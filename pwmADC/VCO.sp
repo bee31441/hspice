@@ -6,3 +6,5 @@
 + POST=1 CAPTAB ACCURATE=1
 
 .SUBCKT schmitt
+M
+.ends
