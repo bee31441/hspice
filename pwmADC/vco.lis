@@ -1,0 +1,269 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\pwmadc\vco.sp              
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1
+
+ .subckt schimmit vdd vss in out 
+ ms1p s1pd in vdd vdd p_18 w = 600n l = 360n
+ ms2p out in s1pd s1pd p_18 w = 600n l = 360n
+ ms1n out in s1ns s1ns n_18 w = 400n l = 360n
+ ms2n s1ns in vss vss n_18 w = 400n l =360n
+
+ ms3p vss out s1pd s1pd p_18 w = 400n l = 360n
+ ms3n vdd out s1ns s1ns n_18 w = 1u l = 360n
+ .ends
+
+ .subckt inverter vdd vss in out
+ m1 out in vdd vdd p_18 w = 2.3u l = 0.5u
+ m2 out in vss vss n_18 w = 1u l = 0.5u
+ .ends
+
+ .subckt vco_amp vdd vss in out vf
+ m6 1 1 vdd vdd p_18 w = 600n l = 360n
+ m5 1 in vss vss n_18 w = 400n l = 360n
+
+ m4 2 1 vdd vdd p_18 w = 600n l = 360n
+ m3 out vf 2 vdd p_18 w = 600n l = 360n
+ m2 out vf 3 vss n_18 w = 400n l = 360n
+ m1 3 vf vss vss n_18 w = 400n l = 360n
+ .ends
+
+ xvco_amp vdd vss cv_in st_in vf vco_amp
+ xschimmit vdd vss st_in st_out schimmit
+ xinverter vdd vss st_out osc_out inverter
+ v0 osc_out vf dc = 0v
+ cl st_in gnd 1p 
+
+ .param vd = 1.2
+
+ vdd vdd gnd dc = vd
+ vss vss gnd dc = 0v
+ vin cv_in gnd dc = 0.6v
+ *v_osc vf gnd dc = 0.6v
+  
+ .ic osc_out = 0v
+
+ .op
+ .tran 1ns 1us
+
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
+
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00n
+ ***********************************************************************
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xvco_amp.                       vco_amp            1.00 
+        2 xschimmit.                      schimmit           1.00 
+        3 xinverter.                      inverter           1.00 
+ 
+
+ 
+      
+  Opening plot unit= 79
+ file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa0                    
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 600.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.6942n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 425.3096m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.9586n 2:s1pd    =  86.9271m
+
+
+ maximum nodal capacitance=   1.009E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1084f 0:osc_out =   4.2530f 0:st_in   =   1.0085p
+ +0:st_out  =  14.4178f 0:vdd     =  30.4739f 0:vf      =   3.0123f
+ +0:vss     =  15.4520f 1:1       =   4.9401f 1:2       =   4.9897f
+ +1:3       =   1.4148f 2:s1ns    =   9.7007f 2:s1pd    =   6.7700f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:v0       0:vdd      0:vss      0:vin     
+  volts      0.         1.2000     0.       600.0000m
+  current    0.       -63.1363u    3.7169u    0.     
+  power      0.        75.7635u    0.         0.     
+
+     total voltage source power dissipation=   75.7635u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt   xvco_amp   xvco_amp   xvco_amp   xvco_amp   xvco_amp   xvco_amp  
+ element  1:m6       1:m5       1:m4       1:m3       1:m2       1:m1      
+ model    0:p_18.1   0:n_18.1   0:p_18.1   0:p_18.1   0:n_18.1   0:n_18.1  
+ region     Saturati   Saturati     Linear     Linear     Cutoff     Cutoff
+  id        -3.7169u    3.7169u   -2.1489p   -2.1488p    9.2291a  194.3785f
+  ibs      9.038e-22 -1.952e-21  5.225e-28  6.004e-24  -25.3930a -2.341e-28
+  ibd       54.3390a  -42.9577a  6.003e-24  8.344e-24 -121.2096a  -25.3930a
+  vgs     -774.6904m  600.0000m -774.6904m   -1.2000  -251.3950m  594.1938n
+  vds     -774.6904m  425.3096m  -85.5880n  -33.3763n  948.6043m  251.3956m
+  vbs        0.         0.         0.        85.5880n -251.3956m    0.     
+  vth     -537.2636m  479.1274m -537.2607m -537.2607m  507.4753m  482.2572m
+  vdsat   -259.4149m  151.4894m -259.4019m -615.3476m   48.2149m   47.4342m
+  vod     -237.4267m  120.8726m -237.4297m -662.7386m -758.8703m -482.2566m
+  beta     112.8118u  363.4169u  112.8123u  105.1792u  364.3149u  363.9697u
+  gam eff  557.0846m  507.4465m  557.0847m  557.0847m  514.0537m  507.4459m
+  gm        26.4410u   43.5499u    8.6653p    2.7991p  329.3685a    6.8469p
+  gds      422.6612n    1.3068u   25.1114u   64.4089u    2.6115a  136.3994f
+  gmb        7.9520u    7.1832u    2.8491p    1.1489p   45.7308a    1.1888p
+  cdtot    812.8782a  680.1423a    2.5235f    2.6511f  595.0023a  707.3867a
+  cgtot      1.5762f    1.1084f    1.8709f    1.8702f  571.0285a  571.0272a
+  cstot      2.2179f    1.5511f    2.4223f    2.4662f  707.3867a  762.5200a
+  cbtot      1.7461f    1.3448f    1.9823f    1.9803f    1.2521f    1.4196f
+  cgs        1.2592f  861.6883a    1.0015f  950.7511a  155.3288a  155.3287a
+  cgd      215.6051a  145.3620a  846.9421a  899.5559a  155.3200a  155.3200a
+
+
+
+ subckt   xschimmit  xschimmit  xschimmit  xschimmit  xschimmit  xschimmit 
+ element  2:ms1p     2:ms2p     2:ms1n     2:ms2n     2:ms3p     2:ms3n    
+ model    0:p_18.1   0:p_18.1   0:n_18.1   0:n_18.1   0:p_18.1   0:n_18.1  
+ region       Cutoff     Cutoff     Linear     Linear     Cutoff     Cutoff
+  id      -298.2343f -1.685e-26  173.8603f    3.0627p   -2.1767p  488.6393f
+  ibs      3.432e-28    0.         0.      -1.609e-27  7.227e-28 -5.034e-28
+  ibd       78.0754a    6.0974a -7.421e-26 -1.307e-24    5.3366a -171.9840a
+  vgs     -118.9643n    1.1131     1.2000     1.2000   -86.9271m  735.6271p
+  vds       -1.1131   -86.9271m  735.6271p   12.9586n  -86.9271m    1.2000 
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -537.2597m -537.2606m  486.7871m  486.7871m -534.0269m  475.3700m
+  vdsat    -47.9918m  -47.9917m  501.2573m  501.2573m  -48.8148m   45.7154m
+  vod      537.2596m    1.6503   713.2128m  713.2128m  447.0998m -475.3700m
+  beta     118.3894u  118.3893u  339.9061u  339.9061u   78.1489u  921.5195u
+  gam eff  557.0847m  557.0847m  507.4459m  507.4459m  557.0847m  507.4459m
+  gm         8.1442p  4.591e-25  214.3224f    3.7754p   59.0864p   17.4320p
+  gds       31.2038f  1.805e-26  236.9254u  236.9254u    2.6213p  251.6556f
+  gmb        2.9458p  2.526e-25   46.0399f  811.0252f   20.1530p    3.3702p
+  cdtot    769.7107a  960.4895a    1.9025f    1.9025f  698.2926a    1.3301f
+  cgtot    856.1141a    1.7917f    1.3250f    1.3250f  557.7856a    1.4312f
+  cstot    991.8606a  991.8600a    1.7469f    1.7469f  721.5644a    1.6973f
+  cbtot      1.7568f    2.8831f    1.4487f    1.4487f    1.4037f    2.9054f
+  cgs      215.2330a  215.2654a  639.2244a  639.2244a  143.4906a  388.3202a
+  cgd      215.2200a  215.2200a  624.8025a  624.8024a  143.4800a  388.3000a
+
+
+
+ subckt   xinverter  xinverter 
+ element  3:m1       3:m2      
+ model    0:p_18.1   0:n_18.1  
+ region     Saturati     Cutoff
+  id       -59.4194u    6.4707a
+  ibs      7.767e-21    0.     
+  ibd      173.4353a -8.516e-23
+  vgs       -1.2000    13.6942n
+  vds       -1.2000   594.1938n
+  vbs        0.         0.     
+  vth     -518.3560m  464.6173m
+  vdsat   -602.2852m   42.8184m
+  vod     -681.6440m -464.6173m
+  beta     281.8288u  643.3695u
+  gam eff  557.0843m  507.4459m
+  gm       146.4485u  234.7941a
+  gds        3.8437u   10.8898p
+  gmb       47.9599u   52.5606a
+  cdtot      2.5557f    1.6973f
+  cgtot      7.8764f    1.6893f
+  cstot      9.9436f    1.6973f
+  cbtot      6.1027f    3.5306f
+  cgs        6.6168f  388.3282a
+  cgd      827.9682a  388.3001a
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      41  # elements   =      19
+  # resistors   =       0  # capacitors =       1  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =      14  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1          26
+  transient          0.17        1001        2254         746 rev=       168
+  readin             0.09
+  errchk             0.01
+  setup              0.02
+  output             0.00
+
+
+           total memory used          356  kbytes
+           total cpu time            0.34 seconds
+           total elapsed time           1 seconds
+           job started at     21:55:25 09/21/2015
+           job ended   at     21:55:25 09/21/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
