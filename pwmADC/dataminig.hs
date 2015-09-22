@@ -34,6 +34,7 @@ main  = do
     path' <- getLine
     content <- readFile' path'
     contentList <- return $ words content --[string]
+    putStrLn "what word you want to search"
     wordsneed <- getLine
     contentneed <- findMyNextIndex contentList wordsneed
     contentoutput <- return $ map (wordsneed ++) $ map (++"\n") contentneed
