@@ -1,0 +1,4 @@
+$DATA1 SOURCE='HSPICE' VERSION='B-2008.09 32-BIT'
+.TITLE '*voltage controlled oscillator'
+ period           poslength        temper           alter#            
+  4.688e-08        1.678e-08         25.0000           2.0000         

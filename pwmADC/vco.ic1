@@ -10,16 +10,16 @@
 .option 
 + gmindc=   1.0000p       
 .nodeset
-+ cv_in = 600.0000m       
++ cv_in = 700.0000m       
 + osc_out = 594.1938n       
 + st_in =   1.2000        
 + st_out =  13.0889n       
 + vdd =   1.2000        
 + vf = 594.1938n       
 + vss =   0.            
-+ xvco_amp.1 = 503.9267m       
++ xvco_amp.1 = 392.1436m       
 + xvco_amp.2 =   1.2000        
 + xvco_amp.3 = 251.3957m       
 + xschimmit.s1ns =  12.3240n       
-+ xschimmit.s1pd =  90.3872m       
++ xschimmit.s1pd =  90.3871m       
 ***   END: Saved Operating Point ***                     
