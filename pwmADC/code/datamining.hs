@@ -28,6 +28,11 @@ findMyNextIndex :: [String] -> String  -> IO [String]
 findMyNextIndex xt x = do
                 indices <- return $ elemIndices' x xt
                 return $ elementsAt xt (map (+1) indices)
+stringCombination :: [String] -> [String] -> String -> [String]
+stringCombination [] [] z = []
+stringCombination (x:xt) [] z = map (++ z) (x:xt)
+stringCombination [] (y:yt) z = map (z ++) (y:yt)
+stringCombination (x:xt) (y:yt) z = (x ++ z ++ y): (stringCombination xt yt z)
 
 main  = do
     putStrLn "Which file you want to survey?"
