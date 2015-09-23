@@ -3,7 +3,7 @@
  lic:
  lic: FLEXlm: v8.5b
  lic: USER:   timer                HOSTNAME: timer-PC
- lic: HOSTID: "00ffa031c008 902b349f3511" PID:      29688
+ lic: HOSTID: "00ffa031c008 902b349f3511" PID:      38800
  lic: Using FLEXlm license file:
  lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
  lic: Checkout 1 hspice
@@ -11,7 +11,7 @@
  lic: NODE LOCKED license on hostid "00ffa031c008 902b349f3511"
  lic:
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
- init: begin read circuit files,  cpu clock=  5.00E-02
+ init: begin read circuit files,  cpu clock=  6.00E-02
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
@@ -34,107 +34,129 @@
        option post     =     1.00
        option captab
        option accura   =     1.00
- init: end read circuit files,  cpu clock=  1.10E-01 memory=    153 kb
- init: begin check errors,  cpu clock=  1.10E-01
- init: end check errors,  cpu clock=  1.20E-01 memory=    314 kb
- init: begin setup matrix, pivot=    10 cpu clock=  1.20E-01
-       establish matrix -- done,  cpu clock=  1.60E-01 memory=    327 kb
-       re-order matrix -- done,  cpu clock=  1.60E-01 memory=    331 kb
- init: end setup matrix,  cpu clock=  1.70E-01 memory=    355 kb
->info:         ***** hspice job concluded
->alter:
- init: begin read circuit files,  cpu clock=  2.07E-01
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TLINE\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TI\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\SIGNET\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\PCI\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\LIN_TECH\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\FET\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\DIO\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\COMLINE\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BURR_BRN\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BJT\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
-       option post     =     2.00
-       option runlvl
-       option abstol   =    1.000E-07
-       option reltol   =    1.000E-07
-       option post     =     1.00
-       option captab
-       option accura   =     1.00
- init: end read circuit files,  cpu clock=  2.80E-01 memory=    153 kb
- init: begin check errors,  cpu clock=  2.80E-01
- init: end check errors,  cpu clock=  2.90E-01 memory=    314 kb
- init: begin setup matrix, pivot=    10 cpu clock=  2.90E-01
-       establish matrix -- done,  cpu clock=  3.00E-01 memory=    328 kb
-       re-order matrix -- done,  cpu clock=  3.00E-01 memory=    332 kb
- init: end setup matrix,  cpu clock=  3.00E-01 memory=    356 kb
- dcop: begin dcop,  cpu clock=  3.10E-01
- dcop: end dcop,  cpu clock=  3.10E-01 memory=    356 kb  tot_iter=      26
+ init: end read circuit files,  cpu clock=  1.20E-01 memory=    153 kb
+ init: begin check errors,  cpu clock=  1.20E-01
+ init: end check errors,  cpu clock=  1.30E-01 memory=    315 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  1.30E-01
+       establish matrix -- done,  cpu clock=  1.60E-01 memory=    328 kb
+       re-order matrix -- done,  cpu clock=  1.70E-01 memory=    332 kb
+ init: end setup matrix,  cpu clock=  1.70E-01 memory=    356 kb
+ dcop: begin dcop,  cpu clock=  1.80E-01
+ dcop: end dcop,  cpu clock=  1.90E-01 memory=    356 kb  tot_iter=      26
+ sweep: voltage         voltage1         begin, #sweeps =   7
+ voltage: vin             =    2.00E-01
+ dcop: begin dcop,  cpu clock=  2.02E-01
+ dcop: end dcop,  cpu clock=  2.16E-01 memory=    356 kb  tot_iter=     130
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran0    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.20E-01
- tran: time= 1.0300E-07 tot_iter=     673 conv_iter=     233 cpu clock= 3.92E-01
- tran: time= 2.0023E-07 tot_iter=    1513 conv_iter=     523 cpu clock= 4.64E-01
- tran: time= 3.0065E-07 tot_iter=    2217 conv_iter=     765 cpu clock= 5.02E-01
- tran: time= 4.0041E-07 tot_iter=    2969 conv_iter=    1026 cpu clock= 5.42E-01
- tran: time= 5.0012E-07 tot_iter=    3759 conv_iter=    1299 cpu clock= 5.82E-01
- tran: time= 6.0274E-07 tot_iter=    4464 conv_iter=    1545 cpu clock= 6.22E-01
- tran: time= 7.0232E-07 tot_iter=    5161 conv_iter=    1786 cpu clock= 6.62E-01
- tran: time= 8.0345E-07 tot_iter=    5864 conv_iter=    2029 cpu clock= 7.02E-01
- tran: time= 9.0005E-07 tot_iter=    6636 conv_iter=    2293 cpu clock= 7.42E-01
- tran: time= 1.0000E-06 tot_iter=    7415 conv_iter=    2564 cpu clock= 7.82E-01
- sweep: tran tran0    end,  cpu clock=  7.92E-01 memory=    356 kb
->info:         ***** hspice job concluded
->alter:
- init: begin read circuit files,  cpu clock=  8.12E-01
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TLINE\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TI\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\SIGNET\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\PCI\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\LIN_TECH\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\FET\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\DIO\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\COMLINE\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BURR_BRN\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BJT\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
-       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
-       option post     =     2.00
-       option runlvl
-       option abstol   =    1.000E-07
-       option reltol   =    1.000E-07
-       option post     =     1.00
-       option captab
-       option accura   =     1.00
- init: end read circuit files,  cpu clock=  8.91E-01 memory=    153 kb
- init: begin check errors,  cpu clock=  8.91E-01
- init: end check errors,  cpu clock=  8.94E-01 memory=    314 kb
- init: begin setup matrix, pivot=    10 cpu clock=  8.94E-01
-       establish matrix -- done,  cpu clock=  9.04E-01 memory=    328 kb
-       re-order matrix -- done,  cpu clock=  9.14E-01 memory=    332 kb
- init: end setup matrix,  cpu clock=  9.14E-01 memory=    356 kb
- dcop: begin dcop,  cpu clock=  9.24E-01
- dcop: end dcop,  cpu clock=  9.24E-01 memory=    356 kb  tot_iter=      30
- output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt1
- sweep: tran tran0    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.44E-01
- tran: time= 1.0130E-07 tot_iter=     964 conv_iter=     332 cpu clock= 1.03E+00
- tran: time= 2.0252E-07 tot_iter=    1996 conv_iter=     688 cpu clock= 1.11E+00
- tran: time= 3.0017E-07 tot_iter=    3032 conv_iter=    1040 cpu clock= 1.17E+00
- tran: time= 4.0007E-07 tot_iter=    4152 conv_iter=    1426 cpu clock= 1.24E+00
- tran: time= 5.0050E-07 tot_iter=    5201 conv_iter=    1790 cpu clock= 1.30E+00
- tran: time= 6.0037E-07 tot_iter=    6241 conv_iter=    2150 cpu clock= 1.36E+00
- tran: time= 7.0012E-07 tot_iter=    7218 conv_iter=    2488 cpu clock= 1.42E+00
- tran: time= 8.0010E-07 tot_iter=    8267 conv_iter=    2849 cpu clock= 1.48E+00
- tran: time= 9.0134E-07 tot_iter=    9263 conv_iter=    3190 cpu clock= 1.53E+00
- tran: time= 1.0000E-06 tot_iter=   10274 conv_iter=    3538 cpu clock= 1.58E+00
- sweep: tran tran0    end,  cpu clock=  1.59E+00 memory=    356 kb
+ sweep: tran tran1    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.26E-01
+ tran: time= 1.0814E-07 tot_iter=     293 conv_iter=     103 cpu clock= 2.52E-01
+ tran: time= 2.2384E-07 tot_iter=     299 conv_iter=     106 cpu clock= 2.52E-01
+ tran: time= 3.2384E-07 tot_iter=     303 conv_iter=     108 cpu clock= 2.62E-01
+ tran: time= 4.2384E-07 tot_iter=     307 conv_iter=     110 cpu clock= 2.62E-01
+ tran: time= 5.2384E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.62E-01
+ tran: time= 6.2384E-07 tot_iter=     315 conv_iter=     114 cpu clock= 2.74E-01
+ tran: time= 7.2384E-07 tot_iter=     319 conv_iter=     116 cpu clock= 2.78E-01
+ tran: time= 8.2384E-07 tot_iter=     323 conv_iter=     118 cpu clock= 2.81E-01
+ tran: time= 9.2384E-07 tot_iter=     327 conv_iter=     120 cpu clock= 2.84E-01
+ tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     122 cpu clock= 2.88E-01
+ sweep: tran tran1    end,  cpu clock=  2.91E-01 memory=    356 kb
+ voltage: vin             =    3.00E-01
+ dcop: begin dcop,  cpu clock=  2.94E-01
+ dcop: end dcop,  cpu clock=  3.04E-01 memory=    356 kb  tot_iter=     159
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran2    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.04E-01
+ tran: time= 1.0198E-07 tot_iter=     276 conv_iter=      97 cpu clock= 3.34E-01
+ tran: time= 2.1074E-07 tot_iter=     284 conv_iter=     101 cpu clock= 3.46E-01
+ tran: time= 3.0210E-07 tot_iter=     288 conv_iter=     103 cpu clock= 3.50E-01
+ tran: time= 4.0210E-07 tot_iter=     292 conv_iter=     105 cpu clock= 3.54E-01
+ tran: time= 5.0210E-07 tot_iter=     296 conv_iter=     107 cpu clock= 3.59E-01
+ tran: time= 6.0210E-07 tot_iter=     300 conv_iter=     109 cpu clock= 3.63E-01
+ tran: time= 7.0210E-07 tot_iter=     304 conv_iter=     111 cpu clock= 3.66E-01
+ tran: time= 8.0210E-07 tot_iter=     308 conv_iter=     113 cpu clock= 3.66E-01
+ tran: time= 9.0210E-07 tot_iter=     312 conv_iter=     115 cpu clock= 3.66E-01
+ tran: time= 1.0000E-06 tot_iter=     316 conv_iter=     117 cpu clock= 3.76E-01
+ sweep: tran tran2    end,  cpu clock=  3.76E-01 memory=    357 kb
+ voltage: vin             =    4.00E-01
+ dcop: begin dcop,  cpu clock=  3.86E-01
+ dcop: end dcop,  cpu clock=  3.96E-01 memory=    357 kb  tot_iter=     180
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran3    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.96E-01
+ tran: time= 1.1237E-07 tot_iter=     288 conv_iter=     101 cpu clock= 4.26E-01
+ tran: time= 2.1237E-07 tot_iter=     292 conv_iter=     103 cpu clock= 4.36E-01
+ tran: time= 3.1237E-07 tot_iter=     296 conv_iter=     105 cpu clock= 4.36E-01
+ tran: time= 4.1237E-07 tot_iter=     300 conv_iter=     107 cpu clock= 4.47E-01
+ tran: time= 5.1237E-07 tot_iter=     305 conv_iter=     109 cpu clock= 4.51E-01
+ tran: time= 6.1237E-07 tot_iter=     311 conv_iter=     111 cpu clock= 4.56E-01
+ tran: time= 7.1237E-07 tot_iter=     317 conv_iter=     113 cpu clock= 4.60E-01
+ tran: time= 8.0816E-07 tot_iter=     323 conv_iter=     115 cpu clock= 4.64E-01
+ tran: time= 9.1994E-07 tot_iter=     709 conv_iter=     242 cpu clock= 4.78E-01
+ tran: time= 1.0000E-06 tot_iter=     713 conv_iter=     244 cpu clock= 4.88E-01
+ sweep: tran tran3    end,  cpu clock=  4.88E-01 memory=    357 kb
+ voltage: vin             =    5.00E-01
+ dcop: begin dcop,  cpu clock=  4.98E-01
+ dcop: end dcop,  cpu clock=  4.98E-01 memory=    357 kb  tot_iter=     206
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran4    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.08E-01
+ tran: time= 1.0979E-07 tot_iter=     310 conv_iter=     109 cpu clock= 5.38E-01
+ tran: time= 2.1185E-07 tot_iter=     702 conv_iter=     241 cpu clock= 5.85E-01
+ tran: time= 3.0039E-07 tot_iter=    1047 conv_iter=     355 cpu clock= 6.21E-01
+ tran: time= 4.0143E-07 tot_iter=    1264 conv_iter=     425 cpu clock= 6.43E-01
+ tran: time= 5.2060E-07 tot_iter=    1469 conv_iter=     498 cpu clock= 6.66E-01
+ tran: time= 6.1695E-07 tot_iter=    1848 conv_iter=     626 cpu clock= 6.80E-01
+ tran: time= 7.0758E-07 tot_iter=    2214 conv_iter=     748 cpu clock= 7.10E-01
+ tran: time= 8.0065E-07 tot_iter=    2569 conv_iter=     868 cpu clock= 7.30E-01
+ tran: time= 9.0315E-07 tot_iter=    2602 conv_iter=     880 cpu clock= 7.30E-01
+ tran: time= 1.0000E-06 tot_iter=    2968 conv_iter=    1003 cpu clock= 7.50E-01
+ sweep: tran tran4    end,  cpu clock=  7.60E-01 memory=    357 kb
+ voltage: vin             =    6.00E-01
+ dcop: begin dcop,  cpu clock=  7.60E-01
+ dcop: end dcop,  cpu clock=  7.70E-01 memory=    357 kb  tot_iter=     232
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran5    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.70E-01
+ tran: time= 1.0300E-07 tot_iter=     673 conv_iter=     233 cpu clock= 8.10E-01
+ tran: time= 2.0023E-07 tot_iter=    1513 conv_iter=     523 cpu clock= 8.60E-01
+ tran: time= 3.0065E-07 tot_iter=    2217 conv_iter=     765 cpu clock= 9.00E-01
+ tran: time= 4.0041E-07 tot_iter=    2969 conv_iter=    1026 cpu clock= 9.40E-01
+ tran: time= 5.0012E-07 tot_iter=    3759 conv_iter=    1299 cpu clock= 9.80E-01
+ tran: time= 6.0274E-07 tot_iter=    4464 conv_iter=    1545 cpu clock= 1.02E+00
+ tran: time= 7.0232E-07 tot_iter=    5161 conv_iter=    1786 cpu clock= 1.06E+00
+ tran: time= 8.0345E-07 tot_iter=    5864 conv_iter=    2029 cpu clock= 1.10E+00
+ tran: time= 9.0005E-07 tot_iter=    6636 conv_iter=    2293 cpu clock= 1.14E+00
+ tran: time= 1.0000E-06 tot_iter=    7415 conv_iter=    2564 cpu clock= 1.18E+00
+ sweep: tran tran5    end,  cpu clock=  1.19E+00 memory=    357 kb
+ voltage: vin             =    7.00E-01
+ dcop: begin dcop,  cpu clock=  1.19E+00
+ dcop: end dcop,  cpu clock=  1.20E+00 memory=    357 kb  tot_iter=     262
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran6    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.21E+00
+ tran: time= 1.0130E-07 tot_iter=     964 conv_iter=     332 cpu clock= 1.30E+00
+ tran: time= 2.0056E-07 tot_iter=    1992 conv_iter=     688 cpu clock= 1.36E+00
+ tran: time= 3.0044E-07 tot_iter=    3010 conv_iter=    1037 cpu clock= 1.43E+00
+ tran: time= 4.0009E-07 tot_iter=    4160 conv_iter=    1435 cpu clock= 1.50E+00
+ tran: time= 5.0070E-07 tot_iter=    5165 conv_iter=    1783 cpu clock= 1.54E+00
+ tran: time= 6.0174E-07 tot_iter=    6219 conv_iter=    2144 cpu clock= 1.60E+00
+ tran: time= 7.0102E-07 tot_iter=    7224 conv_iter=    2489 cpu clock= 1.66E+00
+ tran: time= 8.0036E-07 tot_iter=    8215 conv_iter=    2827 cpu clock= 1.71E+00
+ tran: time= 9.0133E-07 tot_iter=    9207 conv_iter=    3163 cpu clock= 1.75E+00
+ tran: time= 1.0000E-06 tot_iter=   10293 conv_iter=    3534 cpu clock= 1.81E+00
+ sweep: tran tran6    end,  cpu clock=  1.81E+00 memory=    357 kb
+ voltage: vin             =    8.00E-01
+ dcop: begin dcop,  cpu clock=  1.82E+00
+ dcop: end dcop,  cpu clock=  1.83E+00 memory=    357 kb  tot_iter=     289
+ output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
+ sweep: tran tran7    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.83E+00
+ tran: time= 1.0066E-07 tot_iter=    1071 conv_iter=     369 cpu clock= 1.93E+00
+ tran: time= 2.0012E-07 tot_iter=    2077 conv_iter=     715 cpu clock= 1.99E+00
+ tran: time= 3.0007E-07 tot_iter=    3298 conv_iter=    1133 cpu clock= 2.06E+00
+ tran: time= 4.0155E-07 tot_iter=    4317 conv_iter=    1481 cpu clock= 2.11E+00
+ tran: time= 5.0026E-07 tot_iter=    5461 conv_iter=    1877 cpu clock= 2.17E+00
+ tran: time= 6.0093E-07 tot_iter=    6678 conv_iter=    2301 cpu clock= 2.24E+00
+ tran: time= 7.0004E-07 tot_iter=    7843 conv_iter=    2707 cpu clock= 2.30E+00
+ tran: time= 8.0122E-07 tot_iter=    8979 conv_iter=    3098 cpu clock= 2.36E+00
+ tran: time= 9.0001E-07 tot_iter=   10003 conv_iter=    3451 cpu clock= 2.41E+00
+ tran: time= 1.0000E-06 tot_iter=   11160 conv_iter=    3847 cpu clock= 2.47E+00
+ sweep: tran tran7    end,  cpu clock=  2.47E+00 memory=    357 kb
+ sweep: voltage         voltage         1 end
 >info:         ***** hspice job concluded
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
  lic: Release hspice token(s)

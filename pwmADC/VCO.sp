@@ -1,15 +1,13 @@
-*Voltage Controlled Oscillator
+*Voltage Controlled Oscillator...
 .protect
 .lib 'cic018.l' TT
 .unprotect
 .options ABSTOL=1e-7 RELTOL=1e-7
 + POST=1 CAPTAB ACCURATE=1
 
-<<<<<<< HEAD
-.SUBCKT schmitt
-M
-.ends
-=======
+
+
+
 .subckt Schimmit vdd vss In Out 
 Ms1p s1pd In vdd vdd p_18 w = 1.2u l = 360n
 Ms2p Out In s1pd s1pd p_18 w = 1.2u l = 360n
@@ -46,7 +44,7 @@ CL st_in gnd 1p
 Vdd vdd gnd dc = vd
 Vss vss gnd dc = 0v
 .ic osc_out = 0v
-.alter
+
 Vin CV_in gnd dc = 0.6v
 *V_osc vf gnd dc = 0.6v
 
@@ -54,18 +52,18 @@ Vin CV_in gnd dc = 0.6v
 
 
 .op
-.tran 1ns 1us  *sweep Vin 0.2 0.8 0.1
+.tran 1ns 1us  sweep Vin 0.2 0.8 0.1
 .meas period trig V(osc_out) val = 0.6v rise = 3
 +targ V(osc_out) val = 0.6v rise = 4
 .meas posLength trig V(osc_out) val = 0.6v rise = 3
 +targ V(osc_out) val = 0.6v fall = 3
 
-.alter 
-Vin CV_in gnd dc = 0.7v
+*.alter 
+*Vin CV_in gnd dc = 0.7v
 
 
 
 .end
 
 *Need to ask how to calculate the cap charging time
->>>>>>> origin/master
+

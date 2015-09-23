@@ -1,4 +1,18 @@
 $DATA1 SOURCE='HSPICE' VERSION='B-2008.09 32-BIT'
 .TITLE '*voltage controlled oscillator'
- period           poslength        temper           alter#            
-  4.688e-08        1.678e-08         25.0000           2.0000         
+ vin              period           poslength        temper            
+                  alter#            
+    0.2000           failed           failed          25.0000         
+                     1.0000         
+    0.3000           failed           failed          25.0000         
+                     1.0000         
+    0.4000           failed           failed          25.0000         
+                     1.0000         
+    0.5000         1.276e-07        1.534e-08         25.0000         
+                     1.0000         
+    0.6000         4.688e-08        1.678e-08         25.0000         
+                     1.0000         
+    0.7000         3.255e-08        1.801e-08         25.0000         
+                     1.0000         
+    0.8000         2.920e-08        1.860e-08         25.0000         
+                     1.0000         

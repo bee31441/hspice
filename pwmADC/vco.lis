@@ -15,6 +15,9 @@
  .options abstol=1e-7 reltol=1e-7
  + post=1 captab accurate=1
 
+
+
+
  .subckt schimmit vdd vss in out 
  ms1p s1pd in vdd vdd p_18 w = 1.2u l = 360n
  ms2p out in s1pd s1pd p_18 w = 1.2u l = 360n
@@ -51,81 +54,7 @@
  vdd vdd gnd dc = vd
  vss vss gnd dc = 0v
  .ic osc_out = 0v
- .alter
 
-
- **warning**  the accurate option increases  the cpu time but the results
-                are more accurate.
- ***accurate option sets default value of the options: 
- lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
-     ft= 200.00m relmos=  10.00m
- (used for FFT control ) fft_accurate= 1
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *voltage controlled oscillator
-
-  ******  circuit name directory
- circuit number to circuit name directory
-   number circuitname                     definition         multiplier
-        0 main circuit
-        1 xvco_amp.                       vco_amp            1.00 
-        2 xschimmit.                      schimmit           1.00 
-        3 xinverter.                      inverter           1.00 
- 
-
- 
-      
-  Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa0                    
-
-
-          ***** job concluded
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *voltage controlled oscillator
-
-  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
-
-  ******  HSPICE Threads Information  ******
-  Command Line Threads Count:                      0
-  Available CPU Count:                             4
-  Actual Model Evaluation(Load) Threads Count:     1
-  Actual Solver Threads Count:                     1
-
-
-  ******  Circuit Statistics  ******
-  # nodes       =      41  # elements   =      18
-  # resistors   =       0  # capacitors =       1  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       3
-  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      14  # U elements  =       0
-  # T elements  =       0  # W elements =       0  # B elements  =       0
-  # S elements  =       0  # P elements =       0  # va device   =       0
-
-
-  ******  Runtime Statistics (seconds)  ******
-
-  analysis           time    # points   tot. iter  conv.iter
-  op point           0.00           1           0
-  readin             0.08
-  errchk             0.01
-  setup              0.05
-  output             0.00
-
-
-           total memory used          355  kbytes
-           total cpu time            0.15 seconds
-           total elapsed time           1 seconds
-           job started at     14:44:32 09/22/2015
-           job ended   at     14:44:32 09/22/2015
-
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- 
-
-  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
  vin cv_in gnd dc = 0.6v
  *v_osc vf gnd dc = 0.6v
 
@@ -133,14 +62,18 @@
 
 
  .op
- .tran 1ns 1us  *sweep vin 0.2 0.8 0.1
+ .tran 1ns 1us  sweep vin 0.2 0.8 0.1
  .meas period trig v(osc_out) val = 0.6v rise = 3
  +targ v(osc_out) val = 0.6v rise = 4
  .meas poslength trig v(osc_out) val = 0.6v rise = 3
  +targ v(osc_out) val = 0.6v fall = 3
 
- .alter 
- $ alter processing continues $
+ *.alter 
+ *vin cv_in gnd dc = 0.7v
+
+
+
+ .end
 
  ***********************************************************************
  ** runlvl is invoked, you can disable it by:
@@ -176,9 +109,11 @@
         2 xschimmit.                      schimmit           1.00 
         3 xinverter.                      inverter           1.00 
  
+
+ 
       
   Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa1                    
+ file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa0                    
 
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
  ******  
@@ -304,6 +239,183 @@
 
 
 
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 200.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0897n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 958.6898m 1:2       =   1.2000 
+ +1:3       = 251.3864m 2:s1ns    =  12.3247n 2:s1pd    =  90.3951m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 543.0381a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.3412f 0:vf      =  19.8440f
+ +0:vss     =  14.6176f 1:1       =  11.9935f 1:2       =  32.9061f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 300.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0890n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 836.5939m 1:2       =   1.2000 
+ +1:3       = 251.3953m 2:s1ns    =  12.3240n 2:s1pd    =  90.3875m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 533.2988a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2382f 0:vf      =  19.8440f
+ +0:vss     =  14.6203f 1:1       =  11.8390f 1:2       =  33.0764f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 400.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 723.8342m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 563.1451a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  73.9438f 0:vf      =  19.8440f
+ +0:vss     =  14.6767f 1:1       =  13.5882f 1:2       =  35.8426f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 500.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 615.9705m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 938.1040a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  84.5067f 0:vf      =  19.8440f
+ +0:vss     =  15.1981f 1:1       =  21.3991f 1:2       =  44.1372f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  1.2760E-07  targ=  3.9299E-07   trig=  2.6539E-07
+   poslength=  1.5343E-08  targ=  2.8074E-07   trig=  2.6539E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 600.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 503.9267m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1083f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.1268f 0:vf      =  19.8440f
+ +0:vss     =  15.4404f 1:1       =  23.9145f 1:2       =  47.6445f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
  ******  
  *voltage controlled oscillator
 
@@ -316,106 +428,17 @@
  ******  
  *voltage controlled oscillator
 
-  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
 
-  ******  HSPICE Threads Information  ******
-  Command Line Threads Count:                      0
-  Available CPU Count:                             4
-  Actual Model Evaluation(Load) Threads Count:     1
-  Actual Solver Threads Count:                     1
+   *** source        0:vin              =    7.000E-01 ***
 
-
-  ******  Circuit Statistics  ******
-  # nodes       =      41  # elements   =      19
-  # resistors   =       0  # capacitors =       1  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
-  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      14  # U elements  =       0
-  # T elements  =       0  # W elements =       0  # B elements  =       0
-  # S elements  =       0  # P elements =       0  # va device   =       0
-
-
-  ******  Runtime Statistics (seconds)  ******
-
-  analysis           time    # points   tot. iter  conv.iter
-  op point           0.00           1          26
-  transient          0.46        1001        7418        2565 rev=       453
-  readin             0.08
-  errchk             0.01
-  setup              0.01
-  output             0.00
-
-
-           total memory used          356  kbytes
-           total cpu time            0.59 seconds
-           total elapsed time           1 seconds
-           job started at     14:44:32 09/22/2015
-           job ended   at     14:44:33 09/22/2015
-
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- 
-
-  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
- vin cv_in gnd dc = 0.7v
-
-
-
- .end
- $ end of alter processing $
-
- ***********************************************************************
- ** runlvl is invoked, you can disable it by:
-      a) Add option runlvl=0 to your current simulation job.
-      b) Copy $installdir/hspice.ini to your HOME directory and
-         customize it by adding option runlvl=0, which disables
-         it for all of your simulation jobs.
-      c) Re-invoke $installdir/bin/config program and unselect the
-         option runlvl setting in box 'hspice.ini' which disables
-         it for whole group simulation jobs.
-
- ** runlvl is invoked, some options are ignored or automatically set:
-      Options below are automatically set(user setting will overwrite them):
-      if runlvl=[1|2|3|4|5|6],  .option bypass=2
-
-      Options below are ignored, they are replaced by automated algorithms:
-        lvltim    dvdt      ft    fast   trtol  absvar  relvar
-          relq  chgtol    dvtr    imin    itl3    rmax
-
- ** runlvl is invoked, actual option value used by HSPICE are:
-       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00n
- ***********************************************************************
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *voltage controlled oscillator
-
-  ******  circuit name directory
- circuit number to circuit name directory
-   number circuitname                     definition         multiplier
-        0 main circuit
-        1 xvco_amp.                       vco_amp            1.00 
-        2 xschimmit.                      schimmit           1.00 
-        3 xinverter.                      inverter           1.00 
- 
-      
-  Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa2                    
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *voltage controlled oscillator
-
-  ******  operating point information tnom=  25.000 temp=  25.000 *****
- ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 700.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
  +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
  +0:vss     =   0.      1:1       = 392.1436m 1:2       =   1.2000 
- +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
 
 
  maximum nodal capacitance=   1.034E-12         on node     0:st_in           
@@ -430,110 +453,62 @@
  +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
 
  
-
- ****  voltage sources
-
- subckt                                              
- element  0:v0       0:vdd      0:vss      0:vin     
-  volts      0.         1.2000     0.       700.0000m
-  current    0.       -68.7141u    9.2947u    0.     
-  power      0.        82.4569u    0.         0.     
-
-     total voltage source power dissipation=   82.4569u       watts
-
-
-
-
- **** mosfets
-
-
- subckt   xvco_amp   xvco_amp   xvco_amp   xvco_amp   xvco_amp   xvco_amp  
- element  1:m6       1:m5       1:m4       1:m3       1:m2       1:m1      
- model    0:p_18.1   0:n_18.1   0:p_18.1   0:p_18.1   0:n_18.1   0:n_18.1  
- region     Saturati   Saturati     Linear     Linear     Cutoff     Cutoff
-  id        -9.2947u    9.2947u   -2.1492p   -2.1490p    9.2291a  194.3785f
-  ibs      1.553e-21 -4.882e-21  3.591e-28  3.607e-24  -25.3930a -2.341e-28
-  ibd       77.8758a  -39.6048a  3.606e-24  5.238e-24 -121.2096a  -25.3930a
-  vgs     -807.8564m  700.0000m -807.8564m   -1.2000  -251.3951m  594.1938n
-  vds     -807.8564m  392.1436m   -7.4829n   -3.3858n  948.6043m  251.3957m
-  vbs        0.         0.         0.         7.4829n -251.3957m    0.     
-  vth     -536.1061m  479.7310m -536.1022m -536.1022m  507.4753m  482.2572m
-  vdsat   -282.9316m  221.1267m -282.9215m -603.9037m   48.2150m   47.4342m
-  vod     -271.7502m  220.2690m -271.7541m -663.8972m -758.8703m -482.2566m
-  beta     226.9275u  361.8722u    1.1346m    1.0450m  364.3149u  363.9697u
-  gam eff  557.0845m  507.4473m  557.0847m  557.0847m  514.0537m  507.4459m
-  gm        58.1055u   67.9996u    7.4452p    2.6760p  329.3681a    6.8469p
-  gds        1.0360u    3.3566u  287.2768u  634.9833u    2.6115a  136.3994f
-  gmb       17.6964u   11.1401u    2.5241p    1.1320p   45.7307a    1.1888p
-  cdtot      1.4766f  690.2853a   24.8671f   25.9513f  595.0023a  707.3867a
-  cgtot      3.1658f    1.1178f   18.7170f   18.7020f  571.0285a  571.0272a
-  cstot      4.2609f    1.5617f   23.5196f   23.8863f  707.3867a  762.5200a
-  cbtot      3.1560f    1.3480f   18.0182f   17.9997f    1.2521f    1.4196f
-  cgs        2.5421f  873.1482a    9.9680f    9.5359f  155.3288a  155.3287a
-  cgd      431.2415a  147.3350a    8.5516f    8.9892f  155.3200a  155.3200a
-
-
-
- subckt   xschimmit  xschimmit  xschimmit  xschimmit  xschimmit  xschimmit 
- element  2:ms1p     2:ms2p     2:ms1n     2:ms2n     2:ms3p     2:ms3n    
- model    0:p_18.1   0:p_18.1   0:n_18.1   0:n_18.1   0:p_18.1   0:n_18.1  
- region       Cutoff     Cutoff     Linear     Linear     Cutoff     Cutoff
-  id      -542.7247f -3.384e-26  180.7829f    2.9127p   -2.4005p  331.7893f
-  ibs      2.761e-28    0.         0.      -1.530e-27  7.952e-28 -8.046e-28
-  ibd      106.9667a    8.7133a -7.717e-26 -1.243e-24    5.5490a -121.2096a
-  vgs      -10.8687n    1.1096     1.2000     1.2000   -90.3871m  764.9175p
-  vds       -1.1096   -90.3871m  764.9175p   12.3240n  -90.3871m    1.2000 
-  vbs        0.         0.         0.         0.         0.         0.     
-  vth     -536.1013m -536.1022m  486.7871m  486.7871m -534.0269m  465.1644m
-  vdsat    -46.9895m  -46.9895m  501.2573m  501.2573m  -48.8149m   47.4336m
-  vod      536.1013m    1.6457   713.2129m  713.2129m  443.6398m -465.1644m
-  beta     242.5393u  242.5391u  339.9061u  339.9061u   78.1489u  364.0952u
-  gam eff  557.0847m  557.0847m  507.4459m  507.4459m  557.0847m  507.4459m
-  gm        14.8207p  9.222e-25  222.8560f    3.5906p   65.1478p   11.8045p
-  gds       57.6779f  3.125e-26  236.9254u  236.9254u    2.5738p  175.0480f
-  gmb        5.3933p  5.090e-25   47.8731f  771.3094f   22.1823p    2.1080p
-  cdtot      1.4085f    1.7450f    1.9025f    1.9025f  697.4385a  595.0023a
-  cgtot      1.7117f    3.5778f    1.3250f    1.3250f  557.3217a  571.0273a
-  cstot      1.8028f    1.8028f    1.7469f    1.7469f  721.5648a  762.5201a
-  cbtot      3.2012f    5.4037f    1.4487f    1.4487f    1.4024f    1.3073f
-  cgs      430.4660a  430.5306a  639.2244a  639.2244a  143.4909a  155.3287a
-  cgd      430.4400a  430.4400a  624.8025a  624.8025a  143.4800a  155.3200a
-
-
-
- subckt   xinverter  xinverter 
- element  3:m1       3:m2      
- model    0:p_18.1   0:n_18.1  
- region     Saturati     Cutoff
-  id       -59.4194u    6.4707a
-  ibs      7.767e-21    0.     
-  ibd      173.4353a -8.516e-23
-  vgs       -1.2000    13.0889n
-  vds       -1.2000   594.1938n
-  vbs        0.         0.     
-  vth     -518.3560m  464.6173m
-  vdsat   -602.2852m   42.8184m
-  vod     -681.6440m -464.6173m
-  beta     281.8288u  643.3695u
-  gam eff  557.0843m  507.4459m
-  gm       146.4485u  234.7941a
-  gds        3.8437u   10.8898p
-  gmb       47.9599u   52.5606a
-  cdtot      2.5557f    1.6973f
-  cgtot      7.8764f    1.6893f
-  cstot      9.9436f    1.6973f
-  cbtot      6.1027f    3.5306f
-  cgs        6.6168f  388.3282a
-  cgd      827.9682a  388.3001a
-
-
-
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
    period=  3.2552E-08  targ=  1.0590E-07   trig=  7.3351E-08
-   poslength=  1.8014E-08  targ=  9.1365E-08   trig=  7.3351E-08
+   poslength=  1.8014E-08  targ=  9.1364E-08   trig=  7.3351E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    8.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 800.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 292.3701m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1360f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.7297f 0:vf      =  19.8440f
+ +0:vss     =  15.4834f 1:1       =  24.0983f 1:2       =  49.2285f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9202E-08  targ=  9.5228E-08   trig=  6.6027E-08
+   poslength=  1.8596E-08  targ=  8.4623E-08   trig=  6.6027E-08
+
+   meas_variable = period
+   mean  =  59.0585n  varian =   2.1465f
+   sigma =  46.3304n  avgdev =  34.2685n
+   max   = 127.5954n  min    =   0.     
+    1-sigma =  46.3304n median =  39.7183n
+
+   meas_variable = poslength
+   mean  =  17.1843n  varian =   2.0768a
+   sigma =   1.4411n  avgdev =   1.1205n
+   max   =  18.5961n  min    =   0.     
+    1-sigma =   1.4411n median =  17.3989n
+ 
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -563,19 +538,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.00           1          30
-  transient          0.65        1001       10296        3546 rev=       613
+  op point           0.08           1         289
+  transient          2.11        7007       33214       11438 rev=      1954
   readin             0.08
-  errchk             0.00
-  setup              0.02
+  errchk             0.01
+  setup              0.04
   output             0.00
 
 
-           total memory used          356  kbytes
-           total cpu time            0.79 seconds
-           total elapsed time           1 seconds
-           job started at     14:44:32 09/22/2015
-           job ended   at     14:44:33 09/22/2015
+           total memory used          357  kbytes
+           total cpu time            2.44 seconds
+           total elapsed time           3 seconds
+           job started at     13:37:05 09/23/2015
+           job ended   at     13:37:08 09/23/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
