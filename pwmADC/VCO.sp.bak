@@ -1,4 +1,4 @@
-*Voltage Controlled Oscillator
+*Voltage Controlled Oscillator...
 .protect
 .lib 'cic018.l' TT
 .unprotect
