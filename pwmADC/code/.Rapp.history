@@ -1,0 +1,248 @@
+x <- 1
+print(x)
+help print
+help(print)
+help($)
+help('$')
+x <- 1,2,3
+x <- [1,2,3]
+x <- [1, 2, 3]
+x <- {1, 2, 3}
+x <- [1;2;3]
+x <- 1 2 3 4 5
+x <- (1 2 3 4 5)
+x <- (1,2,3,4,5)
+x <- (numeric, 12)
+help(vector)
+vector(mode = "logical", length = 0)
+vector(mode = "logical", length = 10)
+vector(mode = "logical", length = 30)
+vector(mode = "list", length = 10)
+1/Inf
+1/0
+matrix(1:6, 2, 3)
+x[1, 2, drop = FALSE]
+matrix(1:6, 2, 3)
+x[1, 2, drop = FALSE]
+x <- matrix(1:6, 2, 3)
+x[1, 2, drop = FALSE]
+help(is.numeric)
+x <- 3
+is.numeric(x)
+x <- c(1,3)
+x
+is.numeric(x)
+x <- c(1.23, 34.2)
+is.numeric(x)
+is.integer(x)
+is.string(x)
+help(string)
+is.character(x)
+x <- "jdk"
+is.character(x)
+x <- "1"
+is.character(x)
+as.numeric(x)
+is.character(x)
+x
+is.numeric(x)
+y <- as.numeric(x)
+is.numeric(y)
+is.chracter(y)
+is.character(y)
+x <- c(1,2,NA,3,4)
+x[3]
+getClass(x)
+getClass(numeric)
+getClass("numeric")
+getClass("matrix")
+str(c(1, 2))
+str(c(1, 2, 3, 5, 6))
+getwd()
+source(data.r)
+source("data.r")
+str(IdVg_plot)
+str(ggplot)
+str(geom_plot)
+str(geom_point)
+str(aes)
+str(size)
+help(lm)
+ls(pattern = "O")
+ls(read.table)
+ls(read.table())
+str(read.table())
+str(read.table)
+help(rnorm)
+rnorm(100)
+rnorm(100, mean = 1, sd = 1)
+x <- list(foo = 1:4, bar = 0.6)
+x[[2]]
+x[2]
+help([[]])
+help('[[]]')
+'??[[]]'
+x[foo]
+x["foo"]
+x$bar
+source(data.r)
+source("data.r")
+str(IdVg)
+IdVg[[Vgs]]
+IdVg[["Vgs"]]
+str(IdVg_input)
+IdVg_input$Vg
+IdVg_input$Vg_1
+IdVg_input$Vg_1 (1)
+IdVg_input$"Vg"
+IdVg_input[[Vg_1 (1)]]
+IdVg_input[["Vg_1 (1)"]]
+IdVg_input$Vg_1..1.
+a1 = 1:10
+a2 = 11:20
+a <- data.frame(a1 = 1:10, a2 = 11:20)
+str(a)
+a $ a1
+a $ a
+a $a
+a$a
+a$"a"
+a $ "a1"
+a $ [["a1", exact = F]]
+a[["a1", exact = F]]
+a[["a", exact = F]]
+a[["1", exact = F]]
+a[[1, exact = F]]
+a[[a, exact = F]]
+a[[a1, exact = F]]
+a[["a1", exact = F]]
+a[["a", exact = F]]
+a <- data.frame(ahsgf = 1:10)
+a <- data.frame(ahsgf = 1:10, auehf = 11:20)
+a[["a", exact = F]]
+a[[a, exact = F]]
+a[["a", exact = FALSE]]
+a[["u", exact = FALSE]]
+a$"u"
+a$a
+a$"a"
+a <- data.list(ahsgf = 1:10, auehf = 11:20)
+a <- list(ahsgf = 1:10, auehf = 11:20)
+a$"a"
+a$a
+x <- list(aardvark = 1:10)
+x$a
+x <- list(ahsgf = 1:10, auehf = 11:20)
+x$a
+x <- list(ahsgf = 1:10)
+x$a
+x <- list(ahsgf = 1:10, auehf = 11:20)
+x$u
+x <- list(ahsgf = 1:10, buehf = 11:20)
+x$b
+source("data.r")
+x <- list(ahsgf = 1:10)
+x$s
+source("data.r")
+IdVg_plot
+source("data.r")
+IdVg_plot
+str(Tr)
+str(Tr_input)
+source(data.r)
+source("data.r")
+Tr_plot
+source("data.r")
+Tr_plot
+source("data.r")
+Tr_plot
+source("data.r")
+Tr_plot
+source("data.r")
+IdVg_plot
+install.package("cowplot")
+install.packages("cowplot")
+library("cowplot")
+source("data.r")
+IdVg_plot
+ggdraw(switch_axis_position(p1, axis = 'xy', keep = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'xy', keep = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'yx'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'x'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'y'))
+ggdraw(switch_axis_position(IdVg_plot))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'xy', keep = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'xy'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'x'))
+ggdraw(switch_axis_position(IdVg_plot, axis = 'y'))
+IdVg_plot
+source("data.r")
+library("ggplot2")#
+library("cowplot")#
+IdVg_input <- read.table("IdVgdelay100ms_3channel_x4_0907.txt", sep = "\t", skip = 1, header = T)#
+Tr_input <- read.table("transientdelay100ms_3channel_PBS_0907.txt", sep = "\t", skip = 1, header = T)#
+Tr <- data.frame(Time_s = Tr_input$Time.Ch_1..1., Id_Tr= Tr_input$Id_1..1.)#
+IdVg <- data.frame(Vgs = IdVg_input$Vg_1..1., Id1 = IdVg_input$Id_2..1., Id2 = IdVg_input$Id_2..2., Id3 = IdVg_input$Id_2..3., Id4 = IdVg_input$Id_2..4.)#
+IdVg_plot <- ggplot(data = IdVg)#
+IdVg_plot <- IdVg_plot + geom_line(aes(x = Vgs, y = Id1, colour = "#860b0b")) + geom_point(aes(x = Vgs, y = Id1, colour = "#860b0b", shape = "Id1", size = "a"))#
+IdVg_plot <- IdVg_plot + geom_line(aes(x = Vgs, y = Id2, colour = "#860b0b")) + geom_point(aes(x = Vgs, y = Id2, colour = "#860b0b", shape = "Id2", size = "a"))#
+IdVg_plot <- IdVg_plot + geom_line(aes(x = Vgs, y = Id3, colour = "#860b0b")) + geom_point(aes(x = Vgs, y = Id3, colour = "#860b0b", shape = "Id3", size = "a"))#
+IdVg_plot <- IdVg_plot + geom_line(aes(x = Vgs, y = Id4, colour = "#860b0b")) + geom_point(aes(x = Vgs, y = Id4, colour = "#860b0b", shape = "Id4", size = "a"))#
+# IdVg_plot <- IdVg_plot + scale_size_continuous(range = c(2, 4)) # error#
+Tr_plot <- ggplot(data = Tr) + geom_line(aes(x = Time_s, y = Id_Tr, colour = "blue"))
+Tr_plot
+ggdraw(switch_axis_position(Tr_plot, axis = 'xy'))
++ IdVg_plot
+IdVg_plot
+Tr_plot
+ggdraw(switch_axis_position(Tr_plot, axis = 'xy'))
+plot<- Tr_plot + IdVg_plot
+plot <- Tr_plot + IdVg_plot
+plot <- IdVg_plot +geom_line(aes(x = Time_s, y = Id_Tr, colour = "blue"))
+plot
+plot <- IdVg_plot +geom_line(aes(data = Tr, x = Time_s, y = Id_Tr, colour = "blue"))
+plot
+plot(Vgs, input[, 3])#
+plot(Vgs, input[,3], xlab = "VGS(V)", ylab = "Id(A)", type = "o", col = "#992e2e", cex = .5, pch = 0)#
+par(new = T)#
+plot(Vgs, input[,7], xlab = "VGS(V)", ylab = "Id(A)", type = "o", col = "#992e2e", cex = .5, pch = 1)#
+par(new = T)#
+plot(Vgs, input[,11], xlab = "VGS(V)", ylab = "Id(A)", type = "o", col = "#992e2e", cex = .5, pch = 2)#
+par(new = T)#
+plot(Vgs, input[,15], xlab = "VGS(V)", ylab = "Id(A)", type = "o", col = "#992e2e", cex = .5, pch = 3)
+source("data.r")
+IdVg_plot
+Tr_plot
+ggdraw(switch_axis_position(Tr_plot, axis = 'xy'))
+help plot
+help(plot)
+help length
+help(length)
+input <- readtable("../../newcreation.txt", sep = "=")
+input <- read.table("../../newcreation.txt", sep = "=")
+getwd()
+setwd(~/GitHub/hspice)
+setwd("~/GitHub/hspice")
+setwd("~/GitHub/hspice"/pwmADC)
+setwd("~/GitHub/hspice/pwmADC")
+input <- read.table("../../newcreation.txt", sep = "=")
+input <- read.table("../newcreation.txt", sep = "=")
+input <- read.txt("../newcreation.txt", sep = "=")
+help read
+help(read)
+input <- read.table("newcreation.txt", sep = "=")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+ plot( ,input[, 2])
+length(input[,2])
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+ plot( 1:length(input[,2]),input[, 2])
+help(plot)
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+ plot( 1:length(input[,2]),input[, 2], type = "b")
+plot

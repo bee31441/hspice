@@ -1,0 +1,7 @@
+period=failed
+ period=failed
+ period=failed
+ period=1.2760E-07
+ period=4.6885E-08
+ period=3.2552E-08
+ period=2.9202E-08

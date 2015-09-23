@@ -31,11 +31,11 @@ findMyNextIndex xt x = do
 
 main  = do
     putStrLn "Which file you want to survey?"
-    path' <- getLine
+    path' <- return $ "../vco.lis"--getLine
     content <- readFile' path'
     contentList <- return $ words content --[string]
     putStrLn "what word you want to search"
     wordsneed <- getLine
     contentneed <- findMyNextIndex contentList wordsneed
-    contentoutput <- return $ map (wordsneed ++) $ map (++"\n") contentneed
+    contentoutput <- return $ map (wordsneed  ++) $ map (++"\n") contentneed
     writeFile "newcreation.txt" $ unwords contentoutput
