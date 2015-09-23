@@ -62,7 +62,7 @@
 
 
  .op
- .tran 1ns 1us  sweep vin 0.2 0.8 0.1
+ .tran 1ns 1us  sweep vin 0.2 0.8 0.01
  .meas period trig v(osc_out) val = 0.6v rise = 3
  +targ v(osc_out) val = 0.6v rise = 4
  .meas poslength trig v(osc_out) val = 0.6v rise = 3
@@ -283,6 +283,339 @@
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
  ***** operating point status is voltage   simulation time is     0.     
 
+   *** source        0:vin              =    2.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 210.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0895n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 946.2769m 1:2       =   1.2000 
+ +1:3       = 251.3890m 2:s1ns    =  12.3245n 2:s1pd    =  90.3928m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 541.8781a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.3141f 0:vf      =  19.8440f
+ +0:vss     =  14.6176f 1:1       =  11.9664f 1:2       =  32.9088f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 220.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0893n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 933.8838m 1:2       =   1.2000 
+ +1:3       = 251.3908m 2:s1ns    =  12.3243n 2:s1pd    =  90.3912m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 540.7427a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2885f 0:vf      =  19.8440f
+ +0:vss     =  14.6176f 1:1       =  11.9405f 1:2       =  32.9125f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 230.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0892n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 921.5207m 1:2       =   1.2000 
+ +1:3       = 251.3922m 2:s1ns    =  12.3243n 2:s1pd    =  90.3902m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 539.6344a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2648f 0:vf      =  19.8440f
+ +0:vss     =  14.6177f 1:1       =  11.9160f 1:2       =  32.9176f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 240.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0891n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 909.1970m 1:2       =   1.2000 
+ +1:3       = 251.3931m 2:s1ns    =  12.3242n 2:s1pd    =  90.3893m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 538.5571a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2437f 0:vf      =  19.8440f
+ +0:vss     =  14.6179f 1:1       =  11.8933f 1:2       =  32.9247f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 250.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0891n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 896.9219m 1:2       =   1.2000 
+ +1:3       = 251.3938m 2:s1ns    =  12.3241n 2:s1pd    =  90.3886m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 537.5163a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2258f 0:vf      =  19.8440f
+ +0:vss     =  14.6180f 1:1       =  11.8729f 1:2       =  32.9345f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 260.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0890n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 884.7043m 1:2       =   1.2000 
+ +1:3       = 251.3943m 2:s1ns    =  12.3241n 2:s1pd    =  90.3883m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 536.5200a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2123f 0:vf      =  19.8440f
+ +0:vss     =  14.6183f 1:1       =  11.8555f 1:2       =  32.9481f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 270.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0890n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 872.5535m 1:2       =   1.2000 
+ +1:3       = 251.3947m 2:s1ns    =  12.3241n 2:s1pd    =  90.3880m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 535.5798a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2046f 0:vf      =  19.8440f
+ +0:vss     =  14.6186f 1:1       =  11.8419f 1:2       =  32.9668f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 280.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0890n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 860.4786m 1:2       =   1.2000 
+ +1:3       = 251.3949m 2:s1ns    =  12.3241n 2:s1pd    =  90.3878m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 534.7122a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2045f 0:vf      =  19.8440f
+ +0:vss     =  14.6190f 1:1       =  11.8335f 1:2       =  32.9926f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    2.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 290.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0890n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 848.4890m 1:2       =   1.2000 
+ +1:3       = 251.3951m 2:s1ns    =  12.3240n 2:s1pd    =  90.3877m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 533.9408a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2146f 0:vf      =  19.8440f
+ +0:vss     =  14.6196f 1:1       =  11.8318f 1:2       =  33.0281f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
    *** source        0:vin              =    3.000E-01 ***
 
     node    =voltage      node    =voltage      node    =voltage
@@ -302,6 +635,339 @@
  +0:cv_in   = 533.2988a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
  +0:st_out  =  14.3417f 0:vdd     =  71.2382f 0:vf      =  19.8440f
  +0:vss     =  14.6203f 1:1       =  11.8390f 1:2       =  33.0764f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 310.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 824.8020m 1:2       =   1.2000 
+ +1:3       = 251.3954m 2:s1ns    =  12.3240n 2:s1pd    =  90.3874m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 532.8338a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.2798f 0:vf      =  19.8440f
+ +0:vss     =  14.6212f 1:1       =  11.8580f 1:2       =  33.1418f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 320.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 813.1210m 1:2       =   1.2000 
+ +1:3       = 251.3954m 2:s1ns    =  12.3240n 2:s1pd    =  90.3874m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 532.6123a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.3449f 0:vf      =  19.8440f
+ +0:vss     =  14.6225f 1:1       =  11.8925f 1:2       =  33.2300f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 330.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 801.5573m 1:2       =   1.2000 
+ +1:3       = 251.3955m 2:s1ns    =  12.3240n 2:s1pd    =  90.3873m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 532.7284a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.4407f 0:vf      =  19.8440f
+ +0:vss     =  14.6243f 1:1       =  11.9473f 1:2       =  33.3477f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 340.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 790.1150m 1:2       =   1.2000 
+ +1:3       = 251.3955m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 533.3136a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.5762f 0:vf      =  19.8440f
+ +0:vss     =  14.6267f 1:1       =  12.0286f 1:2       =  33.5034f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 350.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 778.7954m 1:2       =   1.2000 
+ +1:3       = 251.3955m 2:s1ns    =  12.3240n 2:s1pd    =  90.3873m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 534.5512a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  71.7623f 0:vf      =  19.8440f
+ +0:vss     =  14.6299f 1:1       =  12.1436f 1:2       =  33.7071f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 360.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 767.5964m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3873m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 536.6939a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  72.0117f 0:vf      =  19.8440f
+ +0:vss     =  14.6344f 1:1       =  12.3016f 1:2       =  33.9700f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 370.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 756.5123m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 540.0872a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  72.3391f 0:vf      =  19.8440f
+ +0:vss     =  14.6406f 1:1       =  12.5130f 1:2       =  34.3042f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 380.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 745.5333m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3873m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 545.1945a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  72.7601f 0:vf      =  19.8440f
+ +0:vss     =  14.6491f 1:1       =  12.7897f 1:2       =  34.7217f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    3.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 390.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 734.6461m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 552.6238a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  73.2905f 0:vf      =  19.8440f
+ +0:vss     =  14.6608f 1:1       =  13.1442f 1:2       =  35.2324f
  +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
 
  
@@ -357,6 +1023,339 @@
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
  ***** operating point status is voltage   simulation time is     0.     
 
+   *** source        0:vin              =    4.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 410.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 713.0790m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 577.6850a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  74.7288f 0:vf      =  19.8440f
+ +0:vss     =  14.6980f 1:1       =  14.1310f 1:2       =  36.5521f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 420.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 702.3605m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 597.2734a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  75.6465f 0:vf      =  19.8440f
+ +0:vss     =  14.7261f 1:1       =  14.7767f 1:2       =  37.3524f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed                          trig= not found
+   poslength= failed                          trig= not found
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 430.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 691.6592m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3873m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 622.9108a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  76.6868f 0:vf      =  19.8440f
+ +0:vss     =  14.7624f 1:1       =  15.5218f 1:2       =  38.2263f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed       targ= not found    trig=  8.8093E-07
+   poslength=  1.4570E-08  targ=  8.9550E-07   trig=  8.8093E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 440.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 680.9561m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 655.3347a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  77.8269f 0:vf      =  19.8440f
+ +0:vss     =  14.8078f 1:1       =  16.3525f 1:2       =  39.1481f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period= failed       targ= not found    trig=  7.2497E-07
+   poslength=  1.4648E-08  targ=  7.3962E-07   trig=  7.2497E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 450.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 670.2348m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 694.6983a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  79.0316f 0:vf      =  19.8440f
+ +0:vss     =  14.8626f 1:1       =  17.2441f 1:2       =  40.0872f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9530E-07  targ=  8.9542E-07   trig=  6.0012E-07
+   poslength=  1.4765E-08  targ=  6.1488E-07   trig=  6.0012E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 460.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 659.4811m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 740.2497a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  80.2566f 0:vf      =  19.8440f
+ +0:vss     =  14.9256f 1:1       =  18.1630f 1:2       =  41.0125f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.4583E-07  targ=  7.4589E-07   trig=  5.0006E-07
+   poslength=  1.4883E-08  targ=  5.1494E-07   trig=  5.0006E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 470.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 648.6842m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 790.1761a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  81.4548f 0:vf      =  19.8440f
+ +0:vss     =  14.9945f 1:1       =  19.0710f 1:2       =  41.8967f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.0580E-07  targ=  6.2758E-07   trig=  4.2178E-07
+   poslength=  1.5012E-08  targ=  4.3679E-07   trig=  4.2178E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 480.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 637.8361m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 841.7786a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  82.5826f 0:vf      =  19.8440f
+ +0:vss     =  15.0655f 1:1       =  19.9312f 1:2       =  42.7191f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  1.7397E-07  targ=  5.3193E-07   trig=  3.5796E-07
+   poslength=  1.5109E-08  targ=  3.7307E-07   trig=  3.5796E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    4.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 490.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 626.9322m 1:2       =   1.2000 
+ +1:3       = 251.3956m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 891.9985a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  83.6066f 0:vf      =  19.8440f
+ +0:vss     =  15.1346f 1:1       =  20.7136f 1:2       =  43.4675f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  1.4835E-07  targ=  4.5489E-07   trig=  3.0654E-07
+   poslength=  1.5237E-08  targ=  3.2178E-07   trig=  3.0654E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
    *** source        0:vin              =    5.000E-01 ***
 
     node    =voltage      node    =voltage      node    =voltage
@@ -385,6 +1384,339 @@
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
    period=  1.2760E-07  targ=  3.9299E-07   trig=  2.6539E-07
    poslength=  1.5343E-08  targ=  2.8074E-07   trig=  2.6539E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 510.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 604.9513m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   = 978.2274a 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  85.2758f 0:vf      =  19.8440f
+ +0:vss     =  15.2535f 1:1       =  21.9798f 1:2       =  44.7293f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  1.1076E-07  targ=  3.4229E-07   trig=  2.3153E-07
+   poslength=  1.5480E-08  targ=  2.4701E-07   trig=  2.3153E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 520.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 593.8771m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0116f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  85.9179f 0:vf      =  19.8440f
+ +0:vss     =  15.2998f 1:1       =  22.4575f 1:2       =  45.2489f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  9.7230E-08  targ=  3.0102E-07   trig=  2.0379E-07
+   poslength=  1.5641E-08  targ=  2.1943E-07   trig=  2.0379E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 530.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 582.7517m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0382f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  86.4444f 0:vf      =  19.8440f
+ +0:vss     =  15.3369f 1:1       =  22.8408f 1:2       =  45.7029f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  8.6056E-08  targ=  2.6839E-07   trig=  1.8233E-07
+   poslength=  1.5783E-08  targ=  1.9812E-07   trig=  1.8233E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 540.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 571.5801m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0588f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  86.8703f 0:vf      =  19.8440f
+ +0:vss     =  15.3660f 1:1       =  23.1421f 1:2       =  46.0992f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  7.6880E-08  targ=  2.4085E-07   trig=  1.6397E-07
+   poslength=  1.5914E-08  targ=  1.7988E-07   trig=  1.6397E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 550.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 560.3679m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0744f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  87.2118f 0:vf      =  19.8440f
+ +0:vss     =  15.3883f 1:1       =  23.3750f 1:2       =  46.4454f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  6.9470E-08  targ=  2.1841E-07   trig=  1.4894E-07
+   poslength=  1.6079E-08  targ=  1.6502E-07   trig=  1.4894E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 560.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 549.1214m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0860f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  87.4844f 0:vf      =  19.8440f
+ +0:vss     =  15.4052f 1:1       =  23.5525f 1:2       =  46.7487f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  6.3189E-08  targ=  1.9927E-07   trig=  1.3608E-07
+   poslength=  1.6230E-08  targ=  1.5231E-07   trig=  1.3608E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 570.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 537.8471m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.0945f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  87.7017f 0:vf      =  19.8440f
+ +0:vss     =  15.4179f 1:1       =  23.6863f 1:2       =  47.0152f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  5.8038E-08  targ=  1.8373E-07   trig=  1.2569E-07
+   poslength=  1.6381E-08  targ=  1.4207E-07   trig=  1.2569E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 580.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 526.5520m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1007f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  87.8752f 0:vf      =  19.8440f
+ +0:vss     =  15.4275f 1:1       =  23.7862f 1:2       =  47.2504f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  5.3593E-08  targ=  1.7015E-07   trig=  1.1656E-07
+   poslength=  1.6493E-08  targ=  1.3305E-07   trig=  1.1656E-07
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    5.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 590.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 515.2428m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1051f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.0144f 0:vf      =  19.8440f
+ +0:vss     =  15.4348f 1:1       =  23.8601f 1:2       =  47.4589f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  4.9982E-08  targ=  1.5951E-07   trig=  1.0952E-07
+   poslength=  1.6659E-08  targ=  1.2618E-07   trig=  1.0952E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -431,6 +1763,339 @@
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
  ***** operating point status is voltage   simulation time is     0.     
 
+   *** source        0:vin              =    6.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 610.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 492.6110m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1106f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.2183f 0:vf      =  19.8440f
+ +0:vss     =  15.4448f 1:1       =  23.9542f 1:2       =  47.8105f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  4.4349E-08  targ=  1.4216E-07   trig=  9.7809E-08
+   poslength=  1.6947E-08  targ=  1.1476E-07   trig=  9.7809E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 620.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 481.3030m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1123f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.2935f 0:vf      =  19.8440f
+ +0:vss     =  15.4484f 1:1       =  23.9830f 1:2       =  47.9597f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  4.1964E-08  targ=  1.3515E-07   trig=  9.3182E-08
+   poslength=  1.6977E-08  targ=  1.1016E-07   trig=  9.3182E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 630.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 470.0105m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1135f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.3559f 0:vf      =  19.8440f
+ +0:vss     =  15.4513f 1:1       =  24.0038f 1:2       =  48.0941f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  4.0115E-08  targ=  1.2936E-07   trig=  8.9241E-08
+   poslength=  1.7183E-08  targ=  1.0642E-07   trig=  8.9241E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 640.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 458.7415m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1145f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.4082f 0:vf      =  19.8440f
+ +0:vss     =  15.4538f 1:1       =  24.0186f 1:2       =  48.2159f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.8502E-08  targ=  1.2446E-07   trig=  8.5953E-08
+   poslength=  1.7295E-08  targ=  1.0325E-07   trig=  8.5953E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 650.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 447.5044m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1152f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.4526f 0:vf      =  19.8440f
+ +0:vss     =  15.4560f 1:1       =  24.0291f 1:2       =  48.3265f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.7114E-08  targ=  1.2021E-07   trig=  8.3098E-08
+   poslength=  1.7440E-08  targ=  1.0054E-07   trig=  8.3098E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 660.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 436.3085m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1158f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.4907f 0:vf      =  19.8440f
+ +0:vss     =  15.4580f 1:1       =  24.0365f 1:2       =  48.4274f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.5858E-08  targ=  1.1644E-07   trig=  8.0577E-08
+   poslength=  1.7533E-08  targ=  9.8110E-08   trig=  8.0577E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 670.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 425.1632m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1163f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.5235f 0:vf      =  19.8440f
+ +0:vss     =  15.4598f 1:1       =  24.0416f 1:2       =  48.5196f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.4857E-08  targ=  1.1317E-07   trig=  7.8311E-08
+   poslength=  1.7674E-08  targ=  9.5985E-08   trig=  7.8311E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 680.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 414.0793m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1168f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.5522f 0:vf      =  19.8440f
+ +0:vss     =  15.4615f 1:1       =  24.0452f 1:2       =  48.6041f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.3990E-08  targ=  1.1052E-07   trig=  7.6529E-08
+   poslength=  1.7816E-08  targ=  9.4345E-08   trig=  7.6529E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    6.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 690.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 403.0685m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1173f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.5775f 0:vf      =  19.8440f
+ +0:vss     =  15.4632f 1:1       =  24.0478f 1:2       =  48.6818f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.3238E-08  targ=  1.0800E-07   trig=  7.4766E-08
+   poslength=  1.7917E-08  targ=  9.2683E-08   trig=  7.4766E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
    *** source        0:vin              =    7.000E-01 ***
 
     node    =voltage      node    =voltage      node    =voltage
@@ -459,6 +2124,339 @@
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
    period=  3.2552E-08  targ=  1.0590E-07   trig=  7.3351E-08
    poslength=  1.8014E-08  targ=  9.1364E-08   trig=  7.3351E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.100E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 710.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 381.3196m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1184f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6197f 0:vf      =  19.8440f
+ +0:vss     =  15.4664f 1:1       =  24.0514f 1:2       =  48.8195f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.1882E-08  targ=  1.0396E-07   trig=  7.2074E-08
+   poslength=  1.8048E-08  targ=  9.0122E-08   trig=  7.2074E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.200E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 720.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 370.6131m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1192f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6375f 0:vf      =  19.8440f
+ +0:vss     =  15.4681f 1:1       =  24.0530f 1:2       =  48.8805f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.1443E-08  targ=  1.0246E-07   trig=  7.1019E-08
+   poslength=  1.8170E-08  targ=  8.9189E-08   trig=  7.1019E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.300E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 730.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 360.0439m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1200f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6535f 0:vf      =  19.8440f
+ +0:vss     =  15.4697f 1:1       =  24.0548f 1:2       =  48.9369f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.1017E-08  targ=  1.0108E-07   trig=  7.0061E-08
+   poslength=  1.8262E-08  targ=  8.8322E-08   trig=  7.0061E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.400E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 740.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 349.6347m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1211f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6680f 0:vf      =  19.8440f
+ +0:vss     =  15.4713f 1:1       =  24.0571f 1:2       =  48.9892f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.0691E-08  targ=  9.9970E-08   trig=  6.9278E-08
+   poslength=  1.8346E-08  targ=  8.7624E-08   trig=  6.9278E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.500E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 750.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 339.4127m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1225f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6810f 0:vf      =  19.8440f
+ +0:vss     =  15.4730f 1:1       =  24.0601f 1:2       =  49.0375f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  3.0322E-08  targ=  9.8844E-08   trig=  6.8522E-08
+   poslength=  1.8390E-08  targ=  8.6912E-08   trig=  6.8522E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.600E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 760.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 329.4097m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3871m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1242f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.6928f 0:vf      =  19.8440f
+ +0:vss     =  15.4748f 1:1       =  24.0641f 1:2       =  49.0822f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9933E-08  targ=  9.7828E-08   trig=  6.7894E-08
+   poslength=  1.8335E-08  targ=  8.6230E-08   trig=  6.7894E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.700E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 770.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 319.6625m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1263f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.7035f 0:vf      =  19.8440f
+ +0:vss     =  15.4767f 1:1       =  24.0696f 1:2       =  49.1235f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9802E-08  targ=  9.7207E-08   trig=  6.7405E-08
+   poslength=  1.8497E-08  targ=  8.5902E-08   trig=  6.7405E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.800E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 780.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 310.2121m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1289f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.7132f 0:vf      =  19.8440f
+ +0:vss     =  15.4787f 1:1       =  24.0768f 1:2       =  49.1615f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9464E-08  targ=  9.6277E-08   trig=  6.6812E-08
+   poslength=  1.8421E-08  targ=  8.5234E-08   trig=  6.6812E-08
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+
+   *** source        0:vin              =    7.900E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:cv_in   = 790.0000m 0:osc_out = 594.1938n 0:st_in   =   1.2000 
+ +0:st_out  =  13.0889n 0:vdd     =   1.2000  0:vf      = 594.1938n
+ +0:vss     =   0.      1:1       = 301.1013m 1:2       =   1.2000 
+ +1:3       = 251.3957m 2:s1ns    =  12.3240n 2:s1pd    =  90.3872m
+
+
+ maximum nodal capacitance=   1.034E-12         on node     0:st_in           
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:cv_in   =   1.1321f 0:osc_out =   4.2530f 0:st_in   =   1.0345p
+ +0:st_out  =  14.3417f 0:vdd     =  88.7219f 0:vf      =  19.8440f
+ +0:vss     =  15.4809f 1:1       =  24.0862f 1:2       =  49.1965f
+ +1:3       =   1.4148f 2:s1ns    =   7.1679f 2:s1pd    =  10.7389f
+
+ 
+ ******  
+ *voltage controlled oscillator
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+   period=  2.9416E-08  targ=  9.5929E-08   trig=  6.6513E-08
+   poslength=  1.8605E-08  targ=  8.5118E-08   trig=  6.6513E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -498,16 +2496,16 @@
    poslength=  1.8596E-08  targ=  8.4623E-08   trig=  6.6027E-08
 
    meas_variable = period
-   mean  =  59.0585n  varian =   2.1465f
-   sigma =  46.3304n  avgdev =  34.2685n
-   max   = 127.5954n  min    =   0.     
-    1-sigma =  46.3304n median =  39.7183n
+   mean  =  71.7953n  varian =   4.3139f
+   sigma =  65.6799n  avgdev =  47.2116n
+   max   = 295.3008n  min    =   0.     
+    1-sigma =  65.6799n median =  41.0394n
 
    meas_variable = poslength
-   mean  =  17.1843n  varian =   2.0768a
-   sigma =   1.4411n  avgdev =   1.1205n
-   max   =  18.5961n  min    =   0.     
-    1-sigma =   1.4411n median =  17.3989n
+   mean  =  16.8283n  varian =   1.7513a
+   sigma =   1.3234n  avgdev =   1.1526n
+   max   =  18.6051n  min    =   0.     
+    1-sigma =   1.3234n median =  16.9618n
  
 
           ***** job concluded
@@ -538,19 +2536,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.08           1         289
-  transient          2.11        7007       33214       11438 rev=      1954
-  readin             0.08
+  op point           0.52           1        2144
+  transient         18.97       61061      282199       97224 rev=     17113
+  readin             0.13
   errchk             0.01
-  setup              0.04
-  output             0.00
+  setup              0.05
+  output             0.02
 
 
-           total memory used          357  kbytes
-           total cpu time            2.44 seconds
-           total elapsed time           3 seconds
-           job started at     13:37:05 09/23/2015
-           job ended   at     13:37:08 09/23/2015
+           total memory used          361  kbytes
+           total cpu time           20.93 seconds
+           total elapsed time          21 seconds
+           job started at     14:12:58 09/23/2015
+           job ended   at     14:13:19 09/23/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
