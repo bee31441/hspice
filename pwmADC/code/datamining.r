@@ -1,3 +1,6 @@
 setwd("~/GitHub/hspice/pwmADC/code")
-input <- read.table("newcreation.txt", sep = "=")
-plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)
+yval = log10(as.numeric(input[, 4]))
+plot <- plot( input[, 2],yval, type = "b")
+x11()
+plot <- plot( input[, 2],input[, 4], type = "b")
