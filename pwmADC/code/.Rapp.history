@@ -1,51 +1,3 @@
-x <- 1
-print(x)
-help print
-help(print)
-help($)
-help('$')
-x <- 1,2,3
-x <- [1,2,3]
-x <- [1, 2, 3]
-x <- {1, 2, 3}
-x <- [1;2;3]
-x <- 1 2 3 4 5
-x <- (1 2 3 4 5)
-x <- (1,2,3,4,5)
-x <- (numeric, 12)
-help(vector)
-vector(mode = "logical", length = 0)
-vector(mode = "logical", length = 10)
-vector(mode = "logical", length = 30)
-vector(mode = "list", length = 10)
-1/Inf
-1/0
-matrix(1:6, 2, 3)
-x[1, 2, drop = FALSE]
-matrix(1:6, 2, 3)
-x[1, 2, drop = FALSE]
-x <- matrix(1:6, 2, 3)
-x[1, 2, drop = FALSE]
-help(is.numeric)
-x <- 3
-is.numeric(x)
-x <- c(1,3)
-x
-is.numeric(x)
-x <- c(1.23, 34.2)
-is.numeric(x)
-is.integer(x)
-is.string(x)
-help(string)
-is.character(x)
-x <- "jdk"
-is.character(x)
-x <- "1"
-is.character(x)
-as.numeric(x)
-is.character(x)
-x
-is.numeric(x)
 y <- as.numeric(x)
 is.numeric(y)
 is.chracter(y)
@@ -252,15 +204,9 @@ input <- read.table("newcreation.txt", sep = "=")#
 setwd("~/GitHub/hspice/pwmADC/code")#
 input <- read.table("newcreation.txt", sep = "=")#
 plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
-setwd("~/GitHub/hspice/pwmADC/code")#
-input <- read.table("newcreation.txt", sep = "=")#
-plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
 > setwd("~/GitHub/hspice/pwmADC/code")#
 > input <- read.table("newcreation.txt", sep = "=")#
 > plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
-setwd("~/GitHub/hspice/pwmADC/code")#
-input <- read.table("newcreation.txt", sep = "=")#
-plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
 setwd("~/GitHub/hspice/pwmADC/code")#
 input <- read.table("newcreation.txt", sep = "=")#
 plot <- plot( 1:length(input[,2]),input[, 2], type = "b")
@@ -273,4 +219,313 @@ input <- read.table("newcreation.txt", sep = "=")#
 plot <- plot(input[,2],input[, 4], type = "b")
 setwd("~/GitHub/hspice/pwmADC/code")#
 input <- read.table("newcreation.txt", sep = "=")#
-plot <- plot(input[,2],input[, 4], type = "b")
+plot <- plot( input[,2],input[, 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+l <- length([,1])#
+plot <- plot( input[2:l,2],input[1:l-1, 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+l2 <- length([,2])#
+plot <- plot( input[2:l2,2],input[ , 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+l2 <- length([,2])#
+plot <- plot( input[2:l2,2],input[ , 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=")#
+plot <- plot( input[,2],input[ , 4], type = "b")
+input
+as.numeric(input[,4])
+help format
+as.numeric(1*10^-08)
+as.numeric("1*10^-08")
+as.numeric("1E-08")
+as.numeric(input[61,4])
+input(61,4)
+input[61,4]
+unclass(input[,4])
+as.numeric(input[,4])
+input(61,4)
+input[61,4]
+str(input)
+unclass(input[,4])
+as.numeric(input[61,4])
+help(read.table)
+type.convert(input[61,4])
+type.convert(input[60:61,4])
+help as.factor
+help(as.factor)
+help(read.table)
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)
+input
+input[,4]
+as.numeric(input[,4])
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+as.numeric(input[,4])#
+plot <- plot( input[,2],input[ , 4], type = "b")
+plot <- plot( input[,2],log(input[ , 4]), type = "b")
+help(log)
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+log10(as.numeric(input[,4]))#
+plot <- plot( input[,2],input[ , 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[,4]))#
+plot <- plot( input[,2],yval, type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+plot <- plot( input[, 2],input[, 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+plot <- plot( input[, 2],input[, 4], type = "b")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+x11()#
+plot <- plot( input[, 2],input[, 4], type = "b")
+help(x11)
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+x11()#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+png("linearity")
+png("linearity")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png("linearity_log")#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off#
+x11()#
+png("linearity")#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png("linearity_log")#
+plot <- plot( input[, 2],yval, type = "b")#
+#
+#x11()#
+#png("linearity")#
+#plot <- plot( input[, 2],input[, 4], type = "b")#
+#dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png("linearity_log")#
+plot <- plot( input[, 2],yval, type = "b")
+png("linearity")
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png("linearity_log")#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png("linearity_log.png")#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png('linearity_log.png')#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png('linearity_log2.png')#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off#
+x11()#
+png("linearity")#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+png('linearity_log2.png')#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off#
+#x11()#
+#png("linearity")#
+#plot <- plot( input[, 2],input[, 4], type = "b")#
+#dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+jpeg('linearity_log2.png')#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity_log2.png')#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity_log.png')#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+jpeg('linearity.png')#
+dev.off#
+#x11()#
+#png("linearity")#
+#plot <- plot( input[, 2],input[, 4], type = "b")#
+#dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+jpeg('linearity.png')#
+dev.off#
+#x11()#
+#png("linearity")#
+#plot <- plot( input[, 2],input[, 4], type = "b")#
+#dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+plot <- plot( input[, 2],input[, 4], type = "b")#
+jpeg('linearity.png')#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off#
+jpeg('linearity.png')#
+plot <- plot( input[, 2],yval, type = "b")#
+#
+dev.off#
+#x11()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off()
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off()#
+#x11()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()#
+#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg('linearity.png')#
+dev.off()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()#
+#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg(file = "linearity.pn")#
+dev.off()#
+#x11()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()#
+#
+plot <- plot( input[, 2],yval, type = "b")#
+jpeg(file = "linearity.png")#
+dev.off()#
+#x11()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+plot <- plot( input[, 2],yval_log, type = "b")#
+jpeg('linearity_log.png')#
+dev.off()
+setwd("~/GitHub/hspice/pwmADC/code")#
+input <- read.table("newcreation.txt", sep = "=", as.is = 4)#
+yval = as.numeric(input[, 4])#
+yval_log = log10(as.numeric(input[, 4]))#
+jpeg('linearity_log.png')#
+plot <- plot( input[, 2],yval_log, type = "b")#
+dev.off()#
+jpeg(file = "linearity.png")#
+plot <- plot( input[, 2],yval, type = "b")#
+dev.off()#
+#x11()
