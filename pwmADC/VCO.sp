@@ -53,6 +53,7 @@ Vin CV_in gnd dc = 0.6v
 
 .op
 .tran 1ns 1us  sweep Vin 0.2 0.8 0.01
+*.meas voscin val = V(Vin)
 .meas period trig V(osc_out) val = 0.6v rise = 3
 +targ V(osc_out) val = 0.6v rise = 4
 .meas posLength trig V(osc_out) val = 0.6v rise = 3

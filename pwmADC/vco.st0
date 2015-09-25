@@ -3,7 +3,7 @@
  lic:
  lic: FLEXlm: v8.5b
  lic: USER:   timer                HOSTNAME: timer-PC
- lic: HOSTID: "00ffa031c008 902b349f3511" PID:      37268
+ lic: HOSTID: "00ffa031c008 902b349f3511" PID:      33776
  lic: Using FLEXlm license file:
  lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
  lic: Checkout 1 hspice
@@ -34,774 +34,774 @@
        option post     =     1.00
        option captab
        option accura   =     1.00
- init: end read circuit files,  cpu clock=  1.70E-01 memory=    153 kb
- init: begin check errors,  cpu clock=  1.70E-01
- init: end check errors,  cpu clock=  1.80E-01 memory=    317 kb
- init: begin setup matrix, pivot=    10 cpu clock=  1.80E-01
-       establish matrix -- done,  cpu clock=  1.90E-01 memory=    331 kb
-       re-order matrix -- done,  cpu clock=  1.90E-01 memory=    335 kb
- init: end setup matrix,  cpu clock=  2.33E-01 memory=    359 kb
- dcop: begin dcop,  cpu clock=  2.40E-01
- dcop: end dcop,  cpu clock=  2.46E-01 memory=    359 kb  tot_iter=      26
+ init: end read circuit files,  cpu clock=  1.33E-01 memory=    153 kb
+ init: begin check errors,  cpu clock=  1.33E-01
+ init: end check errors,  cpu clock=  1.47E-01 memory=    317 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  1.47E-01
+       establish matrix -- done,  cpu clock=  1.56E-01 memory=    331 kb
+       re-order matrix -- done,  cpu clock=  1.59E-01 memory=    335 kb
+ init: end setup matrix,  cpu clock=  1.63E-01 memory=    359 kb
+ dcop: begin dcop,  cpu clock=  1.63E-01
+ dcop: end dcop,  cpu clock=  1.73E-01 memory=    359 kb  tot_iter=      26
  sweep: voltage         voltage1         begin, #sweeps =  61
  voltage: vin             =    2.00E-01
- dcop: begin dcop,  cpu clock=  2.58E-01
- dcop: end dcop,  cpu clock=  2.65E-01 memory=    359 kb  tot_iter=     130
+ dcop: begin dcop,  cpu clock=  1.83E-01
+ dcop: end dcop,  cpu clock=  1.93E-01 memory=    359 kb  tot_iter=     130
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran1    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.74E-01
- tran: time= 1.0814E-07 tot_iter=     293 conv_iter=     103 cpu clock= 3.03E-01
- tran: time= 2.2384E-07 tot_iter=     299 conv_iter=     106 cpu clock= 3.07E-01
- tran: time= 3.2384E-07 tot_iter=     303 conv_iter=     108 cpu clock= 3.11E-01
- tran: time= 4.2384E-07 tot_iter=     307 conv_iter=     110 cpu clock= 3.14E-01
- tran: time= 5.2384E-07 tot_iter=     311 conv_iter=     112 cpu clock= 3.18E-01
- tran: time= 6.2384E-07 tot_iter=     315 conv_iter=     114 cpu clock= 3.23E-01
- tran: time= 7.2384E-07 tot_iter=     319 conv_iter=     116 cpu clock= 3.27E-01
- tran: time= 8.2384E-07 tot_iter=     323 conv_iter=     118 cpu clock= 3.31E-01
- tran: time= 9.2384E-07 tot_iter=     327 conv_iter=     120 cpu clock= 3.40E-01
- tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     122 cpu clock= 3.67E-01
- sweep: tran tran1    end,  cpu clock=  3.72E-01 memory=    359 kb
+ sweep: tran tran1    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.13E-01
+ tran: time= 1.0814E-07 tot_iter=     293 conv_iter=     103 cpu clock= 2.46E-01
+ tran: time= 2.2384E-07 tot_iter=     299 conv_iter=     106 cpu clock= 2.52E-01
+ tran: time= 3.2384E-07 tot_iter=     303 conv_iter=     108 cpu clock= 2.55E-01
+ tran: time= 4.2384E-07 tot_iter=     307 conv_iter=     110 cpu clock= 2.59E-01
+ tran: time= 5.2384E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.62E-01
+ tran: time= 6.2384E-07 tot_iter=     315 conv_iter=     114 cpu clock= 2.65E-01
+ tran: time= 7.2384E-07 tot_iter=     319 conv_iter=     116 cpu clock= 2.69E-01
+ tran: time= 8.2384E-07 tot_iter=     323 conv_iter=     118 cpu clock= 2.72E-01
+ tran: time= 9.2384E-07 tot_iter=     327 conv_iter=     120 cpu clock= 2.73E-01
+ tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     122 cpu clock= 2.73E-01
+ sweep: tran tran1    end,  cpu clock=  2.73E-01 memory=    359 kb
  voltage: vin             =    2.10E-01
- dcop: begin dcop,  cpu clock=  3.79E-01
- dcop: end dcop,  cpu clock=  3.86E-01 memory=    359 kb  tot_iter=     170
+ dcop: begin dcop,  cpu clock=  2.83E-01
+ dcop: end dcop,  cpu clock=  2.93E-01 memory=    359 kb  tot_iter=     170
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran2    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.94E-01
- tran: time= 1.1260E-07 tot_iter=     312 conv_iter=     111 cpu clock= 4.29E-01
- tran: time= 2.2592E-07 tot_iter=     318 conv_iter=     114 cpu clock= 4.33E-01
- tran: time= 3.2460E-07 tot_iter=     322 conv_iter=     116 cpu clock= 4.37E-01
- tran: time= 4.2460E-07 tot_iter=     326 conv_iter=     118 cpu clock= 4.41E-01
- tran: time= 5.2460E-07 tot_iter=     330 conv_iter=     120 cpu clock= 4.44E-01
- tran: time= 6.2460E-07 tot_iter=     334 conv_iter=     122 cpu clock= 4.48E-01
- tran: time= 7.2460E-07 tot_iter=     338 conv_iter=     124 cpu clock= 4.53E-01
- tran: time= 8.2460E-07 tot_iter=     342 conv_iter=     126 cpu clock= 4.57E-01
- tran: time= 9.2460E-07 tot_iter=     346 conv_iter=     128 cpu clock= 4.61E-01
- tran: time= 1.0000E-06 tot_iter=     350 conv_iter=     130 cpu clock= 4.64E-01
- sweep: tran tran2    end,  cpu clock=  4.67E-01 memory=    359 kb
+ sweep: tran tran2    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.03E-01
+ tran: time= 1.1260E-07 tot_iter=     312 conv_iter=     111 cpu clock= 3.33E-01
+ tran: time= 2.2592E-07 tot_iter=     318 conv_iter=     114 cpu clock= 3.43E-01
+ tran: time= 3.2460E-07 tot_iter=     322 conv_iter=     116 cpu clock= 3.43E-01
+ tran: time= 4.2460E-07 tot_iter=     326 conv_iter=     118 cpu clock= 3.43E-01
+ tran: time= 5.2460E-07 tot_iter=     330 conv_iter=     120 cpu clock= 3.56E-01
+ tran: time= 6.2460E-07 tot_iter=     334 conv_iter=     122 cpu clock= 3.60E-01
+ tran: time= 7.2460E-07 tot_iter=     338 conv_iter=     124 cpu clock= 3.65E-01
+ tran: time= 8.2460E-07 tot_iter=     342 conv_iter=     126 cpu clock= 3.69E-01
+ tran: time= 9.2460E-07 tot_iter=     346 conv_iter=     128 cpu clock= 3.72E-01
+ tran: time= 1.0000E-06 tot_iter=     350 conv_iter=     130 cpu clock= 3.75E-01
+ sweep: tran tran2    end,  cpu clock=  3.75E-01 memory=    359 kb
  voltage: vin             =    2.20E-01
- dcop: begin dcop,  cpu clock=  4.77E-01
- dcop: end dcop,  cpu clock=  4.84E-01 memory=    359 kb  tot_iter=     221
+ dcop: begin dcop,  cpu clock=  3.85E-01
+ dcop: end dcop,  cpu clock=  3.95E-01 memory=    359 kb  tot_iter=     221
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran3    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.93E-01
- tran: time= 1.1906E-07 tot_iter=     285 conv_iter=     101 cpu clock= 5.23E-01
- tran: time= 2.2435E-07 tot_iter=     291 conv_iter=     104 cpu clock= 5.26E-01
- tran: time= 3.2305E-07 tot_iter=     295 conv_iter=     106 cpu clock= 5.32E-01
- tran: time= 4.2305E-07 tot_iter=     299 conv_iter=     108 cpu clock= 5.36E-01
- tran: time= 5.2305E-07 tot_iter=     303 conv_iter=     110 cpu clock= 5.40E-01
- tran: time= 6.2305E-07 tot_iter=     307 conv_iter=     112 cpu clock= 5.44E-01
- tran: time= 7.2305E-07 tot_iter=     311 conv_iter=     114 cpu clock= 5.48E-01
- tran: time= 8.2305E-07 tot_iter=     315 conv_iter=     116 cpu clock= 5.50E-01
- tran: time= 9.2305E-07 tot_iter=     319 conv_iter=     118 cpu clock= 5.50E-01
- tran: time= 1.0000E-06 tot_iter=     323 conv_iter=     120 cpu clock= 5.60E-01
- sweep: tran tran3    end,  cpu clock=  5.60E-01 memory=    359 kb
+ sweep: tran tran3    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.11E-01
+ tran: time= 1.1906E-07 tot_iter=     285 conv_iter=     101 cpu clock= 4.41E-01
+ tran: time= 2.2435E-07 tot_iter=     291 conv_iter=     104 cpu clock= 4.62E-01
+ tran: time= 3.2305E-07 tot_iter=     295 conv_iter=     106 cpu clock= 4.66E-01
+ tran: time= 4.2305E-07 tot_iter=     299 conv_iter=     108 cpu clock= 4.69E-01
+ tran: time= 5.2305E-07 tot_iter=     303 conv_iter=     110 cpu clock= 4.72E-01
+ tran: time= 6.2305E-07 tot_iter=     307 conv_iter=     112 cpu clock= 4.76E-01
+ tran: time= 7.2305E-07 tot_iter=     311 conv_iter=     114 cpu clock= 4.77E-01
+ tran: time= 8.2305E-07 tot_iter=     315 conv_iter=     116 cpu clock= 4.77E-01
+ tran: time= 9.2305E-07 tot_iter=     319 conv_iter=     118 cpu clock= 4.77E-01
+ tran: time= 1.0000E-06 tot_iter=     323 conv_iter=     120 cpu clock= 4.87E-01
+ sweep: tran tran3    end,  cpu clock=  4.87E-01 memory=    359 kb
  voltage: vin             =    2.30E-01
- dcop: begin dcop,  cpu clock=  5.70E-01
- dcop: end dcop,  cpu clock=  5.70E-01 memory=    359 kb  tot_iter=     278
+ dcop: begin dcop,  cpu clock=  4.97E-01
+ dcop: end dcop,  cpu clock=  5.07E-01 memory=    359 kb  tot_iter=     278
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran4    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.80E-01
- tran: time= 1.2248E-07 tot_iter=     276 conv_iter=      98 cpu clock= 6.47E-01
- tran: time= 2.2494E-07 tot_iter=     282 conv_iter=     101 cpu clock= 6.51E-01
- tran: time= 3.2204E-07 tot_iter=     286 conv_iter=     103 cpu clock= 6.55E-01
- tran: time= 4.2204E-07 tot_iter=     290 conv_iter=     105 cpu clock= 6.59E-01
- tran: time= 5.2204E-07 tot_iter=     294 conv_iter=     107 cpu clock= 6.62E-01
- tran: time= 6.2204E-07 tot_iter=     298 conv_iter=     109 cpu clock= 6.65E-01
- tran: time= 7.2204E-07 tot_iter=     302 conv_iter=     111 cpu clock= 6.69E-01
- tran: time= 8.2204E-07 tot_iter=     306 conv_iter=     113 cpu clock= 6.72E-01
- tran: time= 9.2204E-07 tot_iter=     310 conv_iter=     115 cpu clock= 6.75E-01
- tran: time= 1.0000E-06 tot_iter=     314 conv_iter=     117 cpu clock= 6.79E-01
- sweep: tran tran4    end,  cpu clock=  6.81E-01 memory=    359 kb
+ sweep: tran tran4    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.07E-01
+ tran: time= 1.2248E-07 tot_iter=     276 conv_iter=      98 cpu clock= 5.45E-01
+ tran: time= 2.2494E-07 tot_iter=     282 conv_iter=     101 cpu clock= 5.51E-01
+ tran: time= 3.2204E-07 tot_iter=     286 conv_iter=     103 cpu clock= 5.55E-01
+ tran: time= 4.2204E-07 tot_iter=     290 conv_iter=     105 cpu clock= 5.58E-01
+ tran: time= 5.2204E-07 tot_iter=     294 conv_iter=     107 cpu clock= 5.62E-01
+ tran: time= 6.2204E-07 tot_iter=     298 conv_iter=     109 cpu clock= 5.81E-01
+ tran: time= 7.2204E-07 tot_iter=     302 conv_iter=     111 cpu clock= 5.99E-01
+ tran: time= 8.2204E-07 tot_iter=     306 conv_iter=     113 cpu clock= 6.03E-01
+ tran: time= 9.2204E-07 tot_iter=     310 conv_iter=     115 cpu clock= 6.08E-01
+ tran: time= 1.0000E-06 tot_iter=     314 conv_iter=     117 cpu clock= 6.12E-01
+ sweep: tran tran4    end,  cpu clock=  6.16E-01 memory=    359 kb
  voltage: vin             =    2.40E-01
- dcop: begin dcop,  cpu clock=  6.82E-01
- dcop: end dcop,  cpu clock=  6.92E-01 memory=    359 kb  tot_iter=     324
+ dcop: begin dcop,  cpu clock=  6.23E-01
+ dcop: end dcop,  cpu clock=  6.30E-01 memory=    359 kb  tot_iter=     324
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran5    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.02E-01
- tran: time= 1.2252E-07 tot_iter=     282 conv_iter=      99 cpu clock= 7.32E-01
- tran: time= 2.2101E-07 tot_iter=     288 conv_iter=     102 cpu clock= 7.32E-01
- tran: time= 3.1649E-07 tot_iter=     292 conv_iter=     104 cpu clock= 7.53E-01
- tran: time= 4.1649E-07 tot_iter=     296 conv_iter=     106 cpu clock= 7.66E-01
- tran: time= 5.1649E-07 tot_iter=     300 conv_iter=     108 cpu clock= 7.70E-01
- tran: time= 6.1649E-07 tot_iter=     304 conv_iter=     110 cpu clock= 7.75E-01
- tran: time= 7.1649E-07 tot_iter=     308 conv_iter=     112 cpu clock= 7.79E-01
- tran: time= 8.1649E-07 tot_iter=     312 conv_iter=     114 cpu clock= 7.83E-01
- tran: time= 9.1649E-07 tot_iter=     316 conv_iter=     116 cpu clock= 7.87E-01
- tran: time= 1.0000E-06 tot_iter=     320 conv_iter=     118 cpu clock= 7.91E-01
- sweep: tran tran5    end,  cpu clock=  7.94E-01 memory=    359 kb
+ sweep: tran tran5    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.39E-01
+ tran: time= 1.2252E-07 tot_iter=     282 conv_iter=      99 cpu clock= 6.69E-01
+ tran: time= 2.2101E-07 tot_iter=     288 conv_iter=     102 cpu clock= 6.72E-01
+ tran: time= 3.1649E-07 tot_iter=     292 conv_iter=     104 cpu clock= 6.76E-01
+ tran: time= 4.1649E-07 tot_iter=     296 conv_iter=     106 cpu clock= 6.80E-01
+ tran: time= 5.1649E-07 tot_iter=     300 conv_iter=     108 cpu clock= 6.83E-01
+ tran: time= 6.1649E-07 tot_iter=     304 conv_iter=     110 cpu clock= 6.86E-01
+ tran: time= 7.1649E-07 tot_iter=     308 conv_iter=     112 cpu clock= 6.89E-01
+ tran: time= 8.1649E-07 tot_iter=     312 conv_iter=     114 cpu clock= 6.89E-01
+ tran: time= 9.1649E-07 tot_iter=     316 conv_iter=     116 cpu clock= 6.89E-01
+ tran: time= 1.0000E-06 tot_iter=     320 conv_iter=     118 cpu clock= 6.99E-01
+ sweep: tran tran5    end,  cpu clock=  6.99E-01 memory=    359 kb
  voltage: vin             =    2.50E-01
- dcop: begin dcop,  cpu clock=  8.01E-01
- dcop: end dcop,  cpu clock=  8.09E-01 memory=    359 kb  tot_iter=     382
+ dcop: begin dcop,  cpu clock=  7.29E-01
+ dcop: end dcop,  cpu clock=  7.39E-01 memory=    359 kb  tot_iter=     382
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran6    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.17E-01
- tran: time= 1.1994E-07 tot_iter=     312 conv_iter=     112 cpu clock= 8.48E-01
- tran: time= 2.1346E-07 tot_iter=     318 conv_iter=     115 cpu clock= 8.52E-01
- tran: time= 3.0714E-07 tot_iter=     322 conv_iter=     117 cpu clock= 8.56E-01
- tran: time= 4.0714E-07 tot_iter=     326 conv_iter=     119 cpu clock= 8.60E-01
- tran: time= 5.0714E-07 tot_iter=     330 conv_iter=     121 cpu clock= 8.63E-01
- tran: time= 6.0714E-07 tot_iter=     334 conv_iter=     123 cpu clock= 8.67E-01
- tran: time= 7.0714E-07 tot_iter=     338 conv_iter=     125 cpu clock= 8.70E-01
- tran: time= 8.0714E-07 tot_iter=     342 conv_iter=     127 cpu clock= 8.73E-01
- tran: time= 9.0714E-07 tot_iter=     346 conv_iter=     129 cpu clock= 8.74E-01
- tran: time= 1.0000E-06 tot_iter=     350 conv_iter=     131 cpu clock= 8.74E-01
- sweep: tran tran6    end,  cpu clock=  8.74E-01 memory=    359 kb
+ sweep: tran tran6    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.52E-01
+ tran: time= 1.1994E-07 tot_iter=     312 conv_iter=     112 cpu clock= 7.85E-01
+ tran: time= 2.1346E-07 tot_iter=     318 conv_iter=     115 cpu clock= 7.89E-01
+ tran: time= 3.0714E-07 tot_iter=     322 conv_iter=     117 cpu clock= 7.93E-01
+ tran: time= 4.0714E-07 tot_iter=     326 conv_iter=     119 cpu clock= 7.98E-01
+ tran: time= 5.0714E-07 tot_iter=     330 conv_iter=     121 cpu clock= 8.02E-01
+ tran: time= 6.0714E-07 tot_iter=     334 conv_iter=     123 cpu clock= 8.06E-01
+ tran: time= 7.0714E-07 tot_iter=     338 conv_iter=     125 cpu clock= 8.10E-01
+ tran: time= 8.0714E-07 tot_iter=     342 conv_iter=     127 cpu clock= 8.14E-01
+ tran: time= 9.0714E-07 tot_iter=     346 conv_iter=     129 cpu clock= 8.18E-01
+ tran: time= 1.0000E-06 tot_iter=     350 conv_iter=     131 cpu clock= 8.22E-01
+ sweep: tran tran6    end,  cpu clock=  8.27E-01 memory=    359 kb
  voltage: vin             =    2.60E-01
- dcop: begin dcop,  cpu clock=  9.14E-01
- dcop: end dcop,  cpu clock=  9.27E-01 memory=    359 kb  tot_iter=     443
+ dcop: begin dcop,  cpu clock=  8.62E-01
+ dcop: end dcop,  cpu clock=  8.70E-01 memory=    359 kb  tot_iter=     443
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran7    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.34E-01
- tran: time= 1.1958E-07 tot_iter=     297 conv_iter=     105 cpu clock= 9.65E-01
- tran: time= 2.1078E-07 tot_iter=     303 conv_iter=     108 cpu clock= 9.69E-01
- tran: time= 3.0255E-07 tot_iter=     307 conv_iter=     110 cpu clock= 9.73E-01
- tran: time= 4.0255E-07 tot_iter=     311 conv_iter=     112 cpu clock= 9.76E-01
- tran: time= 5.0255E-07 tot_iter=     315 conv_iter=     114 cpu clock= 9.80E-01
- tran: time= 6.0255E-07 tot_iter=     319 conv_iter=     116 cpu clock= 9.84E-01
- tran: time= 7.0255E-07 tot_iter=     323 conv_iter=     118 cpu clock= 9.88E-01
- tran: time= 8.0255E-07 tot_iter=     327 conv_iter=     120 cpu clock= 9.92E-01
- tran: time= 9.0255E-07 tot_iter=     331 conv_iter=     122 cpu clock= 9.96E-01
- tran: time= 1.0000E-06 tot_iter=     335 conv_iter=     124 cpu clock= 1.00E+00
- sweep: tran tran7    end,  cpu clock=  1.00E+00 memory=    359 kb
+ sweep: tran tran7    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.77E-01
+ tran: time= 1.1958E-07 tot_iter=     297 conv_iter=     105 cpu clock= 8.99E-01
+ tran: time= 2.1078E-07 tot_iter=     303 conv_iter=     108 cpu clock= 9.03E-01
+ tran: time= 3.0255E-07 tot_iter=     307 conv_iter=     110 cpu clock= 9.07E-01
+ tran: time= 4.0255E-07 tot_iter=     311 conv_iter=     112 cpu clock= 9.11E-01
+ tran: time= 5.0255E-07 tot_iter=     315 conv_iter=     114 cpu clock= 9.15E-01
+ tran: time= 6.0255E-07 tot_iter=     319 conv_iter=     116 cpu clock= 9.20E-01
+ tran: time= 7.0255E-07 tot_iter=     323 conv_iter=     118 cpu clock= 9.24E-01
+ tran: time= 8.0255E-07 tot_iter=     327 conv_iter=     120 cpu clock= 9.28E-01
+ tran: time= 9.0255E-07 tot_iter=     331 conv_iter=     122 cpu clock= 9.32E-01
+ tran: time= 1.0000E-06 tot_iter=     335 conv_iter=     124 cpu clock= 9.36E-01
+ sweep: tran tran7    end,  cpu clock=  9.39E-01 memory=    359 kb
  voltage: vin             =    2.70E-01
- dcop: begin dcop,  cpu clock=  1.01E+00
- dcop: end dcop,  cpu clock=  1.03E+00 memory=    359 kb  tot_iter=     482
+ dcop: begin dcop,  cpu clock=  9.47E-01
+ dcop: end dcop,  cpu clock=  9.53E-01 memory=    359 kb  tot_iter=     482
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran8    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.07E+00
- tran: time= 1.1273E-07 tot_iter=     292 conv_iter=     104 cpu clock= 1.10E+00
- tran: time= 2.3720E-07 tot_iter=     300 conv_iter=     108 cpu clock= 1.10E+00
- tran: time= 3.3332E-07 tot_iter=     304 conv_iter=     110 cpu clock= 1.10E+00
- tran: time= 4.3332E-07 tot_iter=     308 conv_iter=     112 cpu clock= 1.11E+00
- tran: time= 5.3332E-07 tot_iter=     312 conv_iter=     114 cpu clock= 1.11E+00
- tran: time= 6.3332E-07 tot_iter=     316 conv_iter=     116 cpu clock= 1.12E+00
- tran: time= 7.3332E-07 tot_iter=     320 conv_iter=     118 cpu clock= 1.13E+00
- tran: time= 8.3332E-07 tot_iter=     324 conv_iter=     120 cpu clock= 1.14E+00
- tran: time= 9.3332E-07 tot_iter=     328 conv_iter=     122 cpu clock= 1.14E+00
- tran: time= 1.0000E-06 tot_iter=     332 conv_iter=     124 cpu clock= 1.14E+00
- sweep: tran tran8    end,  cpu clock=  1.15E+00 memory=    359 kb
+ sweep: tran tran8    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.92E-01
+ tran: time= 1.1273E-07 tot_iter=     292 conv_iter=     104 cpu clock= 1.01E+00
+ tran: time= 2.3720E-07 tot_iter=     300 conv_iter=     108 cpu clock= 1.02E+00
+ tran: time= 3.3332E-07 tot_iter=     304 conv_iter=     110 cpu clock= 1.02E+00
+ tran: time= 4.3332E-07 tot_iter=     308 conv_iter=     112 cpu clock= 1.03E+00
+ tran: time= 5.3332E-07 tot_iter=     312 conv_iter=     114 cpu clock= 1.03E+00
+ tran: time= 6.3332E-07 tot_iter=     316 conv_iter=     116 cpu clock= 1.04E+00
+ tran: time= 7.3332E-07 tot_iter=     320 conv_iter=     118 cpu clock= 1.04E+00
+ tran: time= 8.3332E-07 tot_iter=     324 conv_iter=     120 cpu clock= 1.04E+00
+ tran: time= 9.3332E-07 tot_iter=     328 conv_iter=     122 cpu clock= 1.05E+00
+ tran: time= 1.0000E-06 tot_iter=     332 conv_iter=     124 cpu clock= 1.05E+00
+ sweep: tran tran8    end,  cpu clock=  1.06E+00 memory=    359 kb
  voltage: vin             =    2.80E-01
- dcop: begin dcop,  cpu clock=  1.18E+00
- dcop: end dcop,  cpu clock=  1.20E+00 memory=    359 kb  tot_iter=     550
+ dcop: begin dcop,  cpu clock=  1.08E+00
+ dcop: end dcop,  cpu clock=  1.09E+00 memory=    359 kb  tot_iter=     550
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran9    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.22E+00
- tran: time= 1.1521E-07 tot_iter=     274 conv_iter=      98 cpu clock= 1.25E+00
- tran: time= 2.0101E-07 tot_iter=     280 conv_iter=     101 cpu clock= 1.25E+00
- tran: time= 3.3744E-07 tot_iter=     286 conv_iter=     104 cpu clock= 1.26E+00
- tran: time= 4.3744E-07 tot_iter=     290 conv_iter=     106 cpu clock= 1.26E+00
- tran: time= 5.3744E-07 tot_iter=     294 conv_iter=     108 cpu clock= 1.27E+00
- tran: time= 6.3744E-07 tot_iter=     298 conv_iter=     110 cpu clock= 1.27E+00
- tran: time= 7.3744E-07 tot_iter=     302 conv_iter=     112 cpu clock= 1.27E+00
- tran: time= 8.3744E-07 tot_iter=     306 conv_iter=     114 cpu clock= 1.28E+00
- tran: time= 9.3744E-07 tot_iter=     310 conv_iter=     116 cpu clock= 1.28E+00
- tran: time= 1.0000E-06 tot_iter=     314 conv_iter=     118 cpu clock= 1.28E+00
- sweep: tran tran9    end,  cpu clock=  1.29E+00 memory=    359 kb
+ sweep: tran tran9    begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.10E+00
+ tran: time= 1.1521E-07 tot_iter=     274 conv_iter=      98 cpu clock= 1.12E+00
+ tran: time= 2.0101E-07 tot_iter=     280 conv_iter=     101 cpu clock= 1.13E+00
+ tran: time= 3.3744E-07 tot_iter=     286 conv_iter=     104 cpu clock= 1.14E+00
+ tran: time= 4.3744E-07 tot_iter=     290 conv_iter=     106 cpu clock= 1.14E+00
+ tran: time= 5.3744E-07 tot_iter=     294 conv_iter=     108 cpu clock= 1.15E+00
+ tran: time= 6.3744E-07 tot_iter=     298 conv_iter=     110 cpu clock= 1.15E+00
+ tran: time= 7.3744E-07 tot_iter=     302 conv_iter=     112 cpu clock= 1.16E+00
+ tran: time= 8.3744E-07 tot_iter=     306 conv_iter=     114 cpu clock= 1.16E+00
+ tran: time= 9.3744E-07 tot_iter=     310 conv_iter=     116 cpu clock= 1.17E+00
+ tran: time= 1.0000E-06 tot_iter=     314 conv_iter=     118 cpu clock= 1.17E+00
+ sweep: tran tran9    end,  cpu clock=  1.18E+00 memory=    359 kb
  voltage: vin             =    2.90E-01
- dcop: begin dcop,  cpu clock=  1.29E+00
- dcop: end dcop,  cpu clock=  1.31E+00 memory=    359 kb  tot_iter=     581
+ dcop: begin dcop,  cpu clock=  1.19E+00
+ dcop: end dcop,  cpu clock=  1.22E+00 memory=    359 kb  tot_iter=     581
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran10   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.35E+00
- tran: time= 1.1548E-07 tot_iter=     278 conv_iter=      98 cpu clock= 1.38E+00
- tran: time= 2.3935E-07 tot_iter=     286 conv_iter=     102 cpu clock= 1.38E+00
- tran: time= 3.3575E-07 tot_iter=     290 conv_iter=     104 cpu clock= 1.39E+00
- tran: time= 4.3575E-07 tot_iter=     294 conv_iter=     106 cpu clock= 1.39E+00
- tran: time= 5.3575E-07 tot_iter=     298 conv_iter=     108 cpu clock= 1.39E+00
- tran: time= 6.3575E-07 tot_iter=     302 conv_iter=     110 cpu clock= 1.39E+00
- tran: time= 7.3575E-07 tot_iter=     306 conv_iter=     112 cpu clock= 1.40E+00
- tran: time= 8.3575E-07 tot_iter=     310 conv_iter=     114 cpu clock= 1.40E+00
- tran: time= 9.3575E-07 tot_iter=     314 conv_iter=     116 cpu clock= 1.41E+00
- tran: time= 1.0000E-06 tot_iter=     318 conv_iter=     118 cpu clock= 1.41E+00
- sweep: tran tran10   end,  cpu clock=  1.42E+00 memory=    360 kb
+ sweep: tran tran10   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.25E+00
+ tran: time= 1.1548E-07 tot_iter=     278 conv_iter=      98 cpu clock= 1.29E+00
+ tran: time= 2.3935E-07 tot_iter=     286 conv_iter=     102 cpu clock= 1.29E+00
+ tran: time= 3.3575E-07 tot_iter=     290 conv_iter=     104 cpu clock= 1.30E+00
+ tran: time= 4.3575E-07 tot_iter=     294 conv_iter=     106 cpu clock= 1.30E+00
+ tran: time= 5.3575E-07 tot_iter=     298 conv_iter=     108 cpu clock= 1.31E+00
+ tran: time= 6.3575E-07 tot_iter=     302 conv_iter=     110 cpu clock= 1.31E+00
+ tran: time= 7.3575E-07 tot_iter=     306 conv_iter=     112 cpu clock= 1.31E+00
+ tran: time= 8.3575E-07 tot_iter=     310 conv_iter=     114 cpu clock= 1.31E+00
+ tran: time= 9.3575E-07 tot_iter=     314 conv_iter=     116 cpu clock= 1.32E+00
+ tran: time= 1.0000E-06 tot_iter=     318 conv_iter=     118 cpu clock= 1.32E+00
+ sweep: tran tran10   end,  cpu clock=  1.32E+00 memory=    360 kb
  voltage: vin             =    3.00E-01
- dcop: begin dcop,  cpu clock=  1.42E+00
- dcop: end dcop,  cpu clock=  1.43E+00 memory=    359 kb  tot_iter=     610
+ dcop: begin dcop,  cpu clock=  1.33E+00
+ dcop: end dcop,  cpu clock=  1.34E+00 memory=    359 kb  tot_iter=     610
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran11   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.44E+00
- tran: time= 1.0198E-07 tot_iter=     276 conv_iter=      97 cpu clock= 1.47E+00
- tran: time= 2.1074E-07 tot_iter=     284 conv_iter=     101 cpu clock= 1.48E+00
- tran: time= 3.0210E-07 tot_iter=     288 conv_iter=     103 cpu clock= 1.48E+00
- tran: time= 4.0210E-07 tot_iter=     292 conv_iter=     105 cpu clock= 1.48E+00
- tran: time= 5.0210E-07 tot_iter=     296 conv_iter=     107 cpu clock= 1.49E+00
- tran: time= 6.0210E-07 tot_iter=     300 conv_iter=     109 cpu clock= 1.49E+00
- tran: time= 7.0210E-07 tot_iter=     304 conv_iter=     111 cpu clock= 1.49E+00
- tran: time= 8.0210E-07 tot_iter=     308 conv_iter=     113 cpu clock= 1.49E+00
- tran: time= 9.0210E-07 tot_iter=     312 conv_iter=     115 cpu clock= 1.49E+00
- tran: time= 1.0000E-06 tot_iter=     316 conv_iter=     117 cpu clock= 1.50E+00
- sweep: tran tran11   end,  cpu clock=  1.50E+00 memory=    360 kb
+ sweep: tran tran11   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.34E+00
+ tran: time= 1.0198E-07 tot_iter=     276 conv_iter=      97 cpu clock= 1.38E+00
+ tran: time= 2.1074E-07 tot_iter=     284 conv_iter=     101 cpu clock= 1.39E+00
+ tran: time= 3.0210E-07 tot_iter=     288 conv_iter=     103 cpu clock= 1.39E+00
+ tran: time= 4.0210E-07 tot_iter=     292 conv_iter=     105 cpu clock= 1.39E+00
+ tran: time= 5.0210E-07 tot_iter=     296 conv_iter=     107 cpu clock= 1.43E+00
+ tran: time= 6.0210E-07 tot_iter=     300 conv_iter=     109 cpu clock= 1.43E+00
+ tran: time= 7.0210E-07 tot_iter=     304 conv_iter=     111 cpu clock= 1.44E+00
+ tran: time= 8.0210E-07 tot_iter=     308 conv_iter=     113 cpu clock= 1.44E+00
+ tran: time= 9.0210E-07 tot_iter=     312 conv_iter=     115 cpu clock= 1.45E+00
+ tran: time= 1.0000E-06 tot_iter=     316 conv_iter=     117 cpu clock= 1.45E+00
+ sweep: tran tran11   end,  cpu clock=  1.45E+00 memory=    360 kb
  voltage: vin             =    3.10E-01
- dcop: begin dcop,  cpu clock=  1.51E+00
- dcop: end dcop,  cpu clock=  1.51E+00 memory=    359 kb  tot_iter=     643
+ dcop: begin dcop,  cpu clock=  1.46E+00
+ dcop: end dcop,  cpu clock=  1.47E+00 memory=    359 kb  tot_iter=     643
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran12   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.52E+00
- tran: time= 1.1544E-07 tot_iter=     297 conv_iter=     102 cpu clock= 1.56E+00
- tran: time= 2.3908E-07 tot_iter=     305 conv_iter=     106 cpu clock= 1.56E+00
- tran: time= 3.3760E-07 tot_iter=     309 conv_iter=     108 cpu clock= 1.57E+00
- tran: time= 4.3760E-07 tot_iter=     313 conv_iter=     110 cpu clock= 1.57E+00
- tran: time= 5.3760E-07 tot_iter=     317 conv_iter=     112 cpu clock= 1.58E+00
- tran: time= 6.3760E-07 tot_iter=     321 conv_iter=     114 cpu clock= 1.58E+00
- tran: time= 7.3760E-07 tot_iter=     325 conv_iter=     116 cpu clock= 1.58E+00
- tran: time= 8.3760E-07 tot_iter=     329 conv_iter=     118 cpu clock= 1.59E+00
- tran: time= 9.3760E-07 tot_iter=     333 conv_iter=     120 cpu clock= 1.59E+00
- tran: time= 1.0000E-06 tot_iter=     337 conv_iter=     122 cpu clock= 1.60E+00
- sweep: tran tran12   end,  cpu clock=  1.60E+00 memory=    360 kb
+ sweep: tran tran12   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.48E+00
+ tran: time= 1.1544E-07 tot_iter=     297 conv_iter=     102 cpu clock= 1.51E+00
+ tran: time= 2.3908E-07 tot_iter=     305 conv_iter=     106 cpu clock= 1.51E+00
+ tran: time= 3.3760E-07 tot_iter=     309 conv_iter=     108 cpu clock= 1.52E+00
+ tran: time= 4.3760E-07 tot_iter=     313 conv_iter=     110 cpu clock= 1.52E+00
+ tran: time= 5.3760E-07 tot_iter=     317 conv_iter=     112 cpu clock= 1.52E+00
+ tran: time= 6.3760E-07 tot_iter=     321 conv_iter=     114 cpu clock= 1.52E+00
+ tran: time= 7.3760E-07 tot_iter=     325 conv_iter=     116 cpu clock= 1.52E+00
+ tran: time= 8.3760E-07 tot_iter=     329 conv_iter=     118 cpu clock= 1.53E+00
+ tran: time= 9.3760E-07 tot_iter=     333 conv_iter=     120 cpu clock= 1.53E+00
+ tran: time= 1.0000E-06 tot_iter=     337 conv_iter=     122 cpu clock= 1.53E+00
+ sweep: tran tran12   end,  cpu clock=  1.54E+00 memory=    360 kb
  voltage: vin             =    3.20E-01
- dcop: begin dcop,  cpu clock=  1.63E+00
- dcop: end dcop,  cpu clock=  1.64E+00 memory=    359 kb  tot_iter=     673
+ dcop: begin dcop,  cpu clock=  1.56E+00
+ dcop: end dcop,  cpu clock=  1.57E+00 memory=    359 kb  tot_iter=     673
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran13   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.65E+00
- tran: time= 1.0169E-07 tot_iter=     317 conv_iter=     111 cpu clock= 1.68E+00
- tran: time= 2.1104E-07 tot_iter=     325 conv_iter=     115 cpu clock= 1.68E+00
- tran: time= 3.0595E-07 tot_iter=     329 conv_iter=     117 cpu clock= 1.69E+00
- tran: time= 4.0595E-07 tot_iter=     333 conv_iter=     119 cpu clock= 1.69E+00
- tran: time= 5.0595E-07 tot_iter=     337 conv_iter=     121 cpu clock= 1.69E+00
- tran: time= 6.0595E-07 tot_iter=     341 conv_iter=     123 cpu clock= 1.70E+00
- tran: time= 7.0595E-07 tot_iter=     345 conv_iter=     125 cpu clock= 1.70E+00
- tran: time= 8.0595E-07 tot_iter=     349 conv_iter=     127 cpu clock= 1.71E+00
- tran: time= 9.0595E-07 tot_iter=     353 conv_iter=     129 cpu clock= 1.71E+00
- tran: time= 1.0000E-06 tot_iter=     357 conv_iter=     131 cpu clock= 1.71E+00
- sweep: tran tran13   end,  cpu clock=  1.72E+00 memory=    360 kb
+ sweep: tran tran13   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.58E+00
+ tran: time= 1.0169E-07 tot_iter=     317 conv_iter=     111 cpu clock= 1.62E+00
+ tran: time= 2.1104E-07 tot_iter=     325 conv_iter=     115 cpu clock= 1.62E+00
+ tran: time= 3.0595E-07 tot_iter=     329 conv_iter=     117 cpu clock= 1.63E+00
+ tran: time= 4.0595E-07 tot_iter=     333 conv_iter=     119 cpu clock= 1.64E+00
+ tran: time= 5.0595E-07 tot_iter=     337 conv_iter=     121 cpu clock= 1.64E+00
+ tran: time= 6.0595E-07 tot_iter=     341 conv_iter=     123 cpu clock= 1.65E+00
+ tran: time= 7.0595E-07 tot_iter=     345 conv_iter=     125 cpu clock= 1.65E+00
+ tran: time= 8.0595E-07 tot_iter=     349 conv_iter=     127 cpu clock= 1.66E+00
+ tran: time= 9.0595E-07 tot_iter=     353 conv_iter=     129 cpu clock= 1.66E+00
+ tran: time= 1.0000E-06 tot_iter=     357 conv_iter=     131 cpu clock= 1.66E+00
+ sweep: tran tran13   end,  cpu clock=  1.69E+00 memory=    360 kb
  voltage: vin             =    3.30E-01
- dcop: begin dcop,  cpu clock=  1.72E+00
- dcop: end dcop,  cpu clock=  1.73E+00 memory=    359 kb  tot_iter=     703
+ dcop: begin dcop,  cpu clock=  1.70E+00
+ dcop: end dcop,  cpu clock=  1.71E+00 memory=    359 kb  tot_iter=     703
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran14   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.73E+00
- tran: time= 1.1890E-07 tot_iter=     317 conv_iter=     113 cpu clock= 1.80E+00
- tran: time= 2.0843E-07 tot_iter=     323 conv_iter=     116 cpu clock= 1.80E+00
- tran: time= 3.0621E-07 tot_iter=     327 conv_iter=     118 cpu clock= 1.81E+00
- tran: time= 4.0621E-07 tot_iter=     331 conv_iter=     120 cpu clock= 1.81E+00
- tran: time= 5.0621E-07 tot_iter=     335 conv_iter=     122 cpu clock= 1.82E+00
- tran: time= 6.0621E-07 tot_iter=     339 conv_iter=     124 cpu clock= 1.82E+00
- tran: time= 7.0621E-07 tot_iter=     343 conv_iter=     126 cpu clock= 1.82E+00
- tran: time= 8.0621E-07 tot_iter=     347 conv_iter=     128 cpu clock= 1.83E+00
- tran: time= 9.0621E-07 tot_iter=     351 conv_iter=     130 cpu clock= 1.83E+00
- tran: time= 1.0000E-06 tot_iter=     355 conv_iter=     132 cpu clock= 1.84E+00
- sweep: tran tran14   end,  cpu clock=  1.84E+00 memory=    360 kb
+ sweep: tran tran14   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.72E+00
+ tran: time= 1.1890E-07 tot_iter=     317 conv_iter=     113 cpu clock= 1.74E+00
+ tran: time= 2.0843E-07 tot_iter=     323 conv_iter=     116 cpu clock= 1.75E+00
+ tran: time= 3.0621E-07 tot_iter=     327 conv_iter=     118 cpu clock= 1.75E+00
+ tran: time= 4.0621E-07 tot_iter=     331 conv_iter=     120 cpu clock= 1.75E+00
+ tran: time= 5.0621E-07 tot_iter=     335 conv_iter=     122 cpu clock= 1.75E+00
+ tran: time= 6.0621E-07 tot_iter=     339 conv_iter=     124 cpu clock= 1.75E+00
+ tran: time= 7.0621E-07 tot_iter=     343 conv_iter=     126 cpu clock= 1.76E+00
+ tran: time= 8.0621E-07 tot_iter=     347 conv_iter=     128 cpu clock= 1.76E+00
+ tran: time= 9.0621E-07 tot_iter=     351 conv_iter=     130 cpu clock= 1.77E+00
+ tran: time= 1.0000E-06 tot_iter=     355 conv_iter=     132 cpu clock= 1.78E+00
+ sweep: tran tran14   end,  cpu clock=  1.78E+00 memory=    360 kb
  voltage: vin             =    3.40E-01
- dcop: begin dcop,  cpu clock=  1.85E+00
- dcop: end dcop,  cpu clock=  1.85E+00 memory=    359 kb  tot_iter=     734
+ dcop: begin dcop,  cpu clock=  1.79E+00
+ dcop: end dcop,  cpu clock=  1.80E+00 memory=    359 kb  tot_iter=     734
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran15   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.86E+00
- tran: time= 1.0691E-07 tot_iter=     301 conv_iter=     105 cpu clock= 1.88E+00
- tran: time= 2.3554E-07 tot_iter=     309 conv_iter=     109 cpu clock= 1.89E+00
- tran: time= 3.3554E-07 tot_iter=     313 conv_iter=     111 cpu clock= 1.89E+00
- tran: time= 4.3554E-07 tot_iter=     317 conv_iter=     113 cpu clock= 1.89E+00
- tran: time= 5.3554E-07 tot_iter=     321 conv_iter=     115 cpu clock= 1.90E+00
- tran: time= 6.3554E-07 tot_iter=     325 conv_iter=     117 cpu clock= 1.90E+00
- tran: time= 7.3554E-07 tot_iter=     329 conv_iter=     119 cpu clock= 1.90E+00
- tran: time= 8.3554E-07 tot_iter=     333 conv_iter=     121 cpu clock= 1.91E+00
- tran: time= 9.3554E-07 tot_iter=     337 conv_iter=     123 cpu clock= 1.91E+00
- tran: time= 1.0000E-06 tot_iter=     341 conv_iter=     125 cpu clock= 1.91E+00
- sweep: tran tran15   end,  cpu clock=  1.92E+00 memory=    360 kb
+ sweep: tran tran15   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.83E+00
+ tran: time= 1.0691E-07 tot_iter=     301 conv_iter=     105 cpu clock= 1.86E+00
+ tran: time= 2.3554E-07 tot_iter=     309 conv_iter=     109 cpu clock= 1.87E+00
+ tran: time= 3.3554E-07 tot_iter=     313 conv_iter=     111 cpu clock= 1.87E+00
+ tran: time= 4.3554E-07 tot_iter=     317 conv_iter=     113 cpu clock= 1.88E+00
+ tran: time= 5.3554E-07 tot_iter=     321 conv_iter=     115 cpu clock= 1.88E+00
+ tran: time= 6.3554E-07 tot_iter=     325 conv_iter=     117 cpu clock= 1.88E+00
+ tran: time= 7.3554E-07 tot_iter=     329 conv_iter=     119 cpu clock= 1.89E+00
+ tran: time= 8.3554E-07 tot_iter=     333 conv_iter=     121 cpu clock= 1.89E+00
+ tran: time= 9.3554E-07 tot_iter=     337 conv_iter=     123 cpu clock= 1.90E+00
+ tran: time= 1.0000E-06 tot_iter=     341 conv_iter=     125 cpu clock= 1.90E+00
+ sweep: tran tran15   end,  cpu clock=  1.91E+00 memory=    360 kb
  voltage: vin             =    3.50E-01
- dcop: begin dcop,  cpu clock=  1.92E+00
- dcop: end dcop,  cpu clock=  1.93E+00 memory=    359 kb  tot_iter=     814
+ dcop: begin dcop,  cpu clock=  1.91E+00
+ dcop: end dcop,  cpu clock=  1.92E+00 memory=    359 kb  tot_iter=     814
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran16   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.94E+00
- tran: time= 1.0917E-07 tot_iter=     308 conv_iter=     108 cpu clock= 1.98E+00
- tran: time= 2.0205E-07 tot_iter=     314 conv_iter=     111 cpu clock= 1.98E+00
- tran: time= 3.0205E-07 tot_iter=     318 conv_iter=     113 cpu clock= 1.99E+00
- tran: time= 4.0205E-07 tot_iter=     322 conv_iter=     115 cpu clock= 1.99E+00
- tran: time= 5.0205E-07 tot_iter=     326 conv_iter=     117 cpu clock= 2.00E+00
- tran: time= 6.0205E-07 tot_iter=     330 conv_iter=     119 cpu clock= 2.00E+00
- tran: time= 7.0205E-07 tot_iter=     334 conv_iter=     121 cpu clock= 2.00E+00
- tran: time= 8.0205E-07 tot_iter=     338 conv_iter=     123 cpu clock= 2.01E+00
- tran: time= 9.0205E-07 tot_iter=     342 conv_iter=     125 cpu clock= 2.01E+00
- tran: time= 1.0000E-06 tot_iter=     346 conv_iter=     127 cpu clock= 2.02E+00
- sweep: tran tran16   end,  cpu clock=  2.02E+00 memory=    360 kb
+ sweep: tran tran16   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.93E+00
+ tran: time= 1.0917E-07 tot_iter=     308 conv_iter=     108 cpu clock= 1.99E+00
+ tran: time= 2.0205E-07 tot_iter=     314 conv_iter=     111 cpu clock= 2.00E+00
+ tran: time= 3.0205E-07 tot_iter=     318 conv_iter=     113 cpu clock= 2.00E+00
+ tran: time= 4.0205E-07 tot_iter=     322 conv_iter=     115 cpu clock= 2.01E+00
+ tran: time= 5.0205E-07 tot_iter=     326 conv_iter=     117 cpu clock= 2.01E+00
+ tran: time= 6.0205E-07 tot_iter=     330 conv_iter=     119 cpu clock= 2.01E+00
+ tran: time= 7.0205E-07 tot_iter=     334 conv_iter=     121 cpu clock= 2.02E+00
+ tran: time= 8.0205E-07 tot_iter=     338 conv_iter=     123 cpu clock= 2.02E+00
+ tran: time= 9.0205E-07 tot_iter=     342 conv_iter=     125 cpu clock= 2.03E+00
+ tran: time= 1.0000E-06 tot_iter=     346 conv_iter=     127 cpu clock= 2.03E+00
+ sweep: tran tran16   end,  cpu clock=  2.03E+00 memory=    360 kb
  voltage: vin             =    3.60E-01
- dcop: begin dcop,  cpu clock=  2.03E+00
- dcop: end dcop,  cpu clock=  2.04E+00 memory=    359 kb  tot_iter=     879
+ dcop: begin dcop,  cpu clock=  2.04E+00
+ dcop: end dcop,  cpu clock=  2.05E+00 memory=    359 kb  tot_iter=     879
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran17   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.05E+00
- tran: time= 1.1174E-07 tot_iter=     285 conv_iter=      99 cpu clock= 2.08E+00
- tran: time= 2.2171E-07 tot_iter=     291 conv_iter=     102 cpu clock= 2.08E+00
- tran: time= 3.2171E-07 tot_iter=     295 conv_iter=     104 cpu clock= 2.09E+00
- tran: time= 4.2171E-07 tot_iter=     299 conv_iter=     106 cpu clock= 2.09E+00
- tran: time= 5.2171E-07 tot_iter=     303 conv_iter=     108 cpu clock= 2.09E+00
- tran: time= 6.2171E-07 tot_iter=     307 conv_iter=     110 cpu clock= 2.09E+00
- tran: time= 7.2171E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.09E+00
- tran: time= 8.2171E-07 tot_iter=     315 conv_iter=     114 cpu clock= 2.09E+00
- tran: time= 9.2171E-07 tot_iter=     319 conv_iter=     116 cpu clock= 2.10E+00
- tran: time= 1.0000E-06 tot_iter=     323 conv_iter=     118 cpu clock= 2.10E+00
- sweep: tran tran17   end,  cpu clock=  2.10E+00 memory=    360 kb
+ sweep: tran tran17   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.06E+00
+ tran: time= 1.1174E-07 tot_iter=     285 conv_iter=      99 cpu clock= 2.09E+00
+ tran: time= 2.2171E-07 tot_iter=     291 conv_iter=     102 cpu clock= 2.10E+00
+ tran: time= 3.2171E-07 tot_iter=     295 conv_iter=     104 cpu clock= 2.10E+00
+ tran: time= 4.2171E-07 tot_iter=     299 conv_iter=     106 cpu clock= 2.11E+00
+ tran: time= 5.2171E-07 tot_iter=     303 conv_iter=     108 cpu clock= 2.11E+00
+ tran: time= 6.2171E-07 tot_iter=     307 conv_iter=     110 cpu clock= 2.11E+00
+ tran: time= 7.2171E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.12E+00
+ tran: time= 8.2171E-07 tot_iter=     315 conv_iter=     114 cpu clock= 2.12E+00
+ tran: time= 9.2171E-07 tot_iter=     319 conv_iter=     116 cpu clock= 2.12E+00
+ tran: time= 1.0000E-06 tot_iter=     323 conv_iter=     118 cpu clock= 2.13E+00
+ sweep: tran tran17   end,  cpu clock=  2.13E+00 memory=    360 kb
  voltage: vin             =    3.70E-01
- dcop: begin dcop,  cpu clock=  2.11E+00
- dcop: end dcop,  cpu clock=  2.12E+00 memory=    359 kb  tot_iter=     943
+ dcop: begin dcop,  cpu clock=  2.14E+00
+ dcop: end dcop,  cpu clock=  2.15E+00 memory=    359 kb  tot_iter=     943
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran18   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.13E+00
- tran: time= 1.0408E-07 tot_iter=     291 conv_iter=     101 cpu clock= 2.16E+00
- tran: time= 2.1466E-07 tot_iter=     297 conv_iter=     104 cpu clock= 2.16E+00
- tran: time= 3.1466E-07 tot_iter=     301 conv_iter=     106 cpu clock= 2.16E+00
- tran: time= 4.1466E-07 tot_iter=     305 conv_iter=     108 cpu clock= 2.17E+00
- tran: time= 5.1466E-07 tot_iter=     309 conv_iter=     110 cpu clock= 2.18E+00
- tran: time= 6.1466E-07 tot_iter=     313 conv_iter=     112 cpu clock= 2.18E+00
- tran: time= 7.1466E-07 tot_iter=     317 conv_iter=     114 cpu clock= 2.19E+00
- tran: time= 8.1466E-07 tot_iter=     321 conv_iter=     116 cpu clock= 2.19E+00
- tran: time= 9.1466E-07 tot_iter=     325 conv_iter=     118 cpu clock= 2.20E+00
- tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     120 cpu clock= 2.20E+00
- sweep: tran tran18   end,  cpu clock=  2.21E+00 memory=    360 kb
+ sweep: tran tran18   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.15E+00
+ tran: time= 1.0408E-07 tot_iter=     291 conv_iter=     101 cpu clock= 2.19E+00
+ tran: time= 2.1466E-07 tot_iter=     297 conv_iter=     104 cpu clock= 2.19E+00
+ tran: time= 3.1466E-07 tot_iter=     301 conv_iter=     106 cpu clock= 2.21E+00
+ tran: time= 4.1466E-07 tot_iter=     305 conv_iter=     108 cpu clock= 2.23E+00
+ tran: time= 5.1466E-07 tot_iter=     309 conv_iter=     110 cpu clock= 2.23E+00
+ tran: time= 6.1466E-07 tot_iter=     313 conv_iter=     112 cpu clock= 2.24E+00
+ tran: time= 7.1466E-07 tot_iter=     317 conv_iter=     114 cpu clock= 2.24E+00
+ tran: time= 8.1466E-07 tot_iter=     321 conv_iter=     116 cpu clock= 2.25E+00
+ tran: time= 9.1466E-07 tot_iter=     325 conv_iter=     118 cpu clock= 2.25E+00
+ tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     120 cpu clock= 2.26E+00
+ sweep: tran tran18   end,  cpu clock=  2.26E+00 memory=    360 kb
  voltage: vin             =    3.80E-01
- dcop: begin dcop,  cpu clock=  2.22E+00
- dcop: end dcop,  cpu clock=  2.23E+00 memory=    359 kb  tot_iter=     970
+ dcop: begin dcop,  cpu clock=  2.27E+00
+ dcop: end dcop,  cpu clock=  2.28E+00 memory=    359 kb  tot_iter=     970
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran19   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.23E+00
- tran: time= 1.0261E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.27E+00
- tran: time= 2.2375E-07 tot_iter=     293 conv_iter=     104 cpu clock= 2.27E+00
- tran: time= 3.2375E-07 tot_iter=     297 conv_iter=     106 cpu clock= 2.27E+00
- tran: time= 4.2375E-07 tot_iter=     301 conv_iter=     108 cpu clock= 2.28E+00
- tran: time= 5.2375E-07 tot_iter=     305 conv_iter=     110 cpu clock= 2.28E+00
- tran: time= 6.2375E-07 tot_iter=     309 conv_iter=     112 cpu clock= 2.28E+00
- tran: time= 7.2375E-07 tot_iter=     314 conv_iter=     114 cpu clock= 2.29E+00
- tran: time= 8.2375E-07 tot_iter=     320 conv_iter=     116 cpu clock= 2.29E+00
- tran: time= 9.2375E-07 tot_iter=     326 conv_iter=     118 cpu clock= 2.30E+00
- tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     120 cpu clock= 2.30E+00
- sweep: tran tran19   end,  cpu clock=  2.30E+00 memory=    360 kb
+ sweep: tran tran19   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.29E+00
+ tran: time= 1.0261E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.31E+00
+ tran: time= 2.2375E-07 tot_iter=     293 conv_iter=     104 cpu clock= 2.32E+00
+ tran: time= 3.2375E-07 tot_iter=     297 conv_iter=     106 cpu clock= 2.32E+00
+ tran: time= 4.2375E-07 tot_iter=     301 conv_iter=     108 cpu clock= 2.33E+00
+ tran: time= 5.2375E-07 tot_iter=     305 conv_iter=     110 cpu clock= 2.33E+00
+ tran: time= 6.2375E-07 tot_iter=     309 conv_iter=     112 cpu clock= 2.33E+00
+ tran: time= 7.2375E-07 tot_iter=     314 conv_iter=     114 cpu clock= 2.33E+00
+ tran: time= 8.2375E-07 tot_iter=     320 conv_iter=     116 cpu clock= 2.34E+00
+ tran: time= 9.2375E-07 tot_iter=     326 conv_iter=     118 cpu clock= 2.34E+00
+ tran: time= 1.0000E-06 tot_iter=     331 conv_iter=     120 cpu clock= 2.35E+00
+ sweep: tran tran19   end,  cpu clock=  2.35E+00 memory=    360 kb
  voltage: vin             =    3.90E-01
- dcop: begin dcop,  cpu clock=  2.32E+00
- dcop: end dcop,  cpu clock=  2.32E+00 memory=    359 kb  tot_iter=     994
+ dcop: begin dcop,  cpu clock=  2.36E+00
+ dcop: end dcop,  cpu clock=  2.37E+00 memory=    359 kb  tot_iter=     994
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran20   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.34E+00
- tran: time= 1.0462E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.37E+00
- tran: time= 2.3878E-07 tot_iter=     293 conv_iter=     104 cpu clock= 2.38E+00
- tran: time= 3.3878E-07 tot_iter=     297 conv_iter=     106 cpu clock= 2.38E+00
- tran: time= 4.3878E-07 tot_iter=     301 conv_iter=     108 cpu clock= 2.38E+00
- tran: time= 5.3878E-07 tot_iter=     305 conv_iter=     110 cpu clock= 2.39E+00
- tran: time= 6.3878E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.39E+00
- tran: time= 7.3878E-07 tot_iter=     317 conv_iter=     114 cpu clock= 2.40E+00
- tran: time= 8.3878E-07 tot_iter=     323 conv_iter=     116 cpu clock= 2.40E+00
- tran: time= 9.3878E-07 tot_iter=     327 conv_iter=     118 cpu clock= 2.41E+00
- tran: time= 1.0000E-06 tot_iter=     336 conv_iter=     122 cpu clock= 2.41E+00
- sweep: tran tran20   end,  cpu clock=  2.42E+00 memory=    360 kb
+ sweep: tran tran20   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.37E+00
+ tran: time= 1.0462E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.41E+00
+ tran: time= 2.3878E-07 tot_iter=     293 conv_iter=     104 cpu clock= 2.42E+00
+ tran: time= 3.3878E-07 tot_iter=     297 conv_iter=     106 cpu clock= 2.42E+00
+ tran: time= 4.3878E-07 tot_iter=     301 conv_iter=     108 cpu clock= 2.42E+00
+ tran: time= 5.3878E-07 tot_iter=     305 conv_iter=     110 cpu clock= 2.43E+00
+ tran: time= 6.3878E-07 tot_iter=     311 conv_iter=     112 cpu clock= 2.43E+00
+ tran: time= 7.3878E-07 tot_iter=     317 conv_iter=     114 cpu clock= 2.46E+00
+ tran: time= 8.3878E-07 tot_iter=     323 conv_iter=     116 cpu clock= 2.46E+00
+ tran: time= 9.3878E-07 tot_iter=     327 conv_iter=     118 cpu clock= 2.46E+00
+ tran: time= 1.0000E-06 tot_iter=     336 conv_iter=     122 cpu clock= 2.47E+00
+ sweep: tran tran20   end,  cpu clock=  2.47E+00 memory=    360 kb
  voltage: vin             =    4.00E-01
- dcop: begin dcop,  cpu clock=  2.45E+00
- dcop: end dcop,  cpu clock=  2.46E+00 memory=    359 kb  tot_iter=    1015
+ dcop: begin dcop,  cpu clock=  2.48E+00
+ dcop: end dcop,  cpu clock=  2.49E+00 memory=    359 kb  tot_iter=    1015
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran21   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.46E+00
- tran: time= 1.1237E-07 tot_iter=     288 conv_iter=     101 cpu clock= 2.49E+00
- tran: time= 2.1237E-07 tot_iter=     292 conv_iter=     103 cpu clock= 2.49E+00
- tran: time= 3.1237E-07 tot_iter=     296 conv_iter=     105 cpu clock= 2.49E+00
- tran: time= 4.1237E-07 tot_iter=     300 conv_iter=     107 cpu clock= 2.49E+00
- tran: time= 5.1237E-07 tot_iter=     305 conv_iter=     109 cpu clock= 2.50E+00
- tran: time= 6.1237E-07 tot_iter=     311 conv_iter=     111 cpu clock= 2.50E+00
- tran: time= 7.1237E-07 tot_iter=     317 conv_iter=     113 cpu clock= 2.50E+00
- tran: time= 8.0816E-07 tot_iter=     323 conv_iter=     115 cpu clock= 2.51E+00
- tran: time= 9.1994E-07 tot_iter=     709 conv_iter=     242 cpu clock= 2.53E+00
- tran: time= 1.0000E-06 tot_iter=     713 conv_iter=     244 cpu clock= 2.53E+00
- sweep: tran tran21   end,  cpu clock=  2.53E+00 memory=    360 kb
+ sweep: tran tran21   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.49E+00
+ tran: time= 1.1237E-07 tot_iter=     288 conv_iter=     101 cpu clock= 2.52E+00
+ tran: time= 2.1237E-07 tot_iter=     292 conv_iter=     103 cpu clock= 2.53E+00
+ tran: time= 3.1237E-07 tot_iter=     296 conv_iter=     105 cpu clock= 2.53E+00
+ tran: time= 4.1237E-07 tot_iter=     300 conv_iter=     107 cpu clock= 2.54E+00
+ tran: time= 5.1237E-07 tot_iter=     305 conv_iter=     109 cpu clock= 2.54E+00
+ tran: time= 6.1237E-07 tot_iter=     311 conv_iter=     111 cpu clock= 2.54E+00
+ tran: time= 7.1237E-07 tot_iter=     317 conv_iter=     113 cpu clock= 2.54E+00
+ tran: time= 8.0816E-07 tot_iter=     323 conv_iter=     115 cpu clock= 2.55E+00
+ tran: time= 9.1994E-07 tot_iter=     709 conv_iter=     242 cpu clock= 2.57E+00
+ tran: time= 1.0000E-06 tot_iter=     713 conv_iter=     244 cpu clock= 2.58E+00
+ sweep: tran tran21   end,  cpu clock=  2.58E+00 memory=    360 kb
  voltage: vin             =    4.10E-01
- dcop: begin dcop,  cpu clock=  2.54E+00
- dcop: end dcop,  cpu clock=  2.55E+00 memory=    360 kb  tot_iter=    1037
+ dcop: begin dcop,  cpu clock=  2.59E+00
+ dcop: end dcop,  cpu clock=  2.59E+00 memory=    360 kb  tot_iter=    1037
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran22   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.56E+00
- tran: time= 1.3796E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.61E+00
- tran: time= 2.3796E-07 tot_iter=     291 conv_iter=     103 cpu clock= 2.62E+00
- tran: time= 3.3796E-07 tot_iter=     295 conv_iter=     105 cpu clock= 2.62E+00
- tran: time= 4.3523E-07 tot_iter=     300 conv_iter=     107 cpu clock= 2.63E+00
- tran: time= 5.2983E-07 tot_iter=     306 conv_iter=     109 cpu clock= 2.63E+00
- tran: time= 6.2963E-07 tot_iter=     312 conv_iter=     111 cpu clock= 2.63E+00
- tran: time= 7.0459E-07 tot_iter=     699 conv_iter=     242 cpu clock= 2.68E+00
- tran: time= 8.1295E-07 tot_iter=     709 conv_iter=     247 cpu clock= 2.68E+00
- tran: time= 9.1295E-07 tot_iter=     713 conv_iter=     249 cpu clock= 2.68E+00
- tran: time= 1.0000E-06 tot_iter=     717 conv_iter=     251 cpu clock= 2.69E+00
- sweep: tran tran22   end,  cpu clock=  2.69E+00 memory=    360 kb
+ sweep: tran tran22   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.60E+00
+ tran: time= 1.3796E-07 tot_iter=     287 conv_iter=     101 cpu clock= 2.63E+00
+ tran: time= 2.3796E-07 tot_iter=     291 conv_iter=     103 cpu clock= 2.64E+00
+ tran: time= 3.3796E-07 tot_iter=     295 conv_iter=     105 cpu clock= 2.64E+00
+ tran: time= 4.3523E-07 tot_iter=     300 conv_iter=     107 cpu clock= 2.65E+00
+ tran: time= 5.2983E-07 tot_iter=     306 conv_iter=     109 cpu clock= 2.66E+00
+ tran: time= 6.2963E-07 tot_iter=     312 conv_iter=     111 cpu clock= 2.67E+00
+ tran: time= 7.0459E-07 tot_iter=     699 conv_iter=     242 cpu clock= 2.71E+00
+ tran: time= 8.1295E-07 tot_iter=     709 conv_iter=     247 cpu clock= 2.72E+00
+ tran: time= 9.1295E-07 tot_iter=     713 conv_iter=     249 cpu clock= 2.72E+00
+ tran: time= 1.0000E-06 tot_iter=     717 conv_iter=     251 cpu clock= 2.73E+00
+ sweep: tran tran22   end,  cpu clock=  2.73E+00 memory=    360 kb
  voltage: vin             =    4.20E-01
- dcop: begin dcop,  cpu clock=  2.70E+00
- dcop: end dcop,  cpu clock=  2.73E+00 memory=    360 kb  tot_iter=    1059
+ dcop: begin dcop,  cpu clock=  2.74E+00
+ dcop: end dcop,  cpu clock=  2.74E+00 memory=    360 kb  tot_iter=    1059
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran23   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.73E+00
+ sweep: tran tran23   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.74E+00
  tran: time= 1.4408E-07 tot_iter=     286 conv_iter=     101 cpu clock= 2.77E+00
- tran: time= 2.4408E-07 tot_iter=     290 conv_iter=     103 cpu clock= 2.77E+00
+ tran: time= 2.4408E-07 tot_iter=     290 conv_iter=     103 cpu clock= 2.78E+00
  tran: time= 3.4408E-07 tot_iter=     295 conv_iter=     105 cpu clock= 2.78E+00
- tran: time= 4.2610E-07 tot_iter=     301 conv_iter=     107 cpu clock= 2.78E+00
- tran: time= 5.1557E-07 tot_iter=     307 conv_iter=     109 cpu clock= 2.79E+00
- tran: time= 6.1747E-07 tot_iter=     693 conv_iter=     237 cpu clock= 2.82E+00
- tran: time= 7.0746E-07 tot_iter=     697 conv_iter=     239 cpu clock= 2.83E+00
- tran: time= 8.0746E-07 tot_iter=     701 conv_iter=     241 cpu clock= 2.85E+00
+ tran: time= 4.2610E-07 tot_iter=     301 conv_iter=     107 cpu clock= 2.79E+00
+ tran: time= 5.1557E-07 tot_iter=     307 conv_iter=     109 cpu clock= 2.80E+00
+ tran: time= 6.1747E-07 tot_iter=     693 conv_iter=     237 cpu clock= 2.85E+00
+ tran: time= 7.0746E-07 tot_iter=     697 conv_iter=     239 cpu clock= 2.86E+00
+ tran: time= 8.0746E-07 tot_iter=     701 conv_iter=     241 cpu clock= 2.86E+00
  tran: time= 9.0044E-07 tot_iter=     706 conv_iter=     243 cpu clock= 2.87E+00
  tran: time= 1.0000E-06 tot_iter=     715 conv_iter=     246 cpu clock= 2.87E+00
- sweep: tran tran23   end,  cpu clock=  2.87E+00 memory=    360 kb
+ sweep: tran tran23   end,  cpu clock=  2.88E+00 memory=    360 kb
  voltage: vin             =    4.30E-01
  dcop: begin dcop,  cpu clock=  2.88E+00
  dcop: end dcop,  cpu clock=  2.89E+00 memory=    360 kb  tot_iter=    1081
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran24   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.89E+00
- tran: time= 1.1686E-07 tot_iter=     321 conv_iter=     116 cpu clock= 2.92E+00
- tran: time= 2.3452E-07 tot_iter=     327 conv_iter=     119 cpu clock= 2.92E+00
- tran: time= 3.0393E-07 tot_iter=     336 conv_iter=     123 cpu clock= 2.94E+00
+ sweep: tran tran24   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.90E+00
+ tran: time= 1.1686E-07 tot_iter=     321 conv_iter=     116 cpu clock= 2.93E+00
+ tran: time= 2.3452E-07 tot_iter=     327 conv_iter=     119 cpu clock= 2.93E+00
+ tran: time= 3.0393E-07 tot_iter=     336 conv_iter=     123 cpu clock= 2.93E+00
  tran: time= 4.3650E-07 tot_iter=     352 conv_iter=     129 cpu clock= 2.94E+00
- tran: time= 5.0898E-07 tot_iter=     741 conv_iter=     258 cpu clock= 3.01E+00
- tran: time= 6.3632E-07 tot_iter=     747 conv_iter=     261 cpu clock= 3.01E+00
- tran: time= 7.3632E-07 tot_iter=     752 conv_iter=     263 cpu clock= 3.02E+00
- tran: time= 8.2907E-07 tot_iter=     767 conv_iter=     268 cpu clock= 3.02E+00
- tran: time= 9.0094E-07 tot_iter=    1142 conv_iter=     392 cpu clock= 3.06E+00
- tran: time= 1.0000E-06 tot_iter=    1167 conv_iter=     402 cpu clock= 3.07E+00
- sweep: tran tran24   end,  cpu clock=  3.07E+00 memory=    360 kb
+ tran: time= 5.0898E-07 tot_iter=     741 conv_iter=     258 cpu clock= 2.96E+00
+ tran: time= 6.3632E-07 tot_iter=     747 conv_iter=     261 cpu clock= 2.96E+00
+ tran: time= 7.3632E-07 tot_iter=     752 conv_iter=     263 cpu clock= 2.97E+00
+ tran: time= 8.2907E-07 tot_iter=     767 conv_iter=     268 cpu clock= 2.97E+00
+ tran: time= 9.0094E-07 tot_iter=    1142 conv_iter=     392 cpu clock= 2.99E+00
+ tran: time= 1.0000E-06 tot_iter=    1167 conv_iter=     402 cpu clock= 3.00E+00
+ sweep: tran tran24   end,  cpu clock=  3.00E+00 memory=    360 kb
  voltage: vin             =    4.40E-01
- dcop: begin dcop,  cpu clock=  3.08E+00
- dcop: end dcop,  cpu clock=  3.08E+00 memory=    360 kb  tot_iter=    1103
+ dcop: begin dcop,  cpu clock=  3.01E+00
+ dcop: end dcop,  cpu clock=  3.01E+00 memory=    360 kb  tot_iter=    1103
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran25   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.09E+00
- tran: time= 1.0058E-07 tot_iter=     317 conv_iter=     112 cpu clock= 3.15E+00
- tran: time= 2.3529E-07 tot_iter=     323 conv_iter=     115 cpu clock= 3.16E+00
- tran: time= 3.3124E-07 tot_iter=     342 conv_iter=     122 cpu clock= 3.16E+00
- tran: time= 4.0183E-07 tot_iter=     751 conv_iter=     263 cpu clock= 3.20E+00
- tran: time= 5.1173E-07 tot_iter=     761 conv_iter=     268 cpu clock= 3.21E+00
- tran: time= 6.1173E-07 tot_iter=     766 conv_iter=     270 cpu clock= 3.21E+00
- tran: time= 7.2026E-07 tot_iter=     784 conv_iter=     276 cpu clock= 3.22E+00
- tran: time= 8.0956E-07 tot_iter=    1164 conv_iter=     403 cpu clock= 3.28E+00
- tran: time= 9.3887E-07 tot_iter=    1170 conv_iter=     406 cpu clock= 3.29E+00
- tran: time= 1.0000E-06 tot_iter=    1177 conv_iter=     408 cpu clock= 3.29E+00
- sweep: tran tran25   end,  cpu clock=  3.29E+00 memory=    360 kb
+ sweep: tran tran25   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.02E+00
+ tran: time= 1.0058E-07 tot_iter=     317 conv_iter=     112 cpu clock= 3.04E+00
+ tran: time= 2.3529E-07 tot_iter=     323 conv_iter=     115 cpu clock= 3.04E+00
+ tran: time= 3.3124E-07 tot_iter=     342 conv_iter=     122 cpu clock= 3.04E+00
+ tran: time= 4.0183E-07 tot_iter=     751 conv_iter=     263 cpu clock= 3.08E+00
+ tran: time= 5.1173E-07 tot_iter=     761 conv_iter=     268 cpu clock= 3.08E+00
+ tran: time= 6.1173E-07 tot_iter=     766 conv_iter=     270 cpu clock= 3.08E+00
+ tran: time= 7.2026E-07 tot_iter=     784 conv_iter=     276 cpu clock= 3.11E+00
+ tran: time= 8.0956E-07 tot_iter=    1164 conv_iter=     403 cpu clock= 3.14E+00
+ tran: time= 9.3887E-07 tot_iter=    1170 conv_iter=     406 cpu clock= 3.15E+00
+ tran: time= 1.0000E-06 tot_iter=    1177 conv_iter=     408 cpu clock= 3.15E+00
+ sweep: tran tran25   end,  cpu clock=  3.15E+00 memory=    360 kb
  voltage: vin             =    4.50E-01
- dcop: begin dcop,  cpu clock=  3.29E+00
- dcop: end dcop,  cpu clock=  3.30E+00 memory=    360 kb  tot_iter=    1125
+ dcop: begin dcop,  cpu clock=  3.16E+00
+ dcop: end dcop,  cpu clock=  3.17E+00 memory=    360 kb  tot_iter=    1125
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran26   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.30E+00
- tran: time= 1.0963E-07 tot_iter=     304 conv_iter=     106 cpu clock= 3.33E+00
- tran: time= 2.1154E-07 tot_iter=     316 conv_iter=     111 cpu clock= 3.35E+00
- tran: time= 3.0106E-07 tot_iter=     372 conv_iter=     129 cpu clock= 3.36E+00
- tran: time= 4.1676E-07 tot_iter=     725 conv_iter=     250 cpu clock= 3.39E+00
- tran: time= 5.0942E-07 tot_iter=     729 conv_iter=     252 cpu clock= 3.40E+00
- tran: time= 6.0006E-07 tot_iter=     915 conv_iter=     308 cpu clock= 3.44E+00
- tran: time= 7.1142E-07 tot_iter=    1151 conv_iter=     392 cpu clock= 3.47E+00
- tran: time= 8.0384E-07 tot_iter=    1155 conv_iter=     394 cpu clock= 3.47E+00
- tran: time= 9.0036E-07 tot_iter=    1395 conv_iter=     471 cpu clock= 3.50E+00
- tran: time= 1.0000E-06 tot_iter=    1581 conv_iter=     539 cpu clock= 3.51E+00
- sweep: tran tran26   end,  cpu clock=  3.51E+00 memory=    360 kb
+ sweep: tran tran26   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.18E+00
+ tran: time= 1.0963E-07 tot_iter=     304 conv_iter=     106 cpu clock= 3.21E+00
+ tran: time= 2.1154E-07 tot_iter=     316 conv_iter=     111 cpu clock= 3.21E+00
+ tran: time= 3.0106E-07 tot_iter=     372 conv_iter=     129 cpu clock= 3.22E+00
+ tran: time= 4.1676E-07 tot_iter=     725 conv_iter=     250 cpu clock= 3.26E+00
+ tran: time= 5.0942E-07 tot_iter=     729 conv_iter=     252 cpu clock= 3.26E+00
+ tran: time= 6.0006E-07 tot_iter=     915 conv_iter=     308 cpu clock= 3.29E+00
+ tran: time= 7.1142E-07 tot_iter=    1151 conv_iter=     392 cpu clock= 3.31E+00
+ tran: time= 8.0384E-07 tot_iter=    1155 conv_iter=     394 cpu clock= 3.32E+00
+ tran: time= 9.0036E-07 tot_iter=    1395 conv_iter=     471 cpu clock= 3.34E+00
+ tran: time= 1.0000E-06 tot_iter=    1581 conv_iter=     539 cpu clock= 3.36E+00
+ sweep: tran tran26   end,  cpu clock=  3.36E+00 memory=    360 kb
  voltage: vin             =    4.60E-01
- dcop: begin dcop,  cpu clock=  3.52E+00
- dcop: end dcop,  cpu clock=  3.53E+00 memory=    360 kb  tot_iter=    1150
+ dcop: begin dcop,  cpu clock=  3.39E+00
+ dcop: end dcop,  cpu clock=  3.39E+00 memory=    360 kb  tot_iter=    1150
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran27   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.53E+00
- tran: time= 1.1907E-07 tot_iter=     264 conv_iter=      94 cpu clock= 3.59E+00
- tran: time= 2.0041E-07 tot_iter=     278 conv_iter=      99 cpu clock= 3.60E+00
- tran: time= 3.0644E-07 tot_iter=     665 conv_iter=     232 cpu clock= 3.62E+00
- tran: time= 4.3400E-07 tot_iter=     679 conv_iter=     238 cpu clock= 3.63E+00
- tran: time= 5.0000E-07 tot_iter=     829 conv_iter=     284 cpu clock= 3.65E+00
- tran: time= 6.0129E-07 tot_iter=    1082 conv_iter=     375 cpu clock= 3.70E+00
- tran: time= 7.0837E-07 tot_iter=    1100 conv_iter=     381 cpu clock= 3.71E+00
- tran: time= 8.0437E-07 tot_iter=    1502 conv_iter=     515 cpu clock= 3.73E+00
- tran: time= 9.2589E-07 tot_iter=    1511 conv_iter=     519 cpu clock= 3.73E+00
- tran: time= 1.0000E-06 tot_iter=    1752 conv_iter=     599 cpu clock= 3.75E+00
- sweep: tran tran27   end,  cpu clock=  3.75E+00 memory=    360 kb
+ sweep: tran tran27   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.40E+00
+ tran: time= 1.1907E-07 tot_iter=     264 conv_iter=      94 cpu clock= 3.44E+00
+ tran: time= 2.0041E-07 tot_iter=     278 conv_iter=      99 cpu clock= 3.44E+00
+ tran: time= 3.0644E-07 tot_iter=     665 conv_iter=     232 cpu clock= 3.48E+00
+ tran: time= 4.3400E-07 tot_iter=     679 conv_iter=     238 cpu clock= 3.49E+00
+ tran: time= 5.0000E-07 tot_iter=     829 conv_iter=     284 cpu clock= 3.50E+00
+ tran: time= 6.0129E-07 tot_iter=    1082 conv_iter=     375 cpu clock= 3.54E+00
+ tran: time= 7.0837E-07 tot_iter=    1100 conv_iter=     381 cpu clock= 3.54E+00
+ tran: time= 8.0437E-07 tot_iter=    1502 conv_iter=     515 cpu clock= 3.57E+00
+ tran: time= 9.2589E-07 tot_iter=    1511 conv_iter=     519 cpu clock= 3.57E+00
+ tran: time= 1.0000E-06 tot_iter=    1752 conv_iter=     599 cpu clock= 3.59E+00
+ sweep: tran tran27   end,  cpu clock=  3.59E+00 memory=    360 kb
  voltage: vin             =    4.70E-01
- dcop: begin dcop,  cpu clock=  3.76E+00
- dcop: end dcop,  cpu clock=  3.77E+00 memory=    360 kb  tot_iter=    1217
+ dcop: begin dcop,  cpu clock=  3.60E+00
+ dcop: end dcop,  cpu clock=  3.60E+00 memory=    360 kb  tot_iter=    1217
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran28   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.77E+00
- tran: time= 1.1058E-07 tot_iter=     265 conv_iter=      94 cpu clock= 3.80E+00
- tran: time= 2.1027E-07 tot_iter=     281 conv_iter=     100 cpu clock= 3.83E+00
- tran: time= 3.1278E-07 tot_iter=     673 conv_iter=     232 cpu clock= 3.86E+00
- tran: time= 4.1607E-07 tot_iter=     692 conv_iter=     239 cpu clock= 3.87E+00
- tran: time= 5.1130E-07 tot_iter=    1088 conv_iter=     372 cpu clock= 3.91E+00
- tran: time= 6.0567E-07 tot_iter=    1106 conv_iter=     378 cpu clock= 3.91E+00
- tran: time= 7.0378E-07 tot_iter=    1465 conv_iter=     500 cpu clock= 3.93E+00
- tran: time= 8.0221E-07 tot_iter=    1481 conv_iter=     506 cpu clock= 3.93E+00
- tran: time= 9.1138E-07 tot_iter=    1867 conv_iter=     636 cpu clock= 3.95E+00
- tran: time= 1.0000E-06 tot_iter=    1883 conv_iter=     642 cpu clock= 3.96E+00
- sweep: tran tran28   end,  cpu clock=  3.96E+00 memory=    360 kb
+ sweep: tran tran28   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.62E+00
+ tran: time= 1.1058E-07 tot_iter=     265 conv_iter=      94 cpu clock= 3.65E+00
+ tran: time= 2.1027E-07 tot_iter=     281 conv_iter=     100 cpu clock= 3.65E+00
+ tran: time= 3.1278E-07 tot_iter=     673 conv_iter=     232 cpu clock= 3.69E+00
+ tran: time= 4.1607E-07 tot_iter=     692 conv_iter=     239 cpu clock= 3.70E+00
+ tran: time= 5.1130E-07 tot_iter=    1088 conv_iter=     372 cpu clock= 3.74E+00
+ tran: time= 6.0567E-07 tot_iter=    1106 conv_iter=     378 cpu clock= 3.74E+00
+ tran: time= 7.0378E-07 tot_iter=    1465 conv_iter=     500 cpu clock= 3.77E+00
+ tran: time= 8.0221E-07 tot_iter=    1481 conv_iter=     506 cpu clock= 3.77E+00
+ tran: time= 9.1138E-07 tot_iter=    1867 conv_iter=     636 cpu clock= 3.79E+00
+ tran: time= 1.0000E-06 tot_iter=    1883 conv_iter=     642 cpu clock= 3.80E+00
+ sweep: tran tran28   end,  cpu clock=  3.80E+00 memory=    360 kb
  voltage: vin             =    4.80E-01
- dcop: begin dcop,  cpu clock=  3.98E+00
- dcop: end dcop,  cpu clock=  3.99E+00 memory=    360 kb  tot_iter=    1276
+ dcop: begin dcop,  cpu clock=  3.81E+00
+ dcop: end dcop,  cpu clock=  3.81E+00 memory=    360 kb  tot_iter=    1276
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran29   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.00E+00
- tran: time= 1.0344E-07 tot_iter=     272 conv_iter=      97 cpu clock= 4.03E+00
- tran: time= 2.0014E-07 tot_iter=     627 conv_iter=     217 cpu clock= 4.07E+00
- tran: time= 3.0326E-07 tot_iter=     678 conv_iter=     237 cpu clock= 4.08E+00
- tran: time= 4.0201E-07 tot_iter=    1082 conv_iter=     375 cpu clock= 4.11E+00
- tran: time= 5.0265E-07 tot_iter=    1112 conv_iter=     387 cpu clock= 4.12E+00
- tran: time= 6.1739E-07 tot_iter=    1520 conv_iter=     524 cpu clock= 4.13E+00
- tran: time= 7.1188E-07 tot_iter=    1532 conv_iter=     528 cpu clock= 4.14E+00
- tran: time= 8.2595E-07 tot_iter=    1921 conv_iter=     660 cpu clock= 4.16E+00
- tran: time= 9.0085E-07 tot_iter=    2311 conv_iter=     791 cpu clock= 4.18E+00
- tran: time= 1.0000E-06 tot_iter=    2342 conv_iter=     803 cpu clock= 4.19E+00
- sweep: tran tran29   end,  cpu clock=  4.19E+00 memory=    360 kb
+ sweep: tran tran29   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  3.82E+00
+ tran: time= 1.0344E-07 tot_iter=     272 conv_iter=      97 cpu clock= 3.85E+00
+ tran: time= 2.0014E-07 tot_iter=     627 conv_iter=     217 cpu clock= 3.89E+00
+ tran: time= 3.0326E-07 tot_iter=     678 conv_iter=     237 cpu clock= 3.90E+00
+ tran: time= 4.0201E-07 tot_iter=    1082 conv_iter=     375 cpu clock= 3.94E+00
+ tran: time= 5.0265E-07 tot_iter=    1112 conv_iter=     387 cpu clock= 3.95E+00
+ tran: time= 6.1739E-07 tot_iter=    1520 conv_iter=     524 cpu clock= 3.97E+00
+ tran: time= 7.1188E-07 tot_iter=    1532 conv_iter=     528 cpu clock= 3.97E+00
+ tran: time= 8.2595E-07 tot_iter=    1921 conv_iter=     660 cpu clock= 3.99E+00
+ tran: time= 9.0085E-07 tot_iter=    2311 conv_iter=     791 cpu clock= 4.02E+00
+ tran: time= 1.0000E-06 tot_iter=    2342 conv_iter=     803 cpu clock= 4.02E+00
+ sweep: tran tran29   end,  cpu clock=  4.02E+00 memory=    360 kb
  voltage: vin             =    4.90E-01
- dcop: begin dcop,  cpu clock=  4.20E+00
- dcop: end dcop,  cpu clock=  4.20E+00 memory=    360 kb  tot_iter=    1302
+ dcop: begin dcop,  cpu clock=  4.03E+00
+ dcop: end dcop,  cpu clock=  4.04E+00 memory=    360 kb  tot_iter=    1302
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran30   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.21E+00
- tran: time= 1.1855E-07 tot_iter=     299 conv_iter=     107 cpu clock= 4.23E+00
- tran: time= 2.0790E-07 tot_iter=     682 conv_iter=     236 cpu clock= 4.29E+00
- tran: time= 3.0754E-07 tot_iter=     704 conv_iter=     244 cpu clock= 4.30E+00
- tran: time= 4.1286E-07 tot_iter=    1080 conv_iter=     370 cpu clock= 4.32E+00
- tran: time= 5.0146E-07 tot_iter=    1463 conv_iter=     499 cpu clock= 4.34E+00
- tran: time= 6.0625E-07 tot_iter=    1483 conv_iter=     507 cpu clock= 4.34E+00
- tran: time= 7.1069E-07 tot_iter=    1861 conv_iter=     634 cpu clock= 4.37E+00
- tran: time= 8.1319E-07 tot_iter=    2242 conv_iter=     761 cpu clock= 4.39E+00
- tran: time= 9.0236E-07 tot_iter=    2261 conv_iter=     768 cpu clock= 4.39E+00
- tran: time= 1.0000E-06 tot_iter=    2636 conv_iter=     895 cpu clock= 4.42E+00
- sweep: tran tran30   end,  cpu clock=  4.42E+00 memory=    360 kb
+ sweep: tran tran30   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.05E+00
+ tran: time= 1.1855E-07 tot_iter=     299 conv_iter=     107 cpu clock= 4.09E+00
+ tran: time= 2.0790E-07 tot_iter=     682 conv_iter=     236 cpu clock= 4.13E+00
+ tran: time= 3.0754E-07 tot_iter=     704 conv_iter=     244 cpu clock= 4.13E+00
+ tran: time= 4.1286E-07 tot_iter=    1080 conv_iter=     370 cpu clock= 4.17E+00
+ tran: time= 5.0146E-07 tot_iter=    1463 conv_iter=     499 cpu clock= 4.19E+00
+ tran: time= 6.0625E-07 tot_iter=    1483 conv_iter=     507 cpu clock= 4.19E+00
+ tran: time= 7.1069E-07 tot_iter=    1861 conv_iter=     634 cpu clock= 4.22E+00
+ tran: time= 8.1319E-07 tot_iter=    2242 conv_iter=     761 cpu clock= 4.24E+00
+ tran: time= 9.0236E-07 tot_iter=    2261 conv_iter=     768 cpu clock= 4.24E+00
+ tran: time= 1.0000E-06 tot_iter=    2636 conv_iter=     895 cpu clock= 4.26E+00
+ sweep: tran tran30   end,  cpu clock=  4.27E+00 memory=    360 kb
  voltage: vin             =    5.00E-01
- dcop: begin dcop,  cpu clock=  4.43E+00
- dcop: end dcop,  cpu clock=  4.43E+00 memory=    360 kb  tot_iter=    1328
+ dcop: begin dcop,  cpu clock=  4.27E+00
+ dcop: end dcop,  cpu clock=  4.28E+00 memory=    360 kb  tot_iter=    1328
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran31   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.44E+00
- tran: time= 1.0979E-07 tot_iter=     310 conv_iter=     109 cpu clock= 4.47E+00
- tran: time= 2.1185E-07 tot_iter=     702 conv_iter=     241 cpu clock= 4.52E+00
- tran: time= 3.0039E-07 tot_iter=    1047 conv_iter=     355 cpu clock= 4.53E+00
- tran: time= 4.0143E-07 tot_iter=    1264 conv_iter=     425 cpu clock= 4.55E+00
- tran: time= 5.2060E-07 tot_iter=    1469 conv_iter=     498 cpu clock= 4.56E+00
- tran: time= 6.1695E-07 tot_iter=    1848 conv_iter=     626 cpu clock= 4.58E+00
- tran: time= 7.0758E-07 tot_iter=    2214 conv_iter=     748 cpu clock= 4.60E+00
- tran: time= 8.0065E-07 tot_iter=    2569 conv_iter=     868 cpu clock= 4.62E+00
- tran: time= 9.0315E-07 tot_iter=    2602 conv_iter=     880 cpu clock= 4.63E+00
- tran: time= 1.0000E-06 tot_iter=    2968 conv_iter=    1003 cpu clock= 4.65E+00
- sweep: tran tran31   end,  cpu clock=  4.65E+00 memory=    360 kb
+ sweep: tran tran31   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.29E+00
+ tran: time= 1.0979E-07 tot_iter=     310 conv_iter=     109 cpu clock= 4.33E+00
+ tran: time= 2.1185E-07 tot_iter=     702 conv_iter=     241 cpu clock= 4.37E+00
+ tran: time= 3.0039E-07 tot_iter=    1047 conv_iter=     355 cpu clock= 4.38E+00
+ tran: time= 4.0143E-07 tot_iter=    1264 conv_iter=     425 cpu clock= 4.40E+00
+ tran: time= 5.2060E-07 tot_iter=    1469 conv_iter=     498 cpu clock= 4.42E+00
+ tran: time= 6.1695E-07 tot_iter=    1848 conv_iter=     626 cpu clock= 4.44E+00
+ tran: time= 7.0758E-07 tot_iter=    2214 conv_iter=     748 cpu clock= 4.46E+00
+ tran: time= 8.0065E-07 tot_iter=    2569 conv_iter=     868 cpu clock= 4.48E+00
+ tran: time= 9.0315E-07 tot_iter=    2602 conv_iter=     880 cpu clock= 4.48E+00
+ tran: time= 1.0000E-06 tot_iter=    2968 conv_iter=    1003 cpu clock= 4.50E+00
+ sweep: tran tran31   end,  cpu clock=  4.51E+00 memory=    360 kb
  voltage: vin             =    5.10E-01
- dcop: begin dcop,  cpu clock=  4.66E+00
- dcop: end dcop,  cpu clock=  4.66E+00 memory=    360 kb  tot_iter=    1354
+ dcop: begin dcop,  cpu clock=  4.53E+00
+ dcop: end dcop,  cpu clock=  4.53E+00 memory=    360 kb  tot_iter=    1354
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran32   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.68E+00
- tran: time= 1.1106E-07 tot_iter=     315 conv_iter=     112 cpu clock= 4.72E+00
- tran: time= 2.0467E-07 tot_iter=     667 conv_iter=     231 cpu clock= 4.74E+00
- tran: time= 3.1099E-07 tot_iter=    1025 conv_iter=     351 cpu clock= 4.76E+00
- tran: time= 4.0136E-07 tot_iter=    1413 conv_iter=     481 cpu clock= 4.78E+00
- tran: time= 5.0949E-07 tot_iter=    1779 conv_iter=     604 cpu clock= 4.80E+00
- tran: time= 6.0035E-07 tot_iter=    2124 conv_iter=     721 cpu clock= 4.82E+00
- tran: time= 7.0297E-07 tot_iter=    2478 conv_iter=     840 cpu clock= 4.85E+00
- tran: time= 8.0002E-07 tot_iter=    2731 conv_iter=     923 cpu clock= 4.86E+00
- tran: time= 9.0027E-07 tot_iter=    3042 conv_iter=    1028 cpu clock= 4.88E+00
- tran: time= 1.0000E-06 tot_iter=    3242 conv_iter=    1099 cpu clock= 4.89E+00
- sweep: tran tran32   end,  cpu clock=  4.89E+00 memory=    360 kb
+ sweep: tran tran32   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.54E+00
+ tran: time= 1.1106E-07 tot_iter=     315 conv_iter=     112 cpu clock= 4.58E+00
+ tran: time= 2.0467E-07 tot_iter=     667 conv_iter=     231 cpu clock= 4.60E+00
+ tran: time= 3.1099E-07 tot_iter=    1025 conv_iter=     351 cpu clock= 4.62E+00
+ tran: time= 4.0136E-07 tot_iter=    1413 conv_iter=     481 cpu clock= 4.64E+00
+ tran: time= 5.0949E-07 tot_iter=    1779 conv_iter=     604 cpu clock= 4.67E+00
+ tran: time= 6.0035E-07 tot_iter=    2124 conv_iter=     721 cpu clock= 4.69E+00
+ tran: time= 7.0297E-07 tot_iter=    2478 conv_iter=     840 cpu clock= 4.71E+00
+ tran: time= 8.0002E-07 tot_iter=    2731 conv_iter=     923 cpu clock= 4.72E+00
+ tran: time= 9.0027E-07 tot_iter=    3042 conv_iter=    1028 cpu clock= 4.74E+00
+ tran: time= 1.0000E-06 tot_iter=    3242 conv_iter=    1099 cpu clock= 4.75E+00
+ sweep: tran tran32   end,  cpu clock=  4.75E+00 memory=    360 kb
  voltage: vin             =    5.20E-01
- dcop: begin dcop,  cpu clock=  4.90E+00
- dcop: end dcop,  cpu clock=  4.91E+00 memory=    360 kb  tot_iter=    1380
+ dcop: begin dcop,  cpu clock=  4.78E+00
+ dcop: end dcop,  cpu clock=  4.79E+00 memory=    360 kb  tot_iter=    1380
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran33   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.92E+00
- tran: time= 1.0024E-07 tot_iter=     312 conv_iter=     111 cpu clock= 4.95E+00
- tran: time= 2.0319E-07 tot_iter=     679 conv_iter=     239 cpu clock= 4.97E+00
- tran: time= 3.0005E-07 tot_iter=    1160 conv_iter=     398 cpu clock= 5.00E+00
- tran: time= 4.0011E-07 tot_iter=    1615 conv_iter=     551 cpu clock= 5.03E+00
- tran: time= 5.0030E-07 tot_iter=    1990 conv_iter=     679 cpu clock= 5.05E+00
- tran: time= 6.0152E-07 tot_iter=    2367 conv_iter=     805 cpu clock= 5.07E+00
- tran: time= 7.0075E-07 tot_iter=    2754 conv_iter=     934 cpu clock= 5.10E+00
- tran: time= 8.0047E-07 tot_iter=    3147 conv_iter=    1067 cpu clock= 5.12E+00
- tran: time= 9.0003E-07 tot_iter=    3561 conv_iter=    1207 cpu clock= 5.14E+00
- tran: time= 1.0000E-06 tot_iter=    4014 conv_iter=    1362 cpu clock= 5.17E+00
- sweep: tran tran33   end,  cpu clock=  5.17E+00 memory=    360 kb
+ sweep: tran tran33   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  4.80E+00
+ tran: time= 1.0024E-07 tot_iter=     312 conv_iter=     111 cpu clock= 4.84E+00
+ tran: time= 2.0319E-07 tot_iter=     679 conv_iter=     239 cpu clock= 4.88E+00
+ tran: time= 3.0005E-07 tot_iter=    1160 conv_iter=     398 cpu clock= 4.93E+00
+ tran: time= 4.0011E-07 tot_iter=    1615 conv_iter=     551 cpu clock= 4.98E+00
+ tran: time= 5.0030E-07 tot_iter=    1990 conv_iter=     679 cpu clock= 5.01E+00
+ tran: time= 6.0152E-07 tot_iter=    2367 conv_iter=     805 cpu clock= 5.04E+00
+ tran: time= 7.0075E-07 tot_iter=    2754 conv_iter=     934 cpu clock= 5.05E+00
+ tran: time= 8.0047E-07 tot_iter=    3147 conv_iter=    1067 cpu clock= 5.08E+00
+ tran: time= 9.0003E-07 tot_iter=    3561 conv_iter=    1207 cpu clock= 5.11E+00
+ tran: time= 1.0000E-06 tot_iter=    4014 conv_iter=    1362 cpu clock= 5.12E+00
+ sweep: tran tran33   end,  cpu clock=  5.13E+00 memory=    360 kb
  voltage: vin             =    5.30E-01
- dcop: begin dcop,  cpu clock=  5.18E+00
- dcop: end dcop,  cpu clock=  5.21E+00 memory=    360 kb  tot_iter=    1406
+ dcop: begin dcop,  cpu clock=  5.13E+00
+ dcop: end dcop,  cpu clock=  5.14E+00 memory=    360 kb  tot_iter=    1406
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran34   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.22E+00
- tran: time= 1.0119E-07 tot_iter=     508 conv_iter=     175 cpu clock= 5.27E+00
- tran: time= 2.0027E-07 tot_iter=    1023 conv_iter=     347 cpu clock= 5.34E+00
- tran: time= 3.0272E-07 tot_iter=    1421 conv_iter=     481 cpu clock= 5.36E+00
- tran: time= 4.0662E-07 tot_iter=    1804 conv_iter=     608 cpu clock= 5.38E+00
- tran: time= 5.0908E-07 tot_iter=    2183 conv_iter=     734 cpu clock= 5.40E+00
- tran: time= 6.0777E-07 tot_iter=    2573 conv_iter=     863 cpu clock= 5.43E+00
- tran: time= 7.0012E-07 tot_iter=    3114 conv_iter=    1040 cpu clock= 5.46E+00
- tran: time= 8.0038E-07 tot_iter=    3543 conv_iter=    1184 cpu clock= 5.48E+00
- tran: time= 9.0249E-07 tot_iter=    4013 conv_iter=    1345 cpu clock= 5.51E+00
- tran: time= 1.0000E-06 tot_iter=    4376 conv_iter=    1467 cpu clock= 5.53E+00
- sweep: tran tran34   end,  cpu clock=  5.53E+00 memory=    360 kb
+ sweep: tran tran34   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.14E+00
+ tran: time= 1.0119E-07 tot_iter=     508 conv_iter=     175 cpu clock= 5.18E+00
+ tran: time= 2.0027E-07 tot_iter=    1023 conv_iter=     347 cpu clock= 5.24E+00
+ tran: time= 3.0272E-07 tot_iter=    1421 conv_iter=     481 cpu clock= 5.26E+00
+ tran: time= 4.0662E-07 tot_iter=    1804 conv_iter=     608 cpu clock= 5.29E+00
+ tran: time= 5.0908E-07 tot_iter=    2183 conv_iter=     734 cpu clock= 5.31E+00
+ tran: time= 6.0777E-07 tot_iter=    2573 conv_iter=     863 cpu clock= 5.33E+00
+ tran: time= 7.0012E-07 tot_iter=    3114 conv_iter=    1040 cpu clock= 5.36E+00
+ tran: time= 8.0038E-07 tot_iter=    3543 conv_iter=    1184 cpu clock= 5.39E+00
+ tran: time= 9.0249E-07 tot_iter=    4013 conv_iter=    1345 cpu clock= 5.41E+00
+ tran: time= 1.0000E-06 tot_iter=    4376 conv_iter=    1467 cpu clock= 5.43E+00
+ sweep: tran tran34   end,  cpu clock=  5.44E+00 memory=    360 kb
  voltage: vin             =    5.40E-01
- dcop: begin dcop,  cpu clock=  5.54E+00
- dcop: end dcop,  cpu clock=  5.54E+00 memory=    360 kb  tot_iter=    1432
+ dcop: begin dcop,  cpu clock=  5.44E+00
+ dcop: end dcop,  cpu clock=  5.45E+00 memory=    360 kb  tot_iter=    1432
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran35   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.55E+00
- tran: time= 1.0047E-07 tot_iter=     538 conv_iter=     183 cpu clock= 5.60E+00
- tran: time= 2.0688E-07 tot_iter=    1035 conv_iter=     351 cpu clock= 5.66E+00
- tran: time= 3.0367E-07 tot_iter=    1411 conv_iter=     478 cpu clock= 5.72E+00
- tran: time= 4.0051E-07 tot_iter=    1960 conv_iter=     659 cpu clock= 5.77E+00
- tran: time= 5.0048E-07 tot_iter=    2502 conv_iter=     844 cpu clock= 5.80E+00
- tran: time= 6.1147E-07 tot_iter=    2885 conv_iter=     972 cpu clock= 5.82E+00
- tran: time= 7.0103E-07 tot_iter=    3269 conv_iter=    1099 cpu clock= 5.85E+00
- tran: time= 8.0010E-07 tot_iter=    3970 conv_iter=    1334 cpu clock= 5.88E+00
- tran: time= 9.0734E-07 tot_iter=    4362 conv_iter=    1471 cpu clock= 5.90E+00
- tran: time= 1.0000E-06 tot_iter=    4738 conv_iter=    1595 cpu clock= 5.93E+00
- sweep: tran tran35   end,  cpu clock=  5.93E+00 memory=    360 kb
+ sweep: tran tran35   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.46E+00
+ tran: time= 1.0047E-07 tot_iter=     538 conv_iter=     183 cpu clock= 5.52E+00
+ tran: time= 2.0688E-07 tot_iter=    1035 conv_iter=     351 cpu clock= 5.57E+00
+ tran: time= 3.0367E-07 tot_iter=    1411 conv_iter=     478 cpu clock= 5.61E+00
+ tran: time= 4.0051E-07 tot_iter=    1960 conv_iter=     659 cpu clock= 5.67E+00
+ tran: time= 5.0048E-07 tot_iter=    2502 conv_iter=     844 cpu clock= 5.69E+00
+ tran: time= 6.1147E-07 tot_iter=    2885 conv_iter=     972 cpu clock= 5.72E+00
+ tran: time= 7.0103E-07 tot_iter=    3269 conv_iter=    1099 cpu clock= 5.74E+00
+ tran: time= 8.0010E-07 tot_iter=    3970 conv_iter=    1334 cpu clock= 5.77E+00
+ tran: time= 9.0734E-07 tot_iter=    4362 conv_iter=    1471 cpu clock= 5.80E+00
+ tran: time= 1.0000E-06 tot_iter=    4738 conv_iter=    1595 cpu clock= 5.82E+00
+ sweep: tran tran35   end,  cpu clock=  5.82E+00 memory=    360 kb
  voltage: vin             =    5.50E-01
- dcop: begin dcop,  cpu clock=  5.94E+00
- dcop: end dcop,  cpu clock=  5.94E+00 memory=    360 kb  tot_iter=    1458
+ dcop: begin dcop,  cpu clock=  5.83E+00
+ dcop: end dcop,  cpu clock=  5.83E+00 memory=    360 kb  tot_iter=    1458
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran36   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.95E+00
- tran: time= 1.0060E-07 tot_iter=     661 conv_iter=     228 cpu clock= 5.99E+00
- tran: time= 2.0315E-07 tot_iter=    1055 conv_iter=     361 cpu clock= 6.02E+00
- tran: time= 3.0110E-07 tot_iter=    1628 conv_iter=     551 cpu clock= 6.05E+00
- tran: time= 4.0381E-07 tot_iter=    2144 conv_iter=     727 cpu clock= 6.08E+00
- tran: time= 5.0005E-07 tot_iter=    2685 conv_iter=     904 cpu clock= 6.11E+00
- tran: time= 6.0484E-07 tot_iter=    3227 conv_iter=    1089 cpu clock= 6.14E+00
- tran: time= 7.0181E-07 tot_iter=    3618 conv_iter=    1220 cpu clock= 6.16E+00
- tran: time= 8.0149E-07 tot_iter=    4314 conv_iter=    1455 cpu clock= 6.20E+00
- tran: time= 9.0094E-07 tot_iter=    4689 conv_iter=    1581 cpu clock= 6.22E+00
- tran: time= 1.0000E-06 tot_iter=    5383 conv_iter=    1814 cpu clock= 6.26E+00
- sweep: tran tran36   end,  cpu clock=  6.26E+00 memory=    360 kb
+ sweep: tran tran36   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  5.84E+00
+ tran: time= 1.0060E-07 tot_iter=     661 conv_iter=     228 cpu clock= 5.88E+00
+ tran: time= 2.0315E-07 tot_iter=    1055 conv_iter=     361 cpu clock= 5.91E+00
+ tran: time= 3.0110E-07 tot_iter=    1628 conv_iter=     551 cpu clock= 5.94E+00
+ tran: time= 4.0381E-07 tot_iter=    2144 conv_iter=     727 cpu clock= 5.97E+00
+ tran: time= 5.0005E-07 tot_iter=    2685 conv_iter=     904 cpu clock= 6.00E+00
+ tran: time= 6.0484E-07 tot_iter=    3227 conv_iter=    1089 cpu clock= 6.03E+00
+ tran: time= 7.0181E-07 tot_iter=    3618 conv_iter=    1220 cpu clock= 6.05E+00
+ tran: time= 8.0149E-07 tot_iter=    4314 conv_iter=    1455 cpu clock= 6.09E+00
+ tran: time= 9.0094E-07 tot_iter=    4689 conv_iter=    1581 cpu clock= 6.11E+00
+ tran: time= 1.0000E-06 tot_iter=    5383 conv_iter=    1814 cpu clock= 6.15E+00
+ sweep: tran tran36   end,  cpu clock=  6.15E+00 memory=    360 kb
  voltage: vin             =    5.60E-01
- dcop: begin dcop,  cpu clock=  6.27E+00
- dcop: end dcop,  cpu clock=  6.27E+00 memory=    360 kb  tot_iter=    1484
+ dcop: begin dcop,  cpu clock=  6.16E+00
+ dcop: end dcop,  cpu clock=  6.16E+00 memory=    360 kb  tot_iter=    1484
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran37   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.28E+00
- tran: time= 1.0005E-07 tot_iter=     663 conv_iter=     228 cpu clock= 6.32E+00
- tran: time= 2.0013E-07 tot_iter=    1202 conv_iter=     408 cpu clock= 6.35E+00
- tran: time= 3.0504E-07 tot_iter=    1747 conv_iter=     598 cpu clock= 6.39E+00
- tran: time= 4.0119E-07 tot_iter=    2311 conv_iter=     786 cpu clock= 6.42E+00
- tran: time= 5.0450E-07 tot_iter=    2836 conv_iter=     964 cpu clock= 6.45E+00
- tran: time= 6.0036E-07 tot_iter=    3529 conv_iter=    1200 cpu clock= 6.49E+00
- tran: time= 7.0417E-07 tot_iter=    3933 conv_iter=    1337 cpu clock= 6.51E+00
- tran: time= 8.0464E-07 tot_iter=    4620 conv_iter=    1570 cpu clock= 6.55E+00
- tran: time= 9.0055E-07 tot_iter=    5149 conv_iter=    1749 cpu clock= 6.57E+00
- tran: time= 1.0000E-06 tot_iter=    5676 conv_iter=    1928 cpu clock= 6.60E+00
- sweep: tran tran37   end,  cpu clock=  6.61E+00 memory=    360 kb
+ sweep: tran tran37   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.17E+00
+ tran: time= 1.0005E-07 tot_iter=     663 conv_iter=     228 cpu clock= 6.26E+00
+ tran: time= 2.0013E-07 tot_iter=    1202 conv_iter=     408 cpu clock= 6.31E+00
+ tran: time= 3.0504E-07 tot_iter=    1747 conv_iter=     598 cpu clock= 6.33E+00
+ tran: time= 4.0119E-07 tot_iter=    2311 conv_iter=     786 cpu clock= 6.37E+00
+ tran: time= 5.0450E-07 tot_iter=    2836 conv_iter=     964 cpu clock= 6.39E+00
+ tran: time= 6.0036E-07 tot_iter=    3529 conv_iter=    1200 cpu clock= 6.43E+00
+ tran: time= 7.0417E-07 tot_iter=    3933 conv_iter=    1337 cpu clock= 6.46E+00
+ tran: time= 8.0464E-07 tot_iter=    4620 conv_iter=    1570 cpu clock= 6.50E+00
+ tran: time= 9.0055E-07 tot_iter=    5149 conv_iter=    1749 cpu clock= 6.53E+00
+ tran: time= 1.0000E-06 tot_iter=    5676 conv_iter=    1928 cpu clock= 6.56E+00
+ sweep: tran tran37   end,  cpu clock=  6.57E+00 memory=    360 kb
  voltage: vin             =    5.70E-01
- dcop: begin dcop,  cpu clock=  6.62E+00
- dcop: end dcop,  cpu clock=  6.63E+00 memory=    360 kb  tot_iter=    1510
+ dcop: begin dcop,  cpu clock=  6.57E+00
+ dcop: end dcop,  cpu clock=  6.58E+00 memory=    360 kb  tot_iter=    1510
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran38   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.64E+00
- tran: time= 1.0592E-07 tot_iter=     652 conv_iter=     226 cpu clock= 6.71E+00
- tran: time= 2.0007E-07 tot_iter=    1268 conv_iter=     434 cpu clock= 6.79E+00
- tran: time= 3.0003E-07 tot_iter=    1854 conv_iter=     634 cpu clock= 6.82E+00
- tran: time= 4.0504E-07 tot_iter=    2422 conv_iter=     831 cpu clock= 6.85E+00
- tran: time= 5.0167E-07 tot_iter=    3136 conv_iter=    1075 cpu clock= 6.89E+00
- tran: time= 6.0020E-07 tot_iter=    3694 conv_iter=    1266 cpu clock= 6.92E+00
- tran: time= 7.0063E-07 tot_iter=    4220 conv_iter=    1446 cpu clock= 6.94E+00
- tran: time= 8.0681E-07 tot_iter=    4916 conv_iter=    1683 cpu clock= 6.98E+00
- tran: time= 9.0006E-07 tot_iter=    5609 conv_iter=    1921 cpu clock= 7.02E+00
- tran: time= 1.0000E-06 tot_iter=    6179 conv_iter=    2117 cpu clock= 7.05E+00
- sweep: tran tran38   end,  cpu clock=  7.05E+00 memory=    360 kb
+ sweep: tran tran38   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.58E+00
+ tran: time= 1.0592E-07 tot_iter=     652 conv_iter=     226 cpu clock= 6.62E+00
+ tran: time= 2.0007E-07 tot_iter=    1268 conv_iter=     434 cpu clock= 6.68E+00
+ tran: time= 3.0003E-07 tot_iter=    1854 conv_iter=     634 cpu clock= 6.72E+00
+ tran: time= 4.0504E-07 tot_iter=    2422 conv_iter=     831 cpu clock= 6.76E+00
+ tran: time= 5.0167E-07 tot_iter=    3136 conv_iter=    1075 cpu clock= 6.79E+00
+ tran: time= 6.0020E-07 tot_iter=    3694 conv_iter=    1266 cpu clock= 6.82E+00
+ tran: time= 7.0063E-07 tot_iter=    4220 conv_iter=    1446 cpu clock= 6.85E+00
+ tran: time= 8.0681E-07 tot_iter=    4916 conv_iter=    1683 cpu clock= 6.89E+00
+ tran: time= 9.0006E-07 tot_iter=    5609 conv_iter=    1921 cpu clock= 6.93E+00
+ tran: time= 1.0000E-06 tot_iter=    6179 conv_iter=    2117 cpu clock= 6.96E+00
+ sweep: tran tran38   end,  cpu clock=  6.96E+00 memory=    360 kb
  voltage: vin             =    5.80E-01
- dcop: begin dcop,  cpu clock=  7.06E+00
- dcop: end dcop,  cpu clock=  7.07E+00 memory=    360 kb  tot_iter=    1536
+ dcop: begin dcop,  cpu clock=  6.97E+00
+ dcop: end dcop,  cpu clock=  6.98E+00 memory=    360 kb  tot_iter=    1536
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran39   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.07E+00
- tran: time= 1.0294E-07 tot_iter=     642 conv_iter=     223 cpu clock= 7.12E+00
- tran: time= 2.0427E-07 tot_iter=    1339 conv_iter=     465 cpu clock= 7.20E+00
- tran: time= 3.0022E-07 tot_iter=    2026 conv_iter=     701 cpu clock= 7.24E+00
- tran: time= 4.0001E-07 tot_iter=    2635 conv_iter=     911 cpu clock= 7.27E+00
- tran: time= 5.0170E-07 tot_iter=    3301 conv_iter=    1140 cpu clock= 7.31E+00
- tran: time= 6.0000E-07 tot_iter=    3980 conv_iter=    1376 cpu clock= 7.35E+00
- tran: time= 7.0426E-07 tot_iter=    4542 conv_iter=    1571 cpu clock= 7.38E+00
- tran: time= 8.0503E-07 tot_iter=    5244 conv_iter=    1815 cpu clock= 7.42E+00
- tran: time= 9.0063E-07 tot_iter=    5945 conv_iter=    2058 cpu clock= 7.45E+00
- tran: time= 1.0000E-06 tot_iter=    6674 conv_iter=    2310 cpu clock= 7.49E+00
- sweep: tran tran39   end,  cpu clock=  7.49E+00 memory=    360 kb
+ sweep: tran tran39   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  6.98E+00
+ tran: time= 1.0294E-07 tot_iter=     642 conv_iter=     223 cpu clock= 7.05E+00
+ tran: time= 2.0427E-07 tot_iter=    1339 conv_iter=     465 cpu clock= 7.11E+00
+ tran: time= 3.0022E-07 tot_iter=    2026 conv_iter=     701 cpu clock= 7.15E+00
+ tran: time= 4.0001E-07 tot_iter=    2635 conv_iter=     911 cpu clock= 7.18E+00
+ tran: time= 5.0170E-07 tot_iter=    3301 conv_iter=    1140 cpu clock= 7.22E+00
+ tran: time= 6.0000E-07 tot_iter=    3980 conv_iter=    1376 cpu clock= 7.25E+00
+ tran: time= 7.0426E-07 tot_iter=    4542 conv_iter=    1571 cpu clock= 7.28E+00
+ tran: time= 8.0503E-07 tot_iter=    5244 conv_iter=    1815 cpu clock= 7.32E+00
+ tran: time= 9.0063E-07 tot_iter=    5945 conv_iter=    2058 cpu clock= 7.36E+00
+ tran: time= 1.0000E-06 tot_iter=    6674 conv_iter=    2310 cpu clock= 7.40E+00
+ sweep: tran tran39   end,  cpu clock=  7.40E+00 memory=    360 kb
  voltage: vin             =    5.90E-01
- dcop: begin dcop,  cpu clock=  7.50E+00
- dcop: end dcop,  cpu clock=  7.51E+00 memory=    360 kb  tot_iter=    1562
+ dcop: begin dcop,  cpu clock=  7.42E+00
+ dcop: end dcop,  cpu clock=  7.42E+00 memory=    360 kb  tot_iter=    1562
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran40   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.51E+00
- tran: time= 1.0316E-07 tot_iter=     677 conv_iter=     237 cpu clock= 7.55E+00
- tran: time= 2.0262E-07 tot_iter=    1389 conv_iter=     481 cpu clock= 7.59E+00
- tran: time= 3.0249E-07 tot_iter=    2100 conv_iter=     725 cpu clock= 7.63E+00
- tran: time= 4.0243E-07 tot_iter=    2811 conv_iter=     969 cpu clock= 7.67E+00
- tran: time= 5.0237E-07 tot_iter=    3522 conv_iter=    1213 cpu clock= 7.71E+00
- tran: time= 6.0231E-07 tot_iter=    4233 conv_iter=    1457 cpu clock= 7.75E+00
- tran: time= 7.0226E-07 tot_iter=    4944 conv_iter=    1701 cpu clock= 7.78E+00
- tran: time= 8.0220E-07 tot_iter=    5655 conv_iter=    1945 cpu clock= 7.82E+00
- tran: time= 9.0214E-07 tot_iter=    6366 conv_iter=    2189 cpu clock= 7.86E+00
- tran: time= 1.0000E-06 tot_iter=    7077 conv_iter=    2433 cpu clock= 7.90E+00
- sweep: tran tran40   end,  cpu clock=  7.90E+00 memory=    360 kb
+ sweep: tran tran40   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.43E+00
+ tran: time= 1.0316E-07 tot_iter=     677 conv_iter=     237 cpu clock= 7.50E+00
+ tran: time= 2.0262E-07 tot_iter=    1389 conv_iter=     481 cpu clock= 7.55E+00
+ tran: time= 3.0249E-07 tot_iter=    2100 conv_iter=     725 cpu clock= 7.59E+00
+ tran: time= 4.0243E-07 tot_iter=    2811 conv_iter=     969 cpu clock= 7.63E+00
+ tran: time= 5.0237E-07 tot_iter=    3522 conv_iter=    1213 cpu clock= 7.67E+00
+ tran: time= 6.0231E-07 tot_iter=    4233 conv_iter=    1457 cpu clock= 7.71E+00
+ tran: time= 7.0226E-07 tot_iter=    4944 conv_iter=    1701 cpu clock= 7.75E+00
+ tran: time= 8.0220E-07 tot_iter=    5655 conv_iter=    1945 cpu clock= 7.79E+00
+ tran: time= 9.0214E-07 tot_iter=    6366 conv_iter=    2189 cpu clock= 7.83E+00
+ tran: time= 1.0000E-06 tot_iter=    7077 conv_iter=    2433 cpu clock= 7.87E+00
+ sweep: tran tran40   end,  cpu clock=  7.87E+00 memory=    360 kb
  voltage: vin             =    6.00E-01
- dcop: begin dcop,  cpu clock=  7.91E+00
- dcop: end dcop,  cpu clock=  7.91E+00 memory=    360 kb  tot_iter=    1588
+ dcop: begin dcop,  cpu clock=  7.88E+00
+ dcop: end dcop,  cpu clock=  7.88E+00 memory=    360 kb  tot_iter=    1588
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran41   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.92E+00
- tran: time= 1.0300E-07 tot_iter=     673 conv_iter=     233 cpu clock= 7.99E+00
- tran: time= 2.0023E-07 tot_iter=    1513 conv_iter=     523 cpu clock= 8.03E+00
- tran: time= 3.0065E-07 tot_iter=    2217 conv_iter=     765 cpu clock= 8.07E+00
- tran: time= 4.0041E-07 tot_iter=    2969 conv_iter=    1026 cpu clock= 8.11E+00
- tran: time= 5.0012E-07 tot_iter=    3759 conv_iter=    1299 cpu clock= 8.16E+00
- tran: time= 6.0274E-07 tot_iter=    4464 conv_iter=    1545 cpu clock= 8.19E+00
- tran: time= 7.0232E-07 tot_iter=    5161 conv_iter=    1786 cpu clock= 8.23E+00
- tran: time= 8.0345E-07 tot_iter=    5864 conv_iter=    2029 cpu clock= 8.27E+00
- tran: time= 9.0005E-07 tot_iter=    6636 conv_iter=    2293 cpu clock= 8.31E+00
- tran: time= 1.0000E-06 tot_iter=    7415 conv_iter=    2564 cpu clock= 8.36E+00
- sweep: tran tran41   end,  cpu clock=  8.36E+00 memory=    360 kb
+ sweep: tran tran41   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  7.89E+00
+ tran: time= 1.0300E-07 tot_iter=     673 conv_iter=     233 cpu clock= 7.93E+00
+ tran: time= 2.0023E-07 tot_iter=    1513 conv_iter=     523 cpu clock= 7.98E+00
+ tran: time= 3.0065E-07 tot_iter=    2217 conv_iter=     765 cpu clock= 8.02E+00
+ tran: time= 4.0041E-07 tot_iter=    2969 conv_iter=    1026 cpu clock= 8.06E+00
+ tran: time= 5.0012E-07 tot_iter=    3759 conv_iter=    1299 cpu clock= 8.10E+00
+ tran: time= 6.0274E-07 tot_iter=    4464 conv_iter=    1545 cpu clock= 8.14E+00
+ tran: time= 7.0232E-07 tot_iter=    5161 conv_iter=    1786 cpu clock= 8.18E+00
+ tran: time= 8.0345E-07 tot_iter=    5864 conv_iter=    2029 cpu clock= 8.22E+00
+ tran: time= 9.0005E-07 tot_iter=    6636 conv_iter=    2293 cpu clock= 8.26E+00
+ tran: time= 1.0000E-06 tot_iter=    7415 conv_iter=    2564 cpu clock= 8.30E+00
+ sweep: tran tran41   end,  cpu clock=  8.31E+00 memory=    360 kb
  voltage: vin             =    6.10E-01
- dcop: begin dcop,  cpu clock=  8.37E+00
- dcop: end dcop,  cpu clock=  8.37E+00 memory=    360 kb  tot_iter=    1614
+ dcop: begin dcop,  cpu clock=  8.32E+00
+ dcop: end dcop,  cpu clock=  8.33E+00 memory=    360 kb  tot_iter=    1614
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran42   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.39E+00
- tran: time= 1.0064E-07 tot_iter=     806 conv_iter=     276 cpu clock= 8.44E+00
- tran: time= 2.0113E-07 tot_iter=    1550 conv_iter=     532 cpu clock= 8.48E+00
- tran: time= 3.0042E-07 tot_iter=    2432 conv_iter=     836 cpu clock= 8.53E+00
- tran: time= 4.0233E-07 tot_iter=    3135 conv_iter=    1078 cpu clock= 8.57E+00
- tran: time= 5.0006E-07 tot_iter=    3981 conv_iter=    1370 cpu clock= 8.61E+00
- tran: time= 6.0045E-07 tot_iter=    4769 conv_iter=    1638 cpu clock= 8.65E+00
- tran: time= 7.0213E-07 tot_iter=    5588 conv_iter=    1919 cpu clock= 8.70E+00
- tran: time= 8.0363E-07 tot_iter=    6292 conv_iter=    2160 cpu clock= 8.73E+00
- tran: time= 9.0051E-07 tot_iter=    7188 conv_iter=    2466 cpu clock= 8.78E+00
- tran: time= 1.0000E-06 tot_iter=    7966 conv_iter=    2735 cpu clock= 8.82E+00
- sweep: tran tran42   end,  cpu clock=  8.83E+00 memory=    361 kb
+ sweep: tran tran42   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.34E+00
+ tran: time= 1.0064E-07 tot_iter=     806 conv_iter=     276 cpu clock= 8.42E+00
+ tran: time= 2.0113E-07 tot_iter=    1550 conv_iter=     532 cpu clock= 8.50E+00
+ tran: time= 3.0042E-07 tot_iter=    2432 conv_iter=     836 cpu clock= 8.56E+00
+ tran: time= 4.0233E-07 tot_iter=    3135 conv_iter=    1078 cpu clock= 8.60E+00
+ tran: time= 5.0006E-07 tot_iter=    3981 conv_iter=    1370 cpu clock= 8.64E+00
+ tran: time= 6.0045E-07 tot_iter=    4769 conv_iter=    1638 cpu clock= 8.69E+00
+ tran: time= 7.0213E-07 tot_iter=    5588 conv_iter=    1919 cpu clock= 8.73E+00
+ tran: time= 8.0363E-07 tot_iter=    6292 conv_iter=    2160 cpu clock= 8.77E+00
+ tran: time= 9.0051E-07 tot_iter=    7188 conv_iter=    2466 cpu clock= 8.81E+00
+ tran: time= 1.0000E-06 tot_iter=    7966 conv_iter=    2735 cpu clock= 8.85E+00
+ sweep: tran tran42   end,  cpu clock=  8.86E+00 memory=    361 kb
  voltage: vin             =    6.20E-01
- dcop: begin dcop,  cpu clock=  8.83E+00
- dcop: end dcop,  cpu clock=  8.84E+00 memory=    361 kb  tot_iter=    1641
+ dcop: begin dcop,  cpu clock=  8.86E+00
+ dcop: end dcop,  cpu clock=  8.87E+00 memory=    361 kb  tot_iter=    1641
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran43   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.85E+00
- tran: time= 1.0013E-07 tot_iter=     794 conv_iter=     277 cpu clock= 8.91E+00
- tran: time= 2.0036E-07 tot_iter=    1693 conv_iter=     585 cpu clock= 9.02E+00
- tran: time= 3.0320E-07 tot_iter=    2430 conv_iter=     838 cpu clock= 9.05E+00
- tran: time= 4.0182E-07 tot_iter=    3334 conv_iter=    1147 cpu clock= 9.10E+00
- tran: time= 5.0015E-07 tot_iter=    4178 conv_iter=    1436 cpu clock= 9.15E+00
- tran: time= 6.0016E-07 tot_iter=    5044 conv_iter=    1732 cpu clock= 9.19E+00
- tran: time= 7.0029E-07 tot_iter=    5919 conv_iter=    2031 cpu clock= 9.24E+00
- tran: time= 8.0214E-07 tot_iter=    6712 conv_iter=    2306 cpu clock= 9.28E+00
- tran: time= 9.0142E-07 tot_iter=    7633 conv_iter=    2620 cpu clock= 9.33E+00
- tran: time= 1.0000E-06 tot_iter=    8510 conv_iter=    2921 cpu clock= 9.38E+00
- sweep: tran tran43   end,  cpu clock=  9.38E+00 memory=    361 kb
+ sweep: tran tran43   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  8.88E+00
+ tran: time= 1.0013E-07 tot_iter=     794 conv_iter=     277 cpu clock= 8.95E+00
+ tran: time= 2.0036E-07 tot_iter=    1693 conv_iter=     585 cpu clock= 9.01E+00
+ tran: time= 3.0320E-07 tot_iter=    2430 conv_iter=     838 cpu clock= 9.04E+00
+ tran: time= 4.0182E-07 tot_iter=    3334 conv_iter=    1147 cpu clock= 9.09E+00
+ tran: time= 5.0015E-07 tot_iter=    4178 conv_iter=    1436 cpu clock= 9.13E+00
+ tran: time= 6.0016E-07 tot_iter=    5044 conv_iter=    1732 cpu clock= 9.18E+00
+ tran: time= 7.0029E-07 tot_iter=    5919 conv_iter=    2031 cpu clock= 9.23E+00
+ tran: time= 8.0214E-07 tot_iter=    6712 conv_iter=    2306 cpu clock= 9.27E+00
+ tran: time= 9.0142E-07 tot_iter=    7633 conv_iter=    2620 cpu clock= 9.32E+00
+ tran: time= 1.0000E-06 tot_iter=    8510 conv_iter=    2921 cpu clock= 9.36E+00
+ sweep: tran tran43   end,  cpu clock=  9.37E+00 memory=    361 kb
  voltage: vin             =    6.30E-01
- dcop: begin dcop,  cpu clock=  9.39E+00
- dcop: end dcop,  cpu clock=  9.39E+00 memory=    361 kb  tot_iter=    1668
+ dcop: begin dcop,  cpu clock=  9.38E+00
+ dcop: end dcop,  cpu clock=  9.38E+00 memory=    361 kb  tot_iter=    1668
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran44   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.40E+00
- tran: time= 1.0089E-07 tot_iter=     821 conv_iter=     283 cpu clock= 9.50E+00
- tran: time= 2.0298E-07 tot_iter=    1711 conv_iter=     593 cpu clock= 9.55E+00
- tran: time= 3.0111E-07 tot_iter=    2608 conv_iter=     898 cpu clock= 9.60E+00
- tran: time= 4.0120E-07 tot_iter=    3484 conv_iter=    1201 cpu clock= 9.64E+00
- tran: time= 5.0007E-07 tot_iter=    4394 conv_iter=    1513 cpu clock= 9.69E+00
- tran: time= 6.0219E-07 tot_iter=    5295 conv_iter=    1822 cpu clock= 9.74E+00
- tran: time= 7.0115E-07 tot_iter=    6158 conv_iter=    2118 cpu clock= 9.78E+00
- tran: time= 8.0047E-07 tot_iter=    7075 conv_iter=    2434 cpu clock= 9.83E+00
- tran: time= 9.0006E-07 tot_iter=    7975 conv_iter=    2744 cpu clock= 9.88E+00
- tran: time= 1.0000E-06 tot_iter=    8867 conv_iter=    3048 cpu clock= 9.93E+00
- sweep: tran tran44   end,  cpu clock=  9.93E+00 memory=    361 kb
+ sweep: tran tran44   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.39E+00
+ tran: time= 1.0089E-07 tot_iter=     821 conv_iter=     283 cpu clock= 9.46E+00
+ tran: time= 2.0298E-07 tot_iter=    1711 conv_iter=     593 cpu clock= 9.56E+00
+ tran: time= 3.0111E-07 tot_iter=    2608 conv_iter=     898 cpu clock= 9.62E+00
+ tran: time= 4.0120E-07 tot_iter=    3484 conv_iter=    1201 cpu clock= 9.66E+00
+ tran: time= 5.0007E-07 tot_iter=    4394 conv_iter=    1513 cpu clock= 9.71E+00
+ tran: time= 6.0219E-07 tot_iter=    5295 conv_iter=    1822 cpu clock= 9.76E+00
+ tran: time= 7.0115E-07 tot_iter=    6158 conv_iter=    2118 cpu clock= 9.81E+00
+ tran: time= 8.0047E-07 tot_iter=    7075 conv_iter=    2434 cpu clock= 9.85E+00
+ tran: time= 9.0006E-07 tot_iter=    7975 conv_iter=    2744 cpu clock= 9.90E+00
+ tran: time= 1.0000E-06 tot_iter=    8867 conv_iter=    3048 cpu clock= 9.95E+00
+ sweep: tran tran44   end,  cpu clock=  9.95E+00 memory=    361 kb
  voltage: vin             =    6.40E-01
- dcop: begin dcop,  cpu clock=  9.95E+00
- dcop: end dcop,  cpu clock=  9.95E+00 memory=    361 kb  tot_iter=    1695
+ dcop: begin dcop,  cpu clock=  9.97E+00
+ dcop: end dcop,  cpu clock=  9.98E+00 memory=    361 kb  tot_iter=    1695
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran45   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.96E+00
+ sweep: tran tran45   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  9.99E+00
  tran: time= 1.0053E-07 tot_iter=     839 conv_iter=     288 cpu clock= 1.01E+01
  tran: time= 2.0114E-07 tot_iter=    1724 conv_iter=     595 cpu clock= 1.01E+01
  tran: time= 3.0067E-07 tot_iter=    2746 conv_iter=     951 cpu clock= 1.02E+01
  tran: time= 4.0211E-07 tot_iter=    3624 conv_iter=    1256 cpu clock= 1.02E+01
- tran: time= 5.0186E-07 tot_iter=    4548 conv_iter=    1577 cpu clock= 1.03E+01
+ tran: time= 5.0186E-07 tot_iter=    4548 conv_iter=    1577 cpu clock= 1.02E+01
  tran: time= 6.0095E-07 tot_iter=    5465 conv_iter=    1889 cpu clock= 1.03E+01
- tran: time= 7.0050E-07 tot_iter=    6311 conv_iter=    2180 cpu clock= 1.04E+01
+ tran: time= 7.0050E-07 tot_iter=    6311 conv_iter=    2180 cpu clock= 1.03E+01
  tran: time= 8.0022E-07 tot_iter=    7324 conv_iter=    2527 cpu clock= 1.04E+01
  tran: time= 9.0018E-07 tot_iter=    8231 conv_iter=    2840 cpu clock= 1.05E+01
  tran: time= 1.0000E-06 tot_iter=    9118 conv_iter=    3149 cpu clock= 1.05E+01
  sweep: tran tran45   end,  cpu clock=  1.05E+01 memory=    361 kb
  voltage: vin             =    6.50E-01
  dcop: begin dcop,  cpu clock=  1.05E+01
- dcop: end dcop,  cpu clock=  1.06E+01 memory=    361 kb  tot_iter=    1721
+ dcop: end dcop,  cpu clock=  1.05E+01 memory=    361 kb  tot_iter=    1721
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran46   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.06E+01
- tran: time= 1.0025E-07 tot_iter=     887 conv_iter=     303 cpu clock= 1.07E+01
+ sweep: tran tran46   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.05E+01
+ tran: time= 1.0025E-07 tot_iter=     887 conv_iter=     303 cpu clock= 1.06E+01
  tran: time= 2.0266E-07 tot_iter=    1862 conv_iter=     638 cpu clock= 1.07E+01
- tran: time= 3.0170E-07 tot_iter=    2725 conv_iter=     934 cpu clock= 1.08E+01
+ tran: time= 3.0170E-07 tot_iter=    2725 conv_iter=     934 cpu clock= 1.07E+01
  tran: time= 4.0028E-07 tot_iter=    3724 conv_iter=    1275 cpu clock= 1.08E+01
- tran: time= 5.0035E-07 tot_iter=    4640 conv_iter=    1586 cpu clock= 1.09E+01
+ tran: time= 5.0035E-07 tot_iter=    4640 conv_iter=    1586 cpu clock= 1.08E+01
  tran: time= 6.0215E-07 tot_iter=    5539 conv_iter=    1899 cpu clock= 1.09E+01
- tran: time= 7.0029E-07 tot_iter=    6542 conv_iter=    2245 cpu clock= 1.10E+01
+ tran: time= 7.0029E-07 tot_iter=    6542 conv_iter=    2245 cpu clock= 1.09E+01
  tran: time= 8.0101E-07 tot_iter=    7440 conv_iter=    2551 cpu clock= 1.10E+01
- tran: time= 9.0008E-07 tot_iter=    8465 conv_iter=    2902 cpu clock= 1.11E+01
+ tran: time= 9.0008E-07 tot_iter=    8465 conv_iter=    2902 cpu clock= 1.10E+01
  tran: time= 1.0000E-06 tot_iter=    9369 conv_iter=    3213 cpu clock= 1.11E+01
  sweep: tran tran46   end,  cpu clock=  1.11E+01 memory=    361 kb
  voltage: vin             =    6.60E-01
  dcop: begin dcop,  cpu clock=  1.11E+01
- dcop: end dcop,  cpu clock=  1.12E+01 memory=    361 kb  tot_iter=    1750
+ dcop: end dcop,  cpu clock=  1.11E+01 memory=    361 kb  tot_iter=    1750
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran47   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.12E+01
- tran: time= 1.0019E-07 tot_iter=     932 conv_iter=     317 cpu clock= 1.13E+01
+ sweep: tran tran47   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.11E+01
+ tran: time= 1.0019E-07 tot_iter=     932 conv_iter=     317 cpu clock= 1.12E+01
  tran: time= 2.0112E-07 tot_iter=    1816 conv_iter=     619 cpu clock= 1.13E+01
- tran: time= 3.0099E-07 tot_iter=    2822 conv_iter=     966 cpu clock= 1.14E+01
+ tran: time= 3.0099E-07 tot_iter=    2822 conv_iter=     966 cpu clock= 1.13E+01
  tran: time= 4.0313E-07 tot_iter=    3685 conv_iter=    1261 cpu clock= 1.14E+01
- tran: time= 5.0162E-07 tot_iter=    4675 conv_iter=    1601 cpu clock= 1.15E+01
+ tran: time= 5.0162E-07 tot_iter=    4675 conv_iter=    1601 cpu clock= 1.14E+01
  tran: time= 6.0001E-07 tot_iter=    5564 conv_iter=    1905 cpu clock= 1.15E+01
- tran: time= 7.0022E-07 tot_iter=    6530 conv_iter=    2237 cpu clock= 1.16E+01
+ tran: time= 7.0022E-07 tot_iter=    6530 conv_iter=    2237 cpu clock= 1.15E+01
  tran: time= 8.0022E-07 tot_iter=    7534 conv_iter=    2578 cpu clock= 1.16E+01
- tran: time= 9.0181E-07 tot_iter=    8442 conv_iter=    2892 cpu clock= 1.17E+01
+ tran: time= 9.0181E-07 tot_iter=    8442 conv_iter=    2892 cpu clock= 1.16E+01
  tran: time= 1.0000E-06 tot_iter=    9440 conv_iter=    3231 cpu clock= 1.17E+01
  sweep: tran tran47   end,  cpu clock=  1.17E+01 memory=    361 kb
  voltage: vin             =    6.70E-01
  dcop: begin dcop,  cpu clock=  1.17E+01
- dcop: end dcop,  cpu clock=  1.18E+01 memory=    361 kb  tot_iter=    1783
+ dcop: end dcop,  cpu clock=  1.17E+01 memory=    361 kb  tot_iter=    1783
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran48   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.18E+01
- tran: time= 1.0013E-07 tot_iter=     954 conv_iter=     329 cpu clock= 1.19E+01
+ sweep: tran tran48   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.17E+01
+ tran: time= 1.0013E-07 tot_iter=     954 conv_iter=     329 cpu clock= 1.18E+01
  tran: time= 2.0008E-07 tot_iter=    1841 conv_iter=     633 cpu clock= 1.19E+01
  tran: time= 3.0102E-07 tot_iter=    2870 conv_iter=     985 cpu clock= 1.20E+01
  tran: time= 4.0012E-07 tot_iter=    3888 conv_iter=    1335 cpu clock= 1.20E+01
@@ -811,9 +811,9 @@
  tran: time= 8.0200E-07 tot_iter=    7857 conv_iter=    2708 cpu clock= 1.22E+01
  tran: time= 9.0037E-07 tot_iter=    8885 conv_iter=    3060 cpu clock= 1.23E+01
  tran: time= 1.0000E-06 tot_iter=    9794 conv_iter=    3371 cpu clock= 1.23E+01
- sweep: tran tran48   end,  cpu clock=  1.24E+01 memory=    361 kb
+ sweep: tran tran48   end,  cpu clock=  1.23E+01 memory=    361 kb
  voltage: vin             =    6.80E-01
- dcop: begin dcop,  cpu clock=  1.24E+01
+ dcop: begin dcop,  cpu clock=  1.23E+01
  dcop: end dcop,  cpu clock=  1.24E+01 memory=    361 kb  tot_iter=    1815
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
  sweep: tran tran49   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.24E+01
@@ -837,9 +837,9 @@
  tran: time= 2.0140E-07 tot_iter=    1984 conv_iter=     678 cpu clock= 1.32E+01
  tran: time= 3.0205E-07 tot_iter=    3010 conv_iter=    1027 cpu clock= 1.32E+01
  tran: time= 4.0130E-07 tot_iter=    4036 conv_iter=    1375 cpu clock= 1.33E+01
- tran: time= 5.0010E-07 tot_iter=    5087 conv_iter=    1739 cpu clock= 1.34E+01
+ tran: time= 5.0010E-07 tot_iter=    5087 conv_iter=    1739 cpu clock= 1.33E+01
  tran: time= 6.0052E-07 tot_iter=    6131 conv_iter=    2097 cpu clock= 1.34E+01
- tran: time= 7.0230E-07 tot_iter=    7143 conv_iter=    2445 cpu clock= 1.35E+01
+ tran: time= 7.0230E-07 tot_iter=    7143 conv_iter=    2445 cpu clock= 1.34E+01
  tran: time= 8.0234E-07 tot_iter=    8139 conv_iter=    2790 cpu clock= 1.35E+01
  tran: time= 9.0200E-07 tot_iter=    9159 conv_iter=    3141 cpu clock= 1.36E+01
  tran: time= 1.0000E-06 tot_iter=   10175 conv_iter=    3487 cpu clock= 1.36E+01
@@ -849,26 +849,26 @@
  dcop: end dcop,  cpu clock=  1.36E+01 memory=    361 kb  tot_iter=    1876
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
  sweep: tran tran51   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.36E+01
- tran: time= 1.0130E-07 tot_iter=     964 conv_iter=     332 cpu clock= 1.38E+01
+ tran: time= 1.0130E-07 tot_iter=     964 conv_iter=     332 cpu clock= 1.37E+01
  tran: time= 2.0056E-07 tot_iter=    1992 conv_iter=     688 cpu clock= 1.38E+01
- tran: time= 3.0044E-07 tot_iter=    3010 conv_iter=    1037 cpu clock= 1.39E+01
+ tran: time= 3.0044E-07 tot_iter=    3010 conv_iter=    1037 cpu clock= 1.38E+01
  tran: time= 4.0009E-07 tot_iter=    4160 conv_iter=    1435 cpu clock= 1.39E+01
  tran: time= 5.0070E-07 tot_iter=    5165 conv_iter=    1783 cpu clock= 1.40E+01
  tran: time= 6.0174E-07 tot_iter=    6219 conv_iter=    2144 cpu clock= 1.40E+01
  tran: time= 7.0102E-07 tot_iter=    7224 conv_iter=    2489 cpu clock= 1.41E+01
  tran: time= 8.0036E-07 tot_iter=    8215 conv_iter=    2827 cpu clock= 1.41E+01
  tran: time= 9.0133E-07 tot_iter=    9207 conv_iter=    3163 cpu clock= 1.42E+01
- tran: time= 1.0000E-06 tot_iter=   10293 conv_iter=    3534 cpu clock= 1.43E+01
- sweep: tran tran51   end,  cpu clock=  1.43E+01 memory=    361 kb
+ tran: time= 1.0000E-06 tot_iter=   10293 conv_iter=    3534 cpu clock= 1.42E+01
+ sweep: tran tran51   end,  cpu clock=  1.42E+01 memory=    361 kb
  voltage: vin             =    7.10E-01
  dcop: begin dcop,  cpu clock=  1.43E+01
  dcop: end dcop,  cpu clock=  1.43E+01 memory=    361 kb  tot_iter=    1906
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
  sweep: tran tran52   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.43E+01
  tran: time= 1.0112E-07 tot_iter=     951 conv_iter=     329 cpu clock= 1.44E+01
- tran: time= 2.0004E-07 tot_iter=    2083 conv_iter=     719 cpu clock= 1.45E+01
+ tran: time= 2.0004E-07 tot_iter=    2083 conv_iter=     719 cpu clock= 1.44E+01
  tran: time= 3.0032E-07 tot_iter=    3179 conv_iter=    1104 cpu clock= 1.45E+01
- tran: time= 4.0096E-07 tot_iter=    4193 conv_iter=    1454 cpu clock= 1.46E+01
+ tran: time= 4.0096E-07 tot_iter=    4193 conv_iter=    1454 cpu clock= 1.45E+01
  tran: time= 5.0104E-07 tot_iter=    5243 conv_iter=    1819 cpu clock= 1.46E+01
  tran: time= 6.0023E-07 tot_iter=    6263 conv_iter=    2169 cpu clock= 1.47E+01
  tran: time= 7.0044E-07 tot_iter=    7370 conv_iter=    2548 cpu clock= 1.47E+01
@@ -897,17 +897,17 @@
  dcop: end dcop,  cpu clock=  1.56E+01 memory=    361 kb  tot_iter=    1958
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
  sweep: tran tran54   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.56E+01
- tran: time= 1.0009E-07 tot_iter=     973 conv_iter=     338 cpu clock= 1.56E+01
+ tran: time= 1.0009E-07 tot_iter=     973 conv_iter=     338 cpu clock= 1.57E+01
  tran: time= 2.0277E-07 tot_iter=    2082 conv_iter=     718 cpu clock= 1.57E+01
- tran: time= 3.0013E-07 tot_iter=    3087 conv_iter=    1071 cpu clock= 1.57E+01
+ tran: time= 3.0013E-07 tot_iter=    3087 conv_iter=    1071 cpu clock= 1.58E+01
  tran: time= 4.0007E-07 tot_iter=    4212 conv_iter=    1457 cpu clock= 1.58E+01
  tran: time= 5.0036E-07 tot_iter=    5258 conv_iter=    1826 cpu clock= 1.59E+01
  tran: time= 6.0081E-07 tot_iter=    6375 conv_iter=    2216 cpu clock= 1.59E+01
  tran: time= 7.0042E-07 tot_iter=    7413 conv_iter=    2581 cpu clock= 1.60E+01
  tran: time= 8.0033E-07 tot_iter=    8465 conv_iter=    2956 cpu clock= 1.60E+01
  tran: time= 9.0147E-07 tot_iter=    9589 conv_iter=    3343 cpu clock= 1.61E+01
- tran: time= 1.0000E-06 tot_iter=   10726 conv_iter=    3741 cpu clock= 1.61E+01
- sweep: tran tran54   end,  cpu clock=  1.61E+01 memory=    361 kb
+ tran: time= 1.0000E-06 tot_iter=   10726 conv_iter=    3741 cpu clock= 1.62E+01
+ sweep: tran tran54   end,  cpu clock=  1.62E+01 memory=    361 kb
  voltage: vin             =    7.40E-01
  dcop: begin dcop,  cpu clock=  1.62E+01
  dcop: end dcop,  cpu clock=  1.62E+01 memory=    361 kb  tot_iter=    1984
@@ -918,7 +918,7 @@
  tran: time= 3.0033E-07 tot_iter=    3089 conv_iter=    1067 cpu clock= 1.64E+01
  tran: time= 4.0056E-07 tot_iter=    4291 conv_iter=    1480 cpu clock= 1.64E+01
  tran: time= 5.0039E-07 tot_iter=    5410 conv_iter=    1867 cpu clock= 1.65E+01
- tran: time= 6.0177E-07 tot_iter=    6430 conv_iter=    2217 cpu clock= 1.65E+01
+ tran: time= 6.0177E-07 tot_iter=    6430 conv_iter=    2217 cpu clock= 1.66E+01
  tran: time= 7.0010E-07 tot_iter=    7559 conv_iter=    2601 cpu clock= 1.66E+01
  tran: time= 8.0040E-07 tot_iter=    8685 conv_iter=    2996 cpu clock= 1.67E+01
  tran: time= 9.0000E-07 tot_iter=    9799 conv_iter=    3384 cpu clock= 1.67E+01
@@ -932,12 +932,12 @@
  tran: time= 1.0006E-07 tot_iter=    1029 conv_iter=     361 cpu clock= 1.69E+01
  tran: time= 2.0094E-07 tot_iter=    2044 conv_iter=     715 cpu clock= 1.69E+01
  tran: time= 3.0014E-07 tot_iter=    3205 conv_iter=    1117 cpu clock= 1.70E+01
- tran: time= 4.0026E-07 tot_iter=    4256 conv_iter=    1482 cpu clock= 1.71E+01
+ tran: time= 4.0026E-07 tot_iter=    4256 conv_iter=    1482 cpu clock= 1.70E+01
  tran: time= 5.0111E-07 tot_iter=    5440 conv_iter=    1895 cpu clock= 1.71E+01
- tran: time= 6.0014E-07 tot_iter=    6526 conv_iter=    2276 cpu clock= 1.72E+01
+ tran: time= 6.0014E-07 tot_iter=    6526 conv_iter=    2276 cpu clock= 1.71E+01
  tran: time= 7.0011E-07 tot_iter=    7660 conv_iter=    2668 cpu clock= 1.72E+01
  tran: time= 8.0123E-07 tot_iter=    8851 conv_iter=    3075 cpu clock= 1.73E+01
- tran: time= 9.0114E-07 tot_iter=    9895 conv_iter=    3434 cpu clock= 1.74E+01
+ tran: time= 9.0114E-07 tot_iter=    9895 conv_iter=    3434 cpu clock= 1.73E+01
  tran: time= 1.0000E-06 tot_iter=   11002 conv_iter=    3819 cpu clock= 1.74E+01
  sweep: tran tran56   end,  cpu clock=  1.74E+01 memory=    361 kb
  voltage: vin             =    7.60E-01
@@ -947,79 +947,79 @@
  sweep: tran tran57   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.74E+01
  tran: time= 1.0023E-07 tot_iter=    1089 conv_iter=     375 cpu clock= 1.75E+01
  tran: time= 2.0094E-07 tot_iter=    2100 conv_iter=     723 cpu clock= 1.76E+01
- tran: time= 3.0058E-07 tot_iter=    3248 conv_iter=    1127 cpu clock= 1.77E+01
+ tran: time= 3.0058E-07 tot_iter=    3248 conv_iter=    1127 cpu clock= 1.76E+01
  tran: time= 4.0052E-07 tot_iter=    4354 conv_iter=    1506 cpu clock= 1.77E+01
- tran: time= 5.0061E-07 tot_iter=    5374 conv_iter=    1859 cpu clock= 1.78E+01
+ tran: time= 5.0061E-07 tot_iter=    5374 conv_iter=    1859 cpu clock= 1.77E+01
  tran: time= 6.0004E-07 tot_iter=    6498 conv_iter=    2245 cpu clock= 1.78E+01
  tran: time= 7.0020E-07 tot_iter=    7674 conv_iter=    2649 cpu clock= 1.79E+01
  tran: time= 8.0091E-07 tot_iter=    8680 conv_iter=    2997 cpu clock= 1.79E+01
  tran: time= 9.0049E-07 tot_iter=    9803 conv_iter=    3384 cpu clock= 1.80E+01
- tran: time= 1.0000E-06 tot_iter=   10934 conv_iter=    3772 cpu clock= 1.81E+01
- sweep: tran tran57   end,  cpu clock=  1.81E+01 memory=    361 kb
+ tran: time= 1.0000E-06 tot_iter=   10934 conv_iter=    3772 cpu clock= 1.80E+01
+ sweep: tran tran57   end,  cpu clock=  1.80E+01 memory=    361 kb
  voltage: vin             =    7.70E-01
- dcop: begin dcop,  cpu clock=  1.81E+01
+ dcop: begin dcop,  cpu clock=  1.80E+01
  dcop: end dcop,  cpu clock=  1.81E+01 memory=    361 kb  tot_iter=    2063
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
  sweep: tran tran58   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.81E+01
  tran: time= 1.0041E-07 tot_iter=    1140 conv_iter=     395 cpu clock= 1.82E+01
  tran: time= 2.0080E-07 tot_iter=    2209 conv_iter=     763 cpu clock= 1.82E+01
  tran: time= 3.0106E-07 tot_iter=    3382 conv_iter=    1167 cpu clock= 1.83E+01
- tran: time= 4.0161E-07 tot_iter=    4547 conv_iter=    1565 cpu clock= 1.84E+01
+ tran: time= 4.0161E-07 tot_iter=    4547 conv_iter=    1565 cpu clock= 1.83E+01
  tran: time= 5.0070E-07 tot_iter=    5587 conv_iter=    1928 cpu clock= 1.84E+01
  tran: time= 6.0195E-07 tot_iter=    6715 conv_iter=    2319 cpu clock= 1.85E+01
- tran: time= 7.0127E-07 tot_iter=    7878 conv_iter=    2721 cpu clock= 1.86E+01
+ tran: time= 7.0127E-07 tot_iter=    7878 conv_iter=    2721 cpu clock= 1.85E+01
  tran: time= 8.0035E-07 tot_iter=    8943 conv_iter=    3089 cpu clock= 1.86E+01
- tran: time= 9.0002E-07 tot_iter=   10071 conv_iter=    3476 cpu clock= 1.87E+01
+ tran: time= 9.0002E-07 tot_iter=   10071 conv_iter=    3476 cpu clock= 1.86E+01
  tran: time= 1.0000E-06 tot_iter=   11192 conv_iter=    3868 cpu clock= 1.87E+01
  sweep: tran tran58   end,  cpu clock=  1.87E+01 memory=    361 kb
  voltage: vin             =    7.80E-01
  dcop: begin dcop,  cpu clock=  1.87E+01
  dcop: end dcop,  cpu clock=  1.87E+01 memory=    361 kb  tot_iter=    2090
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran59   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.88E+01
+ sweep: tran tran59   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.87E+01
  tran: time= 1.0083E-07 tot_iter=    1114 conv_iter=     387 cpu clock= 1.88E+01
  tran: time= 2.0016E-07 tot_iter=    2168 conv_iter=     759 cpu clock= 1.89E+01
  tran: time= 3.0062E-07 tot_iter=    3251 conv_iter=    1135 cpu clock= 1.89E+01
  tran: time= 4.0060E-07 tot_iter=    4363 conv_iter=    1515 cpu clock= 1.90E+01
  tran: time= 5.0026E-07 tot_iter=    5536 conv_iter=    1923 cpu clock= 1.91E+01
- tran: time= 6.0011E-07 tot_iter=    6731 conv_iter=    2340 cpu clock= 1.92E+01
+ tran: time= 6.0011E-07 tot_iter=    6731 conv_iter=    2340 cpu clock= 1.91E+01
  tran: time= 7.0086E-07 tot_iter=    7773 conv_iter=    2700 cpu clock= 1.92E+01
- tran: time= 8.0031E-07 tot_iter=    8971 conv_iter=    3117 cpu clock= 1.93E+01
- tran: time= 9.0036E-07 tot_iter=   10133 conv_iter=    3515 cpu clock= 1.94E+01
- tran: time= 1.0000E-06 tot_iter=   11253 conv_iter=    3904 cpu clock= 1.94E+01
+ tran: time= 8.0031E-07 tot_iter=    8971 conv_iter=    3117 cpu clock= 1.92E+01
+ tran: time= 9.0036E-07 tot_iter=   10133 conv_iter=    3515 cpu clock= 1.93E+01
+ tran: time= 1.0000E-06 tot_iter=   11253 conv_iter=    3904 cpu clock= 1.93E+01
  sweep: tran tran59   end,  cpu clock=  1.94E+01 memory=    361 kb
  voltage: vin             =    7.90E-01
  dcop: begin dcop,  cpu clock=  1.94E+01
- dcop: end dcop,  cpu clock=  1.95E+01 memory=    361 kb  tot_iter=    2117
+ dcop: end dcop,  cpu clock=  1.94E+01 memory=    361 kb  tot_iter=    2117
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran60   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.95E+01
- tran: time= 1.0124E-07 tot_iter=    1110 conv_iter=     386 cpu clock= 1.96E+01
- tran: time= 2.0032E-07 tot_iter=    2124 conv_iter=     731 cpu clock= 1.97E+01
- tran: time= 3.0007E-07 tot_iter=    3274 conv_iter=    1137 cpu clock= 1.97E+01
- tran: time= 4.0095E-07 tot_iter=    4335 conv_iter=    1506 cpu clock= 1.98E+01
- tran: time= 5.0010E-07 tot_iter=    5518 conv_iter=    1919 cpu clock= 1.99E+01
- tran: time= 6.0174E-07 tot_iter=    6634 conv_iter=    2301 cpu clock= 1.99E+01
- tran: time= 7.0019E-07 tot_iter=    7697 conv_iter=    2669 cpu clock= 2.00E+01
- tran: time= 8.0001E-07 tot_iter=    8848 conv_iter=    3070 cpu clock= 2.01E+01
- tran: time= 9.0047E-07 tot_iter=    9978 conv_iter=    3459 cpu clock= 2.02E+01
- tran: time= 1.0000E-06 tot_iter=   11097 conv_iter=    3839 cpu clock= 2.02E+01
- sweep: tran tran60   end,  cpu clock=  2.02E+01 memory=    361 kb
+ sweep: tran tran60   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  1.94E+01
+ tran: time= 1.0124E-07 tot_iter=    1110 conv_iter=     386 cpu clock= 1.95E+01
+ tran: time= 2.0032E-07 tot_iter=    2124 conv_iter=     731 cpu clock= 1.95E+01
+ tran: time= 3.0007E-07 tot_iter=    3274 conv_iter=    1137 cpu clock= 1.96E+01
+ tran: time= 4.0095E-07 tot_iter=    4335 conv_iter=    1506 cpu clock= 1.96E+01
+ tran: time= 5.0010E-07 tot_iter=    5518 conv_iter=    1919 cpu clock= 1.97E+01
+ tran: time= 6.0174E-07 tot_iter=    6634 conv_iter=    2301 cpu clock= 1.98E+01
+ tran: time= 7.0019E-07 tot_iter=    7697 conv_iter=    2669 cpu clock= 1.98E+01
+ tran: time= 8.0001E-07 tot_iter=    8848 conv_iter=    3070 cpu clock= 1.99E+01
+ tran: time= 9.0047E-07 tot_iter=    9978 conv_iter=    3459 cpu clock= 1.99E+01
+ tran: time= 1.0000E-06 tot_iter=   11097 conv_iter=    3839 cpu clock= 2.00E+01
+ sweep: tran tran60   end,  cpu clock=  2.00E+01 memory=    361 kb
  voltage: vin             =    8.00E-01
- dcop: begin dcop,  cpu clock=  2.02E+01
- dcop: end dcop,  cpu clock=  2.03E+01 memory=    361 kb  tot_iter=    2144
+ dcop: begin dcop,  cpu clock=  2.00E+01
+ dcop: end dcop,  cpu clock=  2.00E+01 memory=    361 kb  tot_iter=    2144
  output: c:\users\timer\documents\github\hspice\pwmadc\vco.mt0
- sweep: tran tran61   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.03E+01
- tran: time= 1.0066E-07 tot_iter=    1071 conv_iter=     369 cpu clock= 2.04E+01
- tran: time= 2.0012E-07 tot_iter=    2077 conv_iter=     715 cpu clock= 2.04E+01
- tran: time= 3.0007E-07 tot_iter=    3298 conv_iter=    1133 cpu clock= 2.05E+01
- tran: time= 4.0155E-07 tot_iter=    4317 conv_iter=    1481 cpu clock= 2.06E+01
- tran: time= 5.0026E-07 tot_iter=    5461 conv_iter=    1877 cpu clock= 2.06E+01
- tran: time= 6.0093E-07 tot_iter=    6678 conv_iter=    2301 cpu clock= 2.07E+01
- tran: time= 7.0004E-07 tot_iter=    7843 conv_iter=    2707 cpu clock= 2.08E+01
- tran: time= 8.0122E-07 tot_iter=    8979 conv_iter=    3098 cpu clock= 2.08E+01
- tran: time= 9.0001E-07 tot_iter=   10003 conv_iter=    3451 cpu clock= 2.09E+01
- tran: time= 1.0000E-06 tot_iter=   11160 conv_iter=    3847 cpu clock= 2.10E+01
- sweep: tran tran61   end,  cpu clock=  2.10E+01 memory=    361 kb
+ sweep: tran tran61   begin, stop_t=  1.00E-06 #sweeps=1001 cpu clock=  2.00E+01
+ tran: time= 1.0066E-07 tot_iter=    1071 conv_iter=     369 cpu clock= 2.01E+01
+ tran: time= 2.0012E-07 tot_iter=    2077 conv_iter=     715 cpu clock= 2.01E+01
+ tran: time= 3.0007E-07 tot_iter=    3298 conv_iter=    1133 cpu clock= 2.02E+01
+ tran: time= 4.0155E-07 tot_iter=    4317 conv_iter=    1481 cpu clock= 2.02E+01
+ tran: time= 5.0026E-07 tot_iter=    5461 conv_iter=    1877 cpu clock= 2.03E+01
+ tran: time= 6.0093E-07 tot_iter=    6678 conv_iter=    2301 cpu clock= 2.04E+01
+ tran: time= 7.0004E-07 tot_iter=    7843 conv_iter=    2707 cpu clock= 2.04E+01
+ tran: time= 8.0122E-07 tot_iter=    8979 conv_iter=    3098 cpu clock= 2.05E+01
+ tran: time= 9.0001E-07 tot_iter=   10003 conv_iter=    3451 cpu clock= 2.06E+01
+ tran: time= 1.0000E-06 tot_iter=   11160 conv_iter=    3847 cpu clock= 2.06E+01
+ sweep: tran tran61   end,  cpu clock=  2.06E+01 memory=    361 kb
  sweep: voltage         voltage         1 end
 >info:         ***** hspice job concluded
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

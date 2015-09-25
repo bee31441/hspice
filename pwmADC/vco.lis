@@ -63,6 +63,7 @@
 
  .op
  .tran 1ns 1us  sweep vin 0.2 0.8 0.01
+ *.meas voscin val = v(vin)
  .meas period trig v(osc_out) val = 0.6v rise = 3
  +targ v(osc_out) val = 0.6v rise = 4
  .meas poslength trig v(osc_out) val = 0.6v rise = 3
@@ -2536,19 +2537,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.52           1        2144
-  transient         18.97       61061      282199       97224 rev=     17113
-  readin             0.13
+  op point           0.45           1        2144
+  transient         18.64       61061      282199       97224 rev=     17113
+  readin             0.10
   errchk             0.01
-  setup              0.05
-  output             0.02
+  setup              0.02
+  output             0.00
 
 
            total memory used          361  kbytes
-           total cpu time           20.93 seconds
+           total cpu time           20.61 seconds
            total elapsed time          21 seconds
-           job started at     14:12:58 09/23/2015
-           job ended   at     14:13:19 09/23/2015
+           job started at     14:55:46 09/23/2015
+           job ended   at     14:56:07 09/23/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
