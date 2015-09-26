@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "14:55:46 09/23/2015 "
+* "rundate" "16:20:20 09/26/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\pwmadc\vco.sp "
 * "runtitle" "*voltage controlled oscillator"
 * time =    0.            
@@ -11,15 +11,15 @@
 + gmindc=   1.0000p       
 .nodeset
 + cv_in = 200.0000m       
-+ osc_out = 594.1938n       
-+ st_in =   1.2000        
-+ st_out =  13.0897n       
-+ vdd =   1.2000        
-+ vf = 594.1938n       
++ osc_out =   1.7650u       
++ st_in =   1.8000        
++ st_out =  16.4449n       
++ vdd =   1.8000        
++ vf =   1.7650u       
 + vss =   0.            
-+ xvco_amp.1 = 958.6898m       
-+ xvco_amp.2 =   1.2000        
-+ xvco_amp.3 = 251.3864m       
-+ xschimmit.s1ns =  12.3247n       
-+ xschimmit.s1pd =  90.3951m       
++ xvco_amp.1 =   1.5637        
++ xvco_amp.2 =   1.8000        
++ xvco_amp.3 =  72.0222m       
++ xschimmit.s1ns =  16.0205n       
++ xschimmit.s1pd =  88.6648m       
 ***   END: Saved Operating Point ***                     
