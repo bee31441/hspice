@@ -1,4 +1,4 @@
-*Voltage Controlled Oscillator
+*OTA
 .protect
 .lib 'rf018.l' TT
 .unprotect

@@ -1,0 +1,4 @@
+$DATA1 SOURCE='HSPICE' VERSION='B-2008.09 32-BIT'
+.TITLE '*ota'
+ idiff            temper           alter#            
+  1.282e-08         25.0000           1.0000         

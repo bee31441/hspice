@@ -1,0 +1,170 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\n,pmos\npmos.sp            
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1 
+ ***netlist***
+
+ .param wp = 1.2u wn = 400n
+ *m1 vdd vg vss vss nch w = wn l = 200n
+ *m2 vss vg vdd vdd pch w = wp l = 200n
+
+  *****************diode connect********************
+ *m3 vss vss idd idd pch w = 1.2u l = 200n 
+ *ix idd gnd dc = -100n
+
+ *****************stack mos************************
+ *m4 in vb1 1 1 nch w = wn l = 200n
+ *m5 1 vb2 vss vss nch w = wn l = 200n
+ *vbias1 vb1 gnd dc = 0.7v
+ *vbias2 vb2 gnd dc = 0.5v
+ *iin in gnd dc = 500u
+ ****************ideal stuff****************
+ hx 20 gnd vcur max=+10 min=-10 100000
+ vcur 1 gnd  dc = 0v
+ iin 1 gnd dc = 100n
+ r1 20 gnd 10k
+ .probe v(20)
+
+
+
+ *vd vdd gnd dc = 1.8v
+ *vs vss gnd dc = 0v
+
+ *vin vg gnd dc = 1.4v
+ .op
+ *.dc sweep wp 1u 3u 50n
+ .dc sweep iin 10n 500n 1n
+ *.probe i(m1) i(m2)
+
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+      
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:20      = -10.0000m
+
+
+ maximum nodal capacitance=    0.00             on node     0:0               
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap
+
+ +0:1       =   0.      0:20      =   0.     
+
+ 
+
+ ****  voltage sources
+
+ subckt             
+ element  0:vcur    
+  volts      0.     
+  current -100.0000n
+  power      0.     
+
+     total voltage source power dissipation=    0.            watts
+
+
+
+ ***** current sources
+
+ subckt             
+ element  0:iin     
+  volts      0.     
+  current  100.0000n
+  power      0.     
+
+
+     total current source power dissipation=   0.            watts
+
+ **** resistors
+
+ subckt             
+ element  0:r1      
+  r value   10.0000k
+  v drop   -10.0000m
+  current   -1.0000u
+  power     10.0000n
+
+
+ **** current-controlled voltage sources
+
+
+ subckt             
+ element  0:hx      
+  volts    -10.0000m
+  current    1.0000u
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =       3  # elements   =       4
+  # resistors   =       1  # capacitors =       0  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       1  # volt_srcs   =       1
+  # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       0  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1           4
+  dc sweep           0.02         491         984
+  readin             0.07
+  errchk             0.04
+  setup              0.02
+  output             0.00
+
+
+           total memory used           31  kbytes
+           total cpu time            0.16 seconds
+           total elapsed time           1 seconds
+           job started at     22:10:58 09/29/2015
+           job ended   at     22:10:59 09/29/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
