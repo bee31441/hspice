@@ -1,0 +1,19 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\n,pmos\\npmos.sp");
+"D0"
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","v(20)"), node(D0,"A0","AMPS"));
+nil
+quit();
+exit
+pnlDeletePane(1, 1);
+nil
+nil
