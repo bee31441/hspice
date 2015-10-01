@@ -5,7 +5,7 @@
   terms and conditions of the license agreement from Synopsys.
   Use of this program is your acceptance to be bound by the 
   license agreement. HSPICE is the trademark of Synopsys, Inc.
-  Input File: c:\users\timer\documents\github\hspice\pwmadc\vco.sp              
+  Input File: c:\users\timer\documents\github\hspice\pwmadc\vco\vco.sp          
  Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
 
@@ -19,13 +19,13 @@
 
 
  .subckt schimmit vdd vss in out 
- ms1p s1pd in vdd vdd pch w = 1.2u l = 360n
- ms2p out in s1pd s1pd pch w = 1.2u l = 360n
- ms1n out in s1ns s1ns nch w = 400n l = 360n
- ms2n s1ns in vss vss nch w = 400n l =360n
+ ms1p s1pd in vdd vdd pch w = 1.2u l = 200n
+ ms2p out in s1pd s1pd pch w = 1.2u l = 200n
+ ms1n out in s1ns s1ns nch w = 400n l = 200n
+ ms2n s1ns in vss vss nch w = 400n l =200n
 
- ms3p vss out s1pd s1pd pch w = 400n l = 360n
- ms3n vdd out s1ns s1ns nch w = 400n l = 360n
+ ms3p vss out s1pd s1pd pch w = 400n l = 200n
+ ms3n vdd out s1ns s1ns nch w = 400n l = 200n
  .ends
 
  .subckt inverter vdd vss in out
@@ -34,13 +34,16 @@
  .ends
 
  .subckt vco_amp vdd vss in out vf
- m6 1 1 vdd vdd pch w = 1.2u l = 360n
- m5 1 in vss vss nch w = 400n l = 360n 
+ m6 1 1 vdd vdd pch w = 1.2u l = 200n
+ m5 1 in vss vss nch w = 400n l = 200n 
 
- m4 2 1 vdd vdd pch w = 1.2u l = 360n m = 5
- m3 out vf 2 vdd pch w = 1.2u l = 360n m = 5
- m2 out vf 3 vss nch w = 400n l = 360n
- m1 3 vf vss vss nch w = 400n l = 360n
+ m4 2 1 vdd vdd pch w = 1.2u l = 200n m = 5
+ m3 out vf 2 vdd pch w = 1.2u l = 200n m = 5
+ m2 out vf 3 vss nch w = 400n l = 200n
+ m1 3 vf vss vss nch w = 400n l = 200n
+ .ends
+
+ .subckt ota vdd vss vbias winp winn
  .ends
 
  xvco_amp vdd vss cv_in st_in vf vco_amp
@@ -55,8 +58,8 @@
  vss vss gnd dc = 0v
  .ic osc_out = 0v
 
- vin cv_in gnd dc = 0.6v
- *v_osc vf gnd dc = 0.6v
+ vin cv_in gnd dc = 0.9v
+ *v_osc vf gnd dc = 0.9v
 
 
 
@@ -68,6 +71,9 @@
  +targ v(osc_out) val = 0.6v rise = 4
  .meas poslength trig v(osc_out) val = 0.6v rise = 3
  +targ v(osc_out) val = 0.6v fall = 3
+ .probe tran period
+ **warning** unrecognized output type period   on above line,ignored.
+
 
  *.alter 
  *vin cv_in gnd dc = 0.7v
@@ -114,7 +120,7 @@
  
       
   Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\pwmadc\vco.pa0                    
+ file=c:\users\timer\documents\github\hspice\pwmadc\vco\vco.pa0                
 
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
  ******  
@@ -124,22 +130,22 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:cv_in   = 600.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1256  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:cv_in   = 900.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 795.1209m 1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0953f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.2523f 0:vf      =  22.4837f
- +0:vss     =  14.7898f 1:1       =  25.5174f 1:2       =  58.4232f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 758.7316a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.9328f 0:vf      =  13.9593f
+ +0:vss     =  13.4279f 1:1       =  17.0583f 1:2       =  43.0047f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
 
@@ -147,11 +153,11 @@
 
  subckt                                              
  element  0:v0       0:vdd      0:vss      0:vin     
-  volts      0.         1.8000     0.       600.0000m
-  current -2.711e-20 -181.5193u    5.0241u    0.     
-  power      0.       326.7347u    0.         0.     
+  volts      0.         1.8000     0.       900.0000m
+  current -2.711e-20 -232.1058u   55.6106u    0.     
+  power      0.       417.7904u    0.         0.     
 
-     total voltage source power dissipation=  326.7347u       watts
+     total voltage source power dissipation=  417.7904u       watts
 
 
 
@@ -163,26 +169,26 @@
  element  1:m6       1:m5       1:m4       1:m3       1:m2       1:m1      
  model    0:pch.8    0:nch.16   0:pch.8    0:pch.8    0:nch.16   0:nch.16  
  region     Saturati   Saturati     Linear     Linear     Cutoff     Cutoff
-  id        -5.0241u    5.0241u   -3.6976p   -3.6978p  170.2969f    1.6822p
-  ibs      9.292e-22 -1.579e-21  6.842e-28  1.326e-23   -2.2320a -5.516e-28
-  ibd        3.9886a  -18.5158p  1.326e-23  1.590e-23 -134.0417a   -2.2320a
-  vgs     -674.4398m  600.0000m -674.4398m   -1.8000   -72.0218m    1.7650u
-  vds     -674.4398m    1.1256   -17.2088n   -3.4228n    1.7280    72.0235m
-  vbs        0.         0.         0.        17.2088n  -72.0235m    0.     
-  vth     -470.0800m  484.5784m -470.8002m -470.8002m  503.3887m  485.3910m
-  vdsat   -195.6896m  136.0063m -195.1940m -919.0814m   44.1196m   43.8437m
-  vod     -204.3598m  115.4216m -203.6396m   -1.3292  -575.4105m -485.3892m
-  beta     225.3148u  494.8525u    1.1264m  910.6760u  497.8662u  498.6247u
-  gam eff  626.9907m  639.8883m  626.9907m  626.9907m  642.2136m  639.8878m
-  gm        40.9801u   56.0069u   17.3871p    1.8330p    5.1470p   50.4316p
-  gds      614.3103n  589.0497n  214.8898u    1.0809m   37.5805f    3.9037p
-  gmb       13.9890u   15.1669u    6.3780p    1.2383p    1.5384p   15.6200p
-  cdtot      1.6249f  546.1200a   29.5082f   33.1253f  510.3307a  666.0425a
-  cgtot      3.4150f    1.0953f   19.9314f   21.2635f  610.1013a  610.1011a
-  cstot      4.7454f    1.5075f   26.8406f   28.9150f  666.0425a  682.1514a
-  cbtot      3.6841f    1.2305f   20.8305f   20.7906f    1.2089f    1.3807f
-  cgs        2.8237f  837.7987a   10.6738f   11.0809f  144.4112a  144.4114a
-  cgd      389.1771a  144.0102a    9.1526f   10.4649f  144.4010a  144.4010a
+  id       -55.6106u   55.6106u   -4.6259p   -4.6255p    1.0783p    2.6704p
+  ibs      1.027e-20 -1.742e-20  8.558e-28  3.420e-24   -2.0618a -8.560e-28
+  ibd        4.3781a  -13.5216f  3.418e-24  5.119e-24 -914.9331a   -2.0618a
+  vgs       -1.0049   900.0000m   -1.0049    -1.8000   -51.9773m    1.7650u
+  vds       -1.0049   795.1209m   -4.4360n   -2.2068n    1.7480    51.9790m
+  vbs        0.         0.         0.         4.4360n  -51.9790m    0.     
+  vth     -498.3100m  520.6366m -502.0180m -502.0180m  532.0986m  522.3207m
+  vdsat   -372.2861m  240.3588m -370.3290m -761.1363m   44.6110m   44.4965m
+  vod     -506.5691m  379.3634m -502.8611m   -1.2980  -584.0759m -522.3189m
+  beta     471.4368u    1.1088m    2.3557m    2.0201m    1.1378m    1.1385m
+  gam eff  642.7241m  902.3220m  642.7243m  642.7243m  907.5849m  902.3025m
+  gm       177.2858u  192.0989u    7.7914p    2.1305p   31.6262p   77.8622p
+  gds        8.2191u    9.4584u    1.0433m    2.0981m  408.6342f   16.6648p
+  gmb       61.3124u   53.6809u    3.2651p    1.3835p    9.3766p   24.8201p
+  cdtot      1.5344f  571.4326a   22.7036f   23.4943f  510.3307a  670.3138a
+  cgtot      2.2606f  758.7316a   12.6919f   12.9993f  479.9999a  479.9996a
+  cstot      3.4801f    1.1623f   19.8412f   20.3010f  670.3138a  682.1512a
+  cbtot      3.1414f    1.1386f   18.2890f   18.2774f    1.0830f    1.2548f
+  cgs        1.8038f  543.9389a    6.6319f    6.7680f  144.4169a  144.4168a
+  cgd      386.9123a  143.9179a    6.1240f    6.3771f  144.4010a  144.4010a
 
 
 
@@ -190,26 +196,26 @@
  element  2:ms1p     2:ms2p     2:ms1n     2:ms2n     2:ms3p     2:ms3n    
  model    0:pch.8    0:pch.8    0:nch.16   0:nch.16   0:pch.16   0:nch.16  
  region       Cutoff     Cutoff     Linear     Linear     Cutoff     Cutoff
-  id        -1.2816p    0.       177.3228f    6.6940p   -4.3497p    2.9135p
-  ibs      5.536e-28    0.         0.      -2.105e-27  1.219e-27 -1.482e-27
-  ibd       22.7481a    3.8344a -3.919e-26 -1.479e-24    1.8978a   -3.1208f
-  vgs      -20.6316n    1.7113     1.8000     1.8000   -88.6595m  424.3789p
-  vds       -1.7113   -88.6595m  424.3789p   16.0204n  -88.6595m    1.8000 
+  id        -3.5796p    0.       192.4874f   11.7316p   -6.6022p    7.9306p
+  ibs      9.772e-28    0.         0.      -3.689e-27  1.840e-27 -3.060e-27
+  ibd       52.9697a    3.8665a -2.310e-26 -1.408e-24    1.9137a   -8.4650f
+  vgs       -6.6429n    1.7038     1.8000     1.8000   -96.2418m  250.4237p
+  vds       -1.7038   -96.2418m  250.4237p   15.2627n  -96.2418m    1.8000 
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -468.9676m -470.7053m  485.4468m  485.4468m -464.0121m  484.0505m
-  vdsat    -40.5325m  -40.5326m  702.9327m  702.9327m  -39.8407m   43.8435m
-  vod      468.9676m    2.1820     1.3146     1.3146   375.3526m -484.0505m
-  beta     232.6218u  232.5032u  395.8942u  395.8942u   77.4295u  498.6909u
-  gam eff  626.9907m  626.9907m  639.8878m  639.8878m  530.9940m  639.8878m
-  gm        38.9814p    0.        71.9176f    2.7149p  133.5241p   87.3427p
-  gds      355.0678f    0.       419.0314u  419.0314u    4.9499p  621.8388f
-  gmb       14.5080p    0.        40.2089f    1.5179p   46.1592p   26.7050p
-  cdtot      1.3991f    1.8729f    2.0730f    2.0730f  748.7858a  510.3307a
-  cgtot      1.7731f    4.3913f    1.4385f    1.4385f  567.9067a  610.1014a
-  cstot      1.9294f    1.9294f    1.8632f    1.8632f  772.1072a  682.1515a
-  cbtot      3.5402f    6.6321f    1.4025f    1.4025f    1.5771f    1.2250f
-  cgs      390.3532a  390.4393a  709.7232a  709.7232a  127.9351a  144.4114a
-  cgd      390.3200a  390.3200a  706.0310a  706.0310a  127.9200a  144.4010a
+  vth     -495.6917m -501.6607m  522.4422m  522.4422m -499.7554m  518.2337m
+  vdsat    -40.7345m  -40.7357m  511.6560m  511.6560m  -41.1714m   44.4956m
+  vod      495.6917m    2.2054     1.2776     1.2776   403.5136m -518.2337m
+  beta     509.5656u  508.7624u  934.1665u  934.1665u  168.6511u    1.1388m
+  gam eff  642.7243m  642.7243m  902.3025m  902.3025m  673.3636m  902.3025m
+  gm       102.0809p    0.        68.8984f    4.1992p  198.5704p  231.2113p
+  gds        2.4602p    0.       772.6859u  772.6858u   11.5781p    2.8684p
+  gmb       37.8936p    0.        37.8877f    2.3092p   71.3668p   70.1731p
+  cdtot      1.4002f    1.8684f    1.4617f    1.4617f  746.9282a  510.3307a
+  cgtot      1.3145f    2.6760f  889.6722a  889.6722a  434.6345a  479.9998a
+  cstot      1.9294f    1.9294f    1.3201f    1.3201f  772.1022a  682.1512a
+  cbtot      3.0828f    4.9124f    1.2746f    1.2746f    1.4420f    1.0949f
+  cgs      390.3380a  390.3826a  417.9108a  417.9108a  127.9272a  144.4168a
+  cgd      390.3200a  390.3200a  436.6655a  436.6655a  127.9200a  144.4010a
 
 
 
@@ -217,14 +223,14 @@
  element  3:m1       3:m2      
  model    0:pch.7    0:nch.11  
  region     Saturati     Cutoff
-  id      -176.4952u  104.3769a
+  id      -176.4952u  104.3768a
   ibs      2.880e-20    0.     
   ibd        2.5123f -2.885e-22
-  vgs       -1.8000    16.4447n
+  vgs       -1.8000    15.5131n
   vds       -1.8000     1.7650u
   vbs        0.         0.     
   vth     -463.8733m  493.6221m
-  vdsat   -962.9238m   43.6073m
+  vdsat   -962.9239m   43.6073m
   vod       -1.3361  -493.6221m
   beta     250.3614u  801.4230u
   gam eff  568.5589m  589.5758m
@@ -252,21 +258,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 200.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4449n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5637  1:2       =   1.8000 
- +1:3       =  72.0222m 2:s1ns    =  16.0205n 2:s1pd    =  88.6648m
+ +0:st_out  =  15.5132n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.5433  1:2       =   1.8000 
+ +1:3       =  51.9788m 2:s1ns    =  15.2627n 2:s1pd    =  96.2477m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 582.6041a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4648f 0:vf      =  22.4837f
- +0:vss     =  13.9423f 1:1       =  12.3970f 1:2       =  38.5737f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 465.5113a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9601f 0:vf      =  13.9593f
+ +0:vss     =  12.9015f 1:1       =   9.8671f 1:2       =  29.9530f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -289,21 +295,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 210.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4449n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5538  1:2       =   1.8000 
- +1:3       =  72.0226m 2:s1ns    =  16.0205n 2:s1pd    =  88.6635m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.5337  1:2       =   1.8000 
+ +1:3       =  51.9789m 2:s1ns    =  15.2627n 2:s1pd    =  96.2463m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 581.4452a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4449f 0:vf      =  22.4837f
- +0:vss     =  13.9417f 1:1       =  12.3756f 1:2       =  38.5779f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 464.8810a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9472f 0:vf      =  13.9593f
+ +0:vss     =  12.9014f 1:1       =   9.8538f 1:2       =  29.9547f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -326,21 +332,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 220.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4449n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5440  1:2       =   1.8000 
- +1:3       =  72.0228m 2:s1ns    =  16.0205n 2:s1pd    =  88.6626m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.5240  1:2       =   1.8000 
+ +1:3       =  51.9789m 2:s1ns    =  15.2627n 2:s1pd    =  96.2452m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 580.3126a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4270f 0:vf      =  22.4837f
- +0:vss     =  13.9411f 1:1       =  12.3553f 1:2       =  38.5837f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 464.2605a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9352f 0:vf      =  13.9593f
+ +0:vss     =  12.9012f 1:1       =   9.8410f 1:2       =  29.9571f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -363,21 +369,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 230.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5340  1:2       =   1.8000 
- +1:3       =  72.0232m 2:s1ns    =  16.0204n 2:s1pd    =  88.6618m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.5143  1:2       =   1.8000 
+ +1:3       =  51.9789m 2:s1ns    =  15.2627n 2:s1pd    =  96.2444m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 579.2099a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4116f 0:vf      =  22.4837f
- +0:vss     =  13.9405f 1:1       =  12.3366f 1:2       =  38.5916f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 463.6505a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9241f 0:vf      =  13.9593f
+ +0:vss     =  12.9011f 1:1       =   9.8289f 1:2       =  29.9603f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -400,21 +406,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 240.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5241  1:2       =   1.8000 
- +1:3       =  72.0233m 2:s1ns    =  16.0204n 2:s1pd    =  88.6612m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.5045  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2439m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 578.1419a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.3996f 0:vf      =  22.4837f
- +0:vss     =  13.9400f 1:1       =  12.3201f 1:2       =  38.6024f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 463.0520a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9144f 0:vf      =  13.9593f
+ +0:vss     =  12.9010f 1:1       =   9.8176f 1:2       =  29.9646f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -437,21 +443,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 250.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5141  1:2       =   1.8000 
- +1:3       =  72.0233m 2:s1ns    =  16.0204n 2:s1pd    =  88.6608m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4947  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2434m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 577.1156a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.3924f 0:vf      =  22.4837f
- +0:vss     =  13.9396f 1:1       =  12.3064f 1:2       =  38.6171f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 462.4664a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9066f 0:vf      =  13.9593f
+ +0:vss     =  12.9010f 1:1       =   9.8074f 1:2       =  29.9704f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -474,21 +480,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 260.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.5040  1:2       =   1.8000 
- +1:3       =  72.0234m 2:s1ns    =  16.0204n 2:s1pd    =  88.6605m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4849  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2430m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 576.1402a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.3914f 0:vf      =  22.4837f
- +0:vss     =  13.9392f 1:1       =  12.2965f 1:2       =  38.6371f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 461.8956a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9013f 0:vf      =  13.9593f
+ +0:vss     =  12.9009f 1:1       =   9.7987f 1:2       =  29.9783f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -511,21 +517,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 270.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4939  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6602m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4750  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2427m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 575.2284a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.3991f 0:vf      =  22.4837f
- +0:vss     =  13.9390f 1:1       =  12.2918f 1:2       =  38.6646f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 461.3425a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.8992f 0:vf      =  13.9593f
+ +0:vss     =  12.9009f 1:1       =   9.7921f 1:2       =  29.9890f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -548,21 +554,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 280.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4837  1:2       =   1.8000 
- +1:3       =  72.0234m 2:s1ns    =  16.0204n 2:s1pd    =  88.6601m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4650  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2425m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 574.3974a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4186f 0:vf      =  22.4837f
- +0:vss     =  13.9389f 1:1       =  12.2943f 1:2       =  38.7022f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 460.8105a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9017f 0:vf      =  13.9593f
+ +0:vss     =  12.9010f 1:1       =   9.7881f 1:2       =  30.0034f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -585,21 +591,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 290.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4735  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6600m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4550  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2424m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 573.6705a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.4540f 0:vf      =  22.4837f
- +0:vss     =  13.9389f 1:1       =  12.3064f 1:2       =  38.7536f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 460.3045a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9101f 0:vf      =  13.9593f
+ +0:vss     =  12.9011f 1:1       =   9.7877f 1:2       =  30.0230f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -622,21 +628,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 300.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4633  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6599m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4450  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2423m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 573.0792a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.5111f 0:vf      =  22.4837f
- +0:vss     =  13.9392f 1:1       =  12.3317f 1:2       =  38.8238f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 459.8311a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9266f 0:vf      =  13.9593f
+ +0:vss     =  12.9012f 1:1       =   9.7921f 1:2       =  30.0495f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -659,21 +665,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 310.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4530  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6598m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4349  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2422m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 572.6657a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.5976f 0:vf      =  22.4837f
- +0:vss     =  13.9398f 1:1       =  12.3749f 1:2       =  38.9194f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 459.3991a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9539f 0:vf      =  13.9593f
+ +0:vss     =  12.9014f 1:1       =   9.8031f 1:2       =  30.0853f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -696,21 +702,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 320.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4427  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6597m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4248  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2421m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 572.4870a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.7235f 0:vf      =  22.4837f
- +0:vss     =  13.9408f 1:1       =  12.4420f 1:2       =  39.0490f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 459.0204a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  74.9957f 0:vf      =  13.9593f
+ +0:vss     =  12.9017f 1:1       =   9.8227f 1:2       =  30.1335f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -733,21 +739,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 330.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4324  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6597m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4147  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2421m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 572.6190a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  80.9016f 0:vf      =  22.4837f
- +0:vss     =  13.9424f 1:1       =  12.5412f 1:2       =  39.2238f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 458.7107a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.0566f 0:vf      =  13.9593f
+ +0:vss     =  12.9022f 1:1       =   9.8539f 1:2       =  30.1983f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -770,21 +776,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 340.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4220  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.4046  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2420m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 573.1631a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  81.1484f 0:vf      =  22.4837f
- +0:vss     =  13.9446f 1:1       =  12.6827f 1:2       =  39.4574f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 458.4912a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.1426f 0:vf      =  13.9593f
+ +0:vss     =  12.9028f 1:1       =   9.9003f 1:2       =  30.2847f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -807,21 +813,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 350.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4117  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6597m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3945  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2420m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 574.2532a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  81.4836f 0:vf      =  22.4837f
- +0:vss     =  13.9477f 1:1       =  12.8791f 1:2       =  39.7664f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 458.3898a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.2611f 0:vf      =  13.9593f
+ +0:vss     =  12.9036f 1:1       =   9.9664f 1:2       =  30.3991f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -844,21 +850,21 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 360.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.4014  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3845  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 576.0654a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  81.9302f 0:vf      =  22.4837f
- +0:vss     =  13.9521f 1:1       =  13.1454f 1:2       =  40.1694f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 458.4438a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.4208f 0:vf      =  13.9593f
+ +0:vss     =  12.9046f 1:1       =  10.0578f 1:2       =  30.5490f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
@@ -881,29 +887,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 370.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3911  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3744  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 578.8282a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  82.5131f 0:vf      =  22.4837f
- +0:vss     =  13.9581f 1:1       =  13.4980f 1:2       =  40.6860f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 458.7023a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.6321f 0:vf      =  13.9593f
+ +0:vss     =  12.9061f 1:1       =  10.1810f 1:2       =  30.7431f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed                          trig= not found
-   poslength= failed                          trig= not found
+   period= failed       targ= not found    trig=  9.8425E-07
+   poslength=  3.6765E-09  targ=  9.8793E-07   trig=  9.8425E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -918,29 +924,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 380.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3807  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3644  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 582.8342a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  83.2565f 0:vf      =  22.4837f
- +0:vss     =  13.9662f 1:1       =  13.9537f 1:2       =  41.3340f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 459.2297a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  75.9061f 0:vf      =  13.9593f
+ +0:vss     =  12.9080f 1:1       =  10.3431f 1:2       =  30.9907f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed                          trig= not found
-   poslength= failed                          trig= not found
+   period= failed       targ= not found    trig=  7.9770E-07
+   poslength=  3.6772E-09  targ=  8.0138E-07   trig=  7.9770E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -955,29 +961,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 390.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3704  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3544  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 588.4507a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  84.1794f 0:vf      =  22.4837f
- +0:vss     =  13.9770f 1:1       =  14.5270f 1:2       =  42.1258f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 460.1100a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  76.2538f 0:vf      =  13.9593f
+ +0:vss     =  12.9105f 1:1       =  10.5515f 1:2       =  31.3007f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed                          trig= not found
-   poslength= failed                          trig= not found
+   period=  3.2574E-07  targ=  9.7616E-07   trig=  6.5042E-07
+   poslength=  3.6831E-09  targ=  6.5410E-07   trig=  6.5042E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -992,29 +998,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 400.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4448n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3600  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3445  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 596.1253a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  85.2901f 0:vf      =  22.4837f
- +0:vss     =  13.9912f 1:1       =  15.2259f 1:2       =  43.0640f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 461.4513a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  76.6844f 0:vf      =  13.9593f
+ +0:vss     =  12.9139f 1:1       =  10.8126f 1:2       =  31.6804f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed                          trig= not found
-   poslength= failed                          trig= not found
+   period=  2.6637E-07  targ=  8.0009E-07   trig=  5.3372E-07
+   poslength=  3.6900E-09  targ=  5.3741E-07   trig=  5.3372E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1029,29 +1035,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 410.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3496  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3345  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 606.3833a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  86.5796f 0:vf      =  22.4837f
- +0:vss     =  14.0097f 1:1       =  16.0477f 1:2       =  44.1376f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 463.3913a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  77.2036f 0:vf      =  13.9593f
+ +0:vss     =  12.9183f 1:1       =  11.1310f 1:2       =  32.1338f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed       targ= not found    trig=  9.1199E-07
-   poslength=  6.0991E-09  targ=  9.1809E-07   trig=  9.1199E-07
+   period=  2.1880E-07  targ=  6.5856E-07   trig=  4.3976E-07
+   poslength=  3.6970E-09  targ=  4.4345E-07   trig=  4.3976E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1066,29 +1072,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 420.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3392  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3246  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 619.8064a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  88.0174f 0:vf      =  22.4837f
- +0:vss     =  14.0334f 1:1       =  16.9757f 1:2       =  45.3204f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 466.1016a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  77.8107f 0:vf      =  13.9593f
+ +0:vss     =  12.9240f 1:1       =  11.5073f 1:2       =  32.6597f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period= failed       targ= not found    trig=  7.4619E-07
-   poslength=  6.1123E-09  targ=  7.5231E-07   trig=  7.4619E-07
+   period=  1.8074E-07  targ=  5.4502E-07   trig=  3.6428E-07
+   poslength=  3.7023E-09  targ=  3.6798E-07   trig=  3.6428E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1103,29 +1109,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 430.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3286  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3146  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 636.9844a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  89.5517f 0:vf      =  22.4837f
- +0:vss     =  14.0633f 1:1       =  17.9775f 1:2       =  46.5727f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 469.7913a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  78.4967f 0:vf      =  13.9593f
+ +0:vss     =  12.9314f 1:1       =  11.9368f 1:2       =  33.2506f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  3.0474E-07  targ=  9.1907E-07   trig=  6.1432E-07
-   poslength=  6.1271E-09  targ=  6.2045E-07   trig=  6.1432E-07
+   period=  1.5011E-07  targ=  4.5380E-07   trig=  3.0370E-07
+   poslength=  3.7125E-09  targ=  3.0741E-07   trig=  3.0370E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1140,29 +1146,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 440.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3180  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.3046  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 658.4321a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  91.1151f 0:vf      =  22.4837f
- +0:vss     =  14.1000f 1:1       =  19.0086f 1:2       =  47.8478f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 474.7055a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  79.2435f 0:vf      =  13.9593f
+ +0:vss     =  12.9410f 1:1       =  12.4088f 1:2       =  33.8925f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.5153E-07  targ=  7.6033E-07   trig=  5.0880E-07
-   poslength=  6.1423E-09  targ=  5.1495E-07   trig=  5.0880E-07
+   period=  1.2536E-07  targ=  3.7997E-07   trig=  2.5461E-07
+   poslength=  3.7211E-09  targ=  2.5833E-07   trig=  2.5461E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1177,29 +1183,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 450.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.3073  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2946  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 684.4688a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  92.6367f 0:vf      =  22.4837f
- +0:vss     =  14.1441f 1:1       =  20.0195f 1:2       =  49.0999f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 481.1175a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  80.0252f 0:vf      =  13.9593f
+ +0:vss     =  12.9531f 1:1       =  12.9067f 1:2       =  34.5663f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.0903E-07  targ=  6.3316E-07   trig=  4.2413E-07
-   poslength=  6.1591E-09  targ=  4.3029E-07   trig=  4.2413E-07
+   period=  1.0541E-07  targ=  3.2027E-07   trig=  2.1485E-07
+   poslength=  3.7318E-09  targ=  2.1859E-07   trig=  2.1485E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1214,29 +1220,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 460.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2964  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2845  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 715.0801a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  94.0546f 0:vf      =  22.4837f
- +0:vss     =  14.1954f 1:1       =  20.9652f 1:2       =  50.2909f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 489.3094a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  80.8113f 0:vf      =  13.9593f
+ +0:vss     =  12.9682f 1:1       =  13.4104f 1:2       =  35.2505f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.7491E-07  targ=  5.3108E-07   trig=  3.5618E-07
-   poslength=  6.1785E-09  targ=  3.6235E-07   trig=  3.5618E-07
+   period=  8.9270E-08  targ=  2.7187E-07   trig=  1.8260E-07
+   poslength=  3.7439E-09  targ=  1.8634E-07   trig=  1.8260E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1251,29 +1257,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 470.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2853  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2743  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 749.7964a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  95.3253f 0:vf      =  22.4837f
- +0:vss     =  14.2529f 1:1       =  21.8126f 1:2       =  51.3946f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 499.5376a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  81.5714f 0:vf      =  13.9593f
+ +0:vss     =  12.9868f 1:1       =  13.8989f 1:2       =  35.9242f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.4705E-07  targ=  4.4787E-07   trig=  3.0082E-07
-   poslength=  6.1925E-09  targ=  3.0701E-07   trig=  3.0082E-07
+   period=  7.5875E-08  targ=  2.3189E-07   trig=  1.5601E-07
+   poslength=  3.7506E-09  targ=  1.5976E-07   trig=  1.5601E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1288,29 +1294,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 480.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2741  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2640  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 787.6476a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  96.4272f 0:vf      =  22.4837f
- +0:vss     =  14.3149f 1:1       =  22.5440f 1:2       =  52.3973f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 511.9824a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  82.2801f 0:vf      =  13.9593f
+ +0:vss     =  13.0091f 1:1       =  14.3543f 1:2       =  36.5701f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.2476E-07  targ=  3.8078E-07   trig=  2.5602E-07
-   poslength=  6.2225E-09  targ=  2.6224E-07   trig=  2.5602E-07
+   period=  6.5057E-08  targ=  1.9932E-07   trig=  1.3426E-07
+   poslength=  3.7672E-09  targ=  1.3803E-07   trig=  1.3426E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1325,29 +1331,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 490.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2627  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2536  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 827.2360a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  97.3583f 0:vf      =  22.4837f
- +0:vss     =  14.3790f 1:1       =  23.1563f 1:2       =  53.2955f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 526.6852a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  82.9197f 0:vf      =  13.9593f
+ +0:vss     =  13.0352f 1:1       =  14.7634f 1:2       =  37.1756f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.0632E-07  targ=  3.2553E-07   trig=  2.1921E-07
-   poslength=  6.2361E-09  targ=  2.2545E-07   trig=  2.1921E-07
+   period=  5.6108E-08  targ=  1.7248E-07   trig=  1.1637E-07
+   poslength=  3.7838E-09  targ=  1.2015E-07   trig=  1.1637E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1362,29 +1368,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 500.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2512  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2431  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 866.9352a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  98.1308f 0:vf      =  22.4837f
- +0:vss     =  14.4426f 1:1       =  23.6571f 1:2       =  54.0928f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 543.4903a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  83.4813f 0:vf      =  13.9593f
+ +0:vss     =  13.0646f 1:1       =  15.1196f 1:2       =  37.7334f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  9.1466E-08  targ=  2.8074E-07   trig=  1.8927E-07
-   poslength=  6.2701E-09  targ=  1.9554E-07   trig=  1.8927E-07
+   period=  4.8630E-08  targ=  1.5002E-07   trig=  1.0139E-07
+   poslength=  3.7959E-09  targ=  1.0519E-07   trig=  1.0139E-07
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1399,29 +1405,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 510.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2394  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2324  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 905.1583a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  98.7644f 0:vf      =  22.4837f
- +0:vss     =  14.5032f 1:1       =  24.0604f 1:2       =  54.7971f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 562.0099a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  83.9639f 0:vf      =  13.9593f
+ +0:vss     =  13.0968f 1:1       =  15.4214f 1:2       =  38.2408f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  7.9081E-08  targ=  2.4389E-07   trig=  1.6480E-07
-   poslength=  6.2924E-09  targ=  1.7110E-07   trig=  1.6480E-07
+   period=  4.2493E-08  targ=  1.3141E-07   trig=  8.8915E-08
+   poslength=  3.8152E-09  targ=  9.2731E-08   trig=  8.8915E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1436,29 +1442,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 520.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2274  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2216  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 940.6060a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  99.2818f 0:vf      =  22.4837f
- +0:vss     =  14.5586f 1:1       =  24.3824f 1:2       =  55.4180f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 581.6380a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  84.3720f 0:vf      =  13.9593f
+ +0:vss     =  13.1305f 1:1       =  15.6721f 1:2       =  38.6982f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  6.9027E-08  targ=  2.1356E-07   trig=  1.4453E-07
-   poslength=  6.3264E-09  targ=  1.5086E-07   trig=  1.4453E-07
+   period=  3.7319E-08  targ=  1.1594E-07   trig=  7.8625E-08
+   poslength=  3.8315E-09  targ=  8.2456E-08   trig=  7.8625E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1473,29 +1479,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 530.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2153  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.2106  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   = 972.4167a 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     =  99.7045f 0:vf      =  22.4837f
- +0:vss     =  14.6078f 1:1       =  24.6392f 1:2       =  55.9657f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 601.6215a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  84.7137f 0:vf      =  13.9593f
+ +0:vss     =  13.1645f 1:1       =  15.8773f 1:2       =  39.1084f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  6.0669E-08  targ=  1.8845E-07   trig=  1.2778E-07
-   poslength=  6.3570E-09  targ=  1.3413E-07   trig=  1.2778E-07
+   period=  3.3033E-08  targ=  1.0304E-07   trig=  7.0003E-08
+   poslength=  3.8541E-09  targ=  7.3857E-08   trig=  7.0003E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1510,29 +1516,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 540.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.2030  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1995  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0002f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 100.0519f 0:vf      =  22.4837f
- +0:vss     =  14.6502f 1:1       =  24.8449f 1:2       =  56.4495f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 621.1743a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  84.9983f 0:vf      =  13.9593f
+ +0:vss     =  13.1975f 1:1       =  16.0437f 1:2       =  39.4751f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  5.3702E-08  targ=  1.6755E-07   trig=  1.1384E-07
-   poslength=  6.3910E-09  targ=  1.2024E-07   trig=  1.1384E-07
+   period=  2.9386E-08  targ=  9.2159E-08   trig=  6.2773E-08
+   poslength=  3.8726E-09  targ=  6.6646E-08   trig=  6.2773E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1547,29 +1553,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 550.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1904  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1882  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0239f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 100.3399f 0:vf      =  22.4837f
- +0:vss     =  14.6860f 1:1       =  25.0114f 1:2       =  56.8782f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 639.5997a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.2351f 0:vf      =  13.9593f
+ +0:vss     =  13.2284f 1:1       =  16.1781f 1:2       =  39.8026f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  4.7954E-08  targ=  1.5013E-07   trig=  1.0217E-07
-   poslength=  6.4304E-09  targ=  1.0860E-07   trig=  1.0217E-07
+   period=  2.6337E-08  targ=  8.3002E-08   trig=  5.6665E-08
+   poslength=  3.8899E-09  targ=  6.0555E-08   trig=  5.6665E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1584,29 +1590,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 560.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1777  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1768  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0439f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 100.5815f 0:vf      =  22.4837f
- +0:vss     =  14.7157f 1:1       =  25.1482f 1:2       =  57.2593f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 656.3824a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.4329f 0:vf      =  13.9593f
+ +0:vss     =  13.2562f 1:1       =  16.2869f 1:2       =  40.0952f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  4.3066E-08  targ=  1.3559E-07   trig=  9.2529E-08
-   poslength=  6.4629E-09  targ=  9.8992E-08   trig=  9.2529E-08
+   period=  2.3785E-08  targ=  7.5286E-08   trig=  5.1501E-08
+   poslength=  3.9131E-09  targ=  5.5414E-08   trig=  5.1501E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1621,29 +1627,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 570.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1649  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1653  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0606f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 100.7866f 0:vf      =  22.4837f
- +0:vss     =  14.7402f 1:1       =  25.2623f 1:2       =  57.5991f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 671.2267a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.5991f 0:vf      =  13.9593f
+ +0:vss     =  13.2806f 1:1       =  16.3755f 1:2       =  40.3571f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  3.8977E-08  targ=  1.2325E-07   trig=  8.4273E-08
-   poslength=  6.5011E-09  targ=  9.0774E-08   trig=  8.4273E-08
+   period=  2.1640E-08  targ=  6.8745E-08   trig=  4.7106E-08
+   poslength=  3.9335E-09  targ=  5.1039E-08   trig=  4.7106E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1658,29 +1664,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 580.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1519  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1537  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0744f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 100.9632f 0:vf      =  22.4837f
- +0:vss     =  14.7601f 1:1       =  25.3594f 1:2       =  57.9034f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 684.0443a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.7398f 0:vf      =  13.9593f
+ +0:vss     =  13.3015f 1:1       =  16.4483f 1:2       =  40.5919f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  3.5535E-08  targ=  1.1292E-07   trig=  7.7386E-08
-   poslength=  6.5447E-09  targ=  8.3930E-08   trig=  7.7386E-08
+   period=  1.9754E-08  targ=  6.3135E-08   trig=  4.3381E-08
+   poslength=  3.9528E-09  targ=  4.7333E-08   trig=  4.3381E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1695,29 +1701,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 590.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1388  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1420  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0858f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.1169f 0:vf      =  22.4837f
- +0:vss     =  14.7764f 1:1       =  25.4434f 1:2       =  58.1768f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 694.9073a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.8601f 0:vf      =  13.9593f
+ +0:vss     =  13.3191f 1:1       =  16.5089f 1:2       =  40.8030f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  3.2593E-08  targ=  1.0409E-07   trig=  7.1500E-08
-   poslength=  6.5839E-09  targ=  7.8084E-08   trig=  7.1500E-08
+   period=  1.8219E-08  targ=  5.8518E-08   trig=  4.0299E-08
+   poslength=  3.9888E-09  targ=  4.4287E-08   trig=  4.0299E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1732,29 +1738,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 600.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1256  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1302  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.0953f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.2523f 0:vf      =  22.4837f
- +0:vss     =  14.7898f 1:1       =  25.5174f 1:2       =  58.4232f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 703.9919a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  85.9640f 0:vf      =  13.9593f
+ +0:vss     =  13.3337f 1:1       =  16.5600f 1:2       =  40.9932f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  3.0125E-08  targ=  9.6536E-08   trig=  6.6411E-08
-   poslength=  6.6221E-09  targ=  7.3033E-08   trig=  6.6411E-08
+   period=  1.6879E-08  targ=  5.4478E-08   trig=  3.7599E-08
+   poslength=  4.0142E-09  targ=  4.1614E-08   trig=  3.7599E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1769,29 +1775,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 610.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.1122  1:2       =   1.8000 
- +1:3       =  72.0237m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1183  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1032f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.3728f 0:vf      =  22.4837f
- +0:vss     =  14.8009f 1:1       =  25.5836f 1:2       =  58.6461f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 711.5253a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.0546f 0:vf      =  13.9593f
+ +0:vss     =  13.3457f 1:1       =  16.6039f 1:2       =  41.1650f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.8003E-08  targ=  9.0142E-08   trig=  6.2139E-08
-   poslength=  6.6762E-09  targ=  6.8815E-08   trig=  6.2139E-08
+   period=  1.5724E-08  targ=  5.0992E-08   trig=  3.5268E-08
+   poslength=  4.0442E-09  targ=  3.9312E-08   trig=  3.5268E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1806,29 +1812,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 620.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0988  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.1064  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1099f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.4810f 0:vf      =  22.4837f
- +0:vss     =  14.8101f 1:1       =  25.6434f 1:2       =  58.8484f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 717.7478a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.1343f 0:vf      =  13.9593f
+ +0:vss     =  13.3556f 1:1       =  16.6420f 1:2       =  41.3207f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.6142E-08  targ=  8.4559E-08   trig=  5.8417E-08
-   poslength=  6.7165E-09  targ=  6.5133E-08   trig=  5.8417E-08
+   period=  1.4736E-08  targ=  4.7972E-08   trig=  3.3236E-08
+   poslength=  4.0659E-09  targ=  3.7302E-08   trig=  3.3236E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1843,29 +1849,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 630.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0854  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0944  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1156f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.5787f 0:vf      =  22.4837f
- +0:vss     =  14.8179f 1:1       =  25.6982f 1:2       =  59.0326f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 722.8872a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.2051f 0:vf      =  13.9593f
+ +0:vss     =  13.3638f 1:1       =  16.6756f 1:2       =  41.4622f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.4560E-08  targ=  7.9759E-08   trig=  5.5199E-08
-   poslength=  6.7616E-09  targ=  6.1961E-08   trig=  5.5199E-08
+   period=  1.3890E-08  targ=  4.5417E-08   trig=  3.1528E-08
+   poslength=  4.0979E-09  targ=  3.5626E-08   trig=  3.1528E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1880,29 +1886,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 640.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0719  1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0825  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1205f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.6677f 0:vf      =  22.4837f
- +0:vss     =  14.8245f 1:1       =  25.7487f 1:2       =  59.2007f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 727.1464a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.2685f 0:vf      =  13.9593f
+ +0:vss     =  13.3705f 1:1       =  16.7056f 1:2       =  41.5911f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.3172E-08  targ=  7.5540E-08   trig=  5.2369E-08
-   poslength=  6.8073E-09  targ=  5.9176E-08   trig=  5.2369E-08
+   period=  1.3144E-08  targ=  4.3141E-08   trig=  2.9997E-08
+   poslength=  4.1239E-09  targ=  3.4121E-08   trig=  2.9997E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1917,29 +1923,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 650.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0584  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0705  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1248f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.7490f 0:vf      =  22.4837f
- +0:vss     =  14.8303f 1:1       =  25.7955f 1:2       =  59.3547f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 730.6981a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.3256f 0:vf      =  13.9593f
+ +0:vss     =  13.3761f 1:1       =  16.7328f 1:2       =  41.7088f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.1958E-08  targ=  7.1848E-08   trig=  4.9890E-08
-   poslength=  6.8458E-09  targ=  5.6736E-08   trig=  4.9890E-08
+   period=  1.2489E-08  targ=  4.1183E-08   trig=  2.8694E-08
+   poslength=  4.1494E-09  targ=  3.2843E-08   trig=  2.8694E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1954,29 +1960,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 660.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0448  1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0586  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1286f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.8237f 0:vf      =  22.4837f
- +0:vss     =  14.8354f 1:1       =  25.8393f 1:2       =  59.4960f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 733.6852a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.3773f 0:vf      =  13.9593f
+ +0:vss     =  13.3809f 1:1       =  16.7575f 1:2       =  41.8165f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  2.0920E-08  targ=  6.8704E-08   trig=  4.7785E-08
-   poslength=  6.8948E-09  targ=  5.4680E-08   trig=  4.7785E-08
+   period=  1.1917E-08  targ=  3.9447E-08   trig=  2.7530E-08
+   poslength=  4.1763E-09  targ=  3.1706E-08   trig=  2.7530E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -1991,29 +1997,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 670.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0313  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0467  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1319f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.8926f 0:vf      =  22.4837f
- +0:vss     =  14.8399f 1:1       =  25.8802f 1:2       =  59.6261f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 736.2230a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.4244f 0:vf      =  13.9593f
+ +0:vss     =  13.3849f 1:1       =  16.7802f 1:2       =  41.9154f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.9980E-08  targ=  6.5864E-08   trig=  4.5884E-08
-   poslength=  6.9435E-09  targ=  5.2828E-08   trig=  4.5884E-08
+   period=  1.1437E-08  targ=  3.7973E-08   trig=  2.6536E-08
+   poslength=  4.2074E-09  targ=  3.0743E-08   trig=  2.6536E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2028,29 +2034,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 680.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0178  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0348  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1350f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 101.9563f 0:vf      =  22.4837f
- +0:vss     =  14.8440f 1:1       =  25.9188f 1:2       =  59.7462f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 738.4039a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.4675f 0:vf      =  13.9593f
+ +0:vss     =  13.3885f 1:1       =  16.8013f 1:2       =  42.0065f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.9163E-08  targ=  6.3366E-08   trig=  4.4203E-08
-   poslength=  6.9925E-09  targ=  5.1195E-08   trig=  4.4203E-08
+   period=  1.0998E-08  targ=  3.6627E-08   trig=  2.5629E-08
+   poslength=  4.2344E-09  targ=  2.9863E-08   trig=  2.5629E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2065,29 +2071,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 690.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       =   1.0043  1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0230  1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1377f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.0154f 0:vf      =  22.4837f
- +0:vss     =  14.8478f 1:1       =  25.9551f 1:2       =  59.8572f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 740.3006a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.5072f 0:vf      =  13.9593f
+ +0:vss     =  13.3916f 1:1       =  16.8208f 1:2       =  42.0904f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.8472E-08  targ=  6.1190E-08   trig=  4.2718E-08
-   poslength=  7.0394E-09  targ=  4.9757E-08   trig=  4.2718E-08
+   period=  1.0622E-08  targ=  3.5463E-08   trig=  2.4841E-08
+   poslength=  4.2635E-09  targ=  2.9104E-08   trig=  2.4841E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2102,29 +2108,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 700.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 990.7680m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       =   1.0112  1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2419m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1403f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.0704f 0:vf      =  22.4837f
- +0:vss     =  14.8513f 1:1       =  25.9895f 1:2       =  59.9602f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 741.9702a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.5437f 0:vf      =  13.9593f
+ +0:vss     =  13.3943f 1:1       =  16.8391f 1:2       =  42.1680f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.7819E-08  targ=  5.9244E-08   trig=  4.1426E-08
-   poslength=  7.0785E-09  targ=  4.8504E-08   trig=  4.1426E-08
+   period=  1.0271E-08  targ=  3.4405E-08   trig=  2.4134E-08
+   poslength=  4.2904E-09  targ=  2.8425E-08   trig=  2.4134E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2139,29 +2145,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 710.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 977.3184m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 999.5168m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1426f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.1216f 0:vf      =  22.4837f
- +0:vss     =  14.8545f 1:1       =  26.0220f 1:2       =  60.0559f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 743.4573a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.5775f 0:vf      =  13.9593f
+ +0:vss     =  13.3969f 1:1       =  16.8562f 1:2       =  42.2400f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.7264E-08  targ=  5.7461E-08   trig=  4.0197E-08
-   poslength=  7.1286E-09  targ=  4.7326E-08   trig=  4.0197E-08
+   period=  9.9705E-09  targ=  3.3481E-08   trig=  2.3511E-08
+   poslength=  4.3175E-09  targ=  2.7828E-08   trig=  2.3511E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2176,29 +2182,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 720.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 963.9112m 1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 987.9084m 1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1448f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.1695f 0:vf      =  22.4837f
- +0:vss     =  14.8576f 1:1       =  26.0528f 1:2       =  60.1451f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 744.7966a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.6088f 0:vf      =  13.9593f
+ +0:vss     =  13.3992f 1:1       =  16.8723f 1:2       =  42.3067f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.6761E-08  targ=  5.5918E-08   trig=  3.9158E-08
-   poslength=  7.1755E-09  targ=  4.6333E-08   trig=  3.9158E-08
+   period=  9.7174E-09  targ=  3.2665E-08   trig=  2.2947E-08
+   poslength=  4.3487E-09  targ=  2.7296E-08   trig=  2.2947E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2213,29 +2219,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 730.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 950.5521m 1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 976.3835m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1469f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.2143f 0:vf      =  22.4837f
- +0:vss     =  14.8605f 1:1       =  26.0821f 1:2       =  60.2283f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 746.0153a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.6379f 0:vf      =  13.9593f
+ +0:vss     =  13.4013f 1:1       =  16.8875f 1:2       =  42.3689f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.6304E-08  targ=  5.4512E-08   trig=  3.8209E-08
-   poslength=  7.2199E-09  targ=  4.5429E-08   trig=  3.8209E-08
+   period=  9.4789E-09  targ=  3.1911E-08   trig=  2.2432E-08
+   poslength=  4.3737E-09  targ=  2.6805E-08   trig=  2.2432E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2250,29 +2256,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 740.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 937.2461m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 964.9466m 1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1488f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.2562f 0:vf      =  22.4837f
- +0:vss     =  14.8633f 1:1       =  26.1100f 1:2       =  60.3061f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 747.1345a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.6650f 0:vf      =  13.9593f
+ +0:vss     =  13.4033f 1:1       =  16.9018f 1:2       =  42.4268f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.5876E-08  targ=  5.3247E-08   trig=  3.7371E-08
-   poslength=  7.2518E-09  targ=  4.4623E-08   trig=  3.7371E-08
+   period=  9.2608E-09  targ=  3.1246E-08   trig=  2.1985E-08
+   poslength=  4.3979E-09  targ=  2.6383E-08   trig=  2.1985E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2287,29 +2293,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 750.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 923.9977m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 953.6014m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1507f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.2957f 0:vf      =  22.4837f
- +0:vss     =  14.8660f 1:1       =  26.1366f 1:2       =  60.3790f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 748.1708a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.6903f 0:vf      =  13.9593f
+ +0:vss     =  13.4052f 1:1       =  16.9154f 1:2       =  42.4810f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.5507E-08  targ=  5.2050E-08   trig=  3.6543E-08
-   poslength=  7.3022E-09  targ=  4.3846E-08   trig=  3.6543E-08
+   period=  9.0802E-09  targ=  3.0650E-08   trig=  2.1570E-08
+   poslength=  4.4296E-09  targ=  2.5999E-08   trig=  2.1570E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2324,29 +2330,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 760.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 910.8104m 1:2       =   1.8000 
- +1:3       =  72.0235m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 942.3508m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1524f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.3328f 0:vf      =  22.4837f
- +0:vss     =  14.8686f 1:1       =  26.1620f 1:2       =  60.4474f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 749.1372a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.7140f 0:vf      =  13.9593f
+ +0:vss     =  13.4071f 1:1       =  16.9282f 1:2       =  42.5317f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.5179E-08  targ=  5.1037E-08   trig=  3.5858E-08
-   poslength=  7.3418E-09  targ=  4.3200E-08   trig=  3.5858E-08
+   period=  8.8954E-09  targ=  3.0094E-08   trig=  2.1198E-08
+   poslength=  4.4514E-09  targ=  2.5650E-08   trig=  2.1198E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2361,29 +2367,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 770.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 897.6874m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 931.1968m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1541f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.3678f 0:vf      =  22.4837f
- +0:vss     =  14.8710f 1:1       =  26.1862f 1:2       =  60.5118f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 750.0441a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.7362f 0:vf      =  13.9593f
+ +0:vss     =  13.4088f 1:1       =  16.9405f 1:2       =  42.5792f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.4857E-08  targ=  5.0072E-08   trig=  3.5215E-08
-   poslength=  7.3838E-09  targ=  4.2599E-08   trig=  3.5215E-08
+   period=  8.7464E-09  targ=  2.9617E-08   trig=  2.0870E-08
+   poslength=  4.4794E-09  targ=  2.5350E-08   trig=  2.0870E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2398,29 +2404,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 780.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 884.6317m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6596m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 920.1407m 1:2       =   1.8000 
+ +1:3       =  51.9791m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1556f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.4007f 0:vf      =  22.4837f
- +0:vss     =  14.8735f 1:1       =  26.2094f 1:2       =  60.5724f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 750.8998a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.7570f 0:vf      =  13.9593f
+ +0:vss     =  13.4105f 1:1       =  16.9521f 1:2       =  42.6239f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.4638E-08  targ=  4.9307E-08   trig=  3.4669E-08
-   poslength=  7.4382E-09  targ=  4.2107E-08   trig=  3.4669E-08
+   period=  8.5954E-09  targ=  2.9152E-08   trig=  2.0557E-08
+   poslength=  4.4958E-09  targ=  2.5053E-08   trig=  2.0557E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2435,29 +2441,29 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 790.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 871.6455m 1:2       =   1.8000 
- +1:3       =  72.0238m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 909.1837m 1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1572f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.4319f 0:vf      =  22.4837f
- +0:vss     =  14.8758f 1:1       =  26.2316f 1:2       =  60.6296f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 751.7107a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.7765f 0:vf      =  13.9593f
+ +0:vss     =  13.4121f 1:1       =  16.9632f 1:2       =  42.6659f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.4362E-08  targ=  4.8450E-08   trig=  3.4088E-08
-   poslength=  7.4469E-09  targ=  4.1535E-08   trig=  3.4088E-08
+   period=  8.4733E-09  targ=  2.8760E-08   trig=  2.0286E-08
+   poslength=  4.5225E-09  targ=  2.4809E-08   trig=  2.0286E-08
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -2472,41 +2478,41 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:cv_in   = 800.0000m 0:osc_out =   1.7650u 0:st_in   =   1.8000 
- +0:st_out  =  16.4447n 0:vdd     =   1.8000  0:vf      =   1.7650u
- +0:vss     =   0.      1:1       = 858.7310m 1:2       =   1.8000 
- +1:3       =  72.0236m 2:s1ns    =  16.0204n 2:s1pd    =  88.6595m
+ +0:st_out  =  15.5131n 0:vdd     =   1.8000  0:vf      =   1.7650u
+ +0:vss     =   0.      1:1       = 898.3259m 1:2       =   1.8000 
+ +1:3       =  51.9790m 2:s1ns    =  15.2627n 2:s1pd    =  96.2418m
 
 
- maximum nodal capacitance=   1.043E-12         on node     0:st_in           
+ maximum nodal capacitance=   1.030E-12         on node     0:st_in           
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:cv_in   =   1.1586f 0:osc_out =   4.0107f 0:st_in   =   1.0427p
- +0:st_out  =  16.0830f 0:vdd     = 102.4614f 0:vf      =  22.4837f
- +0:vss     =  14.8781f 1:1       =  26.2528f 1:2       =  60.6836f
- +1:3       =   1.3321f 2:s1ns    =   7.2459f 2:s1pd    =  12.3098f
+ +0:cv_in   = 752.4824a 0:osc_out =   4.0107f 0:st_in   =   1.0298p
+ +0:st_out  =  15.2039f 0:vdd     =  86.7950f 0:vf      =  13.9593f
+ +0:vss     =  13.4137f 1:1       =  16.9738f 1:2       =  42.7055f
+ +1:3       =   1.3406f 2:s1ns    =   5.8333f 2:s1pd    =  10.4561f
 
  
  ******  
  *voltage controlled oscillator
 
   ******  transient analysis tnom=  25.000 temp=  25.000 *****
-   period=  1.4167E-08  targ=  4.7807E-08   trig=  3.3640E-08
-   poslength=  7.5142E-09  targ=  4.1154E-08   trig=  3.3640E-08
+   period=  8.3552E-09  targ=  2.8365E-08   trig=  2.0010E-08
+   poslength=  4.5449E-09  targ=  2.4555E-08   trig=  2.0010E-08
 
    meas_variable = period
-   mean  =  59.8850n  varian =   4.9960f
-   sigma =  70.6827n  avgdev =  50.5180n
-   max   = 304.7435n  min    =   0.     
-    1-sigma =  70.6827n median =  27.0727n
+   mean  =  52.1932n  varian =   5.5202f
+   sigma =  74.2979n  avgdev =  51.6531n
+   max   = 325.7423n  min    =   0.     
+    1-sigma =  74.2979n median =  17.5491n
 
    meas_variable = poslength
-   mean  =   6.7053n  varian = 2.050e-19
-   sigma = 452.8225p  avgdev = 394.1466p
-   max   =   7.5142n  min    =   0.     
-    1-sigma = 452.8225p median =   6.6491n
+   mean  =   4.0276n  varian = 8.076e-20
+   sigma = 284.1758p  avgdev = 248.3294p
+   max   =   4.5449n  min    =   0.     
+    1-sigma = 284.1758p median =   3.9708n
  
 
           ***** job concluded
@@ -2537,19 +2543,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.46           1        1792
-  transient         32.71       61061      484375      164394 rev=     31393
-  readin             0.21
-  errchk             0.04
-  setup              0.02
-  output             0.00
+  op point           0.43           1        1691
+  transient         55.36       61061      840367      283647 rev=     56482
+  readin             0.16
+  errchk             0.02
+  setup              0.01
+  output             0.01
 
 
            total memory used          521  kbytes
-           total cpu time           34.52 seconds
-           total elapsed time          35 seconds
-           job started at     16:20:20 09/26/2015
-           job ended   at     16:20:55 09/26/2015
+           total cpu time           57.04 seconds
+           total elapsed time          57 seconds
+           job started at     17:10:15 09/30/2015
+           job ended   at     17:11:12 09/30/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

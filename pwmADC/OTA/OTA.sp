@@ -39,7 +39,7 @@ vs vss gnd dc = 0v
 Vsp vssp gnd dc = 0v
 Vsn vssn gnd dc = 0v
 vsb vssb gnd dc = 0v
-vbias vb gnd dc = 'vd - 0.3v'
+vbias vb gnd dc = 'vd - 0.3v' pulse('vd - 0.3v' 0v 1ns 1ns 1ns 40ns 100ns)
 
 .param vdc = 'vd/2' diff = 0.5 vdiff = 1.4v
 Vinp winp gnd dc = 'vdc + vdiff/2' ac = diff
@@ -53,12 +53,12 @@ Vinn winn gnd dc = 0.9
 ******************
 .op
 .dc sweep vdiff '0' vd 0.01
-.ac dec 500 1k 1Meg *sweep vbias 0.8 1.2 0.05
-.probe  Idiff = par('I(vsn)-I(vsp)')  
+*.ac dec 500 1k 1Meg *sweep vbias 0.8 1.2 0.05
+.tran 1ns 300ns 
+.probe Idiff = par('I(vsn)-I(vsp)')  
 .probe dc I(mb)  I(XWLR_innerp.Mgm) 
 *.probe  isub(xbump.ib)
-.print dc 
-+ Idiff = par('I(vsn)-I(vsp)') 
+.print dc Idiff = par('I(vsn)-I(vsp)') 
 *+ v(20)    *Use the current controlled voltage source(H Element) ouput to sense current(x E5)
 .end
 

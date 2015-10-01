@@ -1,8 +1,8 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "16:20:20 09/26/2015 "
-* "netlist" "c:\users\timer\documents\github\hspice\pwmadc\vco.sp "
+* "rundate" "17:10:15 09/30/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\pwmadc\vco\vco.sp "
 * "runtitle" "*voltage controlled oscillator"
 * time =    0.            
 * temperature =   25.0000        
@@ -13,13 +13,13 @@
 + cv_in = 200.0000m       
 + osc_out =   1.7650u       
 + st_in =   1.8000        
-+ st_out =  16.4449n       
++ st_out =  15.5132n       
 + vdd =   1.8000        
 + vf =   1.7650u       
 + vss =   0.            
-+ xvco_amp.1 =   1.5637        
++ xvco_amp.1 =   1.5433        
 + xvco_amp.2 =   1.8000        
-+ xvco_amp.3 =  72.0222m       
-+ xschimmit.s1ns =  16.0205n       
-+ xschimmit.s1pd =  88.6648m       
++ xvco_amp.3 =  51.9788m       
++ xschimmit.s1ns =  15.2627n       
++ xschimmit.s1pd =  96.2477m       
 ***   END: Saved Operating Point ***                     

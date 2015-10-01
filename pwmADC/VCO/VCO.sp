@@ -9,13 +9,13 @@
 
 
 .subckt Schimmit vdd vss In Out 
-Ms1p s1pd In vdd vdd pch w = 1.2u l = 360n
-Ms2p Out In s1pd s1pd pch w = 1.2u l = 360n
-Ms1n Out In s1ns s1ns nch w = 400n l = 360n
-Ms2n s1ns In vss vss nch w = 400n l =360n
+Ms1p s1pd In vdd vdd pch w = 1.2u l = 200n
+Ms2p Out In s1pd s1pd pch w = 1.2u l = 200n
+Ms1n Out In s1ns s1ns nch w = 400n l = 200n
+Ms2n s1ns In vss vss nch w = 400n l =200n
 
-Ms3p vss Out s1pd s1pd pch w = 400n l = 360n
-Ms3n vdd Out s1ns s1ns nch w = 400n l = 360n
+Ms3p vss Out s1pd s1pd pch w = 400n l = 200n
+Ms3n vdd Out s1ns s1ns nch w = 400n l = 200n
 .ends
 
 .subckt inverter vdd vss in out
@@ -24,13 +24,16 @@ M2 out in vss vss nch w = 1u l = 0.5u
 .ends
 
 .subckt VCO_amp vdd vss in out vf
-M6 1 1 vdd vdd pch w = 1.2u l = 360n
-M5 1 in vss vss nch w = 400n l = 360n 
+M6 1 1 vdd vdd pch w = 1.2u l = 200n
+M5 1 in vss vss nch w = 400n l = 200n 
 
-M4 2 1 vdd vdd pch w = 1.2u l = 360n m = 5
-M3 out vf 2 vdd pch w = 1.2u l = 360n m = 5
-M2 out vf 3 vss nch w = 400n l = 360n
-M1 3 vf vss vss nch w = 400n l = 360n
+M4 2 1 vdd vdd pch w = 1.2u l = 200n m = 5
+M3 out vf 2 vdd pch w = 1.2u l = 200n m = 5
+M2 out vf 3 vss nch w = 400n l = 200n
+M1 3 vf vss vss nch w = 400n l = 200n
+.ends
+
+.subckt OTA vdd vss vbias winp winn
 .ends
 
 XVCo_amp vdd vss CV_in St_in vf VCo_amp
@@ -45,8 +48,8 @@ Vdd vdd gnd dc = vd
 Vss vss gnd dc = 0v
 .ic osc_out = 0v
 
-Vin CV_in gnd dc = 0.6v
-*V_osc vf gnd dc = 0.6v
+Vin CV_in gnd dc = 0.9v
+*V_osc vf gnd dc = 0.9v
 
 
 
@@ -58,6 +61,7 @@ Vin CV_in gnd dc = 0.6v
 +targ V(osc_out) val = 0.6v rise = 4
 .meas posLength trig V(osc_out) val = 0.6v rise = 3
 +targ V(osc_out) val = 0.6v fall = 3
+.probe tran period
 
 *.alter 
 *Vin CV_in gnd dc = 0.7v
