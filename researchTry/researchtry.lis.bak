@@ -1,0 +1,294 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\researchtry\researchtry.sp 
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1 ingold=1
+ ***netlist***
+ *.subckt ct vdd vss v1 vb vi vo
+ mb vo vb v1 vss nch w = 10u l = 200n
+ md vo vi vdd vdd pch w = 40u l = 200n
+ *.ends
+ *x1 vdd vss v1 vb vi vo ct
+ m6 v1 vin vss vbin nch w = 8u l = 200n
+ vconcentration vbin gnd dc = 0v
+ vd vdd gnd dc = 1v
+ vs vss gnd dc = 0v
+ .param vib = 0.7v
+ vbias vb vss dc = '1 - vib + 0.5'
+ vibias vi vss dc = vib
+ .param inb = '1 - vib' ampt = 0.001
+ vin vin gnd dc = inb pulse('inb - ampt/2' 'inb + ampt/2' 1ns 1ms 1ms 0ms 2ms)
+
+ ***derivator & unit gain buffer***
+ eu vcin gnd opamp vo vcin
+ ed vout gnd opamp b+ in-
+ veb b+ gnd 0.48v
+ c1 vcin in- 0.1n 
+ r1 vout in- 5000k
+
+ ***mos size test***
+ .param ww = 40u
+ m1 vdt vgt gnd gnd nch w = 9u l = 200n
+ vtd vdt gnd dc = 0.5v 
+ vtg vgt gnd dc = 0.3v
+ m2 vdt2 vgt2 vst2 vst2 pch w = ww l = 200n
+ vts2 vst2 gnd dc = 1v
+ vtd2 vdt2 gnd dc = 0.25v 
+ vtg2 vgt2 gnd dc = 0.7v
+  ***derivator test***
+ et1 1 gnd opamp 2 3
+ vteb 2 gnd 0v
+ ct1 vto 3 0.1n 
+ rt1 1 3 1000k
+ vtin vto gnd dc = 0v pulse(0.5 -0.5 1ns 0.5ms 0.5ms 0ms 1ms)
+ *itin gnd vto dc = 0u pulse(0.2u -0.2u 1ns 0.5ms 0.5ms 0ms 1ms)
+
+ ***
+ .op
+ *.dc sweep vtd 0.1 1v 0.01v
+ *.dc sweep ww 0.5u 50u 0.5u
+ .tran 1ms 3ms 100us *sweep vconcentration 0 0.2 0.05
+ .probe tran i(m1) i(m2) i(c1) i(m6) vglitch=par('v(vcin) - v(vo)')
+ .print tran i(c1)
+
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
+
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00n
+ ***********************************************************************
+
+
+ **warning** recommend to set start explicitly:
+             .TRAN tstep tstop START=val
+
+
+ 
+
+ 
+      
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry.sp
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:2       =   0.      0:3       =   0.     
+ +0:b+      =   0.4800  0:in-     =   0.4800  0:v1      =   0.3951 
+ +0:vb      =   0.8000  0:vbin    =   0.      0:vcin    =   0.4874 
+ +0:vdd     =   1.0000  0:vdt     =   0.5000  0:vdt2    =   0.2500 
+ +0:vgt     =   0.3000  0:vgt2    =   0.7000  0:vi      =   0.7000 
+ +0:vin     =   0.3000  0:vo      =   0.4874  0:vout    =   0.4829 
+ +0:vss     =   0.      0:vst2    =   1.0000  0:vto     =   0.     
+
+
+ maximum nodal capacitance=   1.000E-10         on node     0:vcin            
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:1       =   0.      0:2       =   0.      0:3       = 1.000e-10
+ +0:b+      =   0.      0:in-     = 1.000e-10 0:v1      = 2.131e-14
+ +0:vb      = 1.083e-14 0:vbin    = 1.748e-14 0:vcin    = 1.000e-10
+ +0:vdd     = 1.559e-13 0:vdt     = 1.041e-14 0:vdt2    = 4.836e-14
+ +0:vgt     = 1.027e-14 0:vgt2    = 4.159e-14 0:vi      = 4.158e-14
+ +0:vin     = 9.130e-15 0:vo      = 6.220e-14 0:vout    =   0.     
+ +0:vss     = 3.018e-14 0:vst2    = 1.537e-13 0:vto     = 1.000e-10
+
+ 
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vconcent 0:vd       0:vs       0:vbias    0:vibias   0:vin     
+  volts      0.         1.0000     0.         0.8000     0.7000     0.3000 
+  current  3.952e-13 -3.153e-07  3.153e-07    0.         0.         0.     
+  power      0.       3.153e-07    0.         0.         0.         0.     
+
+ subckt                                                                    
+ element  0:veb      0:vtd      0:vtg      0:vts2     0:vtd2     0:vtg2    
+  volts      0.4800     0.5000     0.3000     1.0000     0.2500     0.7000 
+  current    0.      -3.814e-07    0.      -3.558e-07  3.558e-07    0.     
+  power      0.       1.907e-07    0.       3.558e-07 -8.894e-08    0.     
+
+ subckt                        
+ element  0:vteb     0:vtin    
+  volts      0.         0.     
+  current    0.         0.     
+  power      0.         0.     
+
+     total voltage source power dissipation=  7.729e-07       watts
+
+
+
+ **** resistors
+
+ subckt                        
+ element  0:r1       0:rt1     
+  r value  5.000e+06  1.000e+06
+  v drop   2.947e-03    0.     
+  current  5.894e-10    0.     
+  power    1.737e-12    0.     
+
+
+ **** voltage-controlled voltage sources
+
+
+ subckt                                   
+ element  0:eu       0:ed       0:et1     
+  volts      0.4874     0.4829     0.     
+  current    0.      -5.894e-10    0.     
+
+
+
+
+
+ **** mosfets
+
+
+ subckt                                                         
+ element  0:mb       0:md       0:m6       0:m1       0:m2      
+ model    0:nch.4    0:pch.4    0:nch.8    0:nch.8    0:pch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       3.153e-07 -3.153e-07  3.153e-07  3.814e-07 -3.558e-07
+  ibs     -3.156e-17  4.461e-23 -5.317e-23 -6.397e-23  5.033e-23
+  ibd     -3.156e-17  1.010e-16 -2.548e-17 -2.943e-17  1.010e-16
+  vgs        0.4049    -0.3000     0.3000     0.3000    -0.3000 
+  vds      9.227e-02   -0.5126     0.3951     0.5000    -0.7500 
+  vbs       -0.3951     0.         0.         0.         0.     
+  vth        0.6132    -0.5013     0.5114     0.5107    -0.5005 
+  vdsat    4.208e-02 -4.230e-02  4.051e-02  4.049e-02 -4.232e-02
+  vod       -0.2084     0.2013    -0.2114    -0.2107     0.2005 
+  beta     2.800e-02  1.937e-02  2.267e-02  2.554e-02  1.938e-02
+  gam eff    0.9119     0.6476     0.8805     0.8796     0.6476 
+  gm       8.594e-06  8.384e-06  8.404e-06  1.016e-05  9.363e-06
+  gds      6.325e-07  1.694e-07  1.976e-07  2.179e-07  1.723e-07
+  gmb      1.999e-06  2.888e-06  2.491e-06  2.998e-06  3.207e-06
+  cdtot    1.158e-14  5.062e-14  9.478e-15  1.041e-14  4.836e-14
+  cgtot    1.083e-14  4.158e-14  9.130e-15  1.027e-14  4.159e-14
+  cstot    1.183e-14  5.819e-14  1.062e-14  1.192e-14  5.820e-14
+  cbtot    1.956e-14  9.773e-14  1.748e-14  1.939e-14  9.547e-14
+  cgs      3.680e-15  1.322e-14  2.944e-15  3.313e-15  1.323e-14
+  cgd      3.663e-15  1.312e-14  2.930e-15  3.296e-15  1.312e-14
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry.sp
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   0.      0:2       =   0.      0:3       =   0.     
+ +0:b+      =   0.4800  0:in-     =   0.4800  0:v1      =   0.3966 
+ +0:vb      =   0.8000  0:vbin    =   0.      0:vcin    =   0.5103 
+ +0:vdd     =   1.0000  0:vdt     =   0.5000  0:vdt2    =   0.2500 
+ +0:vgt     =   0.3000  0:vgt2    =   0.7000  0:vi      =   0.7000 
+ +0:vin     =   0.2995  0:vo      =   0.5103  0:vout    =   0.4829 
+ +0:vss     =   0.      0:vst2    =   1.0000  0:vto     =   0.5000 
+
+
+ maximum nodal capacitance=   1.000E-10         on node     0:vcin            
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:1       =   0.      0:2       =   0.      0:3       = 1.000e-10
+ +0:b+      =   0.      0:in-     = 1.000e-10 0:v1      = 2.130e-14
+ +0:vb      = 1.083e-14 0:vbin    = 1.747e-14 0:vcin    = 1.000e-10
+ +0:vdd     = 1.562e-13 0:vdt     = 1.041e-14 0:vdt2    = 4.836e-14
+ +0:vgt     = 1.027e-14 0:vgt2    = 4.159e-14 0:vi      = 4.158e-14
+ +0:vin     = 9.131e-15 0:vo      = 6.240e-14 0:vout    =   0.     
+ +0:vss     = 3.012e-14 0:vst2    = 1.537e-13 0:vto     = 1.000e-10
+
+ 
+ ******  
+ *researchtry.sp
+
+  ******  transient analysis tnom=  25.000 temp=  25.000 *****
+x
+
+        time    current    
+                    c1     
+  1.0000e-04   -4.586e-09  
+  1.1000e-03    4.525e-09  
+  2.1000e-03   -4.587e-09  
+  3.0000e-03   -4.498e-09  
+y
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry.sp
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      35  # elements   =      29
+  # resistors   =       2  # capacitors =       2  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       3
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      17
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       5  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1          39
+  transient          0.31           4       12986        6493 rev=       911
+  readin             0.15
+  errchk             0.05
+  setup              0.02
+  output             0.01
+
+
+           total memory used          232  kbytes
+           total cpu time            0.57 seconds
+           total elapsed time           1 seconds
+           job started at     16:17:21 10/27/2015
+           job ended   at     16:17:21 10/27/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

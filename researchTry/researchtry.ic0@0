@@ -1,0 +1,35 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "14:56:42 10/28/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry.sp "
+* "runtitle" "*researchtry.sp"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ 1 =   0.            
++ 2 =   0.            
++ 3 =   0.            
++ b+ =   0.            
++ in- =   0.            
++ v1 =   0.4057        
++ vb =   0.8000        
++ vbin =   0.            
++ vcin =   0.7052        
++ vdd =   1.0000        
++ vdt =   0.5000        
++ vdt2 =   0.2500        
++ vgt =   0.6000        
++ vgt2 =   0.7000        
++ vi =   0.7000        
++ vin =   0.2950        
++ vo =   0.7052        
++ vout =   0.            
++ vss =   0.            
++ vst2 =   1.0000        
++ vto =   0.5000        
++ vwt =   0.            
+***   END: Saved Operating Point ***                     

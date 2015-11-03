@@ -4860,7 +4860,7 @@ Csub3 6 Minus  '1.04f*csub_esdfac'
 + fac_n ='0.3766*2.4'
 + fac_p ='0.3766*2.1'
 
-+ du0n='A1N*fac_n*(-0.2e-2)'
++ du0n='A1N*fac_n*(-0.2e-2)'	* = 0
 + dlu0n='A1N*fac_n*(-0.5e-9)'
 + dwu0n='A1N*fac_n*(-0.00e-9)'
 + dpu0n='A1N*fac_n*(-0.0e-16)'
@@ -4868,8 +4868,8 @@ Csub3 6 Minus  '1.04f*csub_esdfac'
 + dlvthn='A1N*fac_n*2.9e-9'
 + dwvthn='A1N*fac_n*6.60e-9'
 + dpvthn='A1N*fac_n*3.0e-15'
-+ toxn='4.08E-09+A4NP*fac_n*1.33e-10*0.5'
-+ dxln='A2NP*fac_n*1.33e-8*0.5'
++ toxn='4.08E-09+A4NP*fac_n*1.33e-10*0.5'		*= 4.08e-09
++ dxln='A2NP*fac_n*1.33e-8*0.5'				* = 0
 + dxwn='A3NP*fac_n*2.2e-8*0.5'
 + dk2n='A1N*fac_n*0.008'
 + dlk2n='A1N*fac_n*0.4e-8'
@@ -4896,7 +4896,7 @@ Csub3 6 Minus  '1.04f*csub_esdfac'
 + dlvthp='A1P*fac_p*(-5.00e-9)'
 + dwvthp='A1P*fac_p*(-1.5e-9)'
 + dpvthp='A1P*fac_p*(-1.5e-15)'
-+ toxp='4.08E-09+A4NP*fac_p*1.33e-10*0.5'
++ toxp='4.08E-09+A4NP*fac_p*1.33e-10*0.5'		*= 4.08e-09
 + dxlp='A2NP*fac_p*1.33e-8*0.5'
 + dxwp='A3NP*fac_p*2.2e-8*0.5'
 + drdswp='0'
@@ -6089,7 +6089,7 @@ Csub3 6 Minus  '1.04f*csub_esdfac'
 *                                                                                         *
 *******************************************************************************************
 
-.MODEL nch.1 NMOS	(	LMIN     = '1.000E-05-dxln'         LMAX     = 20.001e-006              
+.MODEL nch.1 NMOS	(	LMIN     = '1.000E-05-dxln'         LMAX     = 20.001e-006              *4872: dxln='A2NP*fac_n*1.33e-8*0.5' = 0
 +WMIN     = '1.0000E-05-dxwn'                                   WMAX     = 900.001e-6               
 +LEVEL    = 49                  TNOM     = 25.0                VERSION  = 3.24                 
 +TOX      = 'toxn'             
@@ -7015,7 +7015,7 @@ Csub3 6 Minus  '1.04f*csub_esdfac'
 +WUB      = -5.1128100E-26      PUB      = -3.3861180E-32      UC       = 7.9146470E-11       
 +LUC      = 1.0520902E-17       WUC      = -9.0127290E-18      PUC      = -9.6208370E-24      
 +RDSW     = 'drdswn+1.7000000E02'        PRWB     = 0.00                PRWG     = 0.00                
-+WR       = 1.0000000           U0       = 'du0n+3.9805520E-02'      
++WR       = 1.0000000           U0       = 'du0n+3.9805520E-02'  *du0n = 0    
 +LU0      = '7.2699450E-10+dlu0n' 
 +WU0      = '-4.2684650E-11+dwu0n' 
 +PU0      = '4.1479770E-16+dpu0n' 

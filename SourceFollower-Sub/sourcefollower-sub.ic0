@@ -1,0 +1,16 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "11:32:45 10/22/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\sourcefollower-sub\sourcefollower-sub.sp "
+* "runtitle" "*sourcefollower-sub"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ vdd =   0.6000        
++ vg =   0.4000        
++ vs =  63.9605        
+***   END: Saved Operating Point ***                     
