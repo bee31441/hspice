@@ -1,0 +1,22 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "18:04:29 10/28/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\currentmirror\currentmirror_test.sp "
+* "runtitle" "*currentmirror.sp"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ vbn =   0.2558        
++ vbp =   0.7655        
++ vdd =   1.0000        
++ vl = 1.742e-02       
++ vss =   0.            
++ vtd =   0.            
++ vtg =   0.2500        
++ vts =   0.5000        
++ vtw =   0.            
+***   END: Saved Operating Point ***                     

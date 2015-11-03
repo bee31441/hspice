@@ -1,0 +1,115 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\researchtry\researchtry.sp 
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1 ingold=1
+ ***netlist***
+ *.subckt ct vdd vss v1 vb vi vo
+ mb vo vb v1 vss nch.1 w = 10u l = 200n
+ md vo vi vdd vdd pch w = 40u l = 200n
+ *.ends
+ *x1 vdd vss v1 vb vi vo ct
+ m6 v1 vin vss vbin nch w = 8u l = 200n			*nanowire
+ vconcentration vbin gnd dc = 0v
+ vd vdd gnd dc = 1v
+ vs vss gnd dc = 0v
+ .param vib = 0.7v
+ vbias vb vss dc = '1 - vib + 0.5'
+ vibias vi vss dc = vib
+ .param inb = '1 - vib'  *123
+ +ampt = 0.01
+ vin vin gnd dc = inb pulse('inb - ampt/2' 'inb + ampt/2' 1ns 0.1ms 0.1ms 0ms 0.2ms)
+
+ ***derivator & unit gain buffer***
+ *e1 vcin gnd opamp vo vcin  max=2 min=0 1000		*unit gain buffer
+ v0 vcin vo dc = 0v
+ e2 vout gnd opamp b+ in- max=2 min=-2 1000				*derivaotr op
+ veb b+ gnd 0v
+ c1 vcin in- 0.1p 
+ r1 vout in- 1000000k
+
+ ***mos size test***
+ .param ww = 40u
+ m1 vdt vgt gnd vwt nch w = 9u l = 200n
+ vtd vdt gnd dc = 0.5v 
+ vtg vgt gnd dc = 0.6v
+ vtw vwt gnd dc = 0v
+ m2 vdt2 vgt2 vst2 vst2 pch w = ww l = 200n
+ vts2 vst2 gnd dc = 1v
+ vtd2 vdt2 gnd dc = 0.25v 
+ vtg2 vgt2 gnd dc = 0.7v
+  ***derivator test***
+ et1 1 gnd opamp 2 3
+ vteb 2 gnd 0v
+ ct1 vto 3 0.1n 
+ rt1 1 3 1000k
+ vtin vto gnd dc = 0v pulse(0.5 -0.5 1ns 1ms 1ms 0ms 2ms)
+ *itin gnd vto dc = 0u pulse(0.2u -0.2u 1ns 0.5ms 0.5ms 0ms 1ms)
+
+ ***
+ .op
+ .dc sweep vtd 0 5v 0.1v
+ *.dc sweep ww 0.5u 50u 0.5u
+ .tran 0.1ms 0.3ms 10us *sweep vconcentration 0 0.2 0.05
+ .probe dc i(m1) i(m2) 
+ .probe tran i(c1) i(m6) vglitch=par('v(vcin) - v(vo)')
+ .print tran i(c1)
+
+ **error** model name nch.1 in the element     0:mb
+ is not defined.
+
+
+          ***** job aborted
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry.sp
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =       0  # elements   =      27
+  # resistors   =       2  # capacitors =       2  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       2
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      16
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       5  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.00           1           0
+  readin             0.54
+  errchk             0.00
+  setup              0.00
+  output             0.00
+
+
+           total memory used          150  kbytes
+           total cpu time            0.55 seconds
+           total elapsed time           1 seconds
+           job started at     15:04:09 10/28/2015
+           job ended   at     15:04:09 10/28/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

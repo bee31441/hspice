@@ -1,0 +1,121 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\currentmirror\\currentmirror_test.sp");
+"D0"
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","i(m1)"), node(D0,"A0","VOLTS"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlDelCurve(1, node(D0,"A0","i(m1)"), node(D0,"A0","VOLTS"));
+nil
+pnlAddCurve(1, node(D0,"A0","i(m2)"), node(D0,"A0","VOLTS"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddPane();
+nil
+nil
+2
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlAddCurve(2, node(D0,"A1","i(mt1)"), node(D0,"A1","ww"));
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+updateAll();
+t
+updateAll();
+t
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlDeletePane(2, 1);
+nil
+nil
+nil
+pnlDeletePane(1, 1);
+nil
+nil
