@@ -1,0 +1,4 @@
+An error has occurred.  The following chain of information is available:
+    error 1: /Module/State/
+	message: Out of Windows device contexts (DCs).This is probably caused by an unbalanced GSave/GRestore.
+	procedure name: vwindowGetMSWDC

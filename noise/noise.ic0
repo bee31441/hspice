@@ -1,8 +1,8 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "15:44:55 11/10/2015 "
-* "netlist" "c:\users\timer\documents\github\hspice\n,pmos\npmos.sp "
+* "rundate" "16:12:24 11/15/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\noise\noise.sp "
 * "runtitle" "*n,pmos"
 * time =    0.            
 * temperature =   25.0000        
@@ -10,6 +10,7 @@
 .option 
 + gmindc=   1.0000p       
 .nodeset
++ idd =   1.0000        
 + vdd = 200.0000m       
 + vg = 300.0000m       
 + vss =   0.            

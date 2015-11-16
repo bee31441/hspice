@@ -1,0 +1,1968 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\noise\noise.sp             
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1 
+ ***netlist***
+
+ .param wp = 1.2u wn = 400n
+ *m1 vdd vg vss vss nch w = wn l = 200n
+ *m2 vss vg vdd vdd pch w = wp l = 200n
+
+
+  *****************diode connect********************
+ m1 vss vss idd idd pch w = 1.2u l = 200n 
+ .param idc = 1000n
+ *ix idd gnd dc = '-idc' ac = 1
+ vind idd gnd dc = 1v ac = 1
+
+ *****************stack mos************************
+ *m4 in vb1 1 1 nch w = wn l = 200n
+ *m5 1 vb2 vss vss nch w = wn l = 200n
+ *vbias1 vb1 gnd dc = 0.7v
+ *vbias2 vb2 gnd dc = 0.5v
+ *iin in gnd dc = 500u
+ ****************ideal stuff****************
+ *hx 20 gnd vcur max=+10 min=-10 100000
+ *vcur 1 gnd  dc = 0v
+ *iin 1 gnd dc = 100n
+ *r1 20 gnd 10k
+ *.probe v(20)
+
+
+
+ vd vdd gnd dc = 0.2v
+ vs vss gnd dc = 0v
+
+ vin vg gnd dc = 0.3v
+ .op
+ .dc vind 0 1 0.01
+ *.print lx18(m1) 
+ *+qg = par('lx14(m1)') *gatecharge
+ *+lx32(m1) 
+ *+cap_bs	= par('lx28(m1)')
+ *+cap_bd	= par('lx29(m1)')
+ *+gm			= par('lx7(m1)')
+ *+gds		= par('lx8(m1)')
+ .probe i(m1) lx18(m1) gds=par('lx8(m1)')
+ *.dc sweep wp 1u 3u 50n
+ *.dc sweep iin 10n 500n 1n
+ *.probe i(m1) i(m2)
+
+ .ac dec 20 1 100  sweep vind  0 1 0.2
+ .noise i(m1) vind 10
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+
+ 
+
+ **warning** the following singular supplies were terminated to 1 meg resistor 
+   supply       node1            node2
+  vd                      0:vdd              defined in subckt 0                     0:0                defined in subckt 0               
+  vin                     0:vg               defined in subckt 0                     0:0                defined in subckt 0               
+      
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     =   1.0000  0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   6.622E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   6.6224f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.7955f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts      1.0000   200.0000m    0.       300.0000m
+  current  -54.7085u -200.0000n   54.7085u -300.0000n
+  power     54.7085u   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=   54.8385u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region     Saturati
+  id       -54.7085u
+  ibs      1.011e-20
+  ibd        4.3699a
+  vgs       -1.0000 
+  vds       -1.0000 
+  vbs        0.     
+  vth     -498.3278m
+  vdsat   -369.5366m
+  vod     -501.6722m
+  beta     471.8278u
+  gam eff  642.7241m
+  gm       176.2818u
+  gds        8.1286u
+  gmb       60.9509u
+  cdtot      1.5355f
+  cgtot      2.2600f
+  cstot      3.4795f
+  cbtot      3.1428f
+  cgs        1.8028f
+  cgd      386.9139a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    0.000E+00 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     =   0.      0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   5.541E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   5.5413f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.2438f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts      0.       200.0000m    0.       300.0000m
+  current    0.      -200.0000n    0.      -300.0000n
+  power      0.        40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=  130.0000n       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region       Cutoff
+  id         0.     
+  ibs        0.     
+  ibd        0.     
+  vgs        0.     
+  vds        0.     
+  vbs        0.     
+  vth     -502.0180m
+  vdsat    -40.7358m
+  vod      502.0180m
+  beta     508.7141u
+  gam eff  642.7243m
+  gm         0.     
+  gds       34.6483p
+  gmb        0.     
+  cdtot      1.9294f
+  cgtot      1.3145f
+  cstot      1.9294f
+  cbtot      3.6119f
+  cgs      390.3374a
+  cgd      390.3201a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn    0.         
+    total    0.         
+
+
+
+
+ **** total output noise current         =   0.            sq amp/hz
+                                         = 248.9619a       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  34.6485p      
+      equivalent input noise at vind                          
+                                         =   7.1854u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn    0.         
+    total    0.         
+
+
+
+
+ **** total output noise current         =   0.            sq amp/hz
+                                         = 248.9619a       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  34.6485p      
+      equivalent input noise at vind                          
+                                         =   7.1854u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  366.0907a       amps
+ **** total equivalent input noise =   10.5658u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn    0.         
+    total    0.         
+
+
+
+
+ **** total output noise current         =   0.            sq amp/hz
+                                         = 248.9619a       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  34.6486p      
+      equivalent input noise at vind                          
+                                         =   7.1853u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  746.8857a       amps
+ **** total equivalent input noise =   21.5560u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn    0.         
+    total    0.         
+
+
+
+
+ **** total output noise current         =   0.            sq amp/hz
+                                         = 248.9619a       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  34.6498p      
+      equivalent input noise at vind                          
+                                         =   7.1851u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    1.3777f       amps
+ **** total equivalent input noise =   39.7617u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn    0.         
+    total    0.         
+
+
+
+
+ **** total output noise current         =   0.            sq amp/hz
+                                         = 248.9619a       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  34.6620p      
+      equivalent input noise at vind                          
+                                         =   7.1826u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    2.4771f       amps
+ **** total equivalent input noise =   71.4840u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    2.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     = 200.0000m 0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   5.379E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   5.3792f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.0817f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts    200.0000m  200.0000m    0.       300.0000m
+  current -435.1860p -200.0000n  435.1860p -300.0000n
+  power     87.0372p   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=  130.0870n       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region       Cutoff
+  id      -434.7860p
+  ibs      8.046e-26
+  ibd        3.9584a
+  vgs     -200.0000m
+  vds     -200.0000m
+  vbs        0.     
+  vth     -501.2754m
+  vdsat    -40.7647m
+  vod      301.2754m
+  beta     508.8118u
+  gam eff  642.7243m
+  gm        12.7535n
+  gds      364.9745p
+  gmb        4.6102n
+  cdtot      1.8113f
+  cgtot      1.2704f
+  cstot      1.9295f
+  cbtot      3.4497f
+  cgs      390.4571a
+  cgd      390.3187a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn  1.793e-26    
+    total  1.795e-26    
+
+
+
+
+ **** total output noise current         = 1.795e-26       sq amp/hz
+                                         = 133.9815f       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  13.1184n      
+      equivalent input noise at vind                          
+                                         =  10.2132u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn  5.267e-27    
+    total  5.288e-27    
+
+
+
+
+ **** total output noise current         = 5.288e-27       sq amp/hz
+                                         =  72.7165f       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  13.1184n      
+      equivalent input noise at vind                          
+                                         =   5.5431u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  141.3984f       amps
+ **** total equivalent input noise =   10.7786u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn  1.547e-27    
+    total  1.568e-27    
+
+
+
+
+ **** total output noise current         = 1.568e-27       sq amp/hz
+                                         =  39.5934f       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  13.1184n      
+      equivalent input noise at vind                          
+                                         =   3.0182u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  196.6331f       amps
+ **** total equivalent input noise =   14.9891u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn  4.546e-28    
+    total  4.748e-28    
+
+
+
+
+ **** total output noise current         = 4.748e-28       sq amp/hz
+                                         =  21.7904f       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  13.1184n      
+      equivalent input noise at vind                          
+                                         =   1.6611u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  237.3155f       amps
+ **** total equivalent input noise =   18.0902u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id    0.         
+       rx    1.0000     
+       fn  1.335e-28    
+    total  1.538e-28    
+
+
+
+
+ **** total output noise current         = 1.538e-28       sq amp/hz
+                                         =  12.4011f       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  13.1184n      
+      equivalent input noise at vind                          
+                                         = 945.3217n       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  271.4713f       amps
+ **** total equivalent input noise =   20.6939u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    4.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     = 400.0000m 0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   5.319E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   5.3191f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   2.9940f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts    400.0000m  200.0000m    0.       300.0000m
+  current -101.9998n -200.0000n  101.9998n -300.0000n
+  power     40.7999n   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=  170.7999n       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region       Cutoff
+  id      -101.9990n
+  ibs      1.887e-23
+  ibd        3.9604a
+  vgs     -400.0000m
+  vds     -400.0000m
+  vbs        0.     
+  vth     -500.5328m
+  vdsat    -46.2629m
+  vod      100.5328m
+  beta     508.4327u
+  gam eff  642.7243m
+  gm         2.3367u
+  gds       48.2349n
+  gmb      810.9570n
+  cdtot      1.7201f
+  cgtot      1.2739f
+  cstot      1.9921f
+  cbtot      3.3270f
+  cgs      442.1739a
+  cgd      389.9944a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  8.714e-27    
+       rx  999.9961m    
+       fn  8.366e-22    
+    total  8.366e-22    
+
+
+
+
+ **** total output noise current         = 8.366e-22       sq amp/hz
+                                         =  28.9244p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =   2.3849u      
+      equivalent input noise at vind                          
+                                         =  12.1280u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  8.714e-27    
+       rx  999.9961m    
+       fn  2.458e-22    
+    total  2.458e-22    
+
+
+
+
+ **** total output noise current         = 2.458e-22       sq amp/hz
+                                         =  15.6773p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =   2.3849u      
+      equivalent input noise at vind                          
+                                         =   6.5735u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   30.5095p       amps
+ **** total equivalent input noise =   12.7926u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  8.714e-27    
+       rx  999.9961m    
+       fn  7.220e-23    
+    total  7.221e-23    
+
+
+
+
+ **** total output noise current         = 7.221e-23       sq amp/hz
+                                         =   8.4975p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =   2.3849u      
+      equivalent input noise at vind                          
+                                         =   3.5630u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   42.3743p       amps
+ **** total equivalent input noise =   17.7675u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  8.714e-27    
+       rx  999.9961m    
+       fn  2.121e-23    
+    total  2.122e-23    
+
+
+
+
+ **** total output noise current         = 2.122e-23       sq amp/hz
+                                         =   4.6063p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =   2.3849u      
+      equivalent input noise at vind                          
+                                         =   1.9314u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   50.9808p       amps
+ **** total equivalent input noise =   21.3762u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  8.714e-27    
+       rx  999.9961m    
+       fn  6.231e-24    
+    total  6.239e-24    
+
+
+
+
+ **** total output noise current         = 6.239e-24       sq amp/hz
+                                         =   2.4978p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =   2.3849u      
+      equivalent input noise at vind                          
+                                         =   1.0473u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   57.8433p       amps
+ **** total equivalent input noise =   24.2536u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    6.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     = 600.0000m 0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   6.574E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   6.5744f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.7533f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts    600.0000m  200.0000m    0.       300.0000m
+  current   -4.1297u -200.0000n    4.1297u -300.0000n
+  power      2.4778u   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=    2.6078u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region     Saturati
+  id        -4.1297u
+  ibs      7.638e-22
+  ibd        3.9834a
+  vgs     -600.0000m
+  vds     -600.0000m
+  vbs        0.     
+  vth     -499.7919m
+  vdsat   -121.9233m
+  vod     -100.2081m
+  beta     501.4784u
+  gam eff  642.7243m
+  gm        51.5343u
+  gds        1.1318u
+  gmb       17.6675u
+  cdtot      1.6473f
+  cgtot      2.1060f
+  cstot      3.2971f
+  cbtot      3.2773f
+  cgs        1.5857f
+  cgd      387.0187a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  5.658e-25    
+       rx  999.9142m    
+       fn  5.881e-19    
+    total  5.881e-19    
+
+
+
+
+ **** total output noise current         = 5.881e-19       sq amp/hz
+                                         = 766.9044p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  52.6616u      
+      equivalent input noise at vind                          
+                                         =  14.5629u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  5.658e-25    
+       rx  999.9142m    
+       fn  1.728e-19    
+    total  1.728e-19    
+
+
+
+
+ **** total output noise current         = 1.728e-19       sq amp/hz
+                                         = 415.6634p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  52.6616u      
+      equivalent input noise at vind                          
+                                         =   7.8931u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =  808.9280p       amps
+ **** total equivalent input noise =   15.3609u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  5.658e-25    
+       rx  999.9142m    
+       fn  5.076e-20    
+    total  5.076e-20    
+
+
+
+
+ **** total output noise current         = 5.076e-20       sq amp/hz
+                                         = 225.2908p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  52.6616u      
+      equivalent input noise at vind                          
+                                         =   4.2781u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    1.1235n       amps
+ **** total equivalent input noise =   21.3343u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  5.658e-25    
+       rx  999.9142m    
+       fn  1.491e-20    
+    total  1.491e-20    
+
+
+
+
+ **** total output noise current         = 1.491e-20       sq amp/hz
+                                         = 122.1095p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  52.6616u      
+      equivalent input noise at vind                          
+                                         =   2.3188u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    1.3517n       amps
+ **** total equivalent input noise =   25.6668u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs    0.         
+       id  5.658e-25    
+       rx  999.9142m    
+       fn  4.380e-21    
+    total  4.381e-21    
+
+
+
+
+ **** total output noise current         = 4.381e-21       sq amp/hz
+                                         =  66.1865p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       =  52.6616u      
+      equivalent input noise at vind                          
+                                         =   1.2568u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    1.5335n       amps
+ **** total equivalent input noise =   29.1197u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    8.000E-01 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     = 800.0000m 0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   6.650E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   6.6503f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.8137f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts    800.0000m  200.0000m    0.       300.0000m
+  current  -22.9010u -200.0000n   22.9010u -300.0000n
+  power     18.3208u   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=   18.4508u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region     Saturati
+  id       -22.9010u
+  ibs      4.234e-21
+  ibd        4.1094a
+  vgs     -800.0000m
+  vds     -800.0000m
+  vbs        0.     
+  vth     -499.0571m
+  vdsat   -250.5112m
+  vod     -300.9429m
+  beta     487.4401u
+  gam eff  642.7242m
+  gm       126.2819u
+  gds        4.3314u
+  gmb       43.3272u
+  cdtot      1.5869f
+  cgtot      2.2267f
+  cstot      3.4454f
+  cbtot      3.2048f
+  cgs        1.7529f
+  cgd      386.9777a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  5.975e-28    
+       id  1.649e-24    
+       rx  999.7861m    
+       fn    8.5213a    
+    total    8.5213a    
+
+
+
+
+ **** total output noise current         =   8.5213a       sq amp/hz
+                                         =   2.9191n       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 130.5853u      
+      equivalent input noise at vind                          
+                                         =  22.3542u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  5.975e-28    
+       id  1.649e-24    
+       rx  999.7861m    
+       fn    2.5033a    
+    total    2.5033a    
+
+
+
+
+ **** total output noise current         =   2.5033a       sq amp/hz
+                                         =   1.5822n       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 130.5853u      
+      equivalent input noise at vind                          
+                                         =  12.1160u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    3.0791n       amps
+ **** total equivalent input noise =   23.5792u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  5.975e-28    
+       id  1.649e-24    
+       rx  999.7861m    
+       fn  7.354e-19    
+    total  7.354e-19    
+
+
+
+
+ **** total output noise current         = 7.354e-19       sq amp/hz
+                                         = 857.5404p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 130.5853u      
+      equivalent input noise at vind                          
+                                         =   6.5669u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    4.2765n       amps
+ **** total equivalent input noise =   32.7484u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  5.975e-28    
+       id  1.649e-24    
+       rx  999.7861m    
+       fn  2.160e-19    
+    total  2.160e-19    
+
+
+
+
+ **** total output noise current         = 2.160e-19       sq amp/hz
+                                         = 464.7889p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 130.5853u      
+      equivalent input noise at vind                          
+                                         =   3.5593u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    5.1449n       amps
+ **** total equivalent input noise =   39.3987u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  5.975e-28    
+       id  1.649e-24    
+       rx  999.7861m    
+       fn  6.346e-20    
+    total  6.346e-20    
+
+
+
+
+ **** total output noise current         = 6.346e-20       sq amp/hz
+                                         = 251.9183p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 130.5853u      
+      equivalent input noise at vind                          
+                                         =   1.9291u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    5.8370n       amps
+ **** total equivalent input noise =   44.6988u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+
+   *** source        0:vind             =    1.000E+00 ***
+
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:idd     =   1.0000  0:vdd     = 200.0000m 0:vg      = 300.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   6.622E-15         on node     0:idd             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:idd     =   6.6224f 0:vdd     =   0.      0:vg      =   0.     
+ +0:vss     =   3.7955f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                              
+ element  0:vind     0:vd       0:vs       0:vin     
+  volts      1.0000   200.0000m    0.       300.0000m
+  current  -54.7085u -200.0000n   54.7085u -300.0000n
+  power     54.7085u   40.0000n    0.        90.0000n
+
+     total voltage source power dissipation=   54.8385u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:pch.8   
+ region     Saturati
+  id       -54.7085u
+  ibs      1.011e-20
+  ibd        4.3699a
+  vgs       -1.0000 
+  vds       -1.0000 
+  vbs        0.     
+  vth     -498.3278m
+  vdsat   -369.5366m
+  vod     -501.6722m
+  beta     471.8278u
+  gam eff  642.7241m
+  gm       176.2818u
+  gds        8.1286u
+  gmb       60.9509u
+  cdtot      1.5355f
+  cgtot      2.2600f
+  cstot      3.4795f
+  cbtot      3.1428f
+  cgs        1.8028f
+  cgd      386.9139a
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   1.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  1.189e-27    
+       id  2.647e-24    
+       rx  999.6959m    
+       fn   32.3200a    
+    total   32.3200a    
+
+
+
+
+ **** total output noise current         =  32.3200a       sq amp/hz
+                                         =   5.6851n       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 184.3543u      
+      equivalent input noise at vind                          
+                                         =  30.8377u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    1.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    0.            amps
+ **** total equivalent input noise =    0.           
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =   3.1623       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  1.189e-27    
+       id  2.647e-24    
+       rx  999.6959m    
+       fn    9.4945a    
+    total    9.4945a    
+
+
+
+
+ **** total output noise current         =   9.4945a       sq amp/hz
+                                         =   3.0813n       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 184.3543u      
+      equivalent input noise at vind                          
+                                         =  16.7141u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto    3.1623       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    5.9966n       amps
+ **** total equivalent input noise =   32.5275u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  10.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  1.189e-27    
+       id  2.647e-24    
+       rx  999.6959m    
+       fn    2.7891a    
+    total    2.7891a    
+
+
+
+
+ **** total output noise current         =   2.7891a       sq amp/hz
+                                         =   1.6701n       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 184.3543u      
+      equivalent input noise at vind                          
+                                         =   9.0590u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   10.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =    8.3285n       amps
+ **** total equivalent input noise =   45.1765u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency =  31.6228       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  1.189e-27    
+       id  2.647e-24    
+       rx  999.6959m    
+       fn  8.194e-19    
+    total  8.194e-19    
+
+
+
+
+ **** total output noise current         = 8.194e-19       sq amp/hz
+                                         = 905.1825p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 184.3543u      
+      equivalent input noise at vind                          
+                                         =   4.9100u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto   31.6228       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   10.0198n       amps
+ **** total equivalent input noise =   54.3506u      
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  noise analysis tnom=  25.000 temp=  25.000 *****
+
+     frequency = 100.0000       hz
+
+
+
+
+ **** mosfet squared noise voltages (sq v/hz)
+
+
+
+
+ element     0:m1
+       rd    0.         
+       rs  1.189e-27    
+       id  2.647e-24    
+       rx  999.6959m    
+       fn  2.407e-19    
+    total  2.407e-19    
+
+
+
+
+ **** total output noise current         = 2.407e-19       sq amp/hz
+                                         = 490.6116p       amp/rt hz
+      transfer function value:
+        i(m1)/vind                       = 184.3543u      
+      equivalent input noise at vind                          
+                                         =   2.6612u       /rt hz
+
+
+
+ **** the results of the sqrt of integral (I**2 / freq)
+      from fstart upto  100.0000       hz. using more freq points
+      results in more accurate total noise values.
+
+ **** total output noise current   =   11.3676n       amps
+ **** total equivalent input noise =   61.6619u      
+
+
+
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =       8  # elements   =       8
+  # resistors   =       2  # capacitors =       0  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       5
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       1  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.03           1          28
+  dc sweep           0.01         101         203
+  ac analysis        0.27         246         246
+  readin             0.18
+  errchk             0.01
+  setup              0.01
+  output             0.00
+
+
+           total memory used          208  kbytes
+           total cpu time            0.60 seconds
+           total elapsed time           1 seconds
+           job started at     16:12:24 11/15/2015
+           job ended   at     16:12:24 11/15/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
