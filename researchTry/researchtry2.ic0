@@ -1,0 +1,21 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "00:05:33 11/17/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry2.sp "
+* "runtitle" "*researchtry2.sp"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ 2- =   0.            
++ 3- =   0.            
++ 3o =   0.            
++ aco =   0.            
++ dco =   0.            
++ dco1 =   0.            
++ inx =   0.            
++ tt =  -0.1000        
+***   END: Saved Operating Point ***                     

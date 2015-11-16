@@ -1,0 +1,154 @@
+***** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******
+ Input File: c:\users\timer\documents\github\hspice\noise\noise.sp
+ lic:
+ lic: FLEXlm: v8.5b
+ lic: USER:   timer                HOSTNAME: timer-PC
+ lic: HOSTID: "00ff9049da08 902b349f3511" PID:      9436
+ lic: Using FLEXlm license file:
+ lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
+ lic: Checkout 1 hspice
+ lic: License/Maintenance for hspice will expire on 31-dec-2020/2007.9
+ lic: NODE LOCKED license on hostid "00ff9049da08 902b349f3511"
+ lic:
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+ init: begin read circuit files,  cpu clock=  1.15E-01
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TLINE\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\TI\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\SIGNET\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\PCI\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\LIN_TECH\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\FET\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\DIO\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\COMLINE\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BURR_BRN\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\BJT\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
+       option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
+       option post     =     2.00
+       option runlvl
+       option abstol   =    1.000E-07
+       option reltol   =    1.000E-07
+       option post     =     1.00
+       option captab
+       option accura   =     1.00
+ init: end read circuit files,  cpu clock=  2.14E-01 memory=    150 kb
+ init: begin check errors,  cpu clock=  2.14E-01
+ init: end check errors,  cpu clock=  2.24E-01 memory=    194 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  2.24E-01
+       establish matrix -- done,  cpu clock=  2.30E-01 memory=    197 kb
+       re-order matrix -- done,  cpu clock=  2.34E-01 memory=    197 kb
+ init: end setup matrix,  cpu clock=  2.37E-01 memory=    208 kb
+ output: c:\users\timer\documents\github\hspice\noise\noise.sw0
+ sweep: dc dc0    begin, #sweeps= 101 cpu clock=  2.44E-01
+ sweep: dc dc0    end,  cpu clock=  2.49E-01 memory=    208 kb
+ dcop: begin dcop,  cpu clock=  2.53E-01
+ dcop: end dcop,  cpu clock=  2.60E-01 memory=    208 kb  tot_iter=       4
+ sweep: voltage         voltage1         begin, #sweeps =   6
+ voltage: vind            =    0.00E+00
+ dcop: begin dcop,  cpu clock=  2.70E-01
+ dcop: end dcop,  cpu clock=  2.74E-01 memory=    208 kb  tot_iter=       8
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac1    begin, #sweeps=  41 cpu clock=  2.80E-01
+ ac: frequency=    1.12E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac1    end,  cpu clock=  3.22E-01 memory=    208 kb
+ voltage: vind            =    2.00E-01
+ dcop: begin dcop,  cpu clock=  3.37E-01
+ dcop: end dcop,  cpu clock=  3.40E-01 memory=    208 kb  tot_iter=      12
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac2    begin, #sweeps=  41 cpu clock=  3.47E-01
+ ac: frequency=    1.00E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac2    end,  cpu clock=  3.85E-01 memory=    208 kb
+ voltage: vind            =    4.00E-01
+ dcop: begin dcop,  cpu clock=  3.92E-01
+ dcop: end dcop,  cpu clock=  3.95E-01 memory=    208 kb  tot_iter=      16
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac3    begin, #sweeps=  41 cpu clock=  4.04E-01
+ ac: frequency=    1.00E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac3    end,  cpu clock=  4.44E-01 memory=    208 kb
+ voltage: vind            =    6.00E-01
+ dcop: begin dcop,  cpu clock=  4.51E-01
+ dcop: end dcop,  cpu clock=  4.55E-01 memory=    208 kb  tot_iter=      20
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac4    begin, #sweeps=  41 cpu clock=  4.61E-01
+ ac: frequency=    1.00E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac4    end,  cpu clock=  5.01E-01 memory=    208 kb
+ voltage: vind            =    8.00E-01
+ dcop: begin dcop,  cpu clock=  5.07E-01
+ dcop: end dcop,  cpu clock=  5.10E-01 memory=    208 kb  tot_iter=      24
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac5    begin, #sweeps=  41 cpu clock=  5.16E-01
+ ac: frequency=    1.00E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac5    end,  cpu clock=  5.69E-01 memory=    208 kb
+ voltage: vind            =    1.00E+00
+ dcop: begin dcop,  cpu clock=  5.75E-01
+ dcop: end dcop,  cpu clock=  5.78E-01 memory=    208 kb  tot_iter=      28
+ output: c:\users\timer\documents\github\hspice\noise\noise.ac0
+ sweep: ac ac6    begin, #sweeps=  41 cpu clock=  5.84E-01
+ ac: frequency=    1.00E+00
+ ac: frequency=    1.58E+00
+ ac: frequency=    2.51E+00
+ ac: frequency=    3.98E+00
+ ac: frequency=    6.31E+00
+ ac: frequency=    1.00E+01
+ ac: frequency=    1.58E+01
+ ac: frequency=    2.51E+01
+ ac: frequency=    3.98E+01
+ ac: frequency=    6.31E+01
+ ac: frequency=    1.00E+02
+ sweep: ac ac6    end,  cpu clock=  6.21E-01 memory=    208 kb
+>info:         ***** hspice job concluded
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+ lic: Release hspice token(s)
