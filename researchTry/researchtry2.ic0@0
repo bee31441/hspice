@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "15:23:55 11/18/2015 "
+* "rundate" "16:44:47 11/19/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry2.sp "
 * "runtitle" "*researchtry2.sp"
 * time =    0.            
@@ -10,14 +10,14 @@
 .option 
 + gmindc= 1.000e-12       
 .nodeset
-+ 2- =   0.            
-+ 3- =   0.            
-+ 3o =-1.000e-22       
-+ aco =   0.            
-+ dco = 1.000e-23       
-+ inx =   0.            
-+ ref1 =   0.            
-+ ref2 =   0.            
++ 2- = 5.459e+05       
++ 3- =-5.400e+06       
++ 3o = 5.400e+09       
++ aco = 5.459e+05       
++ dco =-5.459e+08       
++ inx =-544.9409        
++ ref1 =   1.0000        
++ ref2 =   1.0000        
 + ref3 =   0.            
-+ vin = 1.000e-09       
++ vin =   1.2000        
 ***   END: Saved Operating Point ***                     
