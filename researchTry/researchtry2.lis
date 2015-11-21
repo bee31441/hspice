@@ -22,60 +22,68 @@
  .param rzv = 10x
  c1 inx aco 100f
  e1 aco gnd vcvs ref1 inx 1000
- vr1 ref1 gnd dc = 0
- rz inx gnd rzv
+ vr1 ref1 gnd dc = 1
+ *rz inx gnd rzv
  cl aco gnd 20p
 
  r3 aco 2- 500g
  c2 aco 2- 25f
  e2 dco gnd vcvs ref2 2- 1000
- vr2 ref2 gnd dc = 0
+ vr2 ref2 gnd dc = 1
  c3 2- dco 10p
 
- r1 dco1 3- 300k
+ r1 dco 3- 300k
  e3 3o gnd vcvs ref3 3- 1000
- vr3 ref3 gnd dc = 0
- r2 3o 3- 3000k
+ vr3 ref3 gnd dc = 
+ r2 3o 3- 3x
  rdc inx 3o 450x
 
- ef		vin	gnd	vcvs	dco gnd 1000
- ibias	gnd inx1 dc = 12n  pulse(10n 12n 10ns 1ns 1ns 48ns 100ns)
- g1		inx1	gnd	vccs	vin	gnd	10^-8
+ *ef		vin	gnd	vcvs	dco gnd 1000
+ vb		vin gnd dc = 1.2
+ ibias	gnd inx dc = 12.1n  *pulse(12n 14n 10ns 1ns 1ns 48ns 100ns)
+ g1		inx	gnd	vccs	vin	gnd	'10^-8'
 
 
  *i1 gnd inx ac = 1
- vdco dco1 gnd ac = 1
+ *vdco dco1 gnd ac = 1
 
 
 
- et	vt	gnd	vcvs	vtr1	gnd	1000
- vx	vtr gnd dc = 0.5
- rti	vtr	vtr1 100
- rt	vt	gnd	1000k
+ *it 1 gnd 1u
+ *r 1 gnd 1000k
 
  .op
  *.dc in 0.1u 0.2u 0.01u 
  *.dc ibias 11u 10u 0.1u
- .ac dec 20 0.001 1000k 
- *.tran 1ns 100ns
- .pz v(dco) vdco 
- .probe ac vdb(dco)
+ *.ac dec 20 0.001 1000k 
+ .tran 1ns 100ns
+ .pz v(dco) ibias 
+ .probe ac vdb(dco) vdb(aco) i(cl) ip(c1)
  .probe tran i(ibias) 
 
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
 
- **warning**  the accurate option increases  the cpu time but the results
-                are more accurate.
- ***accurate option sets default value of the options: 
- lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
-     ft= 200.00m relmos=  10.00m
- (used for FFT control ) fft_accurate= 1
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00n
+ ***********************************************************************
+
  
-
-
-
- **warning**  no dc path to ground from node        0:inx1             defined in subckt 0               now it is connected with gdcpath
-
-
       
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
  ******  
@@ -85,11 +93,10 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:2-      =   0.      0:3-      =   0.      0:3o      =   0.     
- +0:aco     =   0.      0:dco     =   0.      0:dco1    =   0.     
- +0:inx     =   0.      0:inx1    = 1.200e-08 0:ref1    =   0.     
- +0:ref2    =   0.      0:ref3    =   0.      0:vin     =   0.     
- +0:vt      = 500.0000  0:vtr     =   0.5000  0:vtr1    =   0.5000 
+ +0:2-      =   1.0001  0:3-      =-9.540e-04 0:3o      =   0.9540 
+ +0:aco     =   1.0001  0:dco     =-9.645e-02 0:inx     =   0.9990 
+ +0:ref1    =   1.0000  0:ref2    =   1.0000  0:ref3    =   0.     
+ +0:vin     =   1.2000 
 
 
  maximum nodal capacitance=   2.013E-11         on node     0:aco             
@@ -99,20 +106,19 @@
     node    =    cap      node    =    cap      node    =    cap
 
  +0:2-      = 1.002e-11 0:3-      =   0.      0:3o      =   0.     
- +0:aco     = 2.012e-11 0:dco     = 1.000e-11 0:dco1    =   0.     
- +0:inx     = 1.000e-13 0:inx1    =   0.      0:ref1    =   0.     
- +0:ref2    =   0.      0:ref3    =   0.      0:vin     =   0.     
- +0:vt      =   0.      0:vtr     =   0.      0:vtr1    =   0.     
+ +0:aco     = 2.012e-11 0:dco     = 1.000e-11 0:inx     = 1.000e-13
+ +0:ref1    =   0.      0:ref2    =   0.      0:ref3    =   0.     
+ +0:vin     =   0.     
 
  
 
  ****  voltage sources
 
- subckt                                                         
- element  0:vr1      0:vr2      0:vr3      0:vdco     0:vx      
-  volts      0.         0.         0.         0.         0.5000 
-  current    0.         0.         0.         0.         0.     
-  power      0.         0.         0.         0.         0.     
+ subckt                                              
+ element  0:vr1      0:vr2      0:vr3      0:vb      
+  volts      1.0000     1.0000     0.         1.2000 
+  current    0.         0.         0.         0.     
+  power      0.         0.         0.         0.     
 
      total voltage source power dissipation=    0.            watts
 
@@ -122,28 +128,21 @@
 
  subckt             
  element  0:ibias   
-  volts   -1.200e-08
-  current  1.200e-08
-  power    1.440e-16
+  volts     -0.9990 
+  current  1.210e-08
+  power    1.209e-08
 
 
-     total current source power dissipation= 1.440e-16       watts
+     total current source power dissipation= 1.209e-08       watts
 
  **** resistors
 
- subckt                                                                    
- element  0:rz       0:r3       0:r1       0:r2       0:rdc      0:rti     
-  r value  1.000e+07  5.000e+11  3.000e+05  3.000e+06  4.500e+08  100.0000 
-  v drop     0.         0.         0.         0.         0.         0.     
-  current    0.         0.         0.         0.         0.         0.     
-  power      0.         0.         0.         0.         0.         0.     
-
- subckt             
- element  0:rt      
-  r value  1.000e+06
-  v drop   500.0000 
-  current  5.000e-04
-  power      0.2500 
+ subckt                                              
+ element  0:r3       0:r1       0:r2       0:rdc     
+  r value  5.000e+11  3.000e+05  3.000e+06  4.500e+08
+  v drop  -9.542e-10 -9.550e-02    0.9550   4.500e-02
+  current -1.908e-21 -3.183e-07  3.183e-07  1.000e-10
+  power      0.       3.040e-08  3.040e-07  4.500e-12
 
 
  **** voltage-controlled current sources
@@ -151,8 +150,8 @@
 
  subckt             
  element  0:g1      
-  v drop   1.200e-08
-  current    0.     
+  v drop     0.9990 
+  current  1.200e-08
 
 
 
@@ -160,10 +159,10 @@
  **** voltage-controlled voltage sources
 
 
- subckt                                                         
- element  0:e1       0:e2       0:e3       0:ef       0:et      
-  volts      0.         0.         0.         0.       500.0000 
-  current    0.         0.         0.         0.      -5.000e-04
+ subckt                                   
+ element  0:e1       0:e2       0:e3      
+  volts      1.0001  -9.645e-02    0.9540 
+  current  1.908e-21  3.183e-07 -3.182e-07
 
 
 
@@ -173,25 +172,21 @@
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
  
  
-    input =  0:vdco          output = v(dco)
+    input =  0:ibias          output = v(dco)
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- 0.              0.              0.              0.              
- -1.02120k       0.              -162.529        0.              
+ -91.5882        0.              -14.5767        0.              
+ -479.024        0.              -76.2391        0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
  -80.0000        0.              -12.7324        0.              
  
-  ***** constant factor = -5.48412 
+  ***** constant factor = 249.500x
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -208,10 +203,10 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      16  # elements   =      23
-  # resistors   =       7  # capacitors =       4  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       1  # vcvs        =       5
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       5
+  # nodes       =      11  # elements   =      17
+  # resistors   =       4  # capacitors =       4  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       1  # vcvs        =       3
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
   # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
   # jfets       =       0  # mosfets    =       0  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
@@ -221,19 +216,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.01           1         326
-  ac analysis        0.05         181         181
-  readin             0.20
-  errchk             0.01
-  setup              0.02
+  op point           0.01           1          18
+  transient          0.05         101          48          24 rev=         0
+  readin             0.21
+  errchk             0.08
+  setup              0.03
   output             0.00
 
 
-           total memory used          176  kbytes
-           total cpu time            0.32 seconds
+           total memory used          171  kbytes
+           total cpu time            0.46 seconds
            total elapsed time           1 seconds
-           job started at     18:08:37 11/18/2015
-           job ended   at     18:08:37 11/18/2015
+           job started at     16:59:28 11/19/2015
+           job ended   at     16:59:28 11/19/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
