@@ -1,11 +1,29 @@
 pnlAddPane();
 nil
 1
-designOpen("c:\\users\\timer\\documents\\github\\hspice\\researchtry\\researchtry.sp");
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\researchtry\\researchtry3.sp");
 "D0"
 t
-quit();
-exit
+pnlAddCurve(1, node(D0,"A0","vm(eo)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlDelCurve(1, node(D0,"A0","vm(eo)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlAddCurve(1, node(D0,"A0","i(edc)"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","i(cdc)"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
 pnlDeletePane(1, 1);
 nil
 nil

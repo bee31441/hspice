@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "23:12:06 11/21/2015 "
+* "rundate" "20:26:33 11/22/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\pwmadc\ota\ota.sp "
 * "runtitle" "*ota"
 * time =    0.            
@@ -10,7 +10,7 @@
 .option 
 + gmindc= 1.000e-12       
 .nodeset
-+ ib =   0.8791        
++ ib =   0.8641        
 + iout =   0.9000        
 + vb =   1.5000        
 + vdd =   1.8000        
@@ -19,12 +19,12 @@
 + vssno =   0.            
 + vssp =   0.            
 + vsspo =   0.            
-+ wgn =   0.3039        
-+ wgp =   0.1820        
++ wgn =   0.2939        
++ wgp =   0.1731        
 + winn =   0.2000        
 + winp =   1.6000        
-+ xwlr_outter.1d =   1.4411        
-+ xwlr_innerp.sd =   0.6645        
-+ xwlr_innern.sd =   0.5423        
-+ xbump.1 =   0.1082        
++ xwlr_outter.1d =   1.4447        
++ xwlr_innerp.sd =   0.6533        
++ xwlr_innern.sd =   0.5314        
++ xbump.1 =   0.1071        
 ***   END: Saved Operating Point ***                     

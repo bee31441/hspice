@@ -1,0 +1,31 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "15:34:34 11/26/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\op\final test.sp "
+* "runtitle" "analog ic: cmfb loop ac response"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ 3 = 226.5779m       
++ 4 = 226.5779m       
++ b2 = 470.0000m       
++ cmfb =   1.2444        
++ vcm = 897.8987m       
++ vdd =   1.8000        
++ vinn = 900.0000m       
++ vinp = 900.0000m       
++ vocm = 900.0000m       
++ von = 897.8987m       
++ vop = 897.8987m       
++ vss =   0.            
++ xop.5 =   1.4323        
++ xop.7 = 897.8987m       
++ xop.10 = 897.8987m       
++ xop.35 =   1.2419        
++ xop.36 = 353.8274m       
++ xop.b1 =   1.2968        
+***   END: Saved Operating Point ***                     

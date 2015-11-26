@@ -1,0 +1,51 @@
+*MyOp
+.protect
+.lib 'rf018.l' tt
+.unprotect
+.option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=   1.0000E-12
+
+***netlist***
+
+M1	3	Vinp	5		vdd	pch	W = 10u L = 0.2u
+M2	4	Vinn	5		vdd	pch	W = 2.9u L = 0.2u
+M5	5	cmfb	vdd	vdd	pch	W = 10u L = 1u	 m = 2
+
+
+***param***
+.param 
++comon		= 0.5
++bias			= 0.47
++supplyp	= 1.0
++supplyn	= 0
+
+***source***
+vd		vdd 	gnd dc supplyp
+vs		vss 	gnd dc supplyn
+*vocm	vocm	gnd dc comon 
+vb 		b2 		gnd dc bias 
+vcm		cmfb	gnd dc comon
+
+***input***
+vinp vinp 0 dc comon ac 1
+vinn vinn 0 dc comon ac 1
+
+
+*mt	vdt	vgt	vdd	vdd	pch	w = 10u l = 1u m = 2 *vgs=0.3: (vds, id) = (0.6, 48.8n)(0.2, 46.8n)
+.param wp = 2.9u
+mt	vdt	vgt	vdd	vdd	pch	w = wp l = 0.2u   *(0.2, 15.9n
+vtg	vgt	gnd dc = 0.7v
+vtd	vdt	gnd dc = 0.4v
+
+.op
+***sweep***
+
+***testing***
+*.dc wp 500n 5u 0.01u
+.dc vtd 0.8 0.2 0.01
+***probe&measuring***
+.probe	I(mt)
+.ac dec 10 10 1g
+
+
+
+.end

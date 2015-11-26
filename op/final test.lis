@@ -8,7 +8,311 @@
   Input File: c:\users\timer\documents\github\hspice\op\final test.sp           
  Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
-  END
-  **error** (c:\users\timer\documents\github\hspice\op\final test.sp:3)  could not find library file named cic018.l
 
-               ***** job aborted
+
+
+
+ .option post acout=0 accurate dcon=1 converge=1 gmindc=   1.0000e-12
+ .include "op-w-cmfb.sp" * include your op netlist
+
+ .param supplyp=1.8 * your positive supply voltage
+ .param supplyn=0 * your negative supply voltage
+ .param comon=0.9 * your output common mode voltage
+ .subckt op 3 4 von vop vcm vss b2 vocm vinp vinn cmfb vdd
+ m1 3 vinp 5 vdd pch w=10u l=0.18u m=9
+ m2 4 vinn 5 vdd pch w=10u l=0.18u m=9
+ m3 3 b2 vss vss nch w=9u l=0.18u
+ m4 4 b2 vss vss nch w=9u l=0.18u
+ m5 5 cmfb vdd vdd pch w=18u l=0.18u 
+ m6 von 4 vss vss nch w=9u l=0.18u m=4
+ m7 von b1 vdd vdd pch w=9u l=0.18u m=4
+ m8 vop 3 vss vss nch w=9u l=0.18u m=4 
+ m9 vop b1 vdd vdd pch w=9u l=0.18u m=4
+
+
+ rz1 7 vop 500
+ *mz1 7 b1 vop vss nch w=10u l=0.18u 
+ cc1 7 3 3p
+ rz2 10 von 500
+ *mz2 10 b1 von vss nch w=10u l=0.18u 
+ cc2 10 4 3p
+
+
+
+ rcm1 vop vcm 50k
+ rcm2 von vcm 50k
+ mcm1 cmfb vcm 36 vss nch w=9u l=0.18u 
+ mcm2 35 vocm 36 vss nch w=9u l=0.18u
+ mcm3 cmfb cmfb vdd vdd pch w=9u l=0.18u
+ mcm4 35 35 vdd vdd pch w=9u l=0.18u
+ mcm5 36 b2 vss vss nch w=9u l=0.18u m=2
+
+ mb1 b2 b2 vss vss nch w=9u l=0.18u 
+ mb2 b1 b2 vss vss nch w=9u l=0.18u
+ mb3 b1 b1 vdd vdd pch w=9u l=0.18u m=4
+
+ mb4 vocm b2 vss vss nch w=9u l=0.18u
+ mb5 vocm vocm vdd vdd pch w=4u l=0.18u 
+
+
+ .ends
+
+ .param rload=25k cload=10p * your load
+ .param supplyp=1.8 * your positive supply voltage
+ .param supplyn=0 * your negative supply voltage
+ .param comon=0.9 * your output common mode voltage
+ .param bias=0.47
+ xop 3 4 von vop vcm vss b2 vocm vinp vinn cmfb vdd op * modify your subcircuit name
+
+  
+ rload1 von 0 rload
+ rload2 vop 0 rload
+ cload1 von 0 cload
+ cload2 vop 0 cload
+
+  
+ vdd vdd 0 dc supplyp
+ vgnd vss 0 dc supplyn
+ vocm vocm 0 dc comon 
+ $vfbin vfbi 0 dc 912.6093m ac=1 $sin(912.6093m 1u 100 0 0 0)
+ vb b2 0 dc bias 
+ vinp vinp 0 dc comon ac 1
+ vinn vinn 0 dc comon ac 1
+
+ .ac dec 10 10 1g
+ .meas ac gaindb max vdb('vop-von','vinp-vinn')
+ $.pz v(vop) vinp
+ $.tran 10u 0.01
+ $.four 100 v(vcms)
+
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ analog ic: cmfb loop ac response
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xop.                            op                 1.00 
+ 
+
+ **warning**  attempt to reference undefined node     0:vop-von         
+  in the definition of vdb(vop-von,vinp-vinn)
+   branch - output ignored
+
+ 
+      
+  Opening plot unit= 79
+ file=c:\users\timer\documents\github\hspice\op\final test.pa0                 
+
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ analog ic: cmfb loop ac response
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:3       = 226.5779m 0:4       = 226.5779m 0:b2      = 470.0000m
+ +0:cmfb    =   1.2444  0:vcm     = 897.8987m 0:vdd     =   1.8000 
+ +0:vinn    = 900.0000m 0:vinp    = 900.0000m 0:vocm    = 900.0000m
+ +0:von     = 897.8987m 0:vop     = 897.8987m 0:vss     =   0.     
+ +1:5       =   1.4323  1:7       = 897.8987m 1:10      = 897.8987m
+ +1:35      =   1.2419  1:36      = 353.8274m 1:b1      =   1.2968 
+
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vdd      0:vgnd     0:vocm     0:vb       0:vinp     0:vinn    
+  volts      1.8000     0.       900.0000m  470.0000m  900.0000m  900.0000m
+  current -343.5266u  159.1405u  134.4763u  -21.9222u    0.         0.     
+  power    618.3479u    0.      -121.0287u   10.3034u    0.         0.     
+
+     total voltage source power dissipation=  507.6226u       watts
+
+
+
+ **** resistors
+
+ subckt                         xop        xop        xop        xop       
+ element  0:rload1   0:rload2   1:rz1      1:rz2      1:rcm1     1:rcm2    
+  r value   25.0000k   25.0000k  500.0000   500.0000    50.0000k   50.0000k
+  v drop   897.8987m  897.8987m    0.         0.         3.4417f   -3.5527f
+  current   35.9159u   35.9159u    0.         0.       6.883e-20 -7.105e-20
+  power     32.2489u   32.2489u    0.         0.         0.         0.     
+
+
+
+ **** mosfets
+
+
+ subckt   xop        xop        xop        xop        xop        xop       
+ element  1:m1       1:m2       1:m3       1:m4       1:m5       1:m6      
+ model    0:pch.4    0:pch.4    0:nch.8    0:nch.8    0:pch.4    0:nch.8   
+ region       Cutoff     Cutoff     Cutoff     Cutoff   Saturati     Cutoff
+  id       -18.6368u  -18.6368u   18.6368u   18.6368u  -37.2737u  286.5313n
+  ibs      233.6399a  233.6399a -3.126e-21 -3.126e-21  5.334e-21 -4.806e-23
+  ibd      443.5024f  443.5024f  -28.5183a  -28.5183a   46.0825a -151.9761f
+  vgs     -532.3245m -532.3245m  470.0000m  470.0000m -555.5738m  226.5779m
+  vds       -1.2057    -1.2057   226.5779m  226.5779m -367.6755m  897.8987m
+  vbs      367.6755m  367.6755m    0.         0.         0.         0.     
+  vth     -617.4024m -617.4024m  516.5250m  516.5250m -510.0360m  514.5101m
+  vdsat    -50.6806m  -50.6806m   52.4668m   52.4668m  -91.8714m   39.3683m
+  vod       85.0779m   85.0779m  -46.5250m  -46.5250m  -45.5378m -287.9322m
+  beta      49.8884m   49.8884m   29.7144m   29.7144m   10.1842m  119.2202m
+  gam eff  678.9129m  678.9129m  962.5001m  962.5001m  676.1707m  962.4998m
+  gm       411.1681u  411.1681u  370.4321u  370.4321u  594.1533u    8.0020u
+  gds        8.0061u    8.0061u   15.9926u   15.9926u   17.4858u  148.2025n
+  gmb      114.7411u  114.7411u  107.8599u  107.8599u  200.9401u    2.3904u
+  cdtot     97.8500f   97.8500f   11.0929f   11.0929f   23.6367f   38.9564f
+  cgtot     89.6512f   89.6512f   10.9196f   10.9196f   26.9793f   40.2310f
+  cstot    125.8484f  125.8484f   13.7305f   13.7305f   41.0254f   47.6195f
+  cbtot    183.7878f  183.7878f   19.6880f   19.6880f   44.3950f   74.0516f
+  cgs       35.6346f   35.6346f    4.7623f    4.7623f   18.5492f   13.1931f
+  cgd       29.4238f   29.4238f    3.2942f    3.2942f    5.8527f   13.1852f
+
+
+
+ subckt   xop        xop        xop        xop        xop        xop       
+ element  1:m7       1:m8       1:m9       1:mcm1     1:mcm2     1:mcm3    
+ model    0:pch.8    0:nch.8    0:pch.8    0:nch.8    0:nch.8    0:pch.8   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff   Saturati
+  id       -36.2025u  286.5313n  -36.2025u   20.0397u   20.8729u  -20.0397u
+  ibs      5.289e-21 -4.806e-23  5.289e-21  -28.5200a  -28.5200a  2.928e-21
+  ibd      409.6411a -151.9761f  409.6411a   -7.6062p   -7.5245p   23.5698a
+  vgs     -503.2466m  226.5779m -503.2466m  544.0713m  546.1726m -555.5738m
+  vds     -902.1013m  897.8987m -902.1013m  890.5987m  888.0700m -555.5738m
+  vbs        0.         0.         0.      -353.8274m -353.8274m    0.     
+  vth     -507.6246m  514.5101m -507.6246m  603.9860m  604.0030m -509.1849m
+  vdsat    -69.4825m   39.3683m  -69.4825m   51.5708m   51.9608m  -92.2524m
+  vod        4.3781m -287.9322m    4.3781m  -59.9147m  -57.8304m  -46.3890m
+  beta      20.3887m  119.2202m   20.3887m   29.3732m   29.3700m    5.0799m
+  gam eff  675.7380m  962.4998m  675.7380m  999.4734m  999.4735m  675.7380m
+  gm       674.7886u    8.0020u  674.7886u  402.0938u  416.5626u  317.5404u
+  gds       11.0948u  148.2025n   11.0948u   10.3909u   10.7832u    6.9481u
+  gmb      225.0098u    2.3904u  225.0098u   89.9337u   93.1673u  106.8095u
+  cdtot     42.8849f   38.9564f   42.8849f    9.3176f    9.3203f   11.4162f
+  cgtot     45.9608f   40.2310f   45.9608f   10.2636f   10.3073f   13.5010f
+  cstot     69.9872f   47.6195f   69.9872f   11.9584f   12.0244f   20.6239f
+  cbtot     84.5364f   74.0516f   84.5364f   16.3549f   16.3582f   21.9036f
+  cgs       26.1764f   13.1931f   26.1764f    4.3128f    4.3683f    9.2793f
+  cgd       11.7187f   13.1852f   11.7187f    3.2908f    3.2905f    2.9229f
+
+
+
+ subckt   xop        xop        xop        xop        xop        xop       
+ element  1:mcm4     1:mcm5     1:mb1      1:mb2      1:mb3      1:mb4     
+ model    0:pch.8    0:nch.8    0:nch.8    0:nch.8    0:pch.8    0:nch.8   
+ region     Saturati     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       -20.8729u   40.9126u   21.9222u   31.5149u  -31.5164u   26.9425u
+  ibs      3.049e-21 -6.862e-21 -3.677e-21 -5.286e-21  4.604e-21 -4.519e-21
+  ibd       23.5747a  -57.0495a  -32.3828a   -1.5766n   94.0018a  -11.7787p
+  vgs     -558.1026m  470.0000m  470.0000m  470.0000m -503.2466m  470.0000m
+  vds     -558.1026m  353.8274m  470.0000m    1.2968  -503.2466m  900.0000m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -509.1735m  516.1433m  515.7949m  513.3149m -509.4197m  514.5050m
+  vdsat    -93.5669m   52.5460m   52.6187m   53.1437m  -68.8557m   52.8900m
+  vod      -48.9291m  -46.1433m  -45.7949m  -43.3149m    6.1731m  -44.5050m
+  beta       5.0790m   59.4338m   29.7192m   29.7356m   20.3831m   29.7278m
+  gam eff  675.7380m  962.5002m  962.5002m  962.5004m  675.7380m  962.5003m
+  gm       327.3800u  808.1013u  430.0288u  590.9933u  598.8810u  515.4519u
+  gds        7.1824u   26.3122u   12.2115u   11.6230u   12.8427u   11.4752u
+  gmb      110.1041u  234.1717u  124.0733u  165.2600u  202.1382u  146.3348u
+  cdtot     11.4104f   21.4908f   10.4770f    9.2628f   46.1593f    9.7363f
+  cgtot     13.5809f   21.8543f   10.9356f   11.0015f   45.6382f   10.9692f
+  cstot     20.7441f   27.4941f   13.7610f   13.8569f   69.5137f   13.8108f
+  cbtot     21.9000f   38.6859f   19.0753f   17.8640f   87.7936f   18.3362f
+  cgs        9.3870f    9.5429f    4.7811f    4.8559f   25.7852f    4.8194f
+  cgd        2.9227f    6.5866f    3.2931f    3.2927f   11.7215f    3.2928f
+
+
+
+ subckt   xop       
+ element  1:mb5     
+ model    0:pch.8   
+ region     Saturati
+  id      -161.4189u
+  ibs      2.476e-20
+  ibd       12.1103a
+  vgs     -900.0000m
+  vds     -900.0000m
+  vbs        0.     
+  vth     -507.5847m
+  vdsat   -299.7848m
+  vod     -392.4153m
+  beta       2.1071m
+  gam eff  670.3233m
+  gm       660.1857u
+  gds       29.4201u
+  gmb      223.5584u
+  cdtot      4.8527f
+  cgtot      6.9385f
+  cstot     10.5311f
+  cbtot      9.5880f
+  cgs        5.4003f
+  cgd        1.2964f
+
+
+
+ ******  
+ analog ic: cmfb loop ac response
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+   gaindb=    failed    from= -1.2346E-29     to=  0.0000E+00
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ analog ic: cmfb loop ac response
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      57  # elements   =      35
+  # resistors   =       6  # capacitors =       4  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       6
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =      19  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.03           1          92
+  ac analysis        0.05          81          81
+  readin             0.17
+  errchk             0.02
+  setup              0.02
+  output             0.00
+
+
+           total memory used          520  kbytes
+           total cpu time            0.32 seconds
+           total elapsed time           1 seconds
+           job started at     15:34:34 11/26/2015
+           job ended   at     15:34:34 11/26/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
