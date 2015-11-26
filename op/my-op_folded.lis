@@ -18,8 +18,8 @@
 
  m1	1	vinp	b		b		pch	w = 2.9u l = 0.2u m = 2
  m2	2	vinn	b		b		pch	w = 2.9u l = 0.2u m = 2
- m5	1	b1		vss	vss	nch	w = 1.8u l = 0.2u m = 1
- m6	2	b1		vss	vss	nch	w = 1.8u l = 0.2u m = 1
+ m5	1	1		vss	vss	nch	w = 1.8u l = 0.2u m = 1
+ m6	2	1		vss	vss	nch	w = 1.8u l = 0.2u m = 1
  mb	b	cmfb	vdd	vdd	pch	w = 10u  l = 1u	  m = 4
 
 
@@ -35,11 +35,11 @@
  vs		vss 	gnd dc supplyn
  *vocm	vocm	gnd dc comon 
  vb 		cmfb	gnd dc bias 
- vb1		b1		gnd dc = 0.3
+ *vb1		b1		gnd dc = 0.3
 
  ***input***
- vinp vinp 0 dc comon ac 1
- vinn vinn 0 dc comon ac 1
+ vinp vinp gnd dc comon ac 1
+ vinn vinn gnd dc comon ac 1
 
 
  *mt	vdt	vgt	vdd	vdd	pch	w = 10u l = 1u m = 4 *vgs=0.3: (vds, id) = (0.6, 97.6n)(0.2, 93.6n)
@@ -53,12 +53,11 @@
  ***sweep***
 
  ***testing***
- .dc wn 500n 5u 0.01u
+ *.dc 
  *.dc vtd 0.8 0.4 0.01
  ***probe&measuring***
- .probe	i(mt)
  .ac dec 10 10 1g
-
+ .probe i(mt)
 
 
  .end
@@ -84,27 +83,27 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:1       = 237.6577m 0:2       = 237.6577m 0:b       = 800.5953m
- +0:b1      = 300.0000m 0:cmfb    = 700.0000m 0:vdd     =   1.0000 
- +0:vdt     = 200.0000m 0:vgt     = 300.0000m 0:vinn    = 500.0000m
- +0:vinp    = 500.0000m 0:vss     =   0.     
+ +0:1       = 298.2747m 0:2       = 298.2747m 0:b       = 801.7584m
+ +0:cmfb    = 700.0000m 0:vdd     =   1.0000  0:vdt     = 200.0000m
+ +0:vgt     = 300.0000m 0:vinn    = 500.0000m 0:vinp    = 500.0000m
+ +0:vss     =   0.     
 
 
  ****  voltage sources
 
  subckt                                                                    
- element  0:vd       0:vs       0:vb       0:vb1      0:vinp     0:vinn    
-  volts      1.0000     0.       700.0000m  300.0000m  500.0000m  500.0000m
-  current  -93.6432n  115.4547n    0.         0.         0.         0.     
-  power     93.6432n    0.         0.         0.         0.         0.     
+ element  0:vd       0:vs       0:vb       0:vinp     0:vinn     0:vtg     
+  volts      1.0000     0.       700.0000m  500.0000m  500.0000m  300.0000m
+  current  -93.6275n  115.4389n    0.         0.         0.         0.     
+  power     93.6275n    0.         0.         0.         0.         0.     
 
- subckt                        
- element  0:vtg      0:vtd     
-  volts    300.0000m  200.0000m
-  current    0.       -21.8115n
-  power      0.         4.3623n
+ subckt             
+ element  0:vtd     
+  volts    200.0000m
+  current  -21.8115n
+  power      4.3623n
 
-     total voltage source power dissipation=   98.0055n       watts
+     total voltage source power dissipation=   97.9898n       watts
 
 
 
@@ -116,26 +115,26 @@
  element  0:m1       0:m2       0:m5       0:m6       0:mb       0:mt      
  model    0:pch.8    0:pch.8    0:nch.8    0:nch.8    0:pch.3    0:nch.12  
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id       -46.8194n  -46.8194n   46.8211n   46.8211n  -93.6416n   21.8111n
-  ibs      7.429e-24  7.429e-24 -9.132e-24 -9.132e-24  1.363e-23 -4.849e-24
-  ibd       16.4203a   16.4203a   -6.6314a   -6.6314a  103.7960a   -4.1983a
-  vgs     -300.5953m -300.5953m  300.0000m  300.0000m -300.0000m  300.0000m
-  vds     -562.9376m -562.9376m  237.6577m  237.6577m -199.4047m  200.0000m
+  id       -46.8117n  -46.8117n   46.8131n   46.8131n  -93.6259n   21.8111n
+  ibs      7.428e-24  7.428e-24 -9.130e-24 -9.130e-24  1.362e-23 -4.849e-24
+  ibd       16.4203a   16.4203a   -6.6319a   -6.6319a  103.7939a   -4.1983a
+  vgs     -301.7584m -301.7584m  298.2747m  298.2747m -300.0000m  300.0000m
+  vds     -503.4837m -503.4837m  298.2747m  298.2747m -198.2416m  200.0000m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -500.7424m -500.7424m  524.0909m  524.0909m -458.7434m  532.2908m
-  vdsat    -41.9624m  -41.9624m   41.2145m   41.2145m  -41.3237m   42.0362m
-  vod      200.1470m  200.1470m -224.0909m -224.0909m  158.7434m -232.2908m
-  beta       2.6873m    2.6873m    4.8603m    4.8603m    2.9844m    2.6389m
+  vth     -500.9631m -500.9631m  523.9389m  523.9389m -458.7436m  532.2908m
+  vdsat    -41.9722m  -41.9722m   41.2030m   41.2030m  -41.3236m   42.0362m
+  vod      199.2047m  199.2047m -225.6642m -225.6642m  158.7436m -232.2908m
+  beta       2.6871m    2.6871m    4.8604m    4.8604m    2.9844m    2.6389m
   gam eff  645.9642m  645.9642m  907.4311m  907.4311m  497.9476m  919.5599m
-  gm         1.2447u    1.2447u    1.2574u    1.2574u    2.5357u  586.9304n
-  gds       24.1410n   24.1410n   38.0507n   38.0507n   13.4824n   20.0467n
-  gmb      431.1330n  431.1330n  385.7327n  385.7327n  842.5536n  182.1134n
-  cdtot      7.5629f    7.5629f    2.3321f    2.3321f   55.1271f    1.3764f
-  cgtot      6.0419f    6.0419f    2.0726f    2.0726f  102.3198f    1.1566f
-  cstot      8.7957f    8.7957f    2.5117f    2.5117f   60.0961f    1.4663f
-  cbtot     14.7887f   14.7887f    4.2819f    4.2819f  162.8940f    2.5401f
-  cgs        1.9108f    1.9108f  659.8116a  659.8116a   14.2423f  365.3151a
-  cgd        1.8957f    1.8957f  657.4984a  657.4984a   13.1081f  364.3003a
+  gm         1.2458u    1.2458u    1.2590u    1.2590u    2.5353u  586.9304n
+  gds       24.8601n   24.8601n   33.6709n   33.6709n   13.5651n   20.0467n
+  gmb      431.9628n  431.9628n  385.7170n  385.7170n  842.4117n  182.1134n
+  cdtot      7.6575f    7.6575f    2.2967f    2.2967f   55.1450f    1.3764f
+  cgtot      6.0411f    6.0411f    2.0730f    2.0730f  102.3199f    1.1566f
+  cstot      8.7960f    8.7960f    2.5116f    2.5116f   60.0960f    1.4663f
+  cbtot     14.8823f   14.8823f    4.2470f    4.2470f  162.9118f    2.5401f
+  cgs        1.9110f    1.9110f  659.7074a  659.7074a   14.2423f  365.3151a
+  cgd        1.8957f    1.8957f  657.4978a  657.4978a   13.1081f  364.3003a
 
 
 
@@ -155,10 +154,10 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      25  # elements   =      15
+  # nodes       =      24  # elements   =      14
   # resistors   =       0  # capacitors =       0  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       8
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
   # jfets       =       0  # mosfets    =       6  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
@@ -168,20 +167,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.02           1          56
-  dc sweep           0.14         451         926
-  ac analysis        0.07          81          81
-  readin             0.19
-  errchk             0.03
+  op point           0.02           1          51
+  ac analysis        0.06          81          81
+  readin             0.17
+  errchk             0.02
   setup              0.01
   output             0.00
 
 
-           total memory used          374  kbytes
-           total cpu time            0.48 seconds
+           total memory used          368  kbytes
+           total cpu time            0.31 seconds
            total elapsed time           1 seconds
-           job started at     17:00:04 11/26/2015
-           job ended   at     17:00:05 11/26/2015
+           job started at     21:50:17 11/26/2015
+           job ended   at     21:50:18 11/26/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
