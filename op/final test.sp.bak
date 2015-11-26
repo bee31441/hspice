@@ -10,7 +10,7 @@ Analog IC: CMFB loop AC response
 .param supplyn=0 * Your negative supply voltage
 .param comon=0.9 * Your output common mode voltage
 .param bias=0.47
-Xop 3 4 von vop Vcm vss b2 vocm vinp vinn cmfb vdd op * Modify your subcircuit name
+Xop von vop Vcm vss b2 vocm vinp vinn cmfb vdd op * Modify your subcircuit name
 
  
 rload1 von 0 rload

@@ -1,0 +1,19 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "20:46:14 11/22/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\pwmadc\ota\outter.sp "
+* "runtitle" "*ota_outter"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ 1d =   1.5177        
++ inn =   0.2500        
++ inp =   0.2500        
++ iout =   1.2000        
++ vdd =   1.8000        
++ vss =   0.            
+***   END: Saved Operating Point ***                     

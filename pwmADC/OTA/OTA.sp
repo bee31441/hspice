@@ -10,11 +10,11 @@
 * pmos: u0Cox /= 8.6e-5
 * nmos: /= 2.0718e-5
 
-XWLR_outter	vdd	vssno	vsspo	wgn	wgp	iout	WLR_outter	wpo = 1.2u	wno = 400n	mpo = 2	mno = 2
-XWLR_innerp	vdd	vssp	winp	wgp	ib	WLR_inner
-XWLR_innern vdd	vssn	winn	wgn	ib	WLR_inner
-Mb	ib vb vdd vdd pch w = 2.6u l = 200n
-Xbump	ib	vssb	wgp		wgn	bump	wnb1 = 400n wnb2 = 400n	mnb1 = 4 mnb2 = 4
+XWLR_outter	vdd	vssno	vsspo	wgn	wgp	iout	WLR_outter	wp = 1u	wn = 400n	mp = 2	mn = 2
+XWLR_innerp	vdd	vssp	winp	wgp	ib	WLR_inner	wp = 1u wn = 400n	mp = 1 mn = 1
+XWLR_innern vdd	vssn	winn	wgn	ib	WLR_inner	wp = 1u wn = 400n	mp = 1 mn = 1
+Mb	ib vb vdd vdd pch w = 2u l = 200n
+Xbump	ib	vssb	wgp		wgn	bump	wn1 = 400n wn2 = 400n	m1 = 4 m2 = 4
 
 
 .subckt	WLR_outter	vdd	vssno	vsspo	inn	inp	iout	wp = 1.2u wn = 400n	mp = 2 mn = 2
@@ -24,10 +24,10 @@ M2 1d inn vssno vssno nch w = wn l = 200n m = mn
 M4 iout inp vsspo vsspo nch w = wn l = 200n m = mn
 .ends
 
-.subckt WLR_inner vdd vss win wg ib
-Ms sd sd ib ib pch w = 1.2u l = 200n
-Mw wg wg sd win pch w = 1.2u l = 200n
-Mgm wg wg vss vss nch w = 400n l = 200n
+.subckt WLR_inner vdd vss win wg ib	wp = 1.2u wn = 400n	mp = 1 mn = 1
+Ms sd sd ib ib pch w = wp l = 200n	m = mp
+Mw wg wg sd win pch w = wp l = 200n	m = mp
+Mgm wg wg vss vss nch w = wn l = 200n	m = mn
 .ends
 
 .subckt bump ib vss wgp wgn wn1 = 400n wn2 = 400n	m1 = 4 m2 = 4
@@ -75,8 +75,8 @@ vout	iout	gnd	dc = 0.9
 .ac dec 10 1 1Meg 
 .tran 1ns 300ns 
 .probe dc I(mb) i(vout)
-+I(XWLR_outter.M4) I(XWLR_innerp.Mgm) Ienlarge_p = par('I(XWLR_outter.M4)/I(XWLR_innerp.Mgm)')
-+I(XWLR_outter.M2) I(XWLR_innern.Mgm) Ienlarge_n = par('I(XWLR_outter.M2)/I(XWLR_innern.Mgm)')
++I(XWLR_outter.M3) I(XWLR_outter.M4) I(XWLR_innerp.Mgm) Ienlarge_p = par('I(XWLR_outter.M4)/I(XWLR_innerp.Mgm)')
++I(XWLR_outter.M1) I(XWLR_outter.M2) I(XWLR_innern.Mgm) Ienlarge_n = par('I(XWLR_outter.M2)/I(XWLR_innern.Mgm)')
 +Idiff_inner = par('I(vsn)-I(vsp)')	
 +Idiff_outter = par('I(vsno)-I(vspo)')
 +IoutIb = par('Idiff_outter/I(Mb)')
