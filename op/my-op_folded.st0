@@ -3,7 +3,7 @@
  lic:
  lic: FLEXlm: v8.5b
  lic: USER:   timer                HOSTNAME: timer-PC
- lic: HOSTID: "00ff0068da08 902b349f3511" PID:      19068
+ lic: HOSTID: "00ff0068da08 902b349f3511" PID:      16660
  lic: Using FLEXlm license file:
  lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
  lic: Checkout 1 hspice
@@ -11,7 +11,7 @@
  lic: NODE LOCKED license on hostid "00ff0068da08 902b349f3511"
  lic:
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
- init: begin read circuit files,  cpu clock=  1.17E-01
+ init: begin read circuit files,  cpu clock=  1.28E-01
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
@@ -35,20 +35,23 @@
        option dcon     =     1.00
        option conver   =     1.00
        option gmindc   =    1.000E-12
- init: end read circuit files,  cpu clock=  2.05E-01 memory=    150 kb
- init: begin check errors,  cpu clock=  2.05E-01
- init: end check errors,  cpu clock=  2.22E-01 memory=    343 kb
- init: begin setup matrix, pivot=    10 cpu clock=  2.22E-01
-       establish matrix -- done,  cpu clock=  2.30E-01 memory=    351 kb
-       re-order matrix -- done,  cpu clock=  2.33E-01 memory=    352 kb
- init: end setup matrix,  cpu clock=  2.37E-01 memory=    368 kb
- dcop: begin dcop,  cpu clock=  2.41E-01
+ init: end read circuit files,  cpu clock=  2.39E-01 memory=    150 kb
+ init: begin check errors,  cpu clock=  2.39E-01
+ init: end check errors,  cpu clock=  2.57E-01 memory=    344 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  2.57E-01
+       establish matrix -- done,  cpu clock=  2.64E-01 memory=    352 kb
+       re-order matrix -- done,  cpu clock=  2.68E-01 memory=    353 kb
+ init: end setup matrix,  cpu clock=  2.71E-01 memory=    369 kb
+ output: c:\users\timer\documents\github\hspice\op\my-op_folded.sw0
+ sweep: dc dc0    begin, #sweeps=  41 cpu clock=  2.78E-01
+ sweep: dc dc0    end,  cpu clock=  2.86E-01 memory=    369 kb
+ dcop: begin dcop,  cpu clock=  2.91E-01
  dcop: begin pseudo transient
  dcop: ...succeeded
  dcop: end pseudo transient
- dcop: end dcop,  cpu clock=  2.57E-01 memory=    368 kb  tot_iter=      51
+ dcop: end dcop,  cpu clock=  3.40E-01 memory=    369 kb  tot_iter=      48
  output: c:\users\timer\documents\github\hspice\op\my-op_folded.ac0
- sweep: ac ac0    begin, #sweeps=  81 cpu clock=  2.65E-01
+ sweep: ac ac0    begin, #sweeps=  81 cpu clock=  3.47E-01
  ac: frequency=    1.26E+01
  ac: frequency=    6.31E+01
  ac: frequency=    3.98E+02
@@ -60,7 +63,7 @@
  ac: frequency=    2.51E+07
  ac: frequency=    1.58E+08
  ac: frequency=    1.00E+09
- sweep: ac ac0    end,  cpu clock=  3.23E-01 memory=    370 kb
+ sweep: ac ac0    end,  cpu clock=  3.89E-01 memory=    371 kb
 >info:         ***** hspice job concluded
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
  lic: Release hspice token(s)
