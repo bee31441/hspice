@@ -1,8 +1,9 @@
-*MyOp_folded
+***MyOp_folded
+
 .protect
 .lib 'rf018.l' tt
 .unprotect
-.option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=   1.0000E-12
+.option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=1.0000E-12
 
 ***netlist***
 
@@ -28,8 +29,10 @@ vb 		cmfb	gnd dc bias
 *vb1		b1		gnd dc = 0.3
 
 ***input***
-vinp vinp gnd dc comon ac 1
-vinn vinn gnd dc comon ac 1
+vinp vinp gnd dc comon ac 0.5
+vinn vinn gnd dc comon ac -0.5
+
+***output***
 
 
 *mt	vdt	vgt	vdd	vdd	pch	w = 10u l = 1u m = 4 *vgs=0.3: (vds, id) = (0.6, 97.6n)(0.2, 93.6n)
@@ -40,13 +43,14 @@ vtg	vgt	gnd dc = 0.3v
 vtd	vdt	gnd dc = 0.2v
 
 .op
+
 ***sweep***
 
 ***testing***
-*.dc 
-*.dc vtd 0.8 0.4 0.01
+.dc vtd 0.8 0.4 0.01
 ***probe&measuring***
 .ac dec 10 10 1g
+.pz v(2) vinp
 .probe I(mt)
 
 

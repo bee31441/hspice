@@ -1,18 +1,18 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "21:50:17 11/26/2015 "
+* "rundate" "22:42:22 11/26/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\op\my-op_folded.sp "
-* "runtitle" "*myop_folded"
+* "runtitle" "***myop_folded"
 * time =    0.            
 * temperature =   25.0000        
 *** BEGIN: Saved Operating Point ***                     
 .option 
 + gmindc=   1.0000p       
 .nodeset
-+ 1 = 298.2747m       
-+ 2 = 298.2747m       
-+ b = 801.7584m       
++ 1 = 312.3256m       
++ 2 = 800.0000m       
++ b = 816.3465m       
 + cmfb = 700.0000m       
 + vdd =   1.0000        
 + vdt = 200.0000m       

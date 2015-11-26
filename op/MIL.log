@@ -1,0 +1,75 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\op\\my-op_folded.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A0","vm(1)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlDelCurve(1, node(D0,"A0","vm(1)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlAddCurve(1, node(D0,"A0","vm(2)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+updateAll();
+t
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlDelCurve(1, node(D0,"A0","vm(2)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlAddCurve(1, node(D0,"A0","im(vout)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+quit();
+exit
+pnlDeletePane(1, 1);
+nil
+nil
