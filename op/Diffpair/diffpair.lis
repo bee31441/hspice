@@ -1,0 +1,229 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\op\diffpair\diffpair.sp    
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .option post acout=0 accurate=1 dcon=1 converge=1 gmindc=1.0000e-12
+ *.option dccap=1 accurate=1 post
+
+ ***netlist***
+ m1	1	vinp	b		b		pch	w = 18.6u l = 0.2u m = 2
+ m2	2	vinn	b		b		pch	w = 18.6u l = 0.2u m = 2
+ m5	1	b1		vss	vss	nch	w = 7.2u l = 0.2u m = 1
+ m6	2	b1		vss	vss	nch	w = 7.2u l = 0.2u m = 1
+ mb	b	cmfb	vdd	vdd	pch	w = 10u  l = 1u	  m = 2
+ *low f gain = 26.9db (22.13)
+ *kappa ~= 0.7
+
+
+ ***param***
+ .param 
+ +comon		= 0.5
+ +bias			= 0.6
+ +supplyp	= 1.0
+ +supplyn	= 0
+ +diff			= 0
+
+ ***source***
+ vd		vdd 	gnd dc supplyp
+ vs		vss 	gnd dc supplyn
+ *vocm	vocm	gnd dc comon 
+ vb 		cmfb	gnd dc bias *ac = 1 
+ vb1		b1		gnd dc = 0.3
+
+
+ ***input***
+ vinp vinp gnd dc = 'comon+diff' ac = 1
+ vinn vinn gnd dc = 'comon-diff' ac = 1 180
+
+ ***output***
+ *vo	2	gnd dc = 0.5v
+
+ ***testing
+ *mt	vdt	vgt	vdd	vdd	pch	w = 10u l = 1u m = 2 			*vgs=0.4: (vds, id) = (0.2, 0.5546u)(0.4, 0.565u); 
+ .param wp = 19u wn = 7.2u
+ *mt	vdt	vgt	vdd	vdd	pch	w = 19u l = 0.2u m = 2  *vgs=0.3: (vds, id) = (0.4, 281n)
+ *mt	vdt	vgt	vss	vss	nch	w = 7.2 l = 0.2u
+ *mt	vdt	vgt	vdd	vdd	pch	w = 6u l = 0.2u m = 2 *vgs=0.35:	(vds, id) = (0.15, 275.72n)
+ *mt	vdt	vgt	vss	vss	nch	w = 7.8u l = 0.2u			*vgs=0.3:		(vds, id) = (0.25, 277.572n)
+ mt	vdt	vgt	vss	vss	nch	w = 30u l = 0.2u			*vgs=0.25:	(vds, id) = (0.25, 278.555n)
+ vtg	vgt	gnd dc = 0.25v
+ vtd	vdt	gnd dc = 0.25v
+
+ .op
+
+ ***sweep***
+ .dc diff -0.5 0.5 0.01
+ ***testing***
+ *.dc vtd 0.2 0.4 0.01 *sweep wn 1u 20u 200n
+
+ ***probe&measuring***
+ .ac dec 1000 10 1g
+ .pz v(2) vinp
+ .probe dc i(mt) i(m1) i(m2)
+ .probe ac gain=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')
+
+
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+
+ 
+      
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***diffpair
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       = 374.1390m 0:2       = 374.1390m 0:b       = 799.7175m
+ +0:b1      = 300.0000m 0:cmfb    = 600.0000m 0:vdd     =   1.0000 
+ +0:vdt     = 250.0000m 0:vgt     = 250.0000m 0:vinn    = 500.0000m
+ +0:vinp    = 500.0000m 0:vss     =   0.     
+
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vd       0:vs       0:vb       0:vb1      0:vinp     0:vinn    
+  volts      1.0000     0.       600.0000m  300.0000m  500.0000m  500.0000m
+  current -554.6716n  833.2274n    0.         0.         0.         0.     
+  power    554.6716n    0.         0.         0.         0.         0.     
+
+ subckt                        
+ element  0:vtg      0:vtd     
+  volts    250.0000m  250.0000m
+  current    0.      -278.5558n
+  power      0.        69.6390n
+
+     total voltage source power dissipation=  624.3106n       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt                                                                    
+ element  0:m1       0:m2       0:m5       0:m6       0:mb       0:mt      
+ model    0:pch.4    0:pch.4    0:nch.8    0:nch.8    0:pch.3    0:nch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id      -277.3341n -277.3341n  277.3350n  277.3350n -554.6708n  278.5553n
+  ibs      3.966e-23  3.966e-23 -4.699e-23 -4.699e-23  8.071e-23 -4.540e-23
+  ibd       94.9212a   94.9212a  -23.0481a  -23.0481a   51.8996a  -92.3546a
+  vgs     -299.7175m -299.7175m  300.0000m  300.0000m -400.0000m  250.0000m
+  vds     -425.5786m -425.5786m  374.1390m  374.1390m -200.2825m  250.0000m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -501.6577m -501.6577m  511.8106m  511.8106m -458.7432m  511.0117m
+  vdsat    -42.2895m  -42.2895m   40.5316m   40.5316m  -51.3037m   40.1997m
+  vod      201.9402m  201.9402m -211.8106m -211.8106m   58.7432m -261.0117m
+  beta      18.0090m   18.0090m   20.3713m   20.3713m    1.4883m   85.2766m
+  gam eff  647.5761m  647.5761m  881.3771m  881.3771m  497.9476m  878.9520m
+  gm         7.4030u    7.4030u    7.3940u    7.3940u   12.4525u    7.7424u
+  gds      157.8247n  157.8247n  177.8403n  177.8403n   80.5176n  217.8221n
+  gmb        2.5550u    2.5550u    2.1950u    2.1950u    4.0958u    2.3322u
+  cdtot     48.1552f   48.1552f    8.5850f    8.5850f   27.5946f   36.3842f
+  cgtot     38.6789f   38.6789f    8.2198f    8.2198f   58.6127f   34.4058f
+  cstot     54.3148f   54.3148f    9.5707f    9.5707f   44.8439f   39.3181f
+  cbtot     92.1929f   92.1929f   15.8036f   15.8036f   80.8485f   66.1111f
+  cgs       12.2874f   12.2874f    2.6496f    2.6496f   18.8862f   11.0063f
+  cgd       12.1941f   12.1941f    2.6366f    2.6366f    6.5679f   10.9928f
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ 
+ 
+    input =  0:vinp          output = v(2)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ -5.91582x       0.              -941.531k       0.              
+ -8.92011x       0.              -1.41968x       0.              
+ -50.2024x       0.              -7.98996x       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ -8.93845x       0.              -1.42260x       0.              
+ -75.8746x       0.              -12.0758x       0.              
+ -210.258x       0.              -33.4635x       0.              
+ 
+  ***** constant factor = 2.02829m
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***diffpair
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      27  # elements   =      17
+  # resistors   =       0  # capacitors =       0  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      11
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       6  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.03           1          79
+  dc sweep           0.03         101         283
+  ac analysis        0.26        8001        8001
+  readin             0.18
+  errchk             0.02
+  setup              0.02
+  output             0.00
+
+
+           total memory used          492  kbytes
+           total cpu time            0.58 seconds
+           total elapsed time           1 seconds
+           job started at     22:24:18 11/27/2015
+           job ended   at     22:24:19 11/27/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

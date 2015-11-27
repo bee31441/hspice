@@ -1,4 +1,4 @@
-***MyOp_folded
+***MyOp_2stage
 
 .protect
 .lib 'rf018.l' tt
@@ -6,12 +6,14 @@
 .option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=1.0000E-12
 
 ***netlist***
-
+***1st stage***
 M1	1	Vinp	b		b		pch	W = 2.9u L = 0.2u m = 2
 M2	2	Vinn	b		b		pch	W = 2.9u L = 0.2u m = 2
-M5	1	1		vss	vss	nch	W = 1.8u L = 0.2u m = 1
-M6	2	1		vss	vss	nch	W = 1.8u L = 0.2u m = 1
+M5	1	b1		vss	vss	nch	W = 1.8u L = 0.2u m = 1
+M6	2	b1		vss	vss	nch	W = 1.8u L = 0.2u m = 1
 Mb	b	cmfb	vdd	vdd	pch	W = 10u  L = 1u	  m = 4
+
+***2nd stage***
 
 
 ***param***
@@ -20,17 +22,18 @@ Mb	b	cmfb	vdd	vdd	pch	W = 10u  L = 1u	  m = 4
 +bias			= 0.7
 +supplyp	= 1.0
 +supplyn	= 0
++diff			= 0
 
 ***source***
 vd		vdd 	gnd dc supplyp
 vs		vss 	gnd dc supplyn
 *vocm	vocm	gnd dc comon 
 vb 		cmfb	gnd dc bias 
-*vb1		b1		gnd dc = 0.3
+vb1		b1		gnd dc = 0.3
 
 ***input***
-vinp vinp gnd dc comon ac 0.5
-vinn vinn gnd dc comon ac -0.5
+vinp vinp gnd dc = 'comon+diff' ac 0.5
+vinn vinn gnd dc = 'comon-diff' ac -0.5
 
 ***output***
 
@@ -47,11 +50,11 @@ vtd	vdt	gnd dc = 0.2v
 ***sweep***
 
 ***testing***
-.dc vtd 0.8 0.4 0.01
+.dc diff -0.5 +0.5 0.01
 ***probe&measuring***
 .ac dec 10 10 1g
 .pz v(2) vinp
-.probe I(mt)
+.probe dc I(mt) I(m1) I(m2)
 
 
 .end
