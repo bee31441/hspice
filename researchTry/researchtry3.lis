@@ -14,14 +14,37 @@
 
  .option post acout=0 accurate dcon=1 converge=1 gmindc=   1.0000e-12
  ***netlist***
- mp	inx	vb	vdd	vdd pch	w = 10u l = 0.2u
+ mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
  mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
  *cl 	inx	eout 1p
- edc	vg	gnd	opamp	inx ref
+
  *rdc	eo	inx 1000k
  *cdc	eo	inx 1p
  ***output***
- *e0	vo	gnd	opamp	inx	vo
+
+ .subckt	op	vdd	vss	vinn	vinp	vop	b0	b1	
+ mb	b	b0		vdd	vdd	pch	w = 10u  l = 1u	  m = 2
+ m1	1	vinn	b		b		pch	w = 30u l = 0.4u m = 2
+ m2	2	vinp	b		b		pch	w = 30u l = 0.4u m = 2
+ m5	1	b1		vss	vss	nch	w = 13u l = 0.4u m = 1
+ m6	2	b1		vss	vss	nch	w = 13u l = 0.4u m = 1
+ m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
+ m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
+ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
+ m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
+ .ends
+
+ xopf	vdd	vss	vinn	vinp	vop	b0	b1	op
+ .param 
+ +bias			= 0.6
+ +bias2		= 0.3
+ vb 		b0		gnd dc bias
+ vb1		b1		gnd dc bias2
+ vref	vinn	gnd dc = 0.5	*496.3104m
+ v1		vinp	inx dc = 0
+ v2		vop		vg  dc = 0
+
+
  ***source***
  vd		vdd	gnd dc = 1v
  vs		vss	gnd dc = 0v
@@ -29,12 +52,11 @@
  *vin		vg	gnd dc = 0.3v ac = 1
  iin	gnd inx dc = 10n
 
- vref	ref	gnd dc = 411.3907m
  ***
  .op
  .dc iin 1n	100n	0.1n
  *.ac dec 100 0.1	1000
- .probe ac vdb(inx)	i(edc)	i(cdc)
+ .probe ac vdb(inx)
 
 
  **warning**  the accurate option increases  the cpu time but the results
@@ -43,238 +65,21 @@
  lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
      ft= 200.00m relmos=  10.00m
  (used for FFT control ) fft_accurate= 1
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xopf.                           op                 1.00 
  
 
- **warning** could not find branch element     0:cdc             
-      branch - output ignored
  
       
- convergence problems in dc sweep curves at  1.94000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  2.08000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  2.57000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  2.71000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  2.72000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  2.84000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  3.25000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  4.17000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  4.53000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  4.88000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  5.15000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  5.83000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  5.93000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.24000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.25000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.31000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.39000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.52000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  6.92000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.00000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.18000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.20000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.32000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.34000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.40000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.57000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.64000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.78000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.80000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.83000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.91000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  7.99000E-08
-  resimulating with dc convergence controls
-
- convergence problem in dc sweep curve at 7.99000E-08
- pseudo tran is tried
-
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
- **diagnostic** remove gshunt failed
-  **diagnostic** try to load final result like nodeset
-
- **diagnostic** gmin ramping for pseudo-tran
- final try failed.
-
- convergence problems in dc sweep curves at  8.03000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.04000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.05000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.07000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.08000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.23000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.26000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.27000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.33000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.41000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.49000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.51000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.52000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.54000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.55000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.67000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.84000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.88000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.90000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  8.94000E-08
-  resimulating with dc convergence controls
-
- convergence problem in dc sweep curve at 8.94000E-08
- pseudo tran is tried
-
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
-
- **diagnostic** although this circuit has failed to converge
- to gmindc=   1.000E-12, it did converge to a gmindc=   1.000E-11
-
- convergence problems in dc sweep curves at  9.01000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.02000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.13000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.14000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.16000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.17000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.20000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.27000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.31000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.39000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.45000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.53000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.54000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.56000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.61000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.67000E-08
-  resimulating with dc convergence controls
-
- convergence problems in dc sweep curves at  9.78000E-08
-  resimulating with dc convergence controls
+  Opening plot unit= 79
+ file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa0      
 
   *** initial damped pseudo transient completed. ***
   *** final try started ***
@@ -286,19 +91,28 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:inx     = 411.3907m 0:ref     = 411.3907m 0:vb      = 700.0000m
- +0:vdd     =   1.0000  0:vg      = 310.8624m 0:vss     =   0.     
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9661m
+ +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vg      = 303.9628m
+ +0:vinn    = 500.0000m 0:vinp    = 499.9661m 0:vop     = 303.9628m
+ +0:vss     =   0.      1:1       = 601.5031m 1:2       = 603.1507m
+ +1:b       = 797.6638m 1:von     = 399.0942m
 
 
  ****  voltage sources
 
- subckt                                              
- element  0:vd       0:vs       0:vbias    0:vref    
-  volts      1.0000     0.       700.0000m  411.3907m
-  current  -81.9943n  109.4875n    0.         0.     
-  power     81.9943n    0.         0.         0.     
+ subckt                                                                    
+ element  0:vb       0:vb1      0:vref     0:v1       0:v2       0:vd      
+  volts    600.0000m  300.0000m  500.0000m    0.         0.         1.0000 
+  current    0.         0.         0.         0.         0.        -1.6263u
+  power      0.         0.         0.         0.         0.         1.6263u
 
-     total voltage source power dissipation=   81.9943n       watts
+ subckt                        
+ element  0:vs       0:vbias   
+  volts      0.       700.0000m
+  current    1.6363u    0.     
+  power      0.         0.     
+
+     total voltage source power dissipation=    1.6263u       watts
 
 
 
@@ -306,52 +120,68 @@
 
  subckt             
  element  0:iin     
-  volts   -411.3907m
+  volts   -499.9661m
   current   10.0000n
-  power      4.1139n
+  power      4.9997n
 
 
-     total current source power dissipation=   4.1139n       watts
-
- **** voltage-controlled voltage sources
-
-
- subckt             
- element  0:edc     
-  volts    310.8624m
-  current    0.     
-
-
-
+     total current source power dissipation=   4.9997n       watts
 
 
  **** mosfets
 
 
- subckt                        
- element  0:mp       0:mnw     
- model    0:pch.4    0:nch.8   
- region       Cutoff     Cutoff
-  id       -81.9932n  109.4866n
-  ibs      1.193e-23 -2.031e-23
-  ibd       25.9605a   -8.7605a
-  vgs     -300.0000m  310.8624m
-  vds     -588.6093m  411.3907m
-  vbs        0.         0.     
-  vth     -501.0523m  519.1913m
-  vdsat    -42.3080m   41.0537m
-  vod      201.0523m -208.3288m
-  beta       4.8395m    6.8706m
-  gam eff  647.5761m  897.6890m
-  gm         2.1728u    2.8975u
-  gds       42.3485n   67.6452n
-  gmb      747.0403n  872.5761n
-  cdtot     12.5801f    3.0517f
-  cgtot     10.4010f    2.8666f
-  cstot     14.6923f    3.4285f
-  cbtot     24.5161f    5.6807f
-  cgs        3.3032f  919.0577a
-  cgd        3.2765f  914.0424a
+ subckt                         xopf       xopf       xopf       xopf      
+ element  0:mp       0:mnw      1:mb       1:m1       1:m2       1:m5      
+ model    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4    0:nch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       -86.0774n   96.0774n -554.8351n -277.3650n -277.4693n  277.3646n
+  ibs      1.248e-23 -1.782e-23  8.073e-23  3.936e-23  3.938e-23 -4.594e-23
+  ibd       28.4605a   -8.9830a   51.9013a  151.8471a  151.8422a -107.4587a
+  vgs     -300.0000m  303.9628m -400.0000m -297.6638m -297.6976m  300.0000m
+  vds     -500.0339m  499.9661m -202.3362m -196.1607m -194.5131m  601.5031m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -501.3812m  518.9690m -458.7427m -471.6908m -471.6921m  491.0351m
+  vdsat    -42.2998m   40.9874m  -51.3038m  -41.5020m  -41.5027m   43.9133m
+  vod      201.3812m -215.0062m   58.7427m  174.0270m  173.9945m -191.0351m
+  beta       5.3236m    6.8710m    1.4883m   11.7361m   11.7361m   15.0987m
+  gam eff  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m  556.1233m
+  gm         2.2897u    2.5606u   12.4563u    7.4885u    7.4910u    7.5270u
+  gds       46.5823n   55.0030n   79.4959n   90.3136n   90.8709n   63.2941n
+  gmb      788.8379n  770.4937n    4.0970u    2.5197u    2.5205u    2.1698u
+  cdtot     14.0761f    2.9963f   27.5778f   82.0434f   82.0811f   14.6916f
+  cgtot     11.4399f    2.8684f   58.6118f   84.7993f   84.7991f   18.9523f
+  cstot     16.1411f    3.4273f   44.8448f   87.8160f   87.8166f   17.2107f
+  cbtot     27.1844f    5.6278f   80.8326f  174.9864f  175.0235f   31.6673f
+  cgs        3.6330f  918.1801a   18.8854f   20.1828f   20.1833f    4.8321f
+  cgd        3.6044f  914.0437a    6.5675f   19.6732f   19.6732f    4.7623f
+
+
+
+ subckt   xopf       xopf       xopf       xopf       xopf      
+ element  1:m6       1:m3       1:m4       1:m7       1:m8      
+ model    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       277.4689n -502.1637n -483.2021n  502.1641n  483.2029n
+  ibs     -4.596e-23  7.187e-23  6.917e-23 -8.892e-23 -8.578e-23
+  ibd     -111.8949a   45.9633a   45.5387a  -12.7122a  -12.4080a
+  vgs      300.0000m -398.4969m -396.8493m  399.0942m  399.0942m
+  vds      603.1507m -600.9058m -696.0372m  399.0942m  303.9628m
+  vbs        0.         0.         0.         0.         0.     
+  vth      491.0341m -458.6508m -458.6289m  483.5632m  483.5949m
+  vdsat     43.9133m  -51.0157m  -50.6908m   58.1700m   58.1570m
+  vod     -191.0341m   60.1539m   61.7796m  -84.4690m  -84.5007m
+  beta      15.0987m    1.3402m    1.3277m    1.5707m    1.5278m
+  gam eff  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
+  gm         7.5298u   11.2873u   10.8903u   10.9188u   10.5134u
+  gds       63.2690n   43.0407n   40.7759n   50.6435n   56.8890n
+  gmb        2.1706u    3.7140u    3.5840u    3.1640u    3.0471u
+  cdtot     14.6872f   22.4632f   21.8533f    4.5755f    4.5585f
+  cgtot     18.9523f   52.3503f   51.5161f   10.2857f   10.0185f
+  cstot     17.2107f   39.7052f   38.7371f    6.5270f    6.3576f
+  cbtot     31.6630f   70.1892f   69.1192f   13.7206f   13.4697f
+  cgs        4.8321f   16.5273f   15.8945f    2.4108f    2.3477f
+  cgd        4.7623f    5.8996f    5.8437f    1.3906f    1.3543f
 
 
 
@@ -371,12 +201,12 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      11  # elements   =       8
+  # nodes       =      37  # elements   =      20
   # resistors   =       0  # capacitors =       0  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       0  # vcvs        =       1
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       8
   # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =       2  # U elements  =       0
+  # jfets       =       0  # mosfets    =      11  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
   # S elements  =       0  # P elements =       0  # va device   =       0
 
@@ -384,19 +214,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.03           1         136
-  dc sweep           0.26         991       17328
-  readin             0.19
+  op point           0.03           1         154
+  dc sweep           0.12         991        2009
+  readin             0.17
   errchk             0.02
-  setup              0.02
+  setup              0.03
   output             0.00
 
 
-           total memory used          217  kbytes
-           total cpu time            0.53 seconds
+           total memory used          390  kbytes
+           total cpu time            0.38 seconds
            total elapsed time           1 seconds
-           job started at     13:36:23 11/27/2015
-           job ended   at     13:36:24 11/27/2015
+           job started at     22:22:52 11/28/2015
+           job ended   at     22:22:52 11/28/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

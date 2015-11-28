@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "23:17:50 11/27/2015 "
+* "rundate" "21:44:40 11/28/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\op\my-op_2stage.sp "
 * "runtitle" "***myop_2stage"
 * time =    0.            
@@ -10,17 +10,17 @@
 .option 
 + gmindc=   1.0000p       
 .nodeset
-+ 1 = 509.0510m       
-+ 2 = 509.0510m       
-+ b = 808.3890m       
++ 1 = 602.3164m       
++ 2 = 602.3164m       
++ b = 797.6803m       
 + b1 = 300.0000m       
-+ b2 = 500.0000m       
-+ b3 = 300.0000m       
 + cmfb = 600.0000m       
 + vdd =   1.0000        
-+ vdt = 250.0000m       
-+ vgt = 250.0000m       
++ vdt = 500.0000m       
++ vgt = 398.2605m       
 + vinn = 500.0000m       
 + vinp = 500.0000m       
++ von = 398.2605m       
++ vop = 500.2983m       
 + vss =   0.            
 ***   END: Saved Operating Point ***                     

@@ -4,20 +4,19 @@ nil
 designOpen("c:\\users\\timer\\documents\\github\\hspice\\op\\diffpair\\diffpair.sp");
 "D0"
 t
-pnlAddCurve(1, node(D0,"A0","HERTZ"), node(D0,"A0","HERTZ"));
+pnlAddCurve(1, node(D0,"A0","par(gain)"), node(D0,"A0","HERTZ"));
 nil
-pnlAddCurve(1, node(D0,"A0","par(i(m1)-i(m2))"), node(D0,"A0","HERTZ"));
+pnlAddCurve(1, node(D0,"A0","p(2)","S-1"), node(D0,"A0","HERTZ"));
 nil
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
-pnlDelCurve(1, node(D0,"A0","par(i(m1)-i(m2))"), node(D0,"A0","HERTZ"));
-nil
-pnlDelCurve(1, node(D0,"A0","HERTZ"), node(D0,"A0","HERTZ"));
-nil
-pnlAddCurve(1, node(D0,"A0","par(gain)"), node(D0,"A0","HERTZ"));
-nil
+quit();
+exit
 pnlDeletePane(1, 1);
+nil
+nil
+
 nil
 nil

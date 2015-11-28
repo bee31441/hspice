@@ -6,21 +6,17 @@
 .option post acout=0 accurate=1 dcon=1 CONVERGE=1 GMINDC=1.0000E-12 captab=1
 *.option dccap=1 accurate=1 post
 
+***param***
+.param 
++comon		= 0.5
++bias			= 0.6
++bias2		= 0.3
++supplyp	= 1.0
++supplyn	= 0
++diff			= 0
 ***netlist***
-***stack stage***
-*Mb	b	cmfb	vdd	vdd	pch	W = 10u   L = 1u   m = 2
-*M1	1	Vinp	b		b		pch	W = 28.6u L = 0.4u m = 2
-*M2	2	Vinn	b		b		pch	W = 28.6u L = 0.4u m = 2
-*M3	3	b3		1		1		pch	W = 7.9u  L = 0.4u m = 2
-*M4	4	b3		2		2		pch W = 7.9u  L = 0.4u m = 2
-*M5	3	b2		7		7		nch	W = 27u   L = 0.4u m = 3
-*M6	4	b2		8		8		nch	W = 27u   L = 0.4u m = 3
-*M7	7	b1		vss	vss	nch	W = 14.2u L = 0.4u m = 1
-*M8	8	b1		vss	vss	nch	W = 14.2u L = 0.4u m = 1
-*
-
-***1nd stage***
-Mb	b	cmfb	vdd	vdd	pch	W = 10u  L = 1u	  m = 2
+***1st stage***
+Mb	b	b0	vdd	vdd	pch	W = 10u  L = 1u	  m = 2
 M1	1	Vinn	b		b		pch	W = 30u L = 0.4u m = 2
 M2	2	Vinp	b		b		pch	W = 30u L = 0.4u m = 2
 M5	1	b1		vss	vss	nch	W = 13u L = 0.4u m = 1
@@ -31,64 +27,30 @@ M6	2	b1		vss	vss	nch	W = 13u L = 0.4u m = 1
 *kappa ~= 0.7     
 
 ***2nd stage***
-.param cmin = 0.602
 m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
 m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
 m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
 m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
 
-***C load***
-*Ct b gnd 10f
-
 ***compensation***
 C1	1	von	1000f
 C2	2	vop	1000f
 
-***param***
-.param 
-+comon		= 0.5
-+bias			= 0.6
-+supplyp	= 1.0
-+supplyn	= 0
-+diff			= 0
-
 ***source***
 vd		vdd 	gnd dc supplyp
 vs		vss 	gnd dc supplyn
-*vocm	vocm	gnd dc comon 
-vb 		cmfb	gnd dc bias *ac = 1 
-vb1		b1		gnd dc = 0.3
-*vb2		b2		gnd dc = 0.5
-*vb3		b3		gnd dc = 0.3
+vb 		0	gnd dc bias
+vb1		b1		gnd dc bias2
+
 
 ***input***
 vinp vinp gnd dc = 'comon+diff' ac = 1
 vinn vinn gnd dc = 'comon-diff' ac = 1 -180
-*vac  vop	gnd	ac = 1
-***input_2ndstage***
-*v1 1 gnd dc = 602.3165m ac = 1
-*v2 2 gnd dc = 602.3165m ac = 1 180
-***output***
-*Vo	2	gnd dc = 0.5v
-
-***testing
-*mt	vdt	vgt	vdd	vdd	pch	w = 14.2u l = 1u m = 2 		
-.param wt = 10u
-*mt	vdt	vgt	vdd	vdd	pch	w = wt l = 0.4u m = 2  
-mt1	vdt	vgt	vdd	vdd	pch	w = 17.8u l = 1u m = 1    *510n
-mt	vdt	vgt	vss	vss	nch	w = 3.9u l = 1u	m = 1	
-*mt	vdt	vgt	vss	vss	nch	w = 21.3u l = 0.2u m = 2			
-vtg	vgt	gnd dc = 0.3982605v
-vtd	vdt	gnd dc = 0.5v
 
 .op
 
 ***sweep***
 .dc diff -0.5 0.5 0.01
-*.dc x -0.5u 0.5u 0.1u sweep y -0.5u 0.5u 0.1u
-***testing***
-*.dc wt 1u 40u 1000n
-
 ***probe&measuring***
 .ac dec 1000 10 1g
 .tf v(1) vinp
