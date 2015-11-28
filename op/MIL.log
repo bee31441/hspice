@@ -4,77 +4,98 @@ nil
 designOpen("c:\\users\\timer\\documents\\github\\hspice\\op\\my-op_2stage.sp");
 "D0"
 t
+pnlAddCurve(1, node(D0,"A0","par(gainall)"), node(D0,"A0","HERTZ"));
+nil
+pnlAddCurve(1, node(D0,"A0","par(phaseall)"), node(D0,"A0","HERTZ"));
+nil
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
 updateAll();
 t
-pnlAddCurve(1, node(D0,"A1","par(v(3)-v(4))"), node(D0,"A1","diff"));
-nil
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
-pnlAddPane();
+updateAll();
+t
+pnlUnselectPane(1, 0);
 nil
+pnlSelectPane(1);
 nil
-2
-pnlAddCurve(2, node(D0,"A0","par(gain)"), node(D0,"A0","HERTZ"));
+updateAll();
+t
+pnlUnselectPane(1, 0);
 nil
-pnlUnselectPane(2, 0);
+pnlSelectPane(1);
 nil
-pnlSelectPane(2);
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
 nil
 updateAll();
 t
 updateAll();
 t
-pnlUnselectPane(2, 0);
+updateAll();
+t
+pnlUnselectPane(1, 0);
 nil
-pnlSelectPane(2);
-nil
-pnlUnselectPane(2, 0);
-nil
-pnlSelectPane(2);
+pnlSelectPane(1);
 nil
 updateAll();
 t
-pnlUnselectPane(2, 0);
+updateAll();
+t
+pnlUnselectPane(1, 0);
 nil
-pnlSelectPane(2);
+pnlSelectPane(1);
 nil
 updateAll();
 t
-pnlUnselectPane(2, 0);
-nil
-pnlSelectPane(1);
-nil
-pnlDeletePane(1, 0);
-nil
-nil
-pnlSelectPane(1);
-nil
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
+updateAll();
+t
+updateAll();
+t
+updateAll();
+t
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
+updateAll();
+t
 pnlUnselectPane(1, 0);
 nil
 pnlSelectPane(1);
 nil
-pnlUnselectPane(1, 0);
-nil
-pnlSelectPane(1);
-nil
-pnlUnselectPane(1, 0);
-nil
-pnlSelectPane(1);
-nil
+updateAll();
+t
 pnlDeletePane(1, 1);
 nil
 nil

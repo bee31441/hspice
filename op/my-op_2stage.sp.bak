@@ -3,30 +3,47 @@
 .protect
 .lib 'rf018.l' tt
 .unprotect
-.option post acout=0 accurate=1 dcon=1 CONVERGE=1 GMINDC=1.0000E-12
+.option post acout=0 accurate=1 dcon=1 CONVERGE=1 GMINDC=1.0000E-12 captab=1
 *.option dccap=1 accurate=1 post
 
 ***netlist***
-***1st stage***
-*Mb	b	cmfb	vdd	vdd	pch	W = 14.2u   L = 1u   m = 2
-*M1	1	Vinp	b		b		pch	W = 17u     L = 0.2u m = 4
-*M2	2	Vinn	b		b		pch	W = 17u     L = 0.2u m = 4
-*M3	3	b3		1		1		pch	W = 5u      L = 0.2u m = 4
-*M4	4	b3		2		2		pch W = 5u      L = 0.2u m = 4
-*M5	3	b2		7		7		nch	W = 13.3u  L = 0.2u m = 2
-*M6	4	b2		8		8		nch	W = 13.3u  L = 0.2u m = 2
-*M7	7	b1		vss	vss	nch	W = 11u  L = 0.2u m = 1
-*M8	8	b1		vss	vss	nch	W = 11u  L = 0.2u m = 1
-* gain = 25db
+***stack stage***
+*Mb	b	cmfb	vdd	vdd	pch	W = 10u   L = 1u   m = 2
+*M1	1	Vinp	b		b		pch	W = 28.6u L = 0.4u m = 2
+*M2	2	Vinn	b		b		pch	W = 28.6u L = 0.4u m = 2
+*M3	3	b3		1		1		pch	W = 7.9u  L = 0.4u m = 2
+*M4	4	b3		2		2		pch W = 7.9u  L = 0.4u m = 2
+*M5	3	b2		7		7		nch	W = 27u   L = 0.4u m = 3
+*M6	4	b2		8		8		nch	W = 27u   L = 0.4u m = 3
+*M7	7	b1		vss	vss	nch	W = 14.2u L = 0.4u m = 1
+*M8	8	b1		vss	vss	nch	W = 14.2u L = 0.4u m = 1
+*
+
+***1nd stage***
+Mb	b	cmfb	vdd	vdd	pch	W = 10u  L = 1u	  m = 2
+M1	1	Vinn	b		b		pch	W = 30u L = 0.4u m = 2
+M2	2	Vinp	b		b		pch	W = 30u L = 0.4u m = 2
+M5	1	b1		vss	vss	nch	W = 13u L = 0.4u m = 1
+M6	2	b1		vss	vss	nch	W = 13u L = 0.4u m = 1
+**low f gain = 34.5db 
+* for subthreshold diffpair. gain do little with Id. it is more related to Leff and Vds of output mos(about output resistance)
+* gds is proportional to 1/leff & vds 
+*kappa ~= 0.7     
 
 ***2nd stage***
-M1	1	Vinp	b		b		pch	W = 17.5u L = 0.2u m = 4
-M2	2	Vinn	b		b		pch	W = 17.5u L = 0.2u m = 4
-M5	1	b1		vss	vss	nch	W = 14u L = 0.2u m = 1
-M6	2	b1		vss	vss	nch	W = 14u L = 0.2u m = 1
-Mb	b	cmfb	vdd	vdd	pch	W = 22u  L = 1u	  m = 2
-*low f gain = 26.9db (22.13)
-*kappa ~= 0.7
+.param cmin = 0.602
+m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
+m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
+m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
+m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
+
+***C load***
+*Ct b gnd 10f
+
+***compensation***
+C1	1	von	1000f
+C2	2	vop	1000f
+
 ***param***
 .param 
 +comon		= 0.5
@@ -41,38 +58,84 @@ vs		vss 	gnd dc supplyn
 *vocm	vocm	gnd dc comon 
 vb 		cmfb	gnd dc bias *ac = 1 
 vb1		b1		gnd dc = 0.3
-vb2		b2		gnd dc = 0.5
-vb3		b3		gnd dc = 0.3
+*vb2		b2		gnd dc = 0.5
+*vb3		b3		gnd dc = 0.3
 
 ***input***
 vinp vinp gnd dc = 'comon+diff' ac = 1
-vinn vinn gnd dc = 'comon-diff' ac = 1 180
-
+vinn vinn gnd dc = 'comon-diff' ac = 1 -180
+*vac  vop	gnd	ac = 1
+***input_2ndstage***
+*v1 1 gnd dc = 602.3165m ac = 1
+*v2 2 gnd dc = 602.3165m ac = 1 180
 ***output***
 *Vo	2	gnd dc = 0.5v
 
 ***testing
-*mt	vdt	vgt	vdd	vdd	pch	w = 14.2u l = 1u m = 2 			*vgs=0.4: (vds, id) = (0.2, 0.7878u) 
-.param wp = 19u wn = 7.2u
-*mt	vdt	vgt	vdd	vdd	pch	w = 17u l = 0.2u m = 4  *vgs=0.3: (vds, id) = (0.2, 423.65n)
-*mt	vdt	vgt	vdd	vdd	pch	w = 4u l = 0.2u m = 4 *vgs=0.35:	(vds, id) = (0.15, 365.9n)
-*mt	vdt	vgt	vss	vss	nch	w = 11u l = 0.2u			*vgs=0.3:		(vds, id) = (0.25, 399.25n)
-mt	vdt	vgt	vss	vss	nch	w = 21.3u l = 0.2u m = 2			*vgs=0.25:	(vds, id) = (0.25, 395.5163n)
-vtg	vgt	gnd dc = 0.25v
-vtd	vdt	gnd dc = 0.25v
+*mt	vdt	vgt	vdd	vdd	pch	w = 14.2u l = 1u m = 2 		
+.param wt = 10u
+*mt	vdt	vgt	vdd	vdd	pch	w = wt l = 0.4u m = 2  
+mt1	vdt	vgt	vdd	vdd	pch	w = 17.8u l = 1u m = 1    *510n
+mt	vdt	vgt	vss	vss	nch	w = 3.9u l = 1u	m = 1	
+*mt	vdt	vgt	vss	vss	nch	w = 21.3u l = 0.2u m = 2			
+vtg	vgt	gnd dc = 0.3982605v
+vtd	vdt	gnd dc = 0.5v
 
 .op
 
 ***sweep***
-*.dc diff -0.5 0.5 0.01
+.dc diff -0.5 0.5 0.01
+*.dc x -0.5u 0.5u 0.1u sweep y -0.5u 0.5u 0.1u
 ***testing***
-.dc vtd 0.2 0.4 0.01 *sweep wn 1u 20u 200n
+*.dc wt 1u 40u 1000n
 
 ***probe&measuring***
 .ac dec 1000 10 1g
-.pz v(2) vinp
-.probe dc I(mt) I(m1) I(m2)	par('v(3)-v(4)')
-.probe ac gain=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')
+.tf v(1) vinp
+.pz v(vop) vinp
+.probe dc I(mt) I(m1) I(m2)
+.probe ac I(vac)	cap(von)
++gain1st=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')	phase1st=par('vp(2,1)')
++gainall=par('Vdb(vop)-Vdb(vinp,vinn)')		phaseall=par('vp(vop)')
 
 
 .end
+
+
+
+*    input =  0:vinp          output = v(vop)
+* 
+*       poles (rad/sec)                 poles ( hertz)
+* real            imag            real            imag            
+* -167.717k       0.              -26.6930k       0.              
+* -682.309k       0.              -108.593k       0.  	 might be 1            
+* -18.9886x       0.              -3.02213x       0.     output node         
+* -40.0808x       0.              -6.37905x       0.     point b         
+* -270.172x       0.              -42.9993x       0.              
+* 
+*       zeros (rad/sec)                 zeros ( hertz)
+* real            imag            real            imag            
+* -707.663k       -118.143        -112.628k       -18.8030   might at 1&2     
+* -39.7089x       71.2964         -6.31986x       11.3472         
+* 205.758x        0.              32.7474x        0.              
+* -222.703x       0.              -35.4443x       0.              
+* 1.85816g        0.              295.735x        0.         
+*
+*
+***1st stage***
+*    input =  0:vinp          output = v(2,1)
+* 
+*       poles (rad/sec)                 poles ( hertz)
+* real            imag            real            imag            
+* -1.59030x       0.              -253.104k       0.              
+* -1.85209x       0.              -294.769k       0.              
+* -26.8240x       0.              -4.26918x       0.              
+* 
+*       zeros (rad/sec)                 zeros ( hertz)
+* real            imag            real            imag            
+* -1.84707x       0.              -293.970k       0.              
+* -23.8712x       0.              -3.79922x       0.              
+* 97.7912x        0.              15.5640x        0.      
+*
+*
+***2nd stage***

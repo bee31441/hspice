@@ -1,7 +1,7 @@
 pnlAddPane();
 nil
 1
-designOpen("c:\\users\\timer\\documents\\github\\hspice\\researchtry\\researchtry.sp");
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\researchtry\\researchtry3.sp");
 "D0"
 t
 quit();

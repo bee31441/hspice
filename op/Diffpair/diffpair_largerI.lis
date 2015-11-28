@@ -1,0 +1,254 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\op\diffpair\diffpair_better
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .option post acout=0 accurate=1 dcon=1 converge=1 gmindc=1.0000e-12
+ *.option dccap=1 accurate=1 post
+
+ ***netlist***
+ ***1st stage***
+ *mb	b	cmfb	vdd	vdd	pch	w = 14.2u   l = 1u   m = 2
+ *m1	1	vinp	b		b		pch	w = 17u     l = 0.2u m = 4
+ *m2	2	vinn	b		b		pch	w = 17u     l = 0.2u m = 4
+ *m3	3	b3		1		1		pch	w = 5u      l = 0.2u m = 4
+ *m4	4	b3		2		2		pch w = 5u      l = 0.2u m = 4
+ *m5	3	b2		7		7		nch	w = 13.3u  l = 0.2u m = 2
+ *m6	4	b2		8		8		nch	w = 13.3u  l = 0.2u m = 2
+ *m7	7	b1		vss	vss	nch	w = 11u  l = 0.2u m = 1
+ *m8	8	b1		vss	vss	nch	w = 11u  l = 0.2u m = 1
+ * gain = 25db
+
+ ***2nd stage***
+ m1	1	vinp	b		b		pch	w = 17.5u l = 0.2u m = 4
+ m2	2	vinn	b		b		pch	w = 17.5u l = 0.2u m = 4
+ m5	1	b1		vss	vss	nch	w = 14.2u l = 0.2u m = 1
+ m6	2	b1		vss	vss	nch	w = 14.2u l = 0.2u m = 1
+ mb	b	cmfb	vdd	vdd	pch	w = 22u  l = 1u	  m = 2
+ *low f gain = 26.9db (22.13)
+ *kappa ~= 0.7
+ ***param***
+ .param 
+ +comon		= 0.5
+ +bias			= 0.6
+ +supplyp	= 1.0
+ +supplyn	= 0
+ +diff			= 0
+
+ ***source***
+ vd		vdd 	gnd dc supplyp
+ vs		vss 	gnd dc supplyn
+ *vocm	vocm	gnd dc comon 
+ vb 		cmfb	gnd dc bias *ac = 1 
+ vb1		b1		gnd dc = 0.3
+ vb2		b2		gnd dc = 0.5
+ vb3		b3		gnd dc = 0.3
+
+ ***input***
+ vinp vinp gnd dc = 'comon+diff' ac = 1
+ vinn vinn gnd dc = 'comon-diff' ac = 1 180
+
+ ***output***
+ *vo	2	gnd dc = 0.5v
+
+ ***testing
+ *mt	vdt	vgt	vdd	vdd	pch	w = 14.2u l = 1u m = 2 			*vgs=0.4: (vds, id) = (0.2, 0.7878u) 
+ .param wp = 19u wn = 7.2u
+ *mt	vdt	vgt	vdd	vdd	pch	w = 17u l = 0.2u m = 4  *vgs=0.3: (vds, id) = (0.2, 423.65n)
+ *mt	vdt	vgt	vdd	vdd	pch	w = 4u l = 0.2u m = 4 *vgs=0.35:	(vds, id) = (0.15, 365.9n)
+ *mt	vdt	vgt	vss	vss	nch	w = 11u l = 0.2u			*vgs=0.3:		(vds, id) = (0.25, 399.25n)
+ mt	vdt	vgt	vss	vss	nch	w = 21.3u l = 0.2u m = 2			*vgs=0.25:	(vds, id) = (0.25, 395.5163n)
+ vtg	vgt	gnd dc = 0.25v
+ vtd	vdt	gnd dc = 0.25v
+
+ .op
+
+ ***sweep***
+ *.dc diff -0.5 0.5 0.01
+ ***testing***
+ .dc vtd 0.2 0.4 0.01 *sweep wn 1u 20u 200n
+
+ ***probe&measuring***
+ .ac dec 1000 10 1g
+ .pz v(2) vinp
+ .probe dc i(mt) i(m1) i(m2)	par('v(3)-v(4)')
+ .probe ac gain=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')
+
+
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+
+ **warning**  attempt to reference undefined node     0:3               
+  in the definition of v(3,0)
+   branch - output ignored
+
+ **warning**  attempt to reference undefined node     0:4               
+  in the definition of v(4,0)
+   branch - output ignored
+
+ 
+
+ **warning** the following singular supplies were terminated to 1 meg resistor 
+   supply       node1            node2
+  vb2                     0:b2               defined in subckt 0                     0:0                defined in subckt 0               
+  vb3                     0:b3               defined in subckt 0                     0:0                defined in subckt 0               
+      
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***myop_2stage
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       = 509.0510m 0:2       = 509.0510m 0:b       = 808.3890m
+ +0:b1      = 300.0000m 0:b2      = 500.0000m 0:b3      = 300.0000m
+ +0:cmfb    = 600.0000m 0:vdd     =   1.0000  0:vdt     = 250.0000m
+ +0:vgt     = 250.0000m 0:vinn    = 500.0000m 0:vinp    = 500.0000m
+ +0:vss     =   0.     
+
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vd       0:vs       0:vb       0:vb1      0:vb2      0:vb3     
+  volts      1.0000     0.       600.0000m  300.0000m  500.0000m  300.0000m
+  current   -1.2194u    1.6149u    0.         0.      -500.0000n -300.0000n
+  power      1.2194u    0.         0.         0.       250.0000n   90.0000n
+
+ subckt                                              
+ element  0:vinp     0:vinn     0:vtg      0:vtd     
+  volts    500.0000m  500.0000m  250.0000m  250.0000m
+  current    0.         0.         0.      -395.5173n
+  power      0.         0.         0.        98.8793n
+
+     total voltage source power dissipation=    1.6582u       watts
+
+
+
+
+ **** mosfets
+
+
+ subckt                                                                    
+ element  0:m1       0:m2       0:m5       0:m6       0:mb       0:mt      
+ model    0:pch.4    0:pch.4    0:nch.4    0:nch.4    0:pch.3    0:nch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id      -609.6781n -609.6781n  609.6794n  609.6794n   -1.2194u  395.5163n
+  ibs      8.730e-23  8.730e-23 -1.007e-22 -1.007e-22  1.738e-22 -6.479e-23
+  ibd      178.8403a  178.8403a  -46.7429a  -46.7429a  111.8575a -131.8162a
+  vgs     -308.3890m -308.3890m  300.0000m  300.0000m -400.0000m  250.0000m
+  vds     -299.3380m -299.3380m  509.0510m  509.0510m -191.6110m  250.0000m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -502.1264m -502.1264m  510.3601m  510.3601m -458.7452m  511.0117m
+  vdsat    -42.3943m  -42.3943m   40.4751m   40.4751m  -51.3033m   40.1997m
+  vod      193.7375m  193.7375m -210.3601m -210.3601m   58.7452m -261.0117m
+  beta      33.8827m   33.8827m   40.3599m   40.3599m    3.2761m  121.0829m
+  gam eff  647.5761m  647.5761m  878.9520m  878.9520m  497.9476m  878.9520m
+  gm        16.2076u   16.2076u   16.2328u   16.2328u   27.3739u   10.9933u
+  gds      387.1084n  387.1084n  345.9880n  345.9880n  187.9574n  309.2822n
+  gmb        5.5993u    5.5993u    4.7864u    4.7864u    9.0036u    3.3115u
+  cdtot     93.4255f   93.4255f   16.3175f   16.3175f   60.4340f   51.7529f
+  cgtot     72.7266f   72.7266f   16.1972f   16.1972f  128.8134f   48.8578f
+  cstot    102.3007f  102.3007f   18.7210f   18.7210f   98.2017f   55.9247f
+  cbtot    176.2576f  176.2576f   30.3750f   30.3750f  176.9342f   94.0647f
+  cgs       23.1613f   23.1613f    5.2287f    5.2287f   41.5800f   15.6276f
+  cgd       22.9448f   22.9448f    5.2021f    5.2021f   14.4618f   15.6085f
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ 
+ 
+    input =  0:vinp          output = v(2)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ -6.68011x       0.              -1.06317x       0.              
+ -9.07775x       0.              -1.44477x       0.              
+ -55.4352x       0.              -8.82278x       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ -9.08236x       0.              -1.44550x       0.              
+ -87.2032x       0.              -13.8788x       0.              
+ -235.461x       0.              -37.4749x       0.              
+ 
+  ***** constant factor = 1.96900m
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***myop_2stage
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      29  # elements   =      21
+  # resistors   =       2  # capacitors =       0  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      13
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       6  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.03           1          83
+  dc sweep           0.01          21          67
+  ac analysis        0.26        8001        8001
+  readin             0.21
+  errchk             0.02
+  setup              0.03
+  output             0.00
+
+
+           total memory used          355  kbytes
+           total cpu time            0.59 seconds
+           total elapsed time           1 seconds
+           job started at     14:38:59 11/28/2015
+           job ended   at     14:39:00 11/28/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
