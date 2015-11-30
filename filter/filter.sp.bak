@@ -1,18 +1,9 @@
-*researchTry3.sp
+*filter
 .protect
 .lib 'rf018.l' TT
 .unprotect
 .option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=   1.0000E-12
 ***netlist***
-Mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
-Mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
-Cl 	inx	v0  10f
-R1	inx	v0  0.5g
-V00	v0	gnd dc = 0 
-
-*cx	vg inx 1p
-
-***output***
 
 .subckt	OP	vdd	vss	vinn	vinp	vop	b0	b1	
 Mb	b	b0		vdd	vdd	pch	W = 10u  L = 1u	  m = 2
@@ -24,34 +15,48 @@ m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
 m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
 m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
 m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
-C1	1	von 800f
-C2	2	vop 800f
+C1	z1	von 1000f
+Rz1	1		z1 1k
+C2	2	vop 900f
+
+Cl2	2	gnd 300f
+Cb	b	gnd 1000f	
 .ends
 
-XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
+XOP1	vdd	vss	vinn	vinp	vop		b0	b1	OP
+*Eop		vop	gnd	OPAMP	vinp	vinn
+Ci	vinn 	vop   2.2p
+*Cd	vop		gnd  220p
+
+*XOP2	vdd	vss	vinn2	vinp2	vout	b0	b1	OP
+*Cfd	vinn2	vout  2.2p
+*Rd	vinn2	vout  47k
+
+***param***
 .param 
 +bias			= 0.6
 +bias2		= 0.3
 vb 		b0		gnd dc bias
 vb1		b1		gnd dc bias2
-vref	vinn	gnd dc = 0.5	*496.3104m
-v1		vinp	inx dc = 0
-v2		vop		vg  dc = 0
-
-
+v1		vinp	gnd dc = 0.5
+v2		vinp2	gnd dc = 0.5
 ***source***
 Vd		vdd	gnd dc = 1v
 Vs		vss	gnd dc = 0v
 Vbias	vb	gnd dc = 0.7v
 *vin		vg	gnd dc = 0.3v ac = 1
 .param f = 320k
-Iin	gnd inx dc = 10n ac = 1 sin(20n 10n f 1ns)
+Iin	gnd vinn ac = 1 sin(20n 10n f 1ns)
+Rin	vinn	gnd 10x
+***By thevanin
+*vin	inx	gnd	dc = 0 ac = 1
+*Rin	 vinn	inx 100000
 
 ***
 .op
-.dc iin 1n	100n	0.1n
-.ac dec 100 10	100000g
-.probe ac vdb(inx) vdb(vg)
-.pz v(inx) iin
-.tran 10ns 100u
+*.dc iin 1n	100n	0.1n
+.ac dec 100 0.01	100000g
+.pz v(vop) iin
+*.tran 10ns 100u sweep f 310k 330k 10k
+.probe i(cd) vdb(vop)
 .end

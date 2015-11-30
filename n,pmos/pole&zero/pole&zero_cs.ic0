@@ -1,0 +1,17 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "15:46:19 11/29/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\n,pmos\pole&zero\pole&zero_cs.sp "
+* "runtitle" "*n,pmos"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ d = 307.8616m       
++ g = 300.0000m       
++ vdd = 500.0000m       
++ vss =   0.            
+***   END: Saved Operating Point ***                     

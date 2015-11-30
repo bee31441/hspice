@@ -1,0 +1,11 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\n,pmos\\pole&zero\\pole&zero_cs.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A0","vm(d)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlDeletePane(1, 1);
+nil
+nil

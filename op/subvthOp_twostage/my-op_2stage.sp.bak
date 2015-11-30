@@ -33,13 +33,21 @@ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1
 m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
 
 ***compensation***
-C1	1	von	1000f
-C2	2	vop	1000f
+C1	z1	von 1100f
+Rz1	1		z1 800
+C2	2	vop 900f
+
+Cl2	2	gnd 300f
+Cb	b	gnd 1000f			*use here to cancell right hand zero
+*Clp	von	gnd 500f
+
+
+*cout	vop gnd 2.86f
 
 ***source***
 vd		vdd 	gnd dc supplyp
 vs		vss 	gnd dc supplyn
-vb 		0	gnd dc bias
+vb 		b0		gnd dc bias
 vb1		b1		gnd dc bias2
 
 
@@ -55,10 +63,14 @@ vinn vinn gnd dc = 'comon-diff' ac = 1 -180
 .ac dec 1000 10 1g
 .tf v(1) vinp
 .pz v(vop) vinp
-.probe dc I(mt) I(m1) I(m2)
-.probe ac I(vac)	cap(von)
+.probe dc I(m1) I(m2)
+.probe ac cap(von)
 +gain1st=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')	phase1st=par('vp(2,1)')
 +gainall=par('Vdb(vop)-Vdb(vinp,vinn)')		phaseall=par('vp(vop)')
+
+.meas ac zerodb WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
+.meas ac phaseATdb	FIND par('vp(vop)') WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
+
 
 
 .end

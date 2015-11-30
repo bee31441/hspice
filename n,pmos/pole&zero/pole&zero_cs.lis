@@ -1,0 +1,186 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\n,pmos\pole&zero\pole&zero_
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab accurate=1 
+ ***netlist***
+
+ .param wp = 1.2u wn = 700n
+ m1 d g vss vss nch w = wn l = 200n
+ r1 vdd	d 10x
+
+ vd vdd gnd dc = 0.5v
+ vs vss gnd dc = 0v
+
+ vin g gnd dc = 0.3v ac = 1
+ .op
+ .dc vd 0 0.9v 0.01
+ .ac dec 100 1	100g 
+ .probe i(m1)
+ .pz	v(d)	vin
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+
+ 
+      
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:d       = 307.8616m 0:g       = 300.0000m 0:vdd     = 500.0000m
+ +0:vss     =   0.     
+
+
+ maximum nodal capacitance=   2.919E-15         on node     0:vss             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:d       = 982.0484a 0:g       = 806.9977a 0:vdd     =   0.     
+ +0:vss     =   2.9192f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                   
+ element  0:vd       0:vs       0:vin     
+  volts    500.0000m    0.       300.0000m
+  current  -19.2138n   19.2138n    0.     
+  power      9.6069n    0.         0.     
+
+     total voltage source power dissipation=    9.6069n       watts
+
+
+
+ **** resistors
+
+ subckt             
+ element  0:r1      
+  r value   10.0000x
+  v drop   192.1384m
+  current   19.2138n
+  power      3.6917n
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:m1      
+ model    0:nch.12  
+ region       Cutoff
+  id        19.2132n
+  ibs     -4.777e-24
+  ibd       -3.2880a
+  vgs      300.0000m
+  vds      307.8616m
+  vbs        0.     
+  vth      532.3248m
+  vdsat     42.8546m
+  vod     -232.3248m
+  beta       1.8899m
+  gam eff  905.8480m
+  gm       513.6628n
+  gds       14.0459n
+  gmb      155.4419n
+  cdtot    982.0484a
+  cgtot    806.9977a
+  cstot      1.0745f
+  cbtot      1.8447f
+  cgs      255.0387a
+  cgd      254.3500a
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ 
+ 
+    input =  0:vin          output = v(d)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ -116.131x       0.              -18.4828x       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ 2.01947g        0.              321.409x        0.              
+ 
+  ***** constant factor = 2.59004m
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *n,pmos
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =       8  # elements   =       6
+  # resistors   =       1  # capacitors =       0  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       1  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1           6
+  dc sweep           0.01          91         213
+  ac analysis        0.05        1101        1101
+  readin             0.16
+  errchk             0.01
+  setup              0.05
+  output             0.00
+
+
+           total memory used          224  kbytes
+           total cpu time            0.31 seconds
+           total elapsed time           1 seconds
+           job started at     15:46:19 11/29/2015
+           job ended   at     15:46:19 11/29/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

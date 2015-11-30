@@ -42,8 +42,16 @@
  m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
 
  ***compensation***
- c1	1	von	1000f
- c2	2	vop	1000f
+ c1	z1	von 1000f
+ rz1	1		z1 800
+ c2	2	vop 900f
+
+ cl2	2	gnd 300f
+ cb	b	gnd 1000f			*use here to cancell right hand zero
+ *clp	von	gnd 500f
+
+
+ *cout	vop gnd 2.86f
 
  ***source***
  vd		vdd 	gnd dc supplyp
@@ -64,10 +72,14 @@
  .ac dec 1000 10 1g
  .tf v(1) vinp
  .pz v(vop) vinp
- .probe dc i(mt) i(m1) i(m2)
- .probe ac i(vac)	cap(von)
+ .probe dc i(m1) i(m2)
+ .probe ac cap(von)
  +gain1st=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')	phase1st=par('vp(2,1)')
  +gainall=par('vdb(vop)-vdb(vinp,vinn)')		phaseall=par('vp(vop)')
+
+ .meas ac zerodb when par('vdb(vop)-vdb(vinp,vinn)') = 1
+ .meas ac phaseatdb	find par('vp(vop)') when par('vdb(vop)-vdb(vinp,vinn)') = 1
+
 
 
  .end
@@ -81,10 +93,6 @@
  (used for FFT control ) fft_accurate= 1
  
 
- **warning** could not find branch element     0:mt              
-      branch - output ignored
- **warning** could not find branch element     0:vac             
-      branch - output ignored
  
       
 
@@ -124,15 +132,15 @@
     -240.0000m           1.000e+20                     141.5505k                  643.2821n
     -230.0000m           1.000e+20                     150.5385k                  960.6139n
     -220.0000m           1.000e+20                     163.2762k                    1.4594u
-    -210.0000m           1.000e+20                     181.7437k                    2.2714u
+    -210.0000m           1.000e+20                     181.7437k                    2.2713u
     -200.0000m           1.000e+20                     209.3660k                    3.6550u
     -190.0000m           1.000e+20                     252.4270k                    6.1518u
-    -180.0000m           1.000e+20                     323.1990k                   10.9823u
+    -180.0000m           1.000e+20                     323.1989k                   10.9823u
     -170.0000m           1.000e+20                     447.2074k                   21.1222u
-    -160.0000m           1.000e+20                     680.5657k                   44.4401u
+    -160.0000m           1.000e+20                     680.5656k                   44.4400u
     -150.0000m           1.000e+20                       1.1487x                  103.0986u
-    -140.0000m           1.000e+20                       2.0963x                  257.8877u
-    -130.0000m           1.000e+20                       3.7635x                  636.1769u
+    -140.0000m           1.000e+20                       2.0963x                  257.8874u
+    -130.0000m           1.000e+20                       3.7635x                  636.1773u
     -120.0000m           1.000e+20                       5.8939x                    1.3807m
     -110.0000m           1.000e+20                       7.8695x                    2.5903m
     -100.0000m           1.000e+20                       9.4224x                    4.4359m
@@ -154,8 +162,8 @@
       60.0000m           1.000e+20                     255.9191k                  983.7697m
       70.0000m           1.000e+20                     244.5271k                  965.8103m
       80.0000m           1.000e+20                     234.3507k                  952.1110m
-      90.0000m           1.000e+20                     223.9393k                  939.8607m
-     100.0000m           1.000e+20                     212.1374k                  927.2134m
+      90.0000m           1.000e+20                     223.9394k                  939.8607m
+     100.0000m           1.000e+20                     212.1373k                  927.2135m
      110.0000m           1.000e+20                     197.9979k                  912.8048m
      120.0000m           1.000e+20                     181.3289k                  895.3569m
      130.0000m           1.000e+20                     164.2060k                  872.4154m
@@ -179,7 +187,7 @@
      310.0000m           1.000e+20                     100.0395k                   23.5059m
      320.0000m           1.000e+20                      99.9783k                   17.5598m
      330.0000m           1.000e+20                      99.9341k                   13.0821m
-     340.0000m           1.000e+20                      99.9014k                    9.7244m
+     340.0000m           1.000e+20                      99.9015k                    9.7244m
      350.0000m           1.000e+20                      99.8768k                    7.2151m
      360.0000m           1.000e+20                      99.8577k                    5.3453m
      370.0000m           1.000e+20                      99.8424k                    3.9551m
@@ -210,19 +218,19 @@
  +0:1       = 602.3164m 0:2       = 602.3164m 0:b       = 797.6803m
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:vdd     =   1.0000 
  +0:vinn    = 500.0000m 0:vinp    = 500.0000m 0:von     = 398.2605m
- +0:vop     = 500.2948m 0:vss     =   0.     
+ +0:vop     = 500.2943m 0:vss     =   0.      0:z1      = 602.3164m
 
 
- maximum nodal capacitance=   1.149E-12         on node     0:1               
+ maximum nodal capacitance=   1.553E-12         on node     0:b               
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:1       =   1.1489p 0:2       =   1.1484p 0:b       = 553.2191f
+ +0:1       = 148.9283f 0:2       =   1.3484p 0:b       =   1.5532p
  +0:b0      =  58.6118f 0:b1      =  37.9046f 0:vdd     = 344.2667f
  +0:vinn    =  84.7992f 0:vinp    =  84.7992f 0:von     =   1.0473p
- +0:vop     =   1.0271p 0:vss     = 137.5713f
+ +0:vop     = 927.0842f 0:vss     = 137.5713f 0:z1      =   1.0000p
 
  
 
@@ -236,6 +244,16 @@
 
      total voltage source power dissipation=    1.5321u       watts
 
+
+
+ **** resistors
+
+ subckt             
+ element  0:rz1     
+  r value  800.0000 
+  v drop     0.     
+  current    0.     
+  power      0.     
 
 
 
@@ -273,11 +291,11 @@
  element  0:m4       0:m7       0:m8      
  model    0:pch.3    0:nch.7    0:nch.7   
  region       Cutoff     Cutoff     Cutoff
-  id      -484.1214n  493.0953n  484.1214n
+  id      -484.1215n  493.0954n  484.1215n
   ibs      6.930e-23 -8.732e-23 -8.594e-23
   ibd       45.5376a  -12.7121a  -12.8374a
   vgs     -397.6836m  398.2605m  398.2605m
-  vds     -499.7052m  398.2605m  500.2948m
+  vds     -499.7057m  398.2605m  500.2943m
   vbs        0.         0.         0.     
   vth     -458.6742m  483.5634m  483.5496m
   vdsat    -50.8475m   58.0195m   58.0148m
@@ -310,27 +328,73 @@
 
  ***************************************************
    ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
  
  
     input =  0:vinp          output = v(vop)
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- -1.20041k       0.              -191.052        0.              
- -30.0378k       0.              -4.78067k       0.              
- -58.2260x       0.              -9.26696x       0.              
- -69.7431x       0.              -11.1000x       0.              
- -129.633x       0.              -20.6318x       0.              
+ -1.32852k       0.              -211.441        0.              
+ -29.9562k       0.              -4.76768k       0.              
+ -11.9470x       0.              -1.90142x       0.              
+ -23.2833x       0.              -3.70566x       0.              
+ -126.198x       0.              -20.0850x       0.              
+ -35.9345g       0.              -5.71916g       0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
- -39.5705k       0.              -6.29784k       0.              
- 10.9056x        0.              1.73568x        0.              
- -55.8812x       0.              -8.89376x       0.              
- -126.705x       0.              -20.1658x       0.              
- 160.148x        0.              25.4883x        0.              
+ -37.1716k       0.              -5.91604k       0.              
+ -10.2213x       0.              -1.62677x       0.              
+ 11.8484x        0.              1.88574x        0.              
+ -125.817x       0.              -20.0244x       0.              
+ 305.029x        0.              48.5468x        0.              
+ -35.9689g       0.              -5.72463g       0.              
  
-  ***** constant factor = 233.714m
+  ***** constant factor = 486.643u
+ ******  
+ ***myop_2stage
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+   zerodb=  1.0064E+06
+   phaseatdb= -1.3533E+02
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -347,8 +411,8 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      32  # elements   =      19
-  # resistors   =       0  # capacitors =       2  # inductors   =       0
+  # nodes       =      33  # elements   =      22
+  # resistors   =       1  # capacitors =       4  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
   # cccs        =       0  # ccvs       =       0  # volt_srcs   =       8
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
@@ -360,20 +424,20 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.02           1          71
+  op point           0.02           1          73
   dc sweep           0.05         101         310
-  ac analysis        0.30        8001        8001
-  readin             0.19
+  ac analysis        0.33        8001        8001
+  readin             0.18
   errchk             0.02
   setup              0.02
   output             0.00
 
 
-           total memory used          498  kbytes
-           total cpu time            0.63 seconds
+           total memory used          500  kbytes
+           total cpu time            0.65 seconds
            total elapsed time           1 seconds
-           job started at     22:30:57 11/28/2015
-           job ended   at     22:30:58 11/28/2015
+           job started at     21:42:10 11/30/2015
+           job ended   at     21:42:11 11/30/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
