@@ -6,10 +6,12 @@
 ***netlist***
 Mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
 Mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
-*Cl 	inx	eout 1p
+Cl 	inx	v0  10f
+R1	inx	v0  0.5g
+V00	v0	gnd dc = 0 
 
-*Rdc	eo	inx 1000k
-*Cdc	eo	inx 1p
+*cx	vg inx 1p
+
 ***output***
 
 .subckt	OP	vdd	vss	vinn	vinp	vop	b0	b1	
@@ -22,6 +24,8 @@ m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
 m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
 m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
 m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
+C1	1	von 800f
+C2	2	vop 800f
 .ends
 
 XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
@@ -40,11 +44,14 @@ Vd		vdd	gnd dc = 1v
 Vs		vss	gnd dc = 0v
 Vbias	vb	gnd dc = 0.7v
 *vin		vg	gnd dc = 0.3v ac = 1
-Iin	gnd inx dc = 10n
+.param f = 320k
+Iin	gnd inx dc = 10n ac = 1 sin(20n 10n f 1ns)
 
 ***
 .op
 .dc iin 1n	100n	0.1n
-*.ac dec 100 0.1	1000
-.probe ac vdb(inx)
+.ac dec 100 10	100000g
+.probe ac vdb(inx) vdb(vg)
+.pz v(inx) iin
+.tran 10ns 100u sweep f 310k 330k 10k
 .end

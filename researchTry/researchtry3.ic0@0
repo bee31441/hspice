@@ -1,25 +1,28 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "21:42:10 11/30/2015 "
-* "netlist" "c:\users\timer\documents\github\hspice\op\subvthop_twostage\my-op_2stage.sp "
-* "runtitle" "***myop_2stage"
+* "rundate" "17:31:11 11/29/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry3.sp "
+* "runtitle" "*researchtry3.sp"
 * time =    0.            
 * temperature =   25.0000        
 *** BEGIN: Saved Operating Point ***                     
 .option 
 + gmindc=   1.0000p       
 .nodeset
-+ 1 = 602.3164m       
-+ 2 = 602.3164m       
-+ b = 797.6803m       
 + b0 = 600.0000m       
 + b1 = 300.0000m       
++ inx = 499.9668m       
++ v0 =   0.            
++ vb = 700.0000m       
 + vdd =   1.0000        
++ vg = 307.3285m       
 + vinn = 500.0000m       
-+ vinp = 500.0000m       
-+ von = 398.2605m       
-+ vop = 500.2943m       
++ vinp = 499.9668m       
++ vop = 307.3285m       
 + vss =   0.            
-+ z1 = 602.3164m       
++ xopf.1 = 601.5180m       
++ xopf.2 = 603.1353m       
++ xopf.b = 797.6641m       
++ xopf.von = 399.0789m       
 ***   END: Saved Operating Point ***                     

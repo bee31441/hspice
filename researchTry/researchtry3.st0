@@ -3,7 +3,7 @@
  lic:
  lic: FLEXlm: v8.5b
  lic: USER:   timer                HOSTNAME: timer-PC
- lic: HOSTID: "00ffa0a8c308 902b349f3511" PID:      3476
+ lic: HOSTID: "00ffa0a8c308 902b349f3511" PID:      11096
  lic: Using FLEXlm license file:
  lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
  lic: Checkout 1 hspice
@@ -11,7 +11,7 @@
  lic: NODE LOCKED license on hostid "00ffa0a8c308 902b349f3511"
  lic:
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
- init: begin read circuit files,  cpu clock=  1.21E-01
+ init: begin read circuit files,  cpu clock=  1.19E-01
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\behave\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\AD\
        option search   = C:\synopsys\Hspice_B-2008.09\PARTS\XILINX\
@@ -35,21 +35,94 @@
        option dcon     =     1.00
        option conver   =     1.00
        option gmindc   =    1.000E-12
- init: end read circuit files,  cpu clock=  2.02E-01 memory=    151 kb
- init: begin check errors,  cpu clock=  2.02E-01
- init: end check errors,  cpu clock=  2.21E-01 memory=    352 kb
- init: begin setup matrix, pivot=    10 cpu clock=  2.21E-01
-       establish matrix -- done,  cpu clock=  2.34E-01 memory=    365 kb
-       re-order matrix -- done,  cpu clock=  2.39E-01 memory=    369 kb
- init: end setup matrix,  cpu clock=  2.47E-01 memory=    390 kb
+ init: end read circuit files,  cpu clock=  1.93E-01 memory=    151 kb
+ init: begin check errors,  cpu clock=  1.93E-01
+ init: end check errors,  cpu clock=  2.15E-01 memory=    373 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  2.15E-01
+       establish matrix -- done,  cpu clock=  2.21E-01 memory=    386 kb
+       re-order matrix -- done,  cpu clock=  2.24E-01 memory=    390 kb
+ init: end setup matrix,  cpu clock=  2.28E-01 memory=    411 kb
  output: c:\users\timer\documents\github\hspice\researchtry\researchtry3.sw0
- sweep: dc dc0    begin, #sweeps= 991 cpu clock=  2.55E-01
- sweep: dc dc0    end,  cpu clock=  3.73E-01 memory=    390 kb
- dcop: begin dcop,  cpu clock=  3.77E-01
+ sweep: dc dc0    begin, #sweeps= 991 cpu clock=  2.36E-01
+ sweep: dc dc0    end,  cpu clock=  3.56E-01 memory=    411 kb
+ dcop: begin dcop,  cpu clock=  3.60E-01
  dcop: begin pseudo transient
  dcop: ...succeeded
  dcop: end pseudo transient
- dcop: end dcop,  cpu clock=  4.05E-01 memory=    390 kb  tot_iter=     154
+ dcop: end dcop,  cpu clock=  3.87E-01 memory=    412 kb  tot_iter=     106
+ output: c:\users\timer\documents\github\hspice\researchtry\researchtry3.ac0
+ sweep: ac ac0    begin, #sweeps=1301 cpu clock=  3.95E-01
+ ac: frequency=    1.02E+01
+ ac: frequency=    2.00E+02
+ ac: frequency=    3.98E+03
+ ac: frequency=    7.94E+04
+ ac: frequency=    1.58E+06
+ ac: frequency=    3.16E+07
+ ac: frequency=    6.31E+08
+ ac: frequency=    1.26E+10
+ ac: frequency=    2.51E+11
+ ac: frequency=    5.01E+12
+ ac: frequency=    1.00E+14
+ sweep: ac ac0    end,  cpu clock=  5.13E-01 memory=    461 kb
+ sweep: parameter       parameter1       begin, #sweeps =   3
+ parameter: f               =    3.10E+05
+ dcop: begin dcop,  cpu clock=  5.23E-01
+ dcop: begin pseudo transient
+ dcop: ...succeeded
+ dcop: end pseudo transient
+ dcop: end dcop,  cpu clock=  5.45E-01 memory=    412 kb  tot_iter=     235
+ output: c:\users\timer\documents\github\hspice\researchtry\researchtry3.tr0
+ sweep: tran tran1    begin, stop_t=  1.00E-04 #sweeps=**** cpu clock=  5.54E-01
+ tran: time= 1.0012E-05 tot_iter=    1207 conv_iter=     421 cpu clock= 6.46E-01
+ tran: time= 2.0037E-05 tot_iter=    2304 conv_iter=     804 cpu clock= 7.31E-01
+ tran: time= 3.0015E-05 tot_iter=    3314 conv_iter=    1159 cpu clock= 7.91E-01
+ tran: time= 4.0023E-05 tot_iter=    4340 conv_iter=    1523 cpu clock= 8.39E-01
+ tran: time= 5.0001E-05 tot_iter=    5298 conv_iter=    1859 cpu clock= 8.86E-01
+ tran: time= 6.0024E-05 tot_iter=    6314 conv_iter=    2216 cpu clock= 9.34E-01
+ tran: time= 7.0014E-05 tot_iter=    7295 conv_iter=    2563 cpu clock= 9.87E-01
+ tran: time= 8.0057E-05 tot_iter=    8360 conv_iter=    2938 cpu clock= 1.04E+00
+ tran: time= 9.0020E-05 tot_iter=    9349 conv_iter=    3288 cpu clock= 1.10E+00
+ tran: time= 1.0000E-04 tot_iter=   10288 conv_iter=    3619 cpu clock= 1.15E+00
+ sweep: tran tran1    end,  cpu clock=  1.15E+00 memory=    416 kb
+ parameter: f               =    3.20E+05
+ dcop: begin dcop,  cpu clock=  1.16E+00
+ dcop: begin pseudo transient
+ dcop: ...succeeded
+ dcop: end pseudo transient
+ dcop: end dcop,  cpu clock=  1.18E+00 memory=    412 kb  tot_iter=     364
+ output: c:\users\timer\documents\github\hspice\researchtry\researchtry3.tr0
+ sweep: tran tran2    begin, stop_t=  1.00E-04 #sweeps=**** cpu clock=  1.19E+00
+ tran: time= 1.0059E-05 tot_iter=    1210 conv_iter=     432 cpu clock= 1.28E+00
+ tran: time= 2.0027E-05 tot_iter=    2315 conv_iter=     821 cpu clock= 1.36E+00
+ tran: time= 3.0042E-05 tot_iter=    3261 conv_iter=    1158 cpu clock= 1.41E+00
+ tran: time= 4.0044E-05 tot_iter=    4300 conv_iter=    1526 cpu clock= 1.47E+00
+ tran: time= 5.0001E-05 tot_iter=    5262 conv_iter=    1867 cpu clock= 1.52E+00
+ tran: time= 6.0040E-05 tot_iter=    6314 conv_iter=    2237 cpu clock= 1.58E+00
+ tran: time= 7.0001E-05 tot_iter=    7286 conv_iter=    2582 cpu clock= 1.63E+00
+ tran: time= 8.0042E-05 tot_iter=    8314 conv_iter=    2941 cpu clock= 1.68E+00
+ tran: time= 9.0052E-05 tot_iter=    9260 conv_iter=    3276 cpu clock= 1.73E+00
+ tran: time= 1.0000E-04 tot_iter=   10175 conv_iter=    3603 cpu clock= 1.77E+00
+ sweep: tran tran2    end,  cpu clock=  1.77E+00 memory=    416 kb
+ parameter: f               =    3.30E+05
+ dcop: begin dcop,  cpu clock=  1.78E+00
+ dcop: begin pseudo transient
+ dcop: ...succeeded
+ dcop: end pseudo transient
+ dcop: end dcop,  cpu clock=  1.80E+00 memory=    412 kb  tot_iter=     493
+ output: c:\users\timer\documents\github\hspice\researchtry\researchtry3.tr0
+ sweep: tran tran3    begin, stop_t=  1.00E-04 #sweeps=**** cpu clock=  1.81E+00
+ tran: time= 1.0006E-05 tot_iter=    1259 conv_iter=     436 cpu clock= 1.87E+00
+ tran: time= 2.0011E-05 tot_iter=    2373 conv_iter=     829 cpu clock= 1.93E+00
+ tran: time= 3.0031E-05 tot_iter=    3375 conv_iter=    1184 cpu clock= 1.99E+00
+ tran: time= 4.0066E-05 tot_iter=    4471 conv_iter=    1568 cpu clock= 2.04E+00
+ tran: time= 5.0001E-05 tot_iter=    5398 conv_iter=    1903 cpu clock= 2.09E+00
+ tran: time= 6.0035E-05 tot_iter=    6432 conv_iter=    2272 cpu clock= 2.14E+00
+ tran: time= 7.0083E-05 tot_iter=    7468 conv_iter=    2641 cpu clock= 2.19E+00
+ tran: time= 8.0001E-05 tot_iter=    8448 conv_iter=    2986 cpu clock= 2.24E+00
+ tran: time= 9.0049E-05 tot_iter=    9433 conv_iter=    3340 cpu clock= 2.29E+00
+ tran: time= 1.0000E-04 tot_iter=   10371 conv_iter=    3675 cpu clock= 2.33E+00
+ sweep: tran tran3    end,  cpu clock=  2.33E+00 memory=    416 kb
+ sweep: parameter       parameter       1 end
 >info:         ***** hspice job concluded
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
  lic: Release hspice token(s)
