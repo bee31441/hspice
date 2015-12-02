@@ -27,18 +27,19 @@ M6	2	b1		vss	vss	nch	W = 13u L = 0.4u m = 1
 *kappa ~= 0.7     
 
 ***2nd stage***
-m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
-m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
-m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
-m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
+m3	von	1		vdd	vdd	pch	w = 18u    l = 1u   m = 1
+m4	vop	2		vdd	vdd	pch w = 3.88u 	 l = 0.2u m = 1
+m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1	
+m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
 ***compensation***
-C1	z1	von 1000f
-Rz1	1		z1 800
-C2	2	vop 900f
+C1	1		von 1700f
+C2	2		vop 900f
+*Rz2	z2	2   100
 
-Cl2	2	gnd 300f
-Cb	b	gnd 1000f			*use here to cancell right hand zero
+*Cl1	1	gnd 400f
+Cl2	2	gnd 400f
+Cb	b		gnd 600f			*use here to cancell right hand zero
 *Clp	von	gnd 500f
 
 
@@ -53,7 +54,26 @@ vb1		b1		gnd dc bias2
 
 ***input***
 vinp vinp gnd dc = 'comon+diff' ac = 1
-vinn vinn gnd dc = 'comon-diff' ac = 1 -180
+vinn vinn gnd dc = 'comon-diff' *ac = 1 -180
+
+
+
+
+
+
+***test
+*mt	vdt	vgt	vss	vss	nch	w = 2.7u   l = 0.5u m = 1
+mt	vdt	vgt	vdd	vdd	pch w = 9.7u l = 0.5u m = 1
+
+vtd	vdt	gnd dc = '1-499.7048m'
+vtg	vgt	gnd dc = '1-397.6836m'
+
+***
+
+
+
+
+
 
 .op
 
@@ -63,11 +83,11 @@ vinn vinn gnd dc = 'comon-diff' ac = 1 -180
 .ac dec 1000 10 1g
 .tf v(1) vinp
 .pz v(vop) vinp
-.probe dc I(m1) I(m2)
+.probe dc I(m1) I(m2)	I(mt)
 .probe ac cap(von)
 +gain1st=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')	phase1st=par('vp(2,1)')
 +gainall=par('Vdb(vop)-Vdb(vinp,vinn)')		phaseall=par('vp(vop)')
-
+.meas ac gain MAX (par('Vdb(vop)-Vdb(vinp,vinn)'))
 .meas ac zerodb WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
 .meas ac phaseATdb	FIND par('vp(vop)') WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
 
@@ -85,7 +105,7 @@ vinn vinn gnd dc = 'comon-diff' ac = 1 -180
 * -682.309k       0.              -108.593k       0.  	 might be 1            
 * -18.9886x       0.              -3.02213x       0.     output node         
 * -40.0808x       0.              -6.37905x       0.     point b         
-* -270.172x       0.              -42.9993x       0.              
+* -270.172x       0.              -42.9993x       0.     might also at 1    
 * 
 *       zeros (rad/sec)                 zeros ( hertz)
 * real            imag            real            imag            

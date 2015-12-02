@@ -16,7 +16,7 @@
  ***netlist***
 
  .subckt	op	vdd	vss	vinn	vinp	vop	b0	b1	
- mb	b	b0		vdd	vdd	pch	w = 10u  l = 1u	  m = 2
+ mb	b	b0	vdd	vdd	pch	w = 10u  l = 1u	  m = 2
  m1	1	vinn	b		b		pch	w = 30u l = 0.4u m = 2
  m2	2	vinp	b		b		pch	w = 30u l = 0.4u m = 2
  m5	1	b1		vss	vss	nch	w = 13u l = 0.4u m = 1
@@ -26,21 +26,22 @@
  m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
  m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
  c1	z1	von 1000f
- rz1	1		z1 1k
+ rz1	1		z1 800
  c2	2	vop 900f
 
  cl2	2	gnd 300f
- cb	b	gnd 1000f	
+ cb	b	gnd 1000f		
+
  .ends
 
  xop1	vdd	vss	vinn	vinp	vop		b0	b1	op
  *eop		vop	gnd	opamp	vinp	vinn
  ci	vinn 	vop   2.2p
- *cd	vop		gnd  220p
+ cd	vop		vinn2  220p
 
- *xop2	vdd	vss	vinn2	vinp2	vout	b0	b1	op
- *cfd	vinn2	vout  2.2p
- *rd	vinn2	vout  47k
+ xop2	vdd	vss	vinn2	vinp2	vout	b0	b1	op
+ cfd	vinn2	vout  2.2p
+ rd	vinn2	vout  47k
 
  ***param***
  .param 
@@ -59,14 +60,14 @@
  *iin	gnd vinn ac = 1 sin(20n 10n f 1ns)
  *rin	vinn	gnd 10x
  ***by thevanin
- vin	inx	gnd	dc = 0 ac = 1
+ vin	inx	gnd	dc = 0.5 ac = 1
  rin	 vinn	inx 10x
 
  ***
  .op
  *.dc iin 1n	100n	0.1n
  .ac dec 100 0.01	100000g
- .pz v(vop) iin
+ .pz v(vop) vin
  *.tran 10ns 100u sweep f 310k 330k 10k
  .probe i(cd) vdb(vop)
 
@@ -77,9 +78,6 @@
  lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
      ft= 200.00m relmos=  10.00m
  (used for FFT control ) fft_accurate= 1
-
- **warning** Source for Pole/Zero analysis iin cannot be found, analysis omitted
-
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
  ******  
  *filter
@@ -89,16 +87,14 @@
    number circuitname                     definition         multiplier
         0 main circuit
         1 xop1.                           op                 1.00 
+        2 xop2.                           op                 1.00 
  
 
- **warning** could not find branch element     0:cd              
-      branch - output ignored
  
 
  **warning** the following singular supplies were terminated to 1 meg resistor 
    supply       node1            node2
   vbias                   0:vb               defined in subckt 0                     0:0                defined in subckt 0               
-  v2                      0:vinp2            defined in subckt 0                     0:0                defined in subckt 0               
       
   Opening plot unit= 79
  file=c:\users\timer\documents\github\hspice\filter\filter.pa0                 
@@ -113,11 +109,14 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     =   0.     
- +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vinn    =   0.     
- +0:vinp    = 500.0000m 0:vinp2   = 500.0000m 0:vop     = 999.9791m
- +0:vss     =   0.      1:1       = 794.2128m 1:2       = 423.3981m
- +1:b       = 794.2996m 1:von     = 202.7925m 1:z1      = 794.2128m
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 500.0000m
+ +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vinn    = 500.0000m
+ +0:vinn2   = 500.0000m 0:vinp    = 500.0000m 0:vinp2   = 500.0000m
+ +0:vop     = 500.2986m 0:vout    = 500.0000m 0:vss     =   0.     
+ +1:1       = 602.3164m 1:2       = 602.3164m 1:b       = 797.6803m
+ +1:von     = 398.2605m 1:z1      = 602.3164m 2:1       = 602.3153m
+ +2:2       = 602.3177m 2:b       = 797.6803m 2:von     = 398.2616m
+ +2:z1      = 602.3153m
 
 
  ****  voltage sources
@@ -125,27 +124,27 @@
  subckt                                                                    
  element  0:vb       0:vb1      0:v1       0:v2       0:vd       0:vs      
   volts    600.0000m  300.0000m  500.0000m  500.0000m    1.0000     0.     
-  current    0.         0.         0.      -500.0000n -561.1372n  561.1372n
-  power      0.         0.         0.       250.0000n  561.1372n    0.     
+  current    0.         0.         0.         0.        -3.0641u    3.0641u
+  power      0.         0.         0.         0.         3.0641u    0.     
 
  subckt                        
  element  0:vbias    0:vin     
-  volts    700.0000m    0.     
+  volts    700.0000m  500.0000m
   current -700.0000n    0.     
   power    490.0000n    0.     
 
-     total voltage source power dissipation=    1.3011u       watts
+     total voltage source power dissipation=    3.5541u       watts
 
 
 
  **** resistors
 
- subckt              xop1      
- element  0:rin      1:rz1     
-  r value   10.0000x    1.0000k
-  v drop     0.         0.     
-  current    0.         0.     
-  power      0.         0.     
+ subckt                         xop1       xop2      
+ element  0:rd       0:rin      1:rz1      2:rz1     
+  r value   47.0000k   10.0000x  800.0000   800.0000 
+  v drop     1.4433f    0.         0.         0.     
+  current  3.071e-20    0.         0.         0.     
+  power      0.         0.         0.         0.     
 
 
 
@@ -155,57 +154,124 @@
  subckt   xop1       xop1       xop1       xop1       xop1       xop1      
  element  1:mb       1:m1       1:m2       1:m5       1:m6       1:m3      
  model    0:pch.3    0:pch.4    0:pch.4    0:nch.4    0:nch.4    0:pch.3   
- region       Cutoff     Linear     Cutoff     Cutoff     Cutoff     Cutoff
-  id      -555.0999n -289.3530n -265.7462n  289.3514n  265.7468n   -2.9311n
-  ibs      8.077e-23  4.106e-23  3.771e-23 -4.793e-23 -4.402e-23  4.196e-25
-  ibd       51.9037a  5.121e-19  151.9210a  -19.2458f  -40.6827a   45.9615a
-  vgs     -400.0000m -794.2996m -294.2996m  300.0000m  300.0000m -205.7872m
-  vds     -205.7004m  -86.7533u -370.9015m  794.2128m  423.3981m -797.2075m
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id      -554.8338n -277.4165n -277.4165n  277.4161n  277.4161n -493.0949n
+  ibs      8.073e-23  3.937e-23  3.937e-23 -4.595e-23 -4.595e-23  7.057e-23
+  ibd       51.9013a  151.8448a  151.8448a -109.6161a -109.6161a   45.9632a
+  vgs     -400.0000m -297.6803m -297.6803m  300.0000m  300.0000m -397.6836m
+  vds     -202.3197m -195.3639m -195.3639m  602.3164m  602.3164m -601.7395m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -458.7419m -471.8453m -471.5532m  490.9141m  491.1470m -458.6056m
-  vdsat    -51.3039m -280.7668m  -41.4339m   43.9151m   43.9117m  -40.2382m
-  vod       58.7419m -322.4543m  177.2536m -190.9141m -191.1470m  252.8184m
-  beta       1.4883m   11.0527m   11.7369m   15.0991m   15.0984m    1.3440m
+  vth     -458.7427m -471.6914m -471.6914m  491.0346m  491.0346m -458.6506m
+  vdsat    -51.3038m  -41.5024m  -41.5024m   43.9133m   43.9133m  -50.8522m
+  vod       58.7427m  174.0112m  174.0112m -191.0346m -191.0346m   60.9670m
+  beta       1.4883m   11.7361m   11.7361m   15.0987m   15.0987m    1.3403m
   gam eff  497.9476m  541.3676m  541.3676m  556.1233m  556.1233m  497.9476m
-  gm        12.4623u  839.2692n    7.2015u    7.8488u    7.2147u   89.0704n
-  gds       77.9178n    3.3354m   66.2910n   61.3989n   67.9681n  270.5924p
-  gmb        4.0990u  317.9288n    2.4236u    2.2602u    2.0817u   30.2364n
-  cdtot     27.5506f  321.5120f   78.4490f   14.2253f   15.2165f   21.6667f
-  cgtot     58.6103f  222.1211f   84.8245f   18.9525f   18.9522f   46.9919f
-  cstot     44.8464f  285.9241f   87.7609f   17.2111f   17.2104f   26.2653f
-  cbtot     80.8067f  190.3991f  171.4502f   31.2010f   32.1922f   71.2704f
-  cgs       18.8842f  119.1770f   20.1361f    4.8323f    4.8319f    5.9269f
-  cgd        6.5668f  106.7122f   19.6728f    4.7623f    4.7623f    5.9007f
+  gm        12.4562u    7.4898u    7.4898u    7.5284u    7.5284u   11.1012u
+  gds       79.5039n   90.5815n   90.5815n   63.2817n   63.2817n   42.3095n
+  gmb        4.0970u    2.5201u    2.5201u    2.1702u    2.1702u    3.6530u
+  cdtot     27.5780f   82.0616f   82.0616f   14.6894f   14.6894f   22.4594f
+  cgtot     58.6118f   84.7992f   84.7992f   18.9523f   18.9523f   52.1772f
+  cstot     44.8448f   87.8163f   87.8163f   17.2107f   17.2107f   39.4012f
+  cbtot     80.8327f  175.0043f  175.0043f   31.6652f   31.6652f   70.1791f
+  cgs       18.8854f   20.1830f   20.1830f    4.8321f    4.8321f   16.2851f
+  cgd        6.5675f   19.6732f   19.6732f    4.7623f    4.7623f    5.8996f
 
 
 
- subckt   xop1       xop1       xop1      
- element  1:m4       1:m7       1:m8      
- model    0:pch.3    0:nch.7    0:nch.7   
- region       Linear     Cutoff     Cutoff
-  id        -3.1039n    2.9323n    3.1019n
-  ibs      4.443e-25 -5.193e-25 -5.508e-25
-  ibd      3.705e-20  -12.7073a   -6.8220f
-  vgs     -576.6019m  202.7925m  202.7925m
-  vds      -20.9118u  202.7925m  999.9791m
-  vbs        0.         0.         0.     
-  vth     -458.7893m  483.6084m  483.4344m
-  vdsat   -135.6615m   48.5040m   48.4997m
-  vod     -117.8126m -280.8159m -280.6419m
-  beta       1.2976m    1.5723m    1.5294m
-  gam eff  497.9476m  519.2085m  519.5326m
-  gm        22.9323n   87.1948n   92.2230n
-  gds      148.4187u  519.5359p  285.4098p
-  gmb        7.8888n   26.1649n   27.6755n
-  cdtot    161.8216f    4.8002f    4.0266f
-  cgtot    141.9858f   10.0751f    9.8129f
-  cstot    156.4296f    5.1215f    4.9909f
-  cbtot     81.3785f   14.4298f   13.4102f
-  cgs       79.5362f    1.3930f    1.3563f
-  cgd       62.9234f    1.3905f    1.3539f
+ subckt   xop1       xop1       xop1       xop2       xop2       xop2      
+ element  1:m4       1:m7       1:m8       2:mb       2:m1       2:m2      
+ model    0:pch.3    0:nch.7    0:nch.7    0:pch.3    0:pch.4    0:pch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id      -484.1216n  493.0953n  484.1216n -554.8338n -277.4164n -277.4166n
+  ibs      6.930e-23 -8.732e-23 -8.594e-23  8.073e-23  3.937e-23  3.937e-23
+  ibd       45.5376a  -12.7121a  -12.8375a   51.9013a  151.8448a  151.8448a
+  vgs     -397.6836m  398.2605m  398.2605m -400.0000m -297.6802m -297.6803m
+  vds     -499.7014m  398.2605m  500.2986m -202.3197m -195.3650m -195.3626m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -458.6742m  483.5634m  483.5496m -458.7427m -471.6914m -471.6914m
+  vdsat    -50.8475m   58.0195m   58.0148m  -51.3038m  -41.5024m  -41.5024m
+  vod       60.9905m  -85.3029m  -85.2891m   58.7427m  174.0112m  174.0111m
+  beta       1.3276m    1.5707m    1.5278m    1.4883m   11.7361m   11.7361m
+  gam eff  497.9476m  519.2085m  519.5326m  497.9476m  541.3676m  541.3676m
+  gm        10.9057u   10.7377u   10.5362u   12.4562u    7.4897u    7.4898u
+  gds       42.7354n   49.8329n   44.9553n   79.5039n   90.5811n   90.5819n
+  gmb        3.5883u    3.1117u    3.0537u    4.0970u    2.5201u    2.5201u
+  cdtot     22.7186f    4.5763f    4.3656f   27.5780f   82.0616f   82.0616f
+  cgtot     51.6826f   10.2686f   10.0010f   58.6118f   84.7992f   84.7992f
+  cstot     39.0198f    6.4930f    6.3275f   44.8448f   87.8163f   87.8163f
+  cbtot     69.9891f   13.7213f   13.2776f   80.8327f  175.0043f  175.0043f
+  cgs       16.1275f    2.3860f    2.3229f   18.8854f   20.1830f   20.1830f
+  cgd        5.8443f    1.3906f    1.3538f    6.5675f   19.6732f   19.6732f
 
 
 
+ subckt   xop2       xop2       xop2       xop2       xop2       xop2      
+ element  2:m5       2:m6       2:m3       2:m4       2:m7       2:m8      
+ model    0:nch.4    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       277.4160n  277.4162n -493.1072n -484.1202n  493.1076n  484.1202n
+  ibs     -4.595e-23 -4.595e-23  7.057e-23  6.930e-23 -8.732e-23 -8.594e-23
+  ibd     -109.6131a -109.6196a   45.9632a   45.5376a  -12.7121a  -12.8297a
+  vgs      300.0000m  300.0000m -397.6847m -397.6823m  398.2616m  398.2616m
+  vds      602.3153m  602.3177m -601.7384m -500.0000m  398.2616m  500.0000m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      491.0346m  491.0346m -458.6506m -458.6741m  483.5634m  483.5497m
+  vdsat     43.9133m   43.9133m  -50.8524m  -50.8473m   58.0197m   58.0150m
+  vod     -191.0346m -191.0346m   60.9659m   60.9918m  -85.3017m  -85.2881m
+  beta      15.0987m   15.0987m    1.3403m    1.3276m    1.5707m    1.5278m
+  gam eff  556.1233m  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
+  gm         7.5284u    7.5284u   11.1015u   10.9057u   10.7379u   10.5361u
+  gds       63.2817n   63.2817n   42.3105n   42.7309n   49.8340n   44.9634n
+  gmb        2.1702u    2.1702u    3.6530u    3.5883u    3.1118u    3.0537u
+  cdtot     14.6894f   14.6894f   22.4594f   22.7172f    4.5763f    4.3659f
+  cgtot     18.9523f   18.9523f   52.1775f   51.6823f   10.2686f   10.0010f
+  cstot     17.2107f   17.2107f   39.4016f   39.0193f    6.4930f    6.3275f
+  cbtot     31.6652f   31.6652f   70.1791f   69.9877f   13.7213f   13.2779f
+  cgs        4.8321f    4.8321f   16.2854f   16.1272f    2.3860f    2.3230f
+  cgd        4.7623f    4.7623f    5.8996f    5.8443f    1.3906f    1.3538f
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ 
+ 
+    input =  0:vin          output = v(vop)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ -7.36091        0.              -1.17152        0.              
+ -37.0922k       0.              -5.90341k       0.              
+ -37.2672k       0.              -5.93126k       0.              
+ -55.0767k       303.282k        -8.76573k       48.2688k        
+ -55.0767k       -303.282k       -8.76574k       -48.2688k       
+ -2.96572x       9.19857x        -472.009k       1.46400x        
+ -2.96572x       -9.19857x       -472.009k       -1.46400x       
+ -10.8400x       0.              -1.72523x       0.              
+ -11.2735x       0.              -1.79423x       0.              
+ -13.5596x       0.              -2.15807x       0.              
+ -126.123x       0.              -20.0732x       0.              
+ -142.832x       0.              -22.7325x       0.              
+ -35.9379g       0.              -5.71969g       0.              
+ -35.9829g       0.              -5.72686g       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ -37.2273k       0.              -5.92491k       0.              
+ -37.2670k       0.              -5.93122k       0.              
+ -39.2555k       401.633k        -6.24770k       63.9219k        
+ -39.2555k       -401.633k       -6.24770k       -63.9219k       
+ 3.70164x        0.              589.135k        0.              
+ -6.70826x       0.              -1.06765x       0.              
+ -10.6101x       0.              -1.68865x       0.              
+ -11.5606x       602.603k        -1.83992x       95.9073k        
+ -11.5606x       -602.603k       -1.83992x       -95.9073k       
+ -123.539x       0.              -19.6619x       0.              
+ -125.905x       0.              -20.0383x       0.              
+ -35.9332g       0.              -5.71894g       0.              
+ -35.9347g       0.              -5.71919g       0.              
+ 
+  ***** constant factor = 131.077k
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -222,12 +288,12 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      34  # elements   =      26
-  # resistors   =       4  # capacitors =       5  # inductors   =       0
+  # nodes       =      59  # elements   =      42
+  # resistors   =       5  # capacitors =      11  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
   # cccs        =       0  # ccvs       =       0  # volt_srcs   =       8
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =       9  # U elements  =       0
+  # jfets       =       0  # mosfets    =      18  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
   # S elements  =       0  # P elements =       0  # va device   =       0
 
@@ -235,19 +301,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.02           1          78
-  ac analysis        0.10        1601        1601
-  readin             0.17
+  op point           0.04           1         109
+  ac analysis        0.15        1601        1601
+  readin             0.20
   errchk             0.02
-  setup              0.11
+  setup              0.02
   output             0.00
 
 
-           total memory used          395  kbytes
+           total memory used          419  kbytes
            total cpu time            0.45 seconds
            total elapsed time           1 seconds
-           job started at     23:24:53 11/30/2015
-           job ended   at     23:24:53 11/30/2015
+           job started at     15:12:15 12/02/2015
+           job ended   at     15:12:15 12/02/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

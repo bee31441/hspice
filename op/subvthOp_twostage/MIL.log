@@ -1,0 +1,72 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\op\\subvthop_twostage\\my-op_2stage.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A0","vm(vop)","S-1"), node(D0,"A0","HERTZ"));
+nil
+pnlAddPane();
+nil
+nil
+2
+pnlAddCurve(2, node(D0,"A0","par(gainall)"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlDeletePane(1, 0);
+nil
+nil
+pnlSelectPane(1);
+nil
+pnlAddCurve(1, node(D0,"A0","par(phaseall)"), node(D0,"A0","HERTZ"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+quit();
+exit
+pnlDeletePane(1, 1);
+nil
+nil

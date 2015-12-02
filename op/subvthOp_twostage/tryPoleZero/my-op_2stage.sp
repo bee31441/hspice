@@ -3,7 +3,7 @@
 .protect
 .lib 'rf018.l' tt
 .unprotect
-.option post acout=0 accurate=1 dcon=1 CONVERGE=1 GMINDC=1.0000E-12 captab=1
+.option post acout=0 accurate=1 dcon=1 CONVERGE=1 GMINDC=1.0000E-12 captab=1  unwrap = 1
 *.option dccap=1 accurate=1 post
 
 ***param***
@@ -32,14 +32,20 @@ m4	vop	2		vdd	vdd	pch w = 3.88u 	 l = 0.2u m = 1
 m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1	
 m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
+***Pole Test***
+*c0	von	1 500f
+*CL	von	gnd 10p
 ***compensation***
-C1	1		von 1700f
-C2	2		vop 900f
-*Rz2	z2	2   100
+C1	z1		von 400f
+Rz1	z1		1   350k	* By cal = 1/gm3. But by sweep result is around 300k~400k
+* Because this RHP zero is around the zero db corner. it effect gain under zerodb but effect phase above zerodb.
+*	So when this RHP zero become LHP. we can make it very large to gain PM
+C2	2			vop 300f  * if one want bandwidth <1k.  it should > 900f
+*Rz2	z2	2   10000
 
 *Cl1	1	gnd 400f
-Cl2	2	gnd 400f
-Cb	b		gnd 700f			*use here to cancell right hand zero
+*Cl2	2	gnd 400f
+*Cb	b		gnd 600f			*use here to cancell right hand zero
 *Clp	von	gnd 500f
 
 
@@ -80,7 +86,7 @@ vtg	vgt	gnd dc = '1-397.6836m'
 ***sweep***
 .dc diff -0.5 0.5 0.01
 ***probe&measuring***
-.ac dec 1000 10 1g
+.ac dec 100 1 10g
 .tf v(1) vinp
 .pz v(vop) vinp
 .probe dc I(m1) I(m2)	I(mt)
@@ -88,8 +94,10 @@ vtg	vgt	gnd dc = '1-397.6836m'
 +gain1st=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')	phase1st=par('vp(2,1)')
 +gainall=par('Vdb(vop)-Vdb(vinp,vinn)')		phaseall=par('vp(vop)')
 .meas ac gain MAX (par('Vdb(vop)-Vdb(vinp,vinn)'))
+.meas ac bandwidth WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 'gain-3db'
 .meas ac zerodb WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
 .meas ac phaseATdb	FIND par('vp(vop)') WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
+
 
 
 
