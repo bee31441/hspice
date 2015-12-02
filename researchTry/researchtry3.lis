@@ -13,17 +13,7 @@
 
 
  .option post acout=0 accurate dcon=1 converge=1 gmindc=   1.0000e-12
- ***netlist***
- mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
- mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
- cl 	inx	v0  10f
- r1	inx	v0  0.5g
- v00	v0	gnd dc = 0 
-
- *cx	vg inx 1p
-
- ***output***
-
+ ***op***
  .subckt	op	vdd	vss	vinn	vinp	vop	b0	b1	
  mb	b	b0		vdd	vdd	pch	w = 10u  l = 1u	  m = 2
  m1	1	vinn	b		b		pch	w = 30u l = 0.4u m = 2
@@ -38,24 +28,52 @@
  c2	2	vop 800f
  .ends
 
+ ***netlist***
+ mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
+ mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
+ cl 	inx	v0  10f
+ r1	inx	v0  0.5g
+ v00	v0	gnd dc = 0 
+
+ *cx	vg inx 1p
  xopf	vdd	vss	vinn	vinp	vop	b0	b1	op
+
+ *** bandpass***
+ xop1	vdd	vss	vinn1	vinp1	vop1		b0	b1	op
+ ci	vinn1 	vop1   2.2p
+ cd	vop1		vinn2  220p
+
+ xop2	vdd	vss	vinn2	vinp2	vout	b0	b1	op
+ cfd	vinn2	vout  2.2p
+ rd	vinn2	vout  47k
+ v1		vinp1	gnd dc = 0.5
+ v2		vinp2	gnd dc = 0.5
+
+
+ ***output***
+
+
+
+ ***param***
  .param 
  +bias			= 0.6
  +bias2		= 0.3
- vb 		b0		gnd dc bias
- vb1		b1		gnd dc bias2
- vref	vinn	gnd dc = 0.5	*496.3104m
- v1		vinp	inx dc = 0
- v2		vop		vg  dc = 0
 
+ ***connection source***
+ *vw vinn1	inx dc = 0v			*bandpass and inx
+ vx		vinp	inx dc = 0		*opf input and inx
+ vy		vop		vg  dc = 0		*opf output and nw_vg
 
  ***source***
  vd		vdd	gnd dc = 1v
  vs		vss	gnd dc = 0v
- vbias	vb	gnd dc = 0.7v
+ vbias	vb	gnd dc = 0.7v		*pmos for bias current
+ vb 		b0		gnd dc bias		*op bias1
+ vb1		b1		gnd dc bias2	*op bias2
+ vref	vinn	gnd dc = 0.5
  *vin		vg	gnd dc = 0.3v ac = 1
  .param f = 320k
- iin	gnd inx dc = 10n ac = 1 sin(20n 10n f 1ns)
+ iin	gnd inx dc = 50n ac = 1 sin(20n 10n f 1ns)
 
  ***
  .op
@@ -96,9 +114,17 @@
    number circuitname                     definition         multiplier
         0 main circuit
         1 xopf.                           op                 1.00 
+        2 xop1.                           op                 1.00 
+        3 xop2.                           op                 1.00 
  
 
  
+
+
+
+ **warning**  no dc path to ground from node        0:vinn1            defined in subckt 0               now it is connected with gdcpath
+
+
       
   Opening plot unit= 79
  file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa0      
@@ -113,28 +139,33 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9661m
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9685m
  +0:v0      =   0.      0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 303.5703m 0:vinn    = 500.0000m 0:vinp    = 499.9661m
- +0:vop     = 303.5703m 0:vss     =   0.      1:1       = 601.5014m
- +1:2       = 603.1525m 1:b       = 797.6637m 1:von     = 399.0959m
+ +0:vg      = 316.8365m 0:vinn    = 500.0000m 0:vinn1   =   0.     
+ +0:vinn2   = 500.0000m 0:vinp    = 499.9685m 0:vinp1   = 500.0000m
+ +0:vinp2   = 500.0000m 0:vop     = 316.8365m 0:vop1    = 999.9791m
+ +0:vout    = 500.0000m 0:vss     =   0.      1:1       = 601.5599m
+ +1:2       = 603.0924m 1:b       = 797.6649m 1:von     = 399.0359m
+ +2:1       = 794.2128m 2:2       = 423.3984m 2:b       = 794.2996m
+ +2:von     = 202.7925m 3:1       = 602.3152m 3:2       = 602.3176m
+ +3:b       = 797.6803m 3:von     = 398.2617m
 
 
  ****  voltage sources
 
  subckt                                                                    
- element  0:v00      0:vb       0:vb1      0:vref     0:v1       0:v2      
-  volts      0.       600.0000m  300.0000m  500.0000m    0.         0.     
-  current  999.9322p    0.         0.         0.         0.         0.     
-  power      0.         0.         0.         0.         0.         0.     
+ element  0:v00      0:v1       0:v2       0:vx       0:vy       0:vd      
+  volts      0.       500.0000m  500.0000m    0.         0.         1.0000 
+  current  999.9370p    0.         0.         0.       888.1784a   -3.7189u
+  power      0.         0.         0.         0.         0.         3.7189u
 
- subckt                                   
- element  0:vd       0:vs       0:vbias   
-  volts      1.0000     0.       700.0000m
-  current   -1.6263u    1.6353u    0.     
-  power      1.6263u    0.         0.     
+ subckt                                                         
+ element  0:vs       0:vbias    0:vb       0:vb1      0:vref    
+  volts      0.       700.0000m  600.0000m  300.0000m  500.0000m
+  current    3.7679u    0.         0.         0.         0.     
+  power      0.         0.         0.         0.         0.     
 
-     total voltage source power dissipation=    1.6263u       watts
+     total voltage source power dissipation=    3.7189u       watts
 
 
 
@@ -142,21 +173,21 @@
 
  subckt             
  element  0:iin     
-  volts   -499.9661m
-  current   10.0000n
-  power      4.9997n
+  volts   -499.9685m
+  current   50.0000n
+  power     24.9984n
 
 
-     total current source power dissipation=   4.9997n       watts
+     total current source power dissipation=  24.9984n       watts
 
  **** resistors
 
- subckt             
- element  0:r1      
-  r value  500.0000x
-  v drop   499.9661m
-  current  999.9322p
-  power    499.9322p
+ subckt                        
+ element  0:r1       0:rd      
+  r value  500.0000x   47.0000k
+  v drop   499.9685m   -4.7740f
+  current  999.9370p -1.016e-19
+  power    499.9370p    0.     
 
 
 
@@ -167,80 +198,182 @@
  element  0:mp       0:mnw      1:mb       1:m1       1:m2       1:m5      
  model    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4    0:nch.4   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id       -86.0774n   95.0774n -554.8351n -277.3649n -277.4694n  277.3645n
-  ibs      1.248e-23 -1.764e-23  8.073e-23  3.936e-23  3.938e-23 -4.594e-23
-  ibd       28.4605a   -8.9807a   51.9013a  151.8471a  151.8422a -107.4543a
-  vgs     -300.0000m  303.5703m -400.0000m -297.6637m -297.6977m  300.0000m
-  vds     -500.0339m  499.9661m -202.3363m -196.1623m -194.5112m  601.5014m
+  id       -86.0773n  135.0773n -554.8350n -277.3686n -277.4656n  277.3682n
+  ibs      1.248e-23 -2.505e-23  8.073e-23  3.936e-23  3.938e-23 -4.595e-23
+  ibd       28.4605a   -9.0712a   51.9013a  151.8470a  151.8424a -107.6074a
+  vgs     -300.0000m  316.8365m -400.0000m -297.6649m -297.6964m  300.0000m
+  vds     -500.0315m  499.9685m -202.3351m -196.1050m -194.5726m  601.5599m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -501.3812m  518.9690m -458.7427m -471.6908m -471.6921m  491.0351m
-  vdsat    -42.2998m   40.9838m  -51.3038m  -41.5020m  -41.5027m   43.9133m
-  vod      201.3812m -215.3987m   58.7427m  174.0271m  173.9944m -191.0351m
-  beta       5.3236m    6.8710m    1.4883m   11.7361m   11.7361m   15.0987m
+  vth     -501.3812m  518.9690m -458.7427m -471.6909m -471.6921m  491.0351m
+  vdsat    -42.2998m   41.1256m  -51.3038m  -41.5020m  -41.5027m   43.9133m
+  vod      201.3812m -202.1324m   58.7427m  174.0259m  173.9956m -191.0351m
+  beta       5.3236m    6.8709m    1.4883m   11.7361m   11.7361m   15.0987m
   gam eff  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m  556.1233m
-  gm         2.2897u    2.5350u   12.4563u    7.4885u    7.4910u    7.5270u
-  gds       46.5823n   54.4352n   79.4959n   90.3131n   90.8716n   63.2941n
-  gmb      788.8379n  762.8673n    4.0970u    2.5197u    2.5205u    2.1698u
-  cdtot     14.0761f    2.9963f   27.5778f   82.0433f   82.0811f   14.6916f
-  cgtot     11.4399f    2.8685f   58.6118f   84.7993f   84.7991f   18.9523f
-  cstot     16.1411f    3.4273f   44.8448f   87.8160f   87.8166f   17.2107f
-  cbtot     27.1844f    5.6279f   80.8326f  174.9863f  175.0235f   31.6673f
-  cgs        3.6330f  918.1339a   18.8854f   20.1828f   20.1833f    4.8321f
-  cgd        3.6044f  914.0438a    6.5675f   19.6732f   19.6732f    4.7623f
+  gm         2.2897u    3.5485u   12.4563u    7.4886u    7.4909u    7.5271u
+  gds       46.5823n   77.0885n   79.4965n   90.3322n   90.8506n   63.2932n
+  gmb      788.8370n    1.0643u    4.0970u    2.5197u    2.5205u    2.1698u
+  cdtot     14.0761f    2.9963f   27.5779f   82.0447f   82.0797f   14.6914f
+  cgtot     11.4399f    2.8652f   58.6118f   84.7993f   84.7991f   18.9523f
+  cstot     16.1411f    3.4297f   44.8448f   87.8160f   87.8165f   17.2107f
+  cbtot     27.1844f    5.6233f   80.8326f  174.9876f  175.0221f   31.6672f
+  cgs        3.6330f  920.0295a   18.8854f   20.1828f   20.1833f    4.8321f
+  cgd        3.6044f  914.0403a    6.5675f   19.6732f   19.6732f    4.7623f
 
 
 
- subckt   xopf       xopf       xopf       xopf       xopf      
- element  1:m6       1:m3       1:m4       1:m7       1:m8      
+ subckt   xopf       xopf       xopf       xopf       xopf       xop1      
+ element  1:m6       1:m3       1:m4       1:m7       1:m8       2:mb      
+ model    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7    0:pch.3   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       277.4652n -501.5250n -483.3114n  501.5254n  483.3122n -555.0999n
+  ibs     -4.596e-23  7.177e-23  6.918e-23 -8.881e-23 -8.580e-23  8.077e-23
+  ibd     -111.7335a   45.9633a   45.5386a  -12.7122a  -12.4080a   51.9037a
+  vgs      300.0000m -398.4401m -396.9076m  399.0359m  399.0359m -400.0000m
+  vds      603.0924m -600.9641m -683.1635m  399.0359m  316.8365m -205.7004m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      491.0341m -458.6508m -458.6319m  483.5632m  483.5919m -458.7419m
+  vdsat     43.9133m  -51.0042m  -50.7017m   58.1594m   58.1470m  -51.3039m
+  vod     -191.0341m   60.2107m   61.7242m  -84.5273m  -84.5560m   58.7419m
+  beta      15.0987m    1.3402m    1.3277m    1.5707m    1.5278m    1.4883m
+  gam eff  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m  497.9476m
+  gm         7.5297u   11.2742u   10.8923u   10.9060u   10.5162u   12.4623u
+  gds       63.2699n   42.9893n   40.8695n   50.5865n   55.3064n   77.9178n
+  gmb        2.1706u    3.7097u    3.5846u    3.1603u    3.0479u    4.0990u
+  cdtot     14.6874f   22.4629f   21.9053f    4.5755f    4.5442f   27.5506f
+  cgtot     18.9523f   52.3381f   51.5275f   10.2845f   10.0171f   58.6103f
+  cstot     17.2107f   39.6838f   38.7568f    6.5246f    6.3555f   44.8464f
+  cbtot     31.6631f   70.1885f   69.1716f   13.7206f   13.4556f   80.8067f
+  cgs        4.8321f   16.5102f   15.9105f    2.4090f    2.3458f   18.8842f
+  cgd        4.7623f    5.8996f    5.8437f    1.3906f    1.3542f    6.5668f
+
+
+
+ subckt   xop1       xop1       xop1       xop1       xop1       xop1      
+ element  2:m1       2:m2       2:m5       2:m6       2:m3       2:m4      
+ model    0:pch.4    0:pch.4    0:nch.4    0:nch.4    0:pch.3    0:pch.3   
+ region       Linear     Cutoff     Cutoff     Cutoff     Cutoff     Linear
+  id      -289.3530n -265.7462n  289.3514n  265.7468n   -2.9311n   -3.1039n
+  ibs      4.106e-23  3.771e-23 -4.793e-23 -4.402e-23  4.196e-25  4.443e-25
+  ibd      5.121e-19  151.9210a  -19.2458f  -40.6827a   45.9615a  3.705e-20
+  vgs     -794.2996m -294.2996m  300.0000m  300.0000m -205.7872m -576.6016m
+  vds      -86.7533u -370.9012m  794.2128m  423.3984m -797.2075m  -20.9118u
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -471.8453m -471.5532m  490.9141m  491.1470m -458.6056m -458.7893m
+  vdsat   -280.7668m  -41.4339m   43.9151m   43.9117m  -40.2382m -135.6613m
+  vod     -322.4543m  177.2536m -190.9141m -191.1470m  252.8184m -117.8123m
+  beta      11.0527m   11.7369m   15.0991m   15.0984m    1.3440m    1.2976m
+  gam eff  541.3676m  541.3676m  556.1233m  556.1233m  497.9476m  497.9476m
+  gm       839.2692n    7.2015u    7.8488u    7.2147u   89.0704n   22.9323n
+  gds        3.3354m   66.2911n   61.3989n   67.9681n  270.5924p  148.4184u
+  gmb      317.9288n    2.4236u    2.2602u    2.0817u   30.2364n    7.8888n
+  cdtot    321.5120f   78.4490f   14.2253f   15.2165f   21.6667f  161.8216f
+  cgtot    222.1211f   84.8245f   18.9525f   18.9522f   46.9919f  141.9858f
+  cstot    285.9241f   87.7609f   17.2111f   17.2104f   26.2653f  156.4296f
+  cbtot    190.3991f  171.4502f   31.2010f   32.1922f   71.2704f   81.3785f
+  cgs      119.1770f   20.1361f    4.8323f    4.8319f    5.9269f   79.5362f
+  cgd      106.7122f   19.6728f    4.7623f    4.7623f    5.9007f   62.9234f
+
+
+
+ subckt   xop1       xop1       xop2       xop2       xop2       xop2      
+ element  2:m7       2:m8       3:mb       3:m1       3:m2       3:m5      
+ model    0:nch.7    0:nch.7    0:pch.3    0:pch.4    0:pch.4    0:nch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id         2.9323n    3.1019n -554.8338n -277.4164n -277.4166n  277.4160n
+  ibs     -5.193e-25 -5.508e-25  8.073e-23  3.937e-23  3.937e-23 -4.595e-23
+  ibd      -12.7073a   -6.8220f   51.9013a  151.8448a  151.8448a -109.6130a
+  vgs      202.7925m  202.7925m -400.0000m -297.6802m -297.6803m  300.0000m
+  vds      202.7925m  999.9791m -202.3197m -195.3651m -195.3627m  602.3152m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      483.6084m  483.4344m -458.7427m -471.6914m -471.6914m  491.0346m
+  vdsat     48.5040m   48.4997m  -51.3038m  -41.5023m  -41.5024m   43.9133m
+  vod     -280.8159m -280.6419m   58.7427m  174.0112m  174.0111m -191.0346m
+  beta       1.5723m    1.5294m    1.4883m   11.7361m   11.7361m   15.0987m
+  gam eff  519.2085m  519.5326m  497.9476m  541.3676m  541.3676m  556.1233m
+  gm        87.1947n   92.2230n   12.4562u    7.4897u    7.4898u    7.5284u
+  gds      519.5358p  285.4098p   79.5039n   90.5811n   90.5819n   63.2817n
+  gmb       26.1649n   27.6755n    4.0970u    2.5201u    2.5201u    2.1702u
+  cdtot      4.8002f    4.0266f   27.5780f   82.0616f   82.0616f   14.6894f
+  cgtot     10.0751f    9.8129f   58.6118f   84.7992f   84.7992f   18.9523f
+  cstot      5.1215f    4.9909f   44.8448f   87.8163f   87.8163f   17.2107f
+  cbtot     14.4298f   13.4102f   80.8327f  175.0043f  175.0043f   31.6652f
+  cgs        1.3930f    1.3563f   18.8854f   20.1830f   20.1830f    4.8321f
+  cgd        1.3905f    1.3539f    6.5675f   19.6732f   19.6732f    4.7623f
+
+
+
+ subckt   xop2       xop2       xop2       xop2       xop2      
+ element  3:m6       3:m3       3:m4       3:m7       3:m8      
  model    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id       277.4690n -502.1824n -483.1976n  502.1828n  483.1984n
-  ibs     -4.596e-23  7.187e-23  6.916e-23 -8.893e-23 -8.578e-23
-  ibd     -111.9001a   45.9633a   45.5387a  -12.7122a  -12.4080a
-  vgs      300.0000m -398.4986m -396.8475m  399.0959m  399.0959m
-  vds      603.1525m -600.9041m -696.4297m  399.0959m  303.5703m
+  id       277.4162n -493.1074n -484.1205n  493.1079n  484.1205n
+  ibs     -4.595e-23  7.057e-23  6.930e-23 -8.732e-23 -8.594e-23
+  ibd     -109.6195a   45.9632a   45.5376a  -12.7121a  -12.8297a
+  vgs      300.0000m -397.6848m -397.6824m  398.2617m  398.2617m
+  vds      602.3176m -601.7383m -500.0000m  398.2617m  500.0000m
   vbs        0.         0.         0.         0.         0.     
-  vth      491.0341m -458.6508m -458.6288m  483.5632m  483.5950m
-  vdsat     43.9133m  -51.0160m  -50.6904m   58.1703m   58.1573m
-  vod     -191.0341m   60.1522m   61.7814m  -84.4673m  -84.4991m
-  beta      15.0987m    1.3402m    1.3277m    1.5707m    1.5278m
+  vth      491.0346m -458.6506m -458.6741m  483.5634m  483.5497m
+  vdsat     43.9133m  -50.8525m  -50.8473m   58.0197m   58.0150m
+  vod     -191.0346m   60.9659m   60.9917m  -85.3017m  -85.2880m
+  beta      15.0987m    1.3403m    1.3276m    1.5707m    1.5278m
   gam eff  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
-  gm         7.5298u   11.2877u   10.8902u   10.9192u   10.5133u
-  gds       63.2690n   43.0422n   40.7730n   50.6452n   56.9408n
-  gmb        2.1706u    3.7142u    3.5839u    3.1641u    3.0470u
-  cdtot     14.6872f   22.4632f   21.8517f    4.5755f    4.5589f
-  cgtot     18.9523f   52.3507f   51.5157f   10.2857f   10.0185f
-  cstot     17.2107f   39.7058f   38.7364f    6.5271f    6.3576f
-  cbtot     31.6629f   70.1893f   69.1176f   13.7206f   13.4702f
-  cgs        4.8321f   16.5278f   15.8940f    2.4108f    2.3477f
-  cgd        4.7623f    5.8996f    5.8437f    1.3906f    1.3543f
+  gm         7.5284u   11.1015u   10.9057u   10.7379u   10.5361u
+  gds       63.2817n   42.3105n   42.7309n   49.8341n   44.9634n
+  gmb        2.1702u    3.6530u    3.5883u    3.1118u    3.0537u
+  cdtot     14.6894f   22.4594f   22.7172f    4.5763f    4.3659f
+  cgtot     18.9523f   52.1775f   51.6823f   10.2686f   10.0010f
+  cstot     17.2107f   39.4016f   39.0194f    6.4930f    6.3275f
+  cbtot     31.6652f   70.1791f   69.9877f   13.7213f   13.2779f
+  cgs        4.8321f   16.2854f   16.1272f    2.3860f    2.3230f
+  cgd        4.7623f    5.8996f    5.8443f    1.3906f    1.3538f
 
 
 
  ***************************************************
    ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
  
  
     input =  0:iin          output = v(inx)
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- -48.7705k       0.              -7.76206k       0.              
- 6.50827x        10.2695x        1.03582x        1.63444x        
- 6.50827x        -10.2695x       1.03582x        -1.63444x       
- -47.3468x       0.              -7.53547x       0.              
- -106.939x       0.              -17.0199x       0.              
- -140.539x       0.              -22.3675x       0.              
+ -48.7724k       0.              -7.76236k       0.              
+ -49.0240k       0.              -7.80241k       0.              
+ -67.7840k       0.              -10.7882k       0.              
+ -123.456k       0.              -19.6486k       0.              
+ -199.091k       399.874k        -31.6863k       63.6419k        
+ -199.091k       -399.874k       -31.6863k       -63.6419k       
+ 8.39197x        -11.0546x       1.33562x        -1.75939x       
+ 8.39197x        11.0546x        1.33562x        1.75939x        
+ -13.3503x       0.              -2.12476x       0.              
+ -16.4049x       0.              -2.61093x       0.              
+ -48.4805x       0.              -7.71591x       0.              
+ -56.2721x       0.              -8.95598x       0.              
+ -110.723x       0.              -17.6221x       0.              
+ -117.954x       0.              -18.7730x       0.              
+ -142.212x       0.              -22.6337x       0.              
+ -357.247x       0.              -56.8576x       0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
- -1.67637k       0.              -266.803        0.              
- -36.9901k       0.              -5.88715k       0.              
- -58.8527x       0.              -9.36670x       0.              
- -66.8433x       0.              -10.6384x       0.              
- -133.536x       0.              -21.2530x       0.              
+ -1.64939k       0.              -262.508        0.              
+ -37.0020k       0.              -5.88905k       0.              
+ -49.0240k       0.              -7.80241k       0.              
+ -105.961k       0.              -16.8643k       0.              
+ -123.456k       0.              -19.6486k       0.              
+ -199.091k       -399.874k       -31.6863k       -63.6419k       
+ -199.091k       399.874k        -31.6863k       63.6419k        
+ -13.3503x       0.              -2.12476x       0.              
+ -16.4049x       0.              -2.61093x       0.              
+ -56.2721x       0.              -8.95598x       0.              
+ -58.7797x       0.              -9.35509x       0.              
+ -66.9231x       0.              -10.6511x       0.              
+ -117.954x       0.              -18.7730x       0.              
+ -133.354x       0.              -21.2239x       0.              
+ -357.247x       0.              -56.8576x       0.              
  
-  ***** constant factor = 11.5119t
+  ***** constant factor = 11.8001t
   *** initial damped pseudo transient completed. ***
   *** final try started ***
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -256,9 +389,14 @@
 
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9668m
  +0:v0      =   0.      0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinp    = 499.9668m
- +0:vop     = 307.3285m 0:vss     =   0.      1:1       = 601.5180m
- +1:2       = 603.1353m 1:b       = 797.6641m 1:von     = 399.0789m
+ +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinn1   =   0.     
+ +0:vinn2   = 500.0000m 0:vinp    = 499.9668m 0:vinp1   = 500.0000m
+ +0:vinp2   = 500.0000m 0:vop     = 307.3285m 0:vop1    = 999.9791m
+ +0:vout    = 500.0000m 0:vss     =   0.      1:1       = 601.5180m
+ +1:2       = 603.1354m 1:b       = 797.6641m 1:von     = 399.0788m
+ +2:1       = 794.2128m 2:2       = 423.3982m 2:b       = 794.2996m
+ +2:von     = 202.7925m 3:1       = 602.3153m 3:2       = 602.3177m
+ +3:b       = 797.6803m 3:von     = 398.2616m
 
 
           ***** job concluded
@@ -277,9 +415,14 @@
 
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9668m
  +0:v0      =   0.      0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinp    = 499.9668m
- +0:vop     = 307.3285m 0:vss     =   0.      1:1       = 601.5180m
- +1:2       = 603.1353m 1:b       = 797.6641m 1:von     = 399.0789m
+ +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinn1   =   0.     
+ +0:vinn2   = 500.0000m 0:vinp    = 499.9668m 0:vinp1   = 500.0000m
+ +0:vinp2   = 500.0000m 0:vop     = 307.3285m 0:vop1    = 999.9791m
+ +0:vout    = 500.0000m 0:vss     =   0.      1:1       = 601.5180m
+ +1:2       = 603.1354m 1:b       = 797.6641m 1:von     = 399.0788m
+ +2:1       = 794.2128m 2:2       = 423.3982m 2:b       = 794.2996m
+ +2:von     = 202.7925m 3:1       = 602.3153m 3:2       = 602.3177m
+ +3:b       = 797.6803m 3:von     = 398.2616m
 
 
           ***** job concluded
@@ -298,9 +441,14 @@
 
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:inx     = 499.9668m
  +0:v0      =   0.      0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinp    = 499.9668m
- +0:vop     = 307.3285m 0:vss     =   0.      1:1       = 601.5180m
- +1:2       = 603.1353m 1:b       = 797.6641m 1:von     = 399.0789m
+ +0:vg      = 307.3285m 0:vinn    = 500.0000m 0:vinn1   =   0.     
+ +0:vinn2   = 500.0000m 0:vinp    = 499.9668m 0:vinp1   = 500.0000m
+ +0:vinp2   = 500.0000m 0:vop     = 307.3285m 0:vop1    = 999.9791m
+ +0:vout    = 500.0000m 0:vss     =   0.      1:1       = 601.5180m
+ +1:2       = 603.1354m 1:b       = 797.6641m 1:von     = 399.0788m
+ +2:1       = 794.2128m 2:2       = 423.3982m 2:b       = 794.2996m
+ +2:von     = 202.7925m 3:1       = 602.3153m 3:2       = 602.3177m
+ +3:b       = 797.6803m 3:von     = 398.2616m
 
 
           ***** job concluded
@@ -318,12 +466,12 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      38  # elements   =      25
-  # resistors   =       1  # capacitors =       3  # inductors   =       0
+  # nodes       =      88  # elements   =      53
+  # resistors   =       2  # capacitors =      10  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      11
   # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      11  # U elements  =       0
+  # jfets       =       0  # mosfets    =      29  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
   # S elements  =       0  # P elements =       0  # va device   =       0
 
@@ -331,21 +479,21 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.10           1         493
-  dc sweep           0.12         991        2009
+  op point           0.25           1         517
+  dc sweep           0.22         991        2017
   ac analysis        0.12        1301        1301
-  transient          1.71       30003       30844       10900 rev=      1880
-  readin             0.16
-  errchk             0.02
-  setup              0.01
+  transient          2.73       30003       30843       10904 rev=      1889
+  readin             0.19
+  errchk             0.03
+  setup              0.02
   output             0.00
 
 
-           total memory used          416  kbytes
-           total cpu time            2.31 seconds
-           total elapsed time           2 seconds
-           job started at     17:31:11 11/29/2015
-           job ended   at     17:31:13 11/29/2015
+           total memory used          592  kbytes
+           total cpu time            3.64 seconds
+           total elapsed time           4 seconds
+           job started at     15:25:46 12/02/2015
+           job ended   at     15:25:50 12/02/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

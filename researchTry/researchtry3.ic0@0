@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "17:31:11 11/29/2015 "
+* "rundate" "15:25:46 12/02/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry3.sp "
 * "runtitle" "*researchtry3.sp"
 * time =    0.            
@@ -18,11 +18,25 @@
 + vdd =   1.0000        
 + vg = 307.3285m       
 + vinn = 500.0000m       
++ vinn1 =   0.            
++ vinn2 = 500.0000m       
 + vinp = 499.9668m       
++ vinp1 = 500.0000m       
++ vinp2 = 500.0000m       
 + vop = 307.3285m       
++ vop1 = 999.9791m       
++ vout = 500.0000m       
 + vss =   0.            
 + xopf.1 = 601.5180m       
-+ xopf.2 = 603.1353m       
++ xopf.2 = 603.1354m       
 + xopf.b = 797.6641m       
-+ xopf.von = 399.0789m       
++ xopf.von = 399.0788m       
++ xop1.1 = 794.2128m       
++ xop1.2 = 423.3982m       
++ xop1.b = 794.2996m       
++ xop1.von = 202.7925m       
++ xop2.1 = 602.3153m       
++ xop2.2 = 602.3177m       
++ xop2.b = 797.6803m       
++ xop2.von = 398.2616m       
 ***   END: Saved Operating Point ***                     

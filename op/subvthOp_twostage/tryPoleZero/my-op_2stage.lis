@@ -5,14 +5,14 @@
   terms and conditions of the license agreement from Synopsys.
   Use of this program is your acceptance to be bound by the 
   license agreement. HSPICE is the trademark of Synopsys, Inc.
-  Input File: c:\users\timer\documents\github\hspice\op\subvthop_twostage\my-op_
+  Input File: c:\users\timer\documents\github\hspice\op\subvthop_twostage\trypol
  Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
 
 
 
 
- .option post acout=0 accurate=1 dcon=1 converge=1 gmindc=1.0000e-12 captab=1
+ .option post acout=0 accurate=1 dcon=1 converge=1 gmindc=1.0000e-12 captab=1  unwrap = 1
  *.option dccap=1 accurate=1 post
 
  ***param***
@@ -41,14 +41,20 @@
  m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1	
  m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
+ ***pole test***
+ *c0	von	1 500f
+ *cl	von	gnd 10p
  ***compensation***
- c1	1		von 1700f
- c2	2		vop 900f
- *rz2	z2	2   100
+ c1	z1		von 400f
+ rz1	z1		1   350k	* by cal = 1/gm3. but by sweep result is around 300k~400k
+ * because this rhp zero is around the zero db corner. it effect gain under zerodb but effect phase above zerodb.
+ *	so when this rhp zero become lhp. we can make it very large to gain pm
+ c2	2			vop 300f  * if one want bandwidth <1k.  it should > 900f
+ *rz2	z2	2   10000
 
  *cl1	1	gnd 400f
- cl2	2	gnd 400f
- cb	b		gnd 600f			*use here to cancell right hand zero
+ *cl2	2	gnd 400f
+ *cb	b		gnd 600f			*use here to cancell right hand zero
  *clp	von	gnd 500f
 
 
@@ -89,7 +95,7 @@
  ***sweep***
  .dc diff -0.5 0.5 0.01
  ***probe&measuring***
- .ac dec 1000 10 1g
+ .ac dec 100 1 10g
  .tf v(1) vinp
  .pz v(vop) vinp
  .probe dc i(m1) i(m2)	i(mt)
@@ -97,8 +103,10 @@
  +gain1st=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')	phase1st=par('vp(2,1)')
  +gainall=par('vdb(vop)-vdb(vinp,vinn)')		phaseall=par('vp(vop)')
  .meas ac gain max (par('vdb(vop)-vdb(vinp,vinn)'))
+ .meas ac bandwidth when par('vdb(vop)-vdb(vinp,vinn)') = 'gain-3db'
  .meas ac zerodb when par('vdb(vop)-vdb(vinp,vinn)') = 1
  .meas ac phaseatdb	find par('vp(vop)') when par('vdb(vop)-vdb(vinp,vinn)') = 1
+
 
 
 
@@ -128,10 +136,10 @@
     -480.0000m           1.000e+20                     117.4454k                  112.0258p
     -470.0000m           1.000e+20                     117.4511k                  158.7334p
     -460.0000m           1.000e+20                     117.4588k                  225.1279p
-    -450.0000m           1.000e+20                     117.4693k                  319.5836p
-    -440.0000m           1.000e+20                     117.4836k                  454.0707p
-    -430.0000m           1.000e+20                     117.5031k                  645.7121p
-    -420.0000m           1.000e+20                     117.5294k                  919.0234p
+    -450.0000m           1.000e+20                     117.4693k                  319.5837p
+    -440.0000m           1.000e+20                     117.4836k                  454.0706p
+    -430.0000m           1.000e+20                     117.5031k                  645.7120p
+    -420.0000m           1.000e+20                     117.5294k                  919.0233p
     -410.0000m           1.000e+20                     117.5652k                    1.3091n
     -400.0000m           1.000e+20                     117.6138k                    1.8664n
     -390.0000m           1.000e+20                     117.6797k                    2.6632n
@@ -148,7 +156,7 @@
     -280.0000m           1.000e+20                     124.5041k                  141.4450n
     -270.0000m           1.000e+20                     127.0134k                  204.8963n
     -260.0000m           1.000e+20                     130.4298k                  298.0230n
-    -250.0000m           1.000e+20                     135.1047k                  436.0136n
+    -250.0000m           1.000e+20                     135.1047k                  436.0135n
     -240.0000m           1.000e+20                     141.5505k                  643.2821n
     -230.0000m           1.000e+20                     150.5385k                  960.6139n
     -220.0000m           1.000e+20                     163.2762k                    1.4594u
@@ -156,11 +164,11 @@
     -200.0000m           1.000e+20                     209.3660k                    3.6550u
     -190.0000m           1.000e+20                     252.4270k                    6.1518u
     -180.0000m           1.000e+20                     323.1990k                   10.9823u
-    -170.0000m           1.000e+20                     447.2075k                   21.1222u
+    -170.0000m           1.000e+20                     447.2074k                   21.1222u
     -160.0000m           1.000e+20                     680.5656k                   44.4400u
-    -150.0000m           1.000e+20                       1.1487x                  103.0986u
-    -140.0000m           1.000e+20                       2.0963x                  257.8875u
-    -130.0000m           1.000e+20                       3.7635x                  636.1774u
+    -150.0000m           1.000e+20                       1.1486x                  103.0986u
+    -140.0000m           1.000e+20                       2.0963x                  257.8877u
+    -130.0000m           1.000e+20                       3.7635x                  636.1773u
     -120.0000m           1.000e+20                       5.8939x                    1.3807m
     -110.0000m           1.000e+20                       7.8695x                    2.5903m
     -100.0000m           1.000e+20                       9.4224x                    4.4359m
@@ -174,7 +182,7 @@
      -20.0000m           1.000e+20                      14.1145x                  355.6018m
      -10.0000m           1.000e+20                      14.3382x                    1.0562 
        0.                1.000e+20                      11.0919x                   24.0316 
-      10.0000m           1.000e+20                     728.2559k                    2.0795 
+      10.0000m           1.000e+20                     728.2557k                    2.0795 
       20.0000m           1.000e+20                     417.7285k                    1.3416 
       30.0000m           1.000e+20                     332.4975k                    1.1439 
       40.0000m           1.000e+20                     293.1308k                    1.0568 
@@ -182,9 +190,9 @@
       60.0000m           1.000e+20                     255.9191k                  983.7697m
       70.0000m           1.000e+20                     244.5271k                  965.8103m
       80.0000m           1.000e+20                     234.3507k                  952.1110m
-      90.0000m           1.000e+20                     223.9393k                  939.8607m
+      90.0000m           1.000e+20                     223.9394k                  939.8607m
      100.0000m           1.000e+20                     212.1373k                  927.2134m
-     110.0000m           1.000e+20                     197.9979k                  912.8049m
+     110.0000m           1.000e+20                     197.9979k                  912.8048m
      120.0000m           1.000e+20                     181.3290k                  895.3569m
      130.0000m           1.000e+20                     164.2060k                  872.4154m
      140.0000m           1.000e+20                     150.5584k                  838.5857m
@@ -235,24 +243,24 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:1       = 602.3165m 0:2       = 602.3165m 0:b       = 797.6803m
+ +0:1       = 602.3164m 0:2       = 602.3164m 0:b       = 797.6803m
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:vdd     =   1.0000 
  +0:vdt     = 500.2952m 0:vgt     = 602.3164m 0:vinn    = 500.0000m
- +0:vinp    = 500.0000m 0:von     = 398.2604m 0:vop     = 499.1141m
- +0:vss     =   0.     
+ +0:vinp    = 500.0000m 0:von     = 398.2605m 0:vop     = 499.1139m
+ +0:vss     =   0.      0:z1      = 602.3164m
 
 
- maximum nodal capacitance=   1.849E-12         on node     0:1               
+ maximum nodal capacitance=   5.532E-13         on node     0:b               
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:1       =   1.8489p 0:2       =   1.4009p 0:b       =   1.1532p
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:vdd     = 297.4421f
+ +0:1       = 148.9283f 0:2       = 400.8530f 0:b       = 553.2191f
+ +0:b0      =  58.6118f 0:b1      =  37.9046f 0:vdd     = 297.4422f
  +0:vdt     =  12.4334f 0:vgt     =  16.9182f 0:vinn    =  84.7992f
- +0:vinp    =  84.7992f 0:von     =   1.7386p 0:vop     = 906.4692f
- +0:vss     = 122.2360f
+ +0:vinp    =  84.7992f 0:von     = 438.5762f 0:vop     = 306.4692f
+ +0:vss     = 122.2360f 0:z1      = 400.0000f
 
  
 
@@ -274,6 +282,16 @@
 
 
 
+ **** resistors
+
+ subckt             
+ element  0:rz1     
+  r value  350.0000k
+  v drop     0.     
+  current    0.     
+  power      0.     
+
+
 
  **** mosfets
 
@@ -282,23 +300,23 @@
  element  0:mb       0:m1       0:m2       0:m5       0:m6       0:m3      
  model    0:pch.3    0:pch.4    0:pch.4    0:nch.4    0:nch.4    0:pch.3   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id      -554.8338n -277.4165n -277.4165n  277.4161n  277.4161n -493.0940n
+  id      -554.8338n -277.4165n -277.4165n  277.4161n  277.4161n -493.0952n
   ibs      8.073e-23  3.937e-23  3.937e-23 -4.595e-23 -4.595e-23  7.057e-23
-  ibd       51.9013a  151.8448a  151.8448a -109.6163a -109.6163a   45.9632a
-  vgs     -400.0000m -297.6803m -297.6803m  300.0000m  300.0000m -397.6835m
-  vds     -202.3197m -195.3638m -195.3638m  602.3165m  602.3165m -601.7396m
+  ibd       51.9013a  151.8448a  151.8448a -109.6160a -109.6161a   45.9632a
+  vgs     -400.0000m -297.6803m -297.6803m  300.0000m  300.0000m -397.6836m
+  vds     -202.3197m -195.3639m -195.3639m  602.3164m  602.3164m -601.7395m
   vbs        0.         0.         0.         0.         0.         0.     
   vth     -458.7427m -471.6914m -471.6914m  491.0346m  491.0346m -458.6506m
   vdsat    -51.3038m  -41.5024m  -41.5024m   43.9133m   43.9133m  -50.8522m
-  vod       58.7427m  174.0112m  174.0112m -191.0346m -191.0346m   60.9671m
+  vod       58.7427m  174.0112m  174.0112m -191.0346m -191.0346m   60.9670m
   beta       1.4883m   11.7361m   11.7361m   15.0987m   15.0987m    1.3403m
   gam eff  497.9476m  541.3676m  541.3676m  556.1233m  556.1233m  497.9476m
   gm        12.4562u    7.4898u    7.4898u    7.5284u    7.5284u   11.1012u
-  gds       79.5039n   90.5815n   90.5815n   63.2817n   63.2817n   42.3095n
-  gmb        4.0970u    2.5201u    2.5201u    2.1702u    2.1702u    3.6529u
+  gds       79.5039n   90.5815n   90.5815n   63.2817n   63.2817n   42.3096n
+  gmb        4.0970u    2.5201u    2.5201u    2.1702u    2.1702u    3.6530u
   cdtot     27.5780f   82.0616f   82.0616f   14.6894f   14.6894f   22.4594f
-  cgtot     58.6118f   84.7992f   84.7992f   18.9523f   18.9523f   52.1772f
-  cstot     44.8448f   87.8163f   87.8163f   17.2107f   17.2107f   39.4011f
+  cgtot     58.6118f   84.7992f   84.7992f   18.9523f   18.9523f   52.1773f
+  cstot     44.8448f   87.8163f   87.8163f   17.2107f   17.2107f   39.4012f
   cbtot     80.8327f  175.0043f  175.0043f   31.6652f   31.6652f   70.1791f
   cgs       18.8854f   20.1830f   20.1830f    4.8321f    4.8321f   16.2851f
   cgd        6.5675f   19.6732f   19.6732f    4.7623f    4.7623f    5.8996f
@@ -309,25 +327,25 @@
  element  0:m4       0:m7       0:m8       0:mt      
  model    0:pch.8    0:nch.7    0:nch.12   0:pch.7   
  region       Cutoff     Cutoff     Cutoff     Cutoff
-  id      -344.7530n  493.0944n  344.7530n -482.6585n
+  id      -344.7539n  493.0956n  344.7539n -482.6585n
   ibs      5.309e-23 -8.732e-23 -7.472e-23  7.031e-23
   ibd       10.6618a  -12.7121a   -5.1326a   25.2126a
-  vgs     -397.6835m  398.2604m  398.2604m -397.6836m
-  vds     -500.8859m  398.2604m  499.1141m -499.7048m
+  vgs     -397.6836m  398.2605m  398.2605m -397.6836m
+  vds     -500.8861m  398.2605m  499.1139m -499.7048m
   vbs        0.         0.         0.         0.     
   vth     -501.1172m  483.5634m  531.4831m -466.4427m
-  vdsat    -46.6158m   58.0195m   44.4128m  -49.7222m
-  vod      103.4337m  -85.3030m -133.2227m   68.7591m
+  vdsat    -46.6159m   58.0195m   44.4128m  -49.7222m
+  vod      103.4336m  -85.3029m -133.2226m   68.7591m
   beta       1.8245m    1.5707m    2.8883m    1.4591m
   gam eff  646.5385m  519.2085m  922.4594m  524.0796m
   gm         7.9945u   10.7377u    8.0808u   10.8815u
-  gds      152.6034n   49.8328n  191.2061n   79.7485n
+  gds      152.6038n   49.8330n  191.2066n   79.7485n
   gmb        2.7212u    3.1117u    2.4456u    3.6001u
   cdtot      5.0702f    4.5763f    1.3991f   12.4334f
   cgtot      4.1019f   10.2686f    1.2719f   16.9182f
   cstot      6.0064f    6.4930f    1.6204f   17.1659f
   cbtot      9.7895f   13.7213f    2.6494f   29.2225f
-  cgs        1.4336f    2.3860f  420.1435a    5.5613f
+  cgs        1.4336f    2.3860f  420.1436a    5.5613f
   cgd        1.2682f    1.3906f  400.9168a    3.1780f
 
 
@@ -352,13 +370,51 @@
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
@@ -383,29 +439,32 @@
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- -8.10603k       0.              -1.29011k       0.              
- -15.0062k       0.              -2.38831k       0.              
- -17.0928x       -2.48811x       -2.72041x       -395.996k       
- -17.0928x       2.48811x        -2.72041x       395.996k        
- -131.441x       0.              -20.9196x       0.              
+ -22.9701k       0.              -3.65581k       0.              
+ -62.2448k       0.              -9.90657k       0.              
+ -42.1328x       25.2273x        -6.70565x       4.01505x        
+ -42.1328x       -25.2273x       -6.70565x       -4.01505x       
+ -79.6058x       0.              -12.6697x       0.              
+ -389.153x       0.              -61.9356x       0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
- -26.2399k       0.              -4.17621k       0.              
- 8.28580x        0.              1.31873x        0.              
- -14.3958x       0.              -2.29116x       0.              
- -131.259x       0.              -20.8906x       0.              
- 275.774x        0.              43.8908x        0.              
+ -102.075k       892.934m        -16.2457k       142.115m        
+ -36.6431x       -8.93307x       -5.83193x       -1.42174x       
+ -36.6434x       8.93384x        -5.83198x       1.42186x        
+ 66.7539x        -38.0022x       10.6242x        -6.04823x       
+ 66.7542x        38.0020x        10.6243x        6.04821x        
+ -368.279x       0.              -58.6134x       0.              
  
-  ***** constant factor = 485.540u
+  ***** constant factor = 3.90463m
  ******  
  ***myop_2stage
 
   ******  ac analysis tnom=  25.000 temp=  25.000 *****
-   gain=  6.1229E+01    at=  1.0000E+01
-               from=  1.0000E+01    to=  1.0000E+09
-   zerodb=  8.9191E+05
-   phaseatdb= -1.3966E+02
+   gain=  6.1230E+01    at=  1.2882E+00
+               from=  1.0000E+00    to=  1.0000E+10
+   bandwidth=  2.1484E+03
+   zerodb=  2.5317E+06
+   phaseatdb= -1.0877E+02
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -422,8 +481,8 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      37  # elements   =      25
-  # resistors   =       0  # capacitors =       4  # inductors   =       0
+  # nodes       =      38  # elements   =      24
+  # resistors   =       1  # capacitors =       2  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
   # cccs        =       0  # ccvs       =       0  # volt_srcs   =      11
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
@@ -435,20 +494,20 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.03           1          72
+  op point           0.02           1          72
   dc sweep           0.06         101         309
-  ac analysis        0.35        8001        8001
+  ac analysis        0.12        1001        1001
   readin             0.18
-  errchk             0.03
+  errchk             0.02
   setup              0.02
   output             0.00
 
 
-           total memory used          502  kbytes
-           total cpu time            0.68 seconds
+           total memory used          391  kbytes
+           total cpu time            0.45 seconds
            total elapsed time           1 seconds
-           job started at     17:21:50 12/01/2015
-           job ended   at     17:21:51 12/01/2015
+           job started at     21:14:02 12/02/2015
+           job ended   at     21:14:03 12/02/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

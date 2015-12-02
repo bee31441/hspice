@@ -1,0 +1,11 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\filter\\filter.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A1","vm(vout)","S-1"), node(D0,"A1","HERTZ"));
+nil
+pnlDeletePane(1, 1);
+nil
+nil

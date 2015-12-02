@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "23:24:53 11/30/2015 "
+* "rundate" "15:12:15 12/02/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\filter\filter.sp "
 * "runtitle" "*filter"
 * time =    0.            
@@ -12,17 +12,24 @@
 .nodeset
 + b0 = 600.0000m       
 + b1 = 300.0000m       
-+ inx =   0.            
++ inx = 500.0000m       
 + vb = 700.0000m       
 + vdd =   1.0000        
-+ vinn =   0.            
++ vinn = 500.0000m       
++ vinn2 = 500.0000m       
 + vinp = 500.0000m       
 + vinp2 = 500.0000m       
-+ vop = 999.9791m       
++ vop = 500.2986m       
++ vout = 500.0000m       
 + vss =   0.            
-+ xop1.1 = 794.2128m       
-+ xop1.2 = 423.3981m       
-+ xop1.b = 794.2996m       
-+ xop1.von = 202.7925m       
-+ xop1.z1 = 794.2128m       
++ xop1.1 = 602.3164m       
++ xop1.2 = 602.3164m       
++ xop1.b = 797.6803m       
++ xop1.von = 398.2605m       
++ xop1.z1 = 602.3164m       
++ xop2.1 = 602.3153m       
++ xop2.2 = 602.3177m       
++ xop2.b = 797.6803m       
++ xop2.von = 398.2616m       
++ xop2.z1 = 602.3153m       
 ***   END: Saved Operating Point ***                     
