@@ -39,7 +39,7 @@ C2	2		vop 900f
 
 *Cl1	1	gnd 400f
 Cl2	2	gnd 400f
-Cb	b		gnd 700f			*use here to cancell right hand zero
+Cb	b		gnd 600f			*use here to cancell right hand zero
 *Clp	von	gnd 500f
 
 

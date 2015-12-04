@@ -33,17 +33,11 @@ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1
 m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
 ***compensation***
-C1	1		von 1700f
-C2	2		vop 900f
-*Rz2	z2	2   100
 
-*Cl1	1	gnd 400f
-Cl2	2	gnd 400f
-Cb	b		gnd 600f			*use here to cancell right hand zero
-*Clp	von	gnd 500f
+C1	z1		von 400f
+Rz1	z1		1   350k
+C2	2			vop 300f
 
-
-*cout	vop gnd 2.86f
 
 ***source***
 vd		vdd 	gnd dc supplyp
