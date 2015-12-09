@@ -42,14 +42,14 @@
  m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
  ***pole test***
- *c0	von	1 500f
+ *c0	vop	gnd 200n
  *cl	von	gnd 10p
  ***compensation***
  c1	z1		von 400f
  rz1	z1		1   350k	* by cal = 1/gm3. but by sweep result is around 300k~400k
  * because this rhp zero is around the zero db corner. it effect gain under zerodb but effect phase above zerodb.
  *	so when this rhp zero become lhp. we can make it very large to gain pm
- c2	2			vop 300f  * if one want bandwidth <1k.  it should > 900f
+ c2	2			vop 900f  * around 900f has smallest bandwidth
  *rz2	z2	2   10000
 
  *cl1	1	gnd 400f
@@ -58,7 +58,8 @@
  *clp	von	gnd 500f
 
 
- *cout	vop gnd 2.86f
+ cout	vop gnd 200n
+ *rl	vop 	gnd 1x
 
  ***source***
  vd		vdd 	gnd dc supplyp
@@ -83,7 +84,6 @@
  vtd	vdt	gnd dc = '1-499.7048m'
  vtg	vgt	gnd dc = '1-397.6836m'
 
- ***
 
 
 
@@ -95,7 +95,7 @@
  ***sweep***
  .dc diff -0.5 0.5 0.01
  ***probe&measuring***
- .ac dec 100 1 10g
+ .ac dec 100 0.1 10g
  .tf v(1) vinp
  .pz v(vop) vinp
  .probe dc i(m1) i(m2)	i(mt)
@@ -250,16 +250,16 @@
  +0:vss     =   0.      0:z1      = 602.3164m
 
 
- maximum nodal capacitance=   5.532E-13         on node     0:b               
+ maximum nodal capacitance=   2.000E-07         on node     0:vop             
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:1       = 148.9283f 0:2       = 400.8530f 0:b       = 553.2191f
+ +0:1       = 148.9283f 0:2       =   1.0009p 0:b       = 553.2191f
  +0:b0      =  58.6118f 0:b1      =  37.9046f 0:vdd     = 297.4422f
  +0:vdt     =  12.4334f 0:vgt     =  16.9182f 0:vinn    =  84.7992f
- +0:vinp    =  84.7992f 0:von     = 438.5762f 0:vop     = 306.4692f
+ +0:vinp    =  84.7992f 0:von     = 438.5762f 0:vop     = 200.0009n
  +0:vss     = 122.2360f 0:z1      = 400.0000f
 
  
@@ -433,38 +433,45 @@
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
  
  
     input =  0:vinp          output = v(vop)
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- -22.9701k       0.              -3.65581k       0.              
- -62.2448k       0.              -9.90657k       0.              
- -42.1328x       25.2273x        -6.70565x       4.01505x        
- -42.1328x       -25.2273x       -6.70565x       -4.01505x       
- -79.6058x       0.              -12.6697x       0.              
- -389.153x       0.              -61.9356x       0.              
+ -1.71864        0.              -273.529m       0.              
+ -68.7786k       0.              -10.9465k       0.              
+ -154.764k       0.              -24.6315k       0.              
+ -43.5249x       15.6028x        -6.92720x       2.48327x        
+ -43.5249x       -15.6028x       -6.92720x       -2.48327x       
+ -379.975x       0.              -60.4749x       0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
- -102.075k       892.934m        -16.2457k       142.115m        
- -36.6431x       -8.93307x       -5.83193x       -1.42174x       
- -36.6434x       8.93384x        -5.83198x       1.42186x        
- 66.7539x        -38.0022x       10.6242x        -6.04823x       
- 66.7542x        38.0020x        10.6243x        6.04821x        
- -368.279x       0.              -58.6134x       0.              
+ -68.7621k       -7.55309        -10.9438k       -1.20211        
+ -31.2375x       -206.216        -4.97161x       -32.8203        
+ -40.4896x       0.              -6.44411x       0.              
+ 50.2041x        -280.951        7.99023x        -44.7148        
+ 65.1327x        0.              10.3662x        0.              
+ -370.497x       0.              -58.9665x       0.              
  
-  ***** constant factor = 3.90463m
+  ***** constant factor = 1.60813n
  ******  
  ***myop_2stage
 
   ******  ac analysis tnom=  25.000 temp=  25.000 *****
-   gain=  6.1230E+01    at=  1.2882E+00
-               from=  1.0000E+00    to=  1.0000E+10
-   bandwidth=  2.1484E+03
-   zerodb=  2.5317E+06
-   phaseatdb= -1.0877E+02
+   gain=  6.0685E+01    at=  1.0000E-01
+               from=  1.0000E-01    to=  1.0000E+10
+   bandwidth=  2.0640E-01
+   zerodb=  2.8085E+02
+   phaseatdb= -9.0599E+01
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -481,8 +488,8 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      38  # elements   =      24
-  # resistors   =       1  # capacitors =       2  # inductors   =       0
+  # nodes       =      38  # elements   =      25
+  # resistors   =       1  # capacitors =       3  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
   # cccs        =       0  # ccvs       =       0  # volt_srcs   =      11
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
@@ -494,20 +501,20 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.02           1          72
+  op point           0.03           1          72
   dc sweep           0.06         101         309
-  ac analysis        0.12        1001        1001
-  readin             0.18
+  ac analysis        0.10        1101        1101
+  readin             0.20
   errchk             0.02
-  setup              0.02
+  setup              0.01
   output             0.00
 
 
-           total memory used          391  kbytes
-           total cpu time            0.45 seconds
+           total memory used          393  kbytes
+           total cpu time            0.49 seconds
            total elapsed time           1 seconds
-           job started at     21:14:02 12/02/2015
-           job ended   at     21:14:03 12/02/2015
+           job started at     15:40:15 12/09/2015
+           job ended   at     15:40:15 12/09/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

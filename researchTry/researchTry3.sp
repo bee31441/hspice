@@ -2,8 +2,8 @@
 .protect
 .lib 'rf018.l' TT
 .unprotect
-.option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC=   1.0000E-12 
-+captab = 1
+.option post acout=0 accurate dcon=1 CONVERGE=1 GMINDC= 1.0000E-12  unwrap = 1
++captab = 1 
 ***OP***
 .subckt	OP	vdd	vss	vinn	vinp	vop	b0	b1	
 Mb	b	b0		vdd	vdd	pch	W = 10u  L = 1u	  m = 2
@@ -17,7 +17,7 @@ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1
 m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
 C1	z1		von 400f
 Rz1	z1		1   350k
-C2	2			vop 300f
+C2	2			vop 900f
 .ends
 
 ***netlist***
@@ -43,7 +43,17 @@ XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
 *
 *
 ***output***
+cL	inx	i2 100p
+*Cl2	vg	inx 20p
+*Cl3	vg	gnd 200n
+*rL	vg 	gnd 1x	*the Rhand Pole can be diminished by it
+* it might because the gain is lowered
+*	And the co is needed. refer to Transfer function
 
+***filter***
+E2	o2	gnd	OPAMP	gnd	i2
+Clf	i2	o2 1p
+Rlf	i2	o2 1k
 
 
 ***param***
@@ -63,17 +73,21 @@ Vbias	vb	gnd dc = 0.7v		*Pmos for bias current
 vb 		b0		gnd dc bias		*OP bias1
 vb1		b1		gnd dc bias2	*Op bias2
 vref	vinn	gnd dc = 0.5
-*vin		vg	gnd dc = 0.3v ac = 1
 .param f = 320k
 Iin	gnd inx dc = 50n ac = 1 sin(20n 10n f 1ns)
 
-***PoleZero testing***
-CL	inx	gnd 50p
+***loop gain testing***
+*vlf	vinp	gnd dc = 499.9686m ac = 1
+*vlf	vg	gnd dc = 0.3171173 ac = 1
+
+
 ***
 .op
-.dc iin 1n	100n	0.1n
-.ac dec 100 10	100000g
-.probe ac vdb(inx) vdb(vg)
-.pz v(vg) iin
+*.dc iin 1n	100n	0.1n
+.ac dec 100 0.1	1000g	
+.probe ac vdb(inx) vdb(vg) i(cL) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp) 
+*.pz	v(vop) vlf
+.pz v(inx) iin
 .tran 10ns 100u sweep f 310k 330k 10k
+*.noise v(vg)	iin 10
 .end

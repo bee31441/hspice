@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "21:14:02 12/02/2015 "
+* "rundate" "15:40:15 12/09/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\op\subvthop_twostage\trypolezero\my-op_2stage.sp "
 * "runtitle" "***myop_2stage"
 * time =    0.            

@@ -1,0 +1,17 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "17:58:23 12/08/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\filter\ideal\filter_ideal.sp "
+* "runtitle" "*filter ideal"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc=   1.0000p       
+.nodeset
++ i1 =  10.0000m       
++ i2 =   0.            
++ o1 =-1.000e+12       
++ o2 =   0.            
+***   END: Saved Operating Point ***                     
