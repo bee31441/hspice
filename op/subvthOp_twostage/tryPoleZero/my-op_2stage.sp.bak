@@ -33,14 +33,14 @@ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1
 m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.2u m = 1
 
 ***Pole Test***
-*c0	von	1 500f
+*c0	vop	gnd 200n
 *CL	von	gnd 10p
 ***compensation***
 C1	z1		von 400f
 Rz1	z1		1   350k	* By cal = 1/gm3. But by sweep result is around 300k~400k
 * Because this RHP zero is around the zero db corner. it effect gain under zerodb but effect phase above zerodb.
 *	So when this RHP zero become LHP. we can make it very large to gain PM
-C2	2			vop 300f  * if one want bandwidth <1k.  it should > 900f
+C2	2			vop 900f  * around 900f has smallest bandwidth
 *Rz2	z2	2   10000
 
 *Cl1	1	gnd 400f
@@ -49,7 +49,8 @@ C2	2			vop 300f  * if one want bandwidth <1k.  it should > 900f
 *Clp	von	gnd 500f
 
 
-*cout	vop gnd 2.86f
+cout	vop gnd 200n
+*rL	vop 	gnd 1x
 
 ***source***
 vd		vdd 	gnd dc supplyp
@@ -74,7 +75,6 @@ mt	vdt	vgt	vdd	vdd	pch w = 9.7u l = 0.5u m = 1
 vtd	vdt	gnd dc = '1-499.7048m'
 vtg	vgt	gnd dc = '1-397.6836m'
 
-***
 
 
 
@@ -86,7 +86,7 @@ vtg	vgt	gnd dc = '1-397.6836m'
 ***sweep***
 .dc diff -0.5 0.5 0.01
 ***probe&measuring***
-.ac dec 1 100 10g
+.ac dec 100 10 10g
 .tf v(1) vinp
 .pz v(vop) vinp
 .probe dc I(m1) I(m2)	I(mt)

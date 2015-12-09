@@ -2,5 +2,5 @@ $DATA1 SOURCE='HSPICE' VERSION='B-2008.09 32-BIT'
 .TITLE '***myop_2stage'
  gain             bandwidth        zerodb           phaseatdb         
  temper           alter#            
-   61.2297         2.148e+03        2.531e+06       -108.7686         
+   60.6849           0.2064         280.8509         -90.5992         
    25.0000           1.0000         
