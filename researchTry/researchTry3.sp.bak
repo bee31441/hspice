@@ -21,14 +21,12 @@ C2	2			vop 900f
 .ends
 
 ***netlist***
-Mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u    
-*Ibi vdd	inx dc = 86.0773n
+*Mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u    
+Ibi vdd	inx dc = 86.0773n ac = 1
 Mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
 
-
-
-
 XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
+*Vop		vg	gnd dc = 299.8361m 
 
 *** BandPass***
 *XOP1	vdd	vss	vinn1	vinp1	vop1		b0	b1	OP
@@ -41,20 +39,20 @@ XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
 *v1		vinp1	gnd dc = 0.5
 *v2		vinp2	gnd dc = 0.5
 *
-*
-***output***
-cL	inx	i2 100p
-*Cl2	vg	inx 20p
-*Cl3	vg	gnd 200n
-*rL	vg 	gnd 1x	*the Rhand Pole can be diminished by it
-* it might because the gain is lowered
-*	And the co is needed. refer to Transfer function
 
 ***filter***
 E2	o2	gnd	OPAMP	gnd	i2
 Clf	i2	o2 1p
 Rlf	i2	o2 1k
 
+***loading***
+cL	inx	i2 100p
+*Cl2	vg	inx 20p
+*Cl3	vg	gnd 200n
+.param RR = 1x
+rL	vop 	gnd rr	*the Rhand Pole can be diminished by it
+* it might because the gain is lowered
+*	And the co is needed. refer to Transfer function
 
 ***param***
 .param 
@@ -73,21 +71,40 @@ Vbias	vb	gnd dc = 0.7v		*Pmos for bias current
 vb 		b0		gnd dc bias		*OP bias1
 vb1		b1		gnd dc bias2	*Op bias2
 vref	vinn	gnd dc = 0.5
-.param f = 320k
+.param f = 100k
 *Iin	gnd inx dc = 50n ac = 1 sin(20n 10n f 1ns)
 
 ***loop gain testing***
 *vlf	vinp	gnd dc = 499.9686m ac = 1
-vlf	vg	gnd dc = 0.3171173 ac = 1
+*vlf	vg	gnd dc = 0.3171173 ac = 1
+
+***loop gain test with copy***
+L1		vop		vg  1t
+vyc		vop		vgc dc = 0
+Mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u   
+Mnwc	inxc	vgc	vss	vss nch	w = 2.5u l = 0.2u
+cLc		inxc	gnd 100p   
+*Cl2c	inxc		gnd 100p
 
 
 ***
 .op
 *.dc iin 1n	100n	0.1n
-.ac dec 100 0.1	1000g	
+.ac dec 100 0.1	1000g sweep rr poi 3 1x 10x 1g
 .probe ac vdb(inx) vdb(vg) i(cL) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp) 
-.pz	v(vop) vlf
-*.pz v(inx) iin
-.tran 10ns 100u sweep f 310k 330k 10k
++ vdb(inxc)
+*.pz	v(vop) vlf
+.pz v(inxc) ibi
+.tran 10ns 1m *sweep f 310k 330k 10k
 *.noise v(vg)	iin 10
-.end
+
+.alter 
+.param rr = 10x
+
+.alter        
+.param rr = 1g
+
+
+
+
+.end                     
