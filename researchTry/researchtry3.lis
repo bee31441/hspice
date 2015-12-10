@@ -31,14 +31,12 @@
  .ends
 
  ***netlist***
- mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u    
- *ibi vdd	inx dc = 86.0773n
+ *mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u    
+ ibi vdd	inx dc = 86.0773n ac = 1
  mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
 
-
-
-
  xopf	vdd	vss	vinn	vinp	vop	b0	b1	op
+ *vop		vg	gnd dc = 299.8361m 
 
  *** bandpass***
  *xop1	vdd	vss	vinn1	vinp1	vop1		b0	b1	op
@@ -51,20 +49,20 @@
  *v1		vinp1	gnd dc = 0.5
  *v2		vinp2	gnd dc = 0.5
  *
- *
- ***output***
- cl	inx	i2 100p
- *cl2	vg	inx 20p
- *cl3	vg	gnd 200n
- *rl	vg 	gnd 1x	*the rhand pole can be diminished by it
- * it might because the gain is lowered
- *	and the co is needed. refer to transfer function
 
  ***filter***
  e2	o2	gnd	opamp	gnd	i2
  clf	i2	o2 1p
  rlf	i2	o2 1k
 
+ ***loading***
+ cl	inx	i2 100p
+ *cl2	vg	inx 20p
+ *cl3	vg	gnd 200n
+ .param rr = 1x
+ rl	vop 	gnd rr	*the rhand pole can be diminished by it
+ * it might because the gain is lowered
+ *	and the co is needed. refer to transfer function
 
  ***param***
  .param 
@@ -74,7 +72,7 @@
  ***connection source***
  *vw vinn1	inx dc = 0v			*bandpass and inx
  vx		vinp	inx dc = 0		*opf input and inx
- vy		vop		vg  dc = 0		*opf output and nw_vg
+ *vy		vop		vg  dc = 0		*opf output and nw_vg
 
  ***source***
  vd		vdd	gnd dc = 1v
@@ -83,22 +81,34 @@
  vb 		b0		gnd dc bias		*op bias1
  vb1		b1		gnd dc bias2	*op bias2
  vref	vinn	gnd dc = 0.5
- .param f = 320k
- iin	gnd inx dc = 50n ac = 1 sin(20n 10n f 1ns)
+ .param f = 100k
+ *iin	gnd inx dc = 50n ac = 1 sin(20n 10n f 1ns)
 
  ***loop gain testing***
  *vlf	vinp	gnd dc = 499.9686m ac = 1
  *vlf	vg	gnd dc = 0.3171173 ac = 1
 
+ ***loop gain test with copy***
+ l1		vop		vg  1t
+ vyc		vop		vgc dc = 0
+ mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u   
+ mnwc	inxc	vgc	vss	vss nch	w = 2.5u l = 0.2u
+ clc		inxc	gnd 100p   
+ *cl2c	inxc		gnd 100p
+
 
  ***
  .op
  *.dc iin 1n	100n	0.1n
- .ac dec 100 0.1	1000g	
+ .ac dec 100 0.1	1000g *sweep rr poi 3 1x 10x 1g
  .probe ac vdb(inx) vdb(vg) i(cl) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp) 
+ + vdb(inxc)
  *.pz	v(vop) vlf
- .pz v(inx) iin
- .tran 10ns 100u sweep f 310k 330k 10k
+ .pz v(inxc) ibi
+ .tran 10ns 1m *sweep f 310k 330k 10k
+ *.noise v(vg)	iin 10
+
+ .alter 
 
  ***********************************************************************
  ** runlvl is invoked, you can disable it by:
@@ -131,8 +141,16 @@
    number circuitname                     definition         multiplier
         0 main circuit
         1 xopf.                           op                 1.00 
+
+
+  **warning**  in element=       0:l1       defined in subckt 0               
+     inductance =   1.000E+12 >= 0.1 henry, please verify it.
+
+
  
 
+ **warning** could not find branch element     0:mp              
+      branch - output ignored
  
       
   Opening plot unit= 79
@@ -149,11 +167,12 @@
     node    =voltage      node    =voltage      node    =voltage
 
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 499.9686m 0:o2      =   0.      0:vb      = 700.0000m
- +0:vdd     =   1.0000  0:vg      = 317.1173m 0:vinn    = 500.0000m
- +0:vinp    = 499.9686m 0:vop     = 317.1173m 0:vss     =   0.     
- +1:1       = 601.5612m 1:2       = 603.0912m 1:b       = 797.6650m
- +1:von     = 399.0346m 1:z1      = 601.5612m
+ +0:inx     = 500.5252m 0:inxc    = 500.0115m 0:o2      =   0.     
+ +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vg      = 299.8361m
+ +0:vgc     = 299.8459m 0:vinn    = 500.0000m 0:vinp    = 500.5252m
+ +0:vop     = 299.8459m 0:vss     =   0.      1:1       = 614.9510m
+ +1:2       = 589.3946m 1:b       = 797.9399m 1:von     = 385.3024m
+ +1:z1      = 614.9510m
 
 
  maximum nodal capacitance=   1.010E-10         on node     0:i2              
@@ -162,52 +181,53 @@
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
- +0:inx     = 100.0171p 0:o2      =   1.0000p 0:vb      =  11.4399f
- +0:vdd     = 386.8047f 0:vg      =   2.8652f 0:vinn    =  84.7993f
- +0:vinp    =  84.7991f 0:vop     = 926.4504f 0:vss     = 146.8606f
- +1:1       = 149.0739f 1:2       =   1.0483p 1:b       = 553.2202f
- +1:von     = 447.3400f 1:z1      = 400.0000f
+ +0:b0      =  58.6119f 0:b1      =  37.9046f 0:i2      = 101.0000p
+ +0:inx     = 100.0030p 0:inxc    = 100.0171p 0:o2      =   1.0000p
+ +0:vb      =  11.4399f 0:vdd     = 388.2853f 0:vg      =   2.8696f
+ +0:vgc     =   2.8696f 0:vinn    =  84.7976f 0:vinp    =  84.8009f
+ +0:vop     = 926.4000f 0:vss     = 155.0362f 1:1       = 146.9317f
+ +1:2       =   1.0514p 1:b       = 553.2076f 1:von     = 446.8387f
+ +1:z1      = 400.0000f
 
  
 
  ****  voltage sources
 
  subckt                                                                    
- element  0:vx       0:vy       0:vd       0:vs       0:vbias    0:vb      
-  volts      0.         0.         1.0000     0.       700.0000m  600.0000m
-  current    0.       888.1784a   -1.6257u    1.6757u    0.         0.     
-  power      0.         0.         1.6257u    0.         0.         0.     
+ element  0:vx       0:vd       0:vs       0:vbias    0:vb       0:vb1     
+  volts      0.         1.0000     0.       700.0000m  600.0000m  300.0000m
+  current    0.        -1.7534u    1.4535u    0.         0.         0.     
+  power      0.         1.7534u    0.         0.         0.         0.     
 
  subckt                        
- element  0:vb1      0:vref    
-  volts    300.0000m  500.0000m
+ element  0:vref     0:vyc     
+  volts    500.0000m    0.     
   current    0.         0.     
   power      0.         0.     
 
-     total voltage source power dissipation=    1.6257u       watts
+     total voltage source power dissipation=    1.7534u       watts
 
 
 
  ***** current sources
 
  subckt             
- element  0:iin     
-  volts   -499.9686m
-  current   50.0000n
-  power     24.9984n
+ element  0:ibi     
+  volts    499.4748m
+  current   86.0773n
+  power    -42.9934n
 
 
-     total current source power dissipation=  24.9984n       watts
+     total current source power dissipation= -42.9934n       watts
 
  **** resistors
 
- subckt              xopf      
- element  0:rlf      1:rz1     
-  r value    1.0000k  350.0000k
-  v drop     0.         0.     
-  current    0.         0.     
-  power      0.         0.     
+ subckt                         xopf      
+ element  0:rlf      0:rl       1:rz1     
+  r value    1.0000k    1.0000x  350.0000k
+  v drop     0.       299.8459m    0.     
+  current    0.       299.8459n    0.     
+  power      0.        89.9076n    0.     
 
 
  **** voltage-controlled voltage sources
@@ -225,57 +245,57 @@
  **** mosfets
 
 
- subckt                         xopf       xopf       xopf       xopf      
- element  0:mp       0:mnw      1:mb       1:m1       1:m2       1:m5      
- model    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4    0:nch.4   
+ subckt                                    xopf       xopf       xopf      
+ element  0:mnw      0:mpc      0:mnwc     1:mb       1:m1       1:m2      
+ model    0:nch.8    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id       -86.0773n  136.0773n -554.8350n -277.3687n -277.4655n  277.3683n
-  ibs      1.248e-23 -2.524e-23  8.073e-23  3.936e-23  3.938e-23 -4.595e-23
-  ibd       28.4605a   -9.0734a   51.9013a  151.8469a  151.8424a -107.6108a
-  vgs     -300.0000m  317.1173m -400.0000m -297.6650m -297.6964m  300.0000m
-  vds     -500.0314m  499.9686m -202.3350m -196.1038m -194.5738m  601.5612m
+  id        86.0780n  -86.0753n   86.0753n -554.8131n -278.2149n -276.5974n
+  ibs     -1.597e-23  1.248e-23 -1.597e-23  8.073e-23  3.948e-23  3.925e-23
+  ibd       -8.9666a   28.4605a   -8.9607a   51.9011a  151.7979a  151.8752a
+  vgs      299.8361m -300.0000m  299.8459m -400.0000m -297.9399m -297.4148m
+  vds      500.5252m -499.9885m  500.0115m -202.0601m -182.9889m -208.5454m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -501.3812m  518.9690m -458.7427m -471.6909m -471.6921m  491.0351m
-  vdsat    -42.2998m   41.1291m  -51.3038m  -41.5020m  -41.5027m   43.9133m
-  vod      201.3812m -201.8516m   58.7427m  174.0259m  173.9957m -191.0351m
-  beta       5.3236m    6.8709m    1.4883m   11.7361m   11.7361m   15.0987m
-  gam eff  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m  556.1233m
-  gm         2.2897u    3.5736u   12.4563u    7.4886u    7.4909u    7.5271u
-  gds       46.5823n   77.6533n   79.4965n   90.3327n   90.8501n   63.2932n
-  gmb      788.8370n    1.0717u    4.0970u    2.5197u    2.5205u    2.1698u
-  cdtot     14.0761f    2.9963f   27.5779f   82.0447f   82.0797f   14.6914f
-  cgtot     11.4399f    2.8652f   58.6118f   84.7993f   84.7991f   18.9523f
-  cstot     16.1411f    3.4298f   44.8448f   87.8160f   87.8165f   17.2107f
-  cbtot     27.1844f    5.6232f   80.8326f  174.9877f  175.0221f   31.6672f
-  cgs        3.6330f  920.0780a   18.8854f   20.1828f   20.1833f    4.8321f
-  cgd        3.6044f  914.0402a    6.5675f   19.6732f   19.6732f    4.7623f
+  vth      518.9675m -501.3814m  518.9688m -458.7428m -471.7012m -471.6811m
+  vdsat     40.9518m  -42.2998m   40.9518m  -51.3038m  -41.5079m  -41.4968m
+  vod     -219.1314m  201.3814m -219.1229m   58.7428m  173.7613m  174.2663m
+  beta       6.8710m    5.3236m    6.8710m    1.4883m   11.7361m   11.7362m
+  gam eff  897.6890m  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m
+  gm         2.3040u    2.2897u    2.3039u   12.4558u    7.5090u    7.4700u
+  gds       49.3005n   46.5824n   49.3182n   79.6306n   95.2766n   86.5898n
+  gmb      693.9878n  788.8209n  693.9686n    4.0969u    2.5265u    2.5135u
+  cdtot      2.9960f   14.0762f    2.9963f   27.5801f   82.3471f   81.7625f
+  cgtot      2.8696f   11.4399f    2.8696f   58.6119f   84.7976f   84.8009f
+  cstot      3.4267f   16.1411f    3.4267f   44.8447f   87.8207f   87.8118f
+  cbtot      5.6289f   27.1845f    5.6292f   80.8347f  175.2852f  174.7099f
+  cgs      917.7198a    3.6330f  917.7207a   18.8855f   20.1870f   20.1791f
+  cgd      914.0445a    3.6044f  914.0445a    6.5675f   19.6733f   19.6731f
 
 
 
- subckt   xopf       xopf       xopf       xopf       xopf      
- element  1:m6       1:m3       1:m4       1:m7       1:m8      
- model    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
- region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id       277.4651n -501.5105n -483.3131n  501.5110n  483.3139n
-  ibs     -4.596e-23  7.177e-23  6.918e-23 -8.881e-23 -8.580e-23
-  ibd     -111.7301a   45.9633a   45.5386a  -12.7122a  -12.4080a
-  vgs      300.0000m -398.4388m -396.9088m  399.0346m  399.0346m
-  vds      603.0912m -600.9654m -682.8827m  399.0346m  317.1173m
-  vbs        0.         0.         0.         0.         0.     
-  vth      491.0341m -458.6508m -458.6319m  483.5632m  483.5919m
-  vdsat     43.9133m  -51.0039m  -50.7020m   58.1592m   58.1468m
-  vod     -191.0341m   60.2120m   61.7231m  -84.5286m  -84.5573m
-  beta      15.0987m    1.3402m    1.3277m    1.5707m    1.5278m
-  gam eff  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
-  gm         7.5297u   11.2739u   10.8924u   10.9058u   10.5163u
-  gds       63.2699n   42.9881n   40.8715n   50.5852n   55.2742n
-  gmb        2.1706u    3.7096u    3.5846u    3.1603u    3.0479u
-  cdtot     14.6874f   22.4629f   21.9065f    4.5755f    4.5439f
-  cgtot     18.9523f   52.3378f   51.5278f   10.2845f   10.0171f
-  cstot     17.2107f   39.6833f   38.7572f    6.5245f    6.3555f
-  cbtot     31.6631f   70.1885f   69.1727f   13.7206f   13.4553f
-  cgs        4.8321f   16.5098f   15.9109f    2.4090f    2.3458f
-  cgd        4.7623f    5.8996f    5.8437f    1.3906f    1.3542f
+ subckt   xopf       xopf       xopf       xopf       xopf       xopf      
+ element  1:m5       1:m6       1:m3       1:m4       1:m7       1:m8      
+ model    0:nch.4    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       278.2144n  276.5971n -370.1300n -656.2642n  370.1304n  356.4200n
+  ibs     -4.609e-23 -4.582e-23  5.297e-23  9.394e-23 -6.554e-23 -6.327e-23
+  ibd     -152.3843a  -81.8274a   45.9625a   45.5400a  -12.7121a  -12.4080a
+  vgs      300.0000m  300.0000m -385.0490m -410.6054m  385.3024m  385.3024m
+  vds      614.9510m  589.3946m -614.6976m -700.1541m  385.3024m  299.8459m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      491.0267m  491.0428m -458.6477m -458.6280m  483.5663m  483.5958m
+  vdsat     43.9135m   43.9132m  -48.5476m  -53.6839m   55.9077m   55.8966m
+  vod     -191.0267m -191.0428m   73.5987m   48.0225m  -98.2640m  -98.2934m
+  beta      15.0988m   15.0987m    1.3411m    1.3266m    1.5711m    1.5282m
+  gam eff  556.1233m  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
+  gm         7.5498u    7.5064u    8.5390u   14.3835u    8.2524u    7.9509u
+  gds       63.0959n   63.4847n   32.2601n   54.0438n   38.5965n   42.8318n
+  gmb        2.1762u    2.1640u    2.8118u    4.7304u    2.3934u    2.3064u
+  cdtot     14.6560f   14.7241f   22.4020f   21.8373f    4.5893f    4.5627f
+  cgtot     18.9523f   18.9523f   49.9286f   54.8742f   10.0544f    9.7931f
+  cstot     17.2108f   17.2107f   35.3951f   44.5766f    6.0544f    5.8981f
+  cbtot     31.6318f   31.6998f   70.0592f   69.2493f   13.7397f   13.4793f
+  cgs        4.8321f    4.8321f   13.1023f   20.5547f    2.0664f    2.0122f
+  cgd        4.7623f    4.7623f    5.8999f    5.8431f    1.3906f    1.3541f
 
 
 
@@ -315,6 +335,182 @@
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
  **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
  **warning** underflow 2 time(s) in pole/zero analysis
  **warning** underflow 2 time(s) in pole/zero analysis
  **warning** underflow 2 time(s) in pole/zero analysis
@@ -346,139 +542,36 @@
  **warning** underflow 2 time(s) in pole/zero analysis
  
  
-    input =  0:iin          output = v(inx)
+    input =  0:ibi          output = v(inxc)
  
        poles (rad/sec)                 poles ( hertz)
  real            imag            real            imag            
- -92.1638        -545.592k       -14.6683        -86.8336k       
- -92.1641        545.592k        -14.6684        86.8336k        
- -67.1360k       0.              -10.6850k       0.              
- -38.7677x       24.3199x        -6.17008x       3.87064x        
- -38.7677x       -24.3199x       -6.17008x       -3.87064x       
- -71.1313x       0.              -11.3209x       0.              
- -314.603x       0.              -50.0706x       0.              
+ 59.4746         706.310         9.46568         112.413         
+ 59.4747         -706.310        9.46569         -112.413        
+ -958.830        0.              -152.602        0.              
+ -7.76271k       0.              -1.23547k       0.              
+ -8.92611k       0.              -1.42063k       0.              
+ -93.5947k       0.              -14.8961k       0.              
+ -43.1056x       19.9607x        -6.86046x       3.17684x        
+ -43.1056x       -19.9607x       -6.86046x       -3.17684x       
+ -89.3794x       0.              -14.2252x       0.              
+ -255.023x       0.              -40.5882x       0.              
  -1.00000g       0.              -159.155x       0.              
  
        zeros (rad/sec)                 zeros ( hertz)
  real            imag            real            imag            
- -1.45695k       0.              -231.880        0.              
- -70.0039k       0.              -11.1415k       0.              
- -38.7768x       24.3401x        -6.17152x       3.87385x        
- -38.7768x       -24.3401x       -6.17152x       -3.87385x       
- -71.0944x       0.              -11.3150x       0.              
- -314.599x       0.              -50.0700x       0.              
+ 0.              18.6678         0.              2.97107         
+ 0.              -18.6678        0.              -2.97107        
+ -66.8634k       422.033         -10.6416k       67.1686         
+ -36.4006x       -7.45099x       -5.79333x       -1.18586x       
+ -36.4006x       7.45100x        -5.79333x       1.18586x        
+ 54.3182x        0.              8.64501x        0.              
+ 74.5858x        0.              11.8707x        0.              
+ -243.359x       0.              -38.7317x       0.              
  -1.00000g       0.              -159.155x       0.              
+ 2.52048g        0.              401.146x        0.              
  
-  ***** constant factor = 99.9236x
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  transient analysis tnom=  25.000 temp=  25.000 *****
- ***** operating point status is voltage   simulation time is     0.     
-
-   *** parameter f                =    3.100E+05 ***
-
-    node    =voltage      node    =voltage      node    =voltage
-
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 499.9668m 0:o2      =   0.      0:vb      = 700.0000m
- +0:vdd     =   1.0000  0:vg      = 307.6853m 0:vinn    = 500.0000m
- +0:vinp    = 499.9668m 0:vop     = 307.6853m 0:vss     =   0.     
- +1:1       = 601.5196m 1:2       = 603.1337m 1:b       = 797.6641m
- +1:von     = 399.0772m 1:z1      = 601.5196m
-
-
- maximum nodal capacitance=   1.010E-10         on node     0:i2              
-
-    nodal  capacitance table 
-
-    node    =    cap      node    =    cap      node    =    cap
-
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
- +0:inx     = 100.0171p 0:o2      =   1.0000p 0:vb      =  11.4399f
- +0:vdd     = 386.7680f 0:vg      =   2.8674f 0:vinn    =  84.7993f
- +0:vinp    =  84.7991f 0:vop     = 926.4226f 0:vss     = 146.8756f
- +1:1       = 149.0821f 1:2       =   1.0483p 1:b       = 553.2202f
- +1:von     = 447.3420f 1:z1      = 400.0000f
-
- 
-
-          ***** job concluded
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  transient analysis tnom=  25.000 temp=  25.000 *****
- ***** operating point status is voltage   simulation time is     0.     
-
-   *** parameter f                =    3.200E+05 ***
-
-    node    =voltage      node    =voltage      node    =voltage
-
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 499.9668m 0:o2      =   0.      0:vb      = 700.0000m
- +0:vdd     =   1.0000  0:vg      = 307.6853m 0:vinn    = 500.0000m
- +0:vinp    = 499.9668m 0:vop     = 307.6853m 0:vss     =   0.     
- +1:1       = 601.5196m 1:2       = 603.1337m 1:b       = 797.6641m
- +1:von     = 399.0772m 1:z1      = 601.5196m
-
-
- maximum nodal capacitance=   1.010E-10         on node     0:i2              
-
-    nodal  capacitance table 
-
-    node    =    cap      node    =    cap      node    =    cap
-
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
- +0:inx     = 100.0171p 0:o2      =   1.0000p 0:vb      =  11.4399f
- +0:vdd     = 386.7680f 0:vg      =   2.8674f 0:vinn    =  84.7993f
- +0:vinp    =  84.7991f 0:vop     = 926.4226f 0:vss     = 146.8756f
- +1:1       = 149.0821f 1:2       =   1.0483p 1:b       = 553.2202f
- +1:von     = 447.3420f 1:z1      = 400.0000f
-
- 
-
-          ***** job concluded
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  transient analysis tnom=  25.000 temp=  25.000 *****
- ***** operating point status is voltage   simulation time is     0.     
-
-   *** parameter f                =    3.300E+05 ***
-
-    node    =voltage      node    =voltage      node    =voltage
-
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 499.9668m 0:o2      =   0.      0:vb      = 700.0000m
- +0:vdd     =   1.0000  0:vg      = 307.6853m 0:vinn    = 500.0000m
- +0:vinp    = 499.9668m 0:vop     = 307.6853m 0:vss     =   0.     
- +1:1       = 601.5196m 1:2       = 603.1337m 1:b       = 797.6641m
- +1:von     = 399.0772m 1:z1      = 601.5196m
-
-
- maximum nodal capacitance=   1.010E-10         on node     0:i2              
-
-    nodal  capacitance table 
-
-    node    =    cap      node    =    cap      node    =    cap
-
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
- +0:inx     = 100.0171p 0:o2      =   1.0000p 0:vb      =  11.4399f
- +0:vdd     = 386.7680f 0:vg      =   2.8674f 0:vinn    =  84.7993f
- +0:vinp    =  84.7991f 0:vop     = 926.4226f 0:vss     = 146.8756f
- +1:1       = 149.0821f 1:2       =   1.0483p 1:b       = 553.2202f
- +1:von     = 447.3420f 1:z1      = 400.0000f
-
- 
+  ***** constant factor = 206.607 
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -495,12 +588,12 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      42  # elements   =      29
-  # resistors   =       2  # capacitors =       4  # inductors   =       0
+  # nodes       =      45  # elements   =      32
+  # resistors   =       3  # capacitors =       5  # inductors   =       1
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       1
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      10
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
   # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      11  # U elements  =       0
+  # jfets       =       0  # mosfets    =      12  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
   # S elements  =       0  # P elements =       0  # va device   =       0
 
@@ -508,20 +601,1015 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.13           1         520
-  ac analysis        0.09        1301        1301
-  transient          0.30       30003        3120        1560 rev=         0
-  readin             0.20
+  op point           0.04           1         167
+  ac analysis        0.10        1301        1301
+  transient          0.05      100001          60          30 rev=         0
+  readin             0.22
+  errchk             0.07
+  setup              0.08
+  output             0.00
+
+
+           total memory used          410  kbytes
+           total cpu time            0.58 seconds
+           total elapsed time           1 seconds
+           job started at     22:45:40 12/09/2015
+           job ended   at     22:45:40 12/09/2015
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ 
+
+  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
+ .param rr = 10x
+
+ .alter        
+ $ alter processing continues $
+
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
+
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00u
+ ***********************************************************************
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xopf.                           op                 1.00 
+
+
+  **warning**  in element=       0:l1       defined in subckt 0               
+     inductance =   1.000E+12 >= 0.1 henry, please verify it.
+
+
+ **warning** could not find branch element     0:mp              
+      branch - output ignored
+ 
+      
+  Opening plot unit= 79
+ file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa1      
+
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
+ +0:inx     = 500.0222m 0:inxc    = 498.7541m 0:o2      =   0.     
+ +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vg      = 299.8903m
+ +0:vgc     = 299.8982m 0:vinn    = 500.0000m 0:vinp    = 500.0222m
+ +0:vop     = 299.8982m 0:vss     =   0.      1:1       = 602.8508m
+ +1:2       = 601.7684m 1:b       = 797.6911m 1:von     = 397.7127m
+ +1:z1      = 602.8508m
+
+
+ maximum nodal capacitance=   1.010E-10         on node     0:i2              
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
+ +0:inx     = 100.0030p 0:inxc    = 100.0171p 0:o2      =   1.0000p
+ +0:vb      =  11.4399f 0:vdd     = 386.7332f 0:vg      =   2.8695f
+ +0:vgc     =   2.8695f 0:vinn    =  84.7991f 0:vinp    =  84.7992f
+ +0:vop     = 926.4000f 0:vss     = 155.8347f 1:1       = 148.8271f
+ +1:2       =   1.0485p 1:b       = 553.2184f 1:von     = 447.2825f
+ +1:z1      = 400.0000f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vx       0:vd       0:vs       0:vbias    0:vb       0:vb1     
+  volts      0.         1.0000     0.       700.0000m  600.0000m  300.0000m
+  current    0.        -1.7129u    1.6830u    0.         0.         0.     
+  power      0.         1.7129u    0.         0.         0.         0.     
+
+ subckt                        
+ element  0:vref     0:vyc     
+  volts    500.0000m    0.     
+  current    0.         0.     
+  power      0.         0.     
+
+     total voltage source power dissipation=    1.7129u       watts
+
+
+
+ ***** current sources
+
+ subckt             
+ element  0:ibi     
+  volts    499.9778m
+  current   86.0773n
+  power    -43.0367n
+
+
+     total current source power dissipation= -43.0367n       watts
+
+ **** resistors
+
+ subckt                         xopf      
+ element  0:rlf      0:rl       1:rz1     
+  r value    1.0000k   10.0000x  350.0000k
+  v drop     0.       299.8982m    0.     
+  current    0.        29.9898n    0.     
+  power      0.         8.9939n    0.     
+
+
+ **** voltage-controlled voltage sources
+
+
+ subckt             
+ element  0:e2      
+  volts      0.     
+  current    0.     
+
+
+
+
+
+ **** mosfets
+
+
+ subckt                                    xopf       xopf       xopf      
+ element  0:mnw      0:mpc      0:mnwc     1:mb       1:m1       1:m2      
+ model    0:nch.8    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id        86.1782n  -86.1338n   86.1338n -554.8329n -277.4503n -277.3818n
+  ibs     -1.598e-23  1.249e-23 -1.598e-23  8.073e-23  3.937e-23  3.936e-23
+  ibd       -8.9611a   28.4605a   -8.9469a   51.9013a  151.8432a  151.8464a
+  vgs      299.8903m -300.0000m  299.8982m -400.0000m -297.6911m -297.6689m
+  vds      500.0222m -501.2459m  498.7541m -202.3089m -194.8404m -195.9227m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      518.9688m -501.3767m  518.9720m -458.7427m -471.6918m -471.6910m
+  vdsat     40.9522m  -42.2999m   40.9522m  -51.3038m  -41.5026m  -41.5021m
+  vod     -219.0785m  201.3767m -219.0738m   58.7427m  174.0007m  174.0221m
+  beta       6.8710m    5.3236m    6.8710m    1.4883m   11.7361m   11.7361m
+  gam eff  897.6890m  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m
+  gm         2.3065u    2.2911u    2.3053u   12.4562u    7.4906u    7.4889u
+  gds       49.3763n   46.5795n   49.3990n   79.5092n   90.7595n   90.3937n
+  gmb      694.7589n  789.2923n  694.4237n    4.0970u    2.5204u    2.5198u
+  cdtot      2.9963f   14.0725f    2.9971f   27.5781f   82.0736f   82.0488f
+  cgtot      2.8695f   11.4399f    2.8695f   58.6118f   84.7991f   84.7992f
+  cstot      3.4267f   16.1411f    3.4267f   44.8448f   87.8164f   87.8161f
+  cbtot      5.6292f   27.1807f    5.6299f   80.8328f  175.0161f  174.9917f
+  cgs      917.7254a    3.6330f  917.7259a   18.8854f   20.1832f   20.1829f
+  cgd      914.0445a    3.6044f  914.0445a    6.5675f   19.6732f   19.6732f
+
+
+
+ subckt   xopf       xopf       xopf       xopf       xopf       xopf      
+ element  1:m5       1:m6       1:m3       1:m4       1:m7       1:m8      
+ model    0:nch.4    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       277.4499n  277.3814n -487.2181n -498.6412n  487.2185n  468.6522n
+  ibs     -4.596e-23 -4.595e-23  6.973e-23  7.138e-23 -8.628e-23 -8.319e-23
+  ibd     -111.0679a -108.1557a   45.9632a   45.5388a  -12.7121a  -12.4080a
+  vgs      300.0000m  300.0000m -397.1492m -398.2316m  397.7127m  397.7127m
+  vds      602.8508m  601.7684m -602.2873m -700.1018m  397.7127m  299.8982m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      491.0343m  491.0350m -458.6505m -458.6280m  483.5635m  483.5958m
+  vdsat     43.9133m   43.9133m  -50.7459m  -50.9667m   57.9216m   57.9087m
+  vod     -191.0343m -191.0350m   61.5013m   60.3964m  -85.8508m  -85.8831m
+  beta      15.0987m   15.0987m    1.3403m    1.3276m    1.5707m    1.5278m
+  gam eff  556.1233m  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
+  gm         7.5293u    7.5275u   10.9804u   11.2073u   10.6202u   10.2222u
+  gds       63.2736n   63.2900n   41.8350n   41.9570n   49.3064n   55.7755n
+  gmb        2.1704u    2.1699u    3.6133u    3.6880u    3.0777u    2.9629u
+  cdtot     14.6880f   14.6909f   22.4570f   21.8371f    4.5768f    4.5630f
+  cgtot     18.9523f   18.9523f   52.0655f   51.8036f   10.2576f    9.9911f
+  cstot     17.2107f   17.2107f   39.2047f   39.2430f    6.4711f    6.3031f
+  cbtot     31.6638f   31.6666f   70.1726f   69.1135f   13.7219f   13.4742f
+  cgs        4.8321f    4.8321f   16.1287f   16.2970f    2.3700f    2.3079f
+  cgd        4.7623f    4.7623f    5.8996f    5.8436f    1.3906f    1.3543f
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ 
+ 
+    input =  0:ibi          output = v(inxc)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ 405.020         -1.37444k       64.4609         -218.749        
+ 405.020         1.37444k        64.4609         218.749         
+ -959.594        0.              -152.724        0.              
+ -3.73959k       0.              -595.174        0.              
+ -7.80463k       0.              -1.24215k       0.              
+ -72.1465k       0.              -11.4825k       0.              
+ -39.4927x       24.0031x        -6.28546x       3.82021x        
+ -39.4927x       -24.0031x       -6.28546x       -3.82021x       
+ -72.3189x       0.              -11.5099x       0.              
+ -308.205x       0.              -49.0524x       0.              
+ -1.00000g       0.              -159.155x       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ 0.              -18.6678        0.              -2.97107        
+ 0.              18.6678         0.              2.97107         
+ -67.4736k       44.0929         -10.7388k       7.01760         
+ -26.1874x       0.              -4.16785x       0.              
+ -46.4033x       0.              -7.38531x       0.              
+ 60.2417x        32.4390x        9.58777x        5.16283x        
+ 60.2417x        -32.4390x       9.58777x        -5.16283x       
+ -290.641x       0.              -46.2569x       0.              
+ -1.00000g       0.              -159.155x       0.              
+ 2.52207g        0.              401.400x        0.              
+ 
+  ***** constant factor = 210.626 
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      45  # elements   =      32
+  # resistors   =       3  # capacitors =       5  # inductors   =       1
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       1
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
+  # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =      12  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.04           1         167
+  ac analysis        0.10        1301        1301
+  transient          0.05      100001          88          39 rev=         0
+  readin             0.12
   errchk             0.02
   setup              0.02
   output             0.00
 
 
-           total memory used          405  kbytes
-           total cpu time            0.83 seconds
+           total memory used          410  kbytes
+           total cpu time            0.37 seconds
            total elapsed time           1 seconds
-           job started at     18:46:19 12/09/2015
-           job ended   at     18:46:20 12/09/2015
+           job started at     22:45:40 12/09/2015
+           job ended   at     22:45:41 12/09/2015
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ 
+
+  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
+ .param rr = 1g
+
+
+
+
+ .end                     
+ $ end of alter processing $
+
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
+
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00u
+ ***********************************************************************
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  circuit name directory
+ circuit number to circuit name directory
+   number circuitname                     definition         multiplier
+        0 main circuit
+        1 xopf.                           op                 1.00 
+
+
+  **warning**  in element=       0:l1       defined in subckt 0               
+     inductance =   1.000E+12 >= 0.1 henry, please verify it.
+
+
+ **warning** could not find branch element     0:mp              
+      branch - output ignored
+ 
+      
+  Opening plot unit= 79
+ file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa2      
+
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
+ +0:inx     = 499.9659m 0:inxc    = 501.4143m 0:o2      =   0.     
+ +0:vb      = 700.0000m 0:vdd     =   1.0000  0:vg      = 299.7819m
+ +0:vgc     = 299.7875m 0:vinn    = 500.0000m 0:vinp    = 499.9659m
+ +0:vop     = 299.7875m 0:vss     =   0.      1:1       = 601.4981m
+ +1:2       = 603.1557m 1:b       = 797.6637m 1:von     = 399.0993m
+ +1:z1      = 601.4981m
+
+
+ maximum nodal capacitance=   1.010E-10         on node     0:i2              
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      = 101.0000p
+ +0:inx     = 100.0030p 0:inxc    = 100.0171p 0:o2      =   1.0000p
+ +0:vb      =  11.4399f 0:vdd     = 386.7417f 0:vg      =   2.8696f
+ +0:vgc     =   2.8696f 0:vinn    =  84.7993f 0:vinp    =  84.7991f
+ +0:vop     = 926.3997f 0:vss     = 155.9427f 1:1       = 149.0863f
+ +1:2       =   1.0483p 1:b       = 553.2202f 1:von     = 447.3431f
+ +1:z1      = 400.0000f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vx       0:vd       0:vs       0:vbias    0:vb       0:vb1     
+  volts      0.         1.0000     0.       700.0000m  600.0000m  300.0000m
+  current    0.        -1.7125u    1.7120u    0.         0.         0.     
+  power      0.         1.7125u    0.         0.         0.         0.     
+
+ subckt                        
+ element  0:vref     0:vyc     
+  volts    500.0000m    0.     
+  current    0.         0.     
+  power      0.         0.     
+
+     total voltage source power dissipation=    1.7125u       watts
+
+
+
+ ***** current sources
+
+ subckt             
+ element  0:ibi     
+  volts    500.0341m
+  current   86.0773n
+  power    -43.0416n
+
+
+     total current source power dissipation= -43.0416n       watts
+
+ **** resistors
+
+ subckt                         xopf      
+ element  0:rlf      0:rl       1:rz1     
+  r value    1.0000k    1.0000g  350.0000k
+  v drop     0.       299.7875m    0.     
+  current    0.       299.7875p    0.     
+  power      0.        89.8725p    0.     
+
+
+ **** voltage-controlled voltage sources
+
+
+ subckt             
+ element  0:e2      
+  volts      0.     
+  current    0.     
+
+
+
+
+
+ **** mosfets
+
+
+ subckt                                    xopf       xopf       xopf      
+ element  0:mnw      0:mpc      0:mnwc     1:mb       1:m1       1:m2      
+ model    0:nch.8    0:pch.4    0:nch.8    0:pch.3    0:pch.4    0:pch.4   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id        85.9257n  -86.0099n   86.0099n -554.8351n -277.3647n -277.4696n
+  ibs     -1.594e-23  1.247e-23 -1.595e-23  8.073e-23  3.936e-23  3.938e-23
+  ibd       -8.9598a   28.4605a   -8.9772a   51.9013a  151.8471a  151.8422a
+  vgs      299.7819m -300.0000m  299.7875m -400.0000m -297.6637m -297.6977m
+  vds      499.9659m -498.5857m  501.4143m -202.3363m -196.1656m -194.5079m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      518.9690m -501.3866m  518.9653m -458.7427m -471.6908m -471.6921m
+  vdsat     40.9513m  -42.2997m   40.9514m  -51.3038m  -41.5020m  -41.5027m
+  vod     -219.1871m  201.3866m -219.1778m   58.7427m  174.0271m  173.9944m
+  beta       6.8710m    5.3236m    6.8710m    1.4883m   11.7361m   11.7361m
+  gam eff  897.6890m  647.5761m  897.6890m  497.9476m  541.3676m  541.3676m
+  gm         2.3000u    2.2881u    2.3022u   12.4563u    7.4885u    7.4910u
+  gds       49.2349n   46.5859n   49.2284n   79.4959n   90.3120n   90.8727n
+  gmb      692.8205n  788.2948n  693.4607n    4.0970u    2.5197u    2.5205u
+  cdtot      2.9963f   14.0804f    2.9955f   27.5778f   82.0433f   82.0812f
+  cgtot      2.8696f   11.4399f    2.8696f   58.6118f   84.7993f   84.7991f
+  cstot      3.4267f   16.1411f    3.4267f   44.8448f   87.8160f   87.8166f
+  cbtot      5.6292f   27.1887f    5.6284f   80.8326f  174.9863f  175.0236f
+  cgs      917.7140a    3.6330f  917.7149a   18.8854f   20.1828f   20.1833f
+  cgd      914.0445a    3.6044f  914.0445a    6.5675f   19.6732f   19.6732f
+
+
+
+ subckt   xopf       xopf       xopf       xopf       xopf       xopf      
+ element  1:m5       1:m6       1:m3       1:m4       1:m7       1:m8      
+ model    0:nch.4    0:nch.4    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       277.3643n  277.4692n -502.2199n -483.3170n  502.2203n  483.0180n
+  ibs     -4.594e-23 -4.596e-23  7.187e-23  6.918e-23 -8.893e-23 -8.574e-23
+  ibd     -107.4456a -111.9090a   45.9633a   45.5387a  -12.7122a  -12.4080a
+  vgs      300.0000m  300.0000m -398.5019m -396.8443m  399.0993m  399.0993m
+  vds      601.4981m  603.1557m -600.9007m -700.2125m  399.0993m  299.7875m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth      491.0351m  491.0341m -458.6508m -458.6280m  483.5632m  483.5958m
+  vdsat     43.9133m   43.9133m  -51.0167m  -50.6900m   58.1709m   58.1578m
+  vod     -191.0351m -191.0341m   60.1489m   61.7837m  -84.4639m  -84.4966m
+  beta      15.0987m   15.0987m    1.3402m    1.3277m    1.5707m    1.5278m
+  gam eff  556.1233m  556.1233m  497.9476m  497.9476m  519.2085m  519.5326m
+  gm         7.5270u    7.5298u   11.2885u   10.8927u   10.9199u   10.5095u
+  gds       63.2941n   63.2690n   43.0452n   40.7580n   50.6485n   57.4367n
+  gmb        2.1698u    2.1706u    3.7144u    3.5848u    3.1643u    3.0459u
+  cdtot     14.6916f   14.6872f   22.4632f   21.8366f    4.5755f    4.5631f
+  cgtot     18.9523f   18.9523f   52.3514f   51.5152f   10.2858f   10.0186f
+  cstot     17.2107f   17.2107f   39.7071f   38.7357f    6.5272f    6.3577f
+  cbtot     31.6674f   31.6629f   70.1893f   69.1025f   13.7206f   13.4744f
+  cgs        4.8321f    4.8321f   16.5288f   15.8932f    2.4110f    2.3479f
+  cgd        4.7623f    4.7623f    5.8996f    5.8436f    1.3906f    1.3543f
+
+
+
+ ***************************************************
+   ******   pole/zero analysis  
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 1 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ **warning** underflow 2 time(s) in pole/zero analysis
+ 
+ 
+    input =  0:ibi          output = v(inxc)
+ 
+       poles (rad/sec)                 poles ( hertz)
+ real            imag            real            imag            
+ 651.905         -1.54278k       103.754         -245.542        
+ 651.905         1.54278k        103.754         245.542         
+ -957.950        0.              -152.462        0.              
+ -2.97055k       0.              -472.778        0.              
+ -7.77939k       0.              -1.23813k       0.              
+ -69.0960k       0.              -10.9970k       0.              
+ -38.7838x       24.3366x        -6.17264x       3.87329x        
+ -38.7838x       -24.3366x       -6.17264x       -3.87329x       
+ -71.1430x       0.              -11.3228x       0.              
+ -314.910x       0.              -50.1195x       0.              
+ -1.00000g       0.              -159.155x       0.              
+ 
+       zeros (rad/sec)                 zeros ( hertz)
+ real            imag            real            imag            
+ 0.              18.6677         0.              2.97106         
+ 0.              -18.6677        0.              -2.97106        
+ -66.0336k       -236.633        -10.5096k       -37.6613        
+ -25.2821x       0.              -4.02377x       0.              
+ -47.2640x       0.              -7.52230x       0.              
+ 59.7473x        34.7937x        9.50907x        5.53759x        
+ 59.7473x        -34.7937x       9.50907x        -5.53759x       
+ -296.513x       0.              -47.1916x       0.              
+ -1.00000g       0.              -159.155x       0.              
+ 2.51870g        0.              400.863x        0.              
+ 
+  ***** constant factor = 212.204 
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *researchtry3.sp
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      45  # elements   =      32
+  # resistors   =       3  # capacitors =       5  # inductors   =       1
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       1
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
+  # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =      12  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.04           1         124
+  ac analysis        0.11        1301        1301
+  transient          0.06      100001         167          75 rev=         8
+  readin             0.18
+  errchk             0.03
+  setup              0.02
+  output             0.00
+
+
+           total memory used          410  kbytes
+           total cpu time            0.52 seconds
+           total elapsed time           1 seconds
+           job started at     22:45:40 12/09/2015
+           job ended   at     22:45:41 12/09/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
