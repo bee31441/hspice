@@ -14,10 +14,11 @@ Vs vss gnd dc = 0v
 vIbias vbp vss dc = 0.3
 
 
+
 ***Derivator & Unit gain Buffer***
 *E1 vcin gnd OPAMP vo vcin  MAX=2 MIN=0 1000		*unit gain buffer
 
-
+R vdd vss .22k
 
 
 ***

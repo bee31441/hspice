@@ -7,7 +7,6 @@
 ***netlist***
 
 Mp vss vbp vdd vdd pch w = 30u l = 10u m = 3
-*Mn vo vbn vss vss nch w = 1u l = 350n
 
 Vd vdd gnd dc = 3.3v
 Vs vss gnd dc = 0v
