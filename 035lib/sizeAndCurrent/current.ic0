@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "13:51:14 12/18/2015 "
+* "rundate" "14:22:05 12/18/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\035lib\sizeandcurrent\current.sp "
 * "runtitle" "*drain source conductance"
 * time =    0.            
