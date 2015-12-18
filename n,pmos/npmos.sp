@@ -4,16 +4,21 @@
 *.lib 'cic018.l' TT
 .unprotect
 .options ABSTOL=1e-7 RELTOL=1e-7
-+ POST=1 CAPTAB ACCURATE=1 
++ POST=1 CAPTAB ACCURATE=1
 ***netlist***
 
 .param wp = 1.2u wn = 400n
 m1 vdd vg vss vss nch w = wn l = 200n
 *m2 vss vg vdd vdd pch w = wp l = 200n
 
+.subckt
+
+ends
+
+
 
  *****************diode connect********************
-*m3 vss vss idd idd pch w = 1.2u l = 200n 
+*m3 vss vss idd idd pch w = 1.2u l = 200n
 *ix idd gnd dc = -100n
 
 *****************stack mos************************
@@ -29,6 +34,9 @@ m1 vdd vg vss vss nch w = wn l = 200n
 *R1 20 gnd 10k
 *.probe v(20)
 
+.sunckt
+ks
+ends
 
 
 vd vdd gnd dc = 0.2v
@@ -37,9 +45,9 @@ vs vss gnd dc = 0v
 vin vg gnd dc = 0.3v
 .op
 .dc vd 0 0.9v 0.01
-.print lx18(m1) 
+.print lx18(m1)
 +Qg = par('lx14(m1)') *GateCharge
-+lx32(m1) 
++lx32(m1)
 +CAP_BS	= par('lx28(m1)')
 +CAP_BD	= par('lx29(m1)')
 +gm			= par('lx7(m1)')
@@ -50,4 +58,3 @@ vin vg gnd dc = 0.3v
 *.probe I(m1) I(m2)
 
 .end
-
