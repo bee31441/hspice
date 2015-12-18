@@ -1,16 +1,16 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "01:09:53 12/16/2015 "
-* "netlist" "c:\users\timer\documents\github\hspice\035lib\researchtest.sp "
-* "runtitle" "*researchtest.sp"
+* "rundate" "13:51:14 12/18/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\035lib\sizeandcurrent\current.sp "
+* "runtitle" "*drain source conductance"
 * time =    0.            
 * temperature =   25.0000        
 *** BEGIN: Saved Operating Point ***                     
 .option 
 + gmindc= 1.000e-12       
 .nodeset
-+ vbp =   0.3000        
-+ vdd =   3.3000        
-+ vss =   0.            
++ vbp =   0.7000        
++ vdd =   2.0000        
++ vss =   1.0000        
 ***   END: Saved Operating Point ***                     
