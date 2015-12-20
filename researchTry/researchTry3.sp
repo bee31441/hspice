@@ -41,9 +41,9 @@ XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
 *
 
 ***filter***
-E2	o2	gnd	OPAMP	gnd	i2
-Clf	i2	o2 1p
-Rlf	i2	o2 1k
+*E2	o2	gnd	OPAMP	gnd	i2
+*Clf	i2	o2 1p
+*Rlf	i2	o2 1k
 
 ***loading***
 cL	inx	i2 100p
@@ -60,9 +60,9 @@ rL	vop 	gnd rr	*the Rhand Pole can be diminished by it
 +bias2		= 0.3
 
 ***connection source***
-*Vw vinn1	inx dc = 0v			*Bandpass and inx
+Vw vinn1	inx dc = 0v			*Bandpass and inx
 vx		vinp	inx dc = 0		*OPf input and inx
-*vy		vop		vg  dc = 0		*Opf output and NW_Vg
+vy		vop		vg  dc = 0		*Opf output and NW_Vg
 
 ***source***
 Vd		vdd	gnd dc = 1v
@@ -79,11 +79,11 @@ vref	vinn	gnd dc = 0.5
 *vlf	vg	gnd dc = 0.3171173 ac = 1
 
 ***loop gain test with copy***
-L1		vop		vg  1t
-vyc		vop		vgc dc = 0
-Mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u   
-Mnwc	inxc	vgc	vss	vss nch	w = 2.5u l = 0.2u
-cLc		inxc	gnd 100p   
+*L1		vop		vg  1t
+*vyc		vop		vgc dc = 0
+*Mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u   
+*Mnwc	inxc	vgc	vss	vss nch	w = 2.5u l = 0.2u
+*cLc		inxc	gnd 100p   
 *Cl2c	inxc		gnd 100p
 
 
