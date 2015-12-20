@@ -41,9 +41,9 @@ XOPf	vdd	vss	vinn	vinp	vop	b0	b1	OP
 *
 
 ***filter***
-E2	o2	gnd	OPAMP	gnd	i2
-Clf	i2	o2 1p
-Rlf	i2	o2 1k
+*E2	o2	gnd	OPAMP	gnd	i2
+*Clf	i2	o2 1p
+*Rlf	i2	o2 1k
 
 ***loading***
 cL	inx	i2 100p
@@ -90,7 +90,7 @@ cLc		inxc	gnd 100p
 ***
 .op
 *.dc iin 1n	100n	0.1n
-.ac dec 100 0.1	1000g sweep rr poi 3 1x 10x 1g
+.ac dec 100 0.1	1000g *sweep rr poi 3 1x 10x 1g
 .probe ac vdb(inx) vdb(vg) i(cL) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp) 
 + vdb(inxc)
 *.pz	v(vop) vlf
