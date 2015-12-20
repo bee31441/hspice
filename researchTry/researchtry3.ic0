@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "21:11:49 12/18/2015 "
+* "rundate" "16:51:00 12/20/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\researchtry\researchtry3.sp "
 * "runtitle" "*researchtry3.sp"
 * time =    0.            

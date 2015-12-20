@@ -13,9 +13,9 @@
 
 
  .option post acout=0 accurate dcon=1 converge=1 gmindc= 1.0000e-12  unwrap = 1
- +captab = 1 
+ +captab = 1
  ***op***
- .subckt	op	vdd	vss	vinn	vinp	vop	b0	b1	
+ .subckt	op	vdd	vss	vinn	vinp	vop	b0	b1
  mb	b	b0		vdd	vdd	pch	w = 10u  l = 1u	  m = 2
  m1	1	vinn	b		b		pch	w = 30u l = 0.4u m = 2
  m2	2	vinp	b		b		pch	w = 30u l = 0.4u m = 2
@@ -23,7 +23,7 @@
  m6	2	b1		vss	vss	nch	w = 13u l = 0.4u m = 1
  m3	von	1		vdd	vdd	pch	w = 18u    l = 1u m = 1
  m4	vop	2		vdd	vdd	pch w = 17.83u l = 1u m = 1
- m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1	
+ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u m = 1
  m8	vop	von	vss	vss	nch	w = 3.7u   l = 1u m = 1
  c1	z1		von 400f
  rz1	z1		1   350k
@@ -31,12 +31,12 @@
  .ends
 
  ***netlist***
- *mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u    
- ibi vdd	inx dc = 86.0773n ac = 1
+ *mp	inx	vb	vdd	vdd pch	w = 11u l = 0.2u
+ ibi vdd	inx dc = 86.0773n ac = 1  pulse(50u 1u 1ms 1ms 1ms 1s 2s)
  mnw	inx	vg	vss	vss nch	w = 2.5u l = 0.2u
 
  xopf	vdd	vss	vinn	vinp	vop	b0	b1	op
- *vop		vg	gnd dc = 299.8361m 
+ *vop		vg	gnd dc = 299.8361m
 
  *** bandpass***
  *xop1	vdd	vss	vinn1	vinp1	vop1		b0	b1	op
@@ -57,22 +57,24 @@
 
  ***loading***
  cl	inx	i2 100p
- *cl2	vg	inx 20p
- *cl3	vg	gnd 200n
+ *cl2	vg	inx 20u
+ rdly vop vg 10k
+ cdly vg gnd 3u
+ *cl3	vg	vop 20u
  .param rr = 1x
  rl	vop 	gnd rr	*the rhand pole can be diminished by it
  * it might because the gain is lowered
  *	and the co is needed. refer to transfer function
 
  ***param***
- .param 
+ .param
  +bias			= 0.6
  +bias2		= 0.3
 
  ***connection source***
  vw vinn1	inx dc = 0v			*bandpass and inx
  vx		vinp	inx dc = 0		*opf input and inx
- vy		vop		vg  dc = 0		*opf output and nw_vg
+ *vy		vop		vg  dc = 0		*opf output and nw_vg
 
  ***source***
  vd		vdd	gnd dc = 1v
@@ -91,24 +93,35 @@
  ***loop gain test with copy***
  *l1		vop		vg  1t
  *vyc		vop		vgc dc = 0
- *mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u   
+ *mpc		inxc	vb	vdd	vdd pch	w = 11u  l = 0.2u
  *mnwc	inxc	vgc	vss	vss nch	w = 2.5u l = 0.2u
- *clc		inxc	gnd 100p   
+ *clc		inxc	gnd 100p
  *cl2c	inxc		gnd 100p
 
 
  ***
  .op
  *.dc iin 1n	100n	0.1n
- .ac dec 100 0.1	1000g *sweep rr poi 3 1x 10x 1g
- .probe ac vdb(inx) vdb(vg) i(cl) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp) 
- + vdb(inxc)
+ *.ac dec 100 0.1	1000g *sweep rr poi 3 1x 10x 1g
+ *.probe ac vdb(inx) vdb(vg) i(cl) vdb(o2) vdb(vop) i(e2) i(mnw) i(mp)
+ *+ vdb(inxc)
  *.pz	v(vop) vlf
- .pz v(inxc) ibi
- .tran 10ns 1m *sweep f 310k 330k 10k
+ *.pz v(inxc) ibi
+ .tran 1m 3s *sweep f 310k 330k 10k
+ .probe tran i(ibi) i(mnw)
+
  *.noise v(vg)	iin 10
 
- .alter 
+ *.alter
+ *.param rr = 10x
+ *
+ *.alter
+ *.param rr = 1g
+
+
+
+
+ .end
 
  ***********************************************************************
  ** runlvl is invoked, you can disable it by:
@@ -142,22 +155,6 @@
         0 main circuit
         1 xopf.                           op                 1.00 
  
-
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of v(inxc,0)
-   branch - output ignored
-
- **warning**  attempt to reference undefined node     0:o2              
-  in the definition of vdb(o2,0)
-   branch - output ignored
-
- **warning** could not find branch element     0:e2              
-      branch - output ignored
- **warning** could not find branch element     0:mp              
-      branch - output ignored
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of vdb(inxc,0)
-   branch - output ignored
 
  
 
@@ -193,7 +190,7 @@
  +1:von     = 385.3029m 1:z1      = 614.9505m
 
 
- maximum nodal capacitance=   1.051E-12         on node     1:2               
+ maximum nodal capacitance=   3.000E-06         on node     0:vg              
 
     nodal  capacitance table 
 
@@ -201,7 +198,7 @@
 
  +0:b0      =  58.6119f 0:b1      =  37.9046f 0:i2      =   0.     
  +0:inx     =   2.9960f 0:vb      =   0.      0:vdd     = 344.9595f
- +0:vg      =   2.8696f 0:vinn    =  84.7976f 0:vinn1   =   0.     
+ +0:vg      =   3.0000u 0:vinn    =  84.7976f 0:vinn1   =   0.     
  +0:vinp    =  84.8009f 0:vop     = 926.3999f 0:vss     = 145.9803f
  +1:1       = 146.9318f 1:2       =   1.0514p 1:b       = 553.2076f
  +1:von     = 446.8388f 1:z1      = 400.0000f
@@ -211,16 +208,16 @@
  ****  voltage sources
 
  subckt                                                                    
- element  0:vw       0:vx       0:vy       0:vd       0:vs       0:vbias   
-  volts      0.         0.         0.         1.0000     0.       700.0000m
-  current    0.         0.        52.9972a   -1.6673u    1.3674u -700.0000n
-  power      0.         0.         0.         1.6673u    0.       490.0000n
+ element  0:vw       0:vx       0:vd       0:vs       0:vbias    0:vb      
+  volts      0.         0.         1.0000     0.       700.0000m  600.0000m
+  current    0.         0.        -1.6673u    1.3674u -700.0000n    0.     
+  power      0.         0.         1.6673u    0.       490.0000n    0.     
 
- subckt                                   
- element  0:vb       0:vb1      0:vref    
-  volts    600.0000m  300.0000m  500.0000m
-  current    0.         0.         0.     
-  power      0.         0.         0.     
+ subckt                        
+ element  0:vb1      0:vref    
+  volts    300.0000m  500.0000m
+  current    0.         0.     
+  power      0.         0.     
 
      total voltage source power dissipation=    2.1573u       watts
 
@@ -239,12 +236,12 @@
 
  **** resistors
 
- subckt              xopf      
- element  0:rl       1:rz1     
-  r value    1.0000x  350.0000k
-  v drop   299.8354m    0.     
-  current  299.8354n    0.     
-  power     89.9012n    0.     
+ subckt                         xopf      
+ element  0:rdly     0:rl       1:rz1     
+  r value   10.0000k    1.0000x  350.0000k
+  v drop     0.       299.8354m    0.     
+  current    0.       299.8354n    0.     
+  power      0.        89.9012n    0.     
 
 
 
@@ -282,7 +279,7 @@
  element  1:m3       1:m4       1:m7       1:m8      
  model    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
  region       Cutoff     Cutoff     Cutoff     Cutoff
-  id      -370.1343n -656.2574n  370.1348n  356.4237n
+  id      -370.1342n -656.2573n  370.1347n  356.4236n
   ibs      5.297e-23  9.394e-23 -6.554e-23 -6.327e-23
   ibd       45.9625a   45.5400a  -12.7121a  -12.4080a
   vgs     -385.0495m -410.6049m  385.3029m  385.3029m
@@ -290,7 +287,7 @@
   vbs        0.         0.         0.         0.     
   vth     -458.6477m -458.6280m  483.5663m  483.5958m
   vdsat    -48.5477m  -53.6838m   55.9078m   55.8966m
-  vod       73.5982m   48.0230m  -98.2634m  -98.2929m
+  vod       73.5982m   48.0231m  -98.2635m  -98.2929m
   beta       1.3411m    1.3266m    1.5711m    1.5282m
   gam eff  497.9476m  497.9476m  519.2085m  519.5326m
   gm         8.5391u   14.3834u    8.2525u    7.9510u
@@ -305,187 +302,6 @@
 
 
 
- ***************************************************
-   ******   pole/zero analysis  
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- 
- 
-    input =  0:ibi          output = v(0)
- 
- ***** no poles found *****     coeffd =161.834g
- ***** no zeros found *****     coeffn =1.00000 
-  ***** constant factor = 1.00000k
-
-          ***** job concluded
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
-
-  ******  HSPICE Threads Information  ******
-  Command Line Threads Count:                      0
-  Available CPU Count:                             4
-  Actual Model Evaluation(Load) Threads Count:     1
-  Actual Solver Threads Count:                     1
-
-
-  ******  Circuit Statistics  ******
-  # nodes       =      39  # elements   =      27
-  # resistors   =       4  # capacitors =       2  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      10
-  # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      10  # U elements  =       0
-  # T elements  =       0  # W elements =       0  # B elements  =       0
-  # S elements  =       0  # P elements =       0  # va device   =       0
-
-
-  ******  Runtime Statistics (seconds)  ******
-
-  analysis           time    # points   tot. iter  conv.iter
-  op point           0.03           1         151
-  ac analysis        0.12        1301        1301
-  transient          0.06      100001          60          30 rev=         0
-  readin             0.19
-  errchk             0.04
-  setup              0.02
-  output             0.00
-
-
-           total memory used          402  kbytes
-           total cpu time            0.49 seconds
-           total elapsed time           1 seconds
-           job started at     21:11:49 12/18/2015
-           job ended   at     21:11:49 12/18/2015
-
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- 
-
-  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
- .param rr = 10x
-
- .alter        
- $ alter processing continues $
-
- ***********************************************************************
- ** runlvl is invoked, you can disable it by:
-      a) Add option runlvl=0 to your current simulation job.
-      b) Copy $installdir/hspice.ini to your HOME directory and
-         customize it by adding option runlvl=0, which disables
-         it for all of your simulation jobs.
-      c) Re-invoke $installdir/bin/config program and unselect the
-         option runlvl setting in box 'hspice.ini' which disables
-         it for whole group simulation jobs.
-
- ** runlvl is invoked, some options are ignored or automatically set:
-      Options below are automatically set(user setting will overwrite them):
-      if runlvl=[1|2|3|4|5|6],  .option bypass=2
-
-      Options below are ignored, they are replaced by automated algorithms:
-        lvltim    dvdt      ft    fast   trtol  absvar  relvar
-          relq  chgtol    dvtr    imin    itl3    rmax
-
- ** runlvl is invoked, actual option value used by HSPICE are:
-       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00u
- ***********************************************************************
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  circuit name directory
- circuit number to circuit name directory
-   number circuitname                     definition         multiplier
-        0 main circuit
-        1 xopf.                           op                 1.00 
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of v(inxc,0)
-   branch - output ignored
-
- **warning**  attempt to reference undefined node     0:o2              
-  in the definition of vdb(o2,0)
-   branch - output ignored
-
- **warning** could not find branch element     0:e2              
-      branch - output ignored
- **warning** could not find branch element     0:mp              
-      branch - output ignored
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of vdb(inxc,0)
-   branch - output ignored
-
- 
-
- **warning** the following singular supplies were terminated to 1 meg resistor 
-   supply       node1            node2
-  vbias                   0:vb               defined in subckt 0                     0:0                defined in subckt 0               
-  vw                      0:vinn1            defined in subckt 0                     0:inx              defined in subckt 0               
-      
-  Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa1      
-
   *** initial damped pseudo transient completed. ***
   *** final try started ***
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -493,202 +309,31 @@
  *researchtry3.sp
 
   ******  operating point information tnom=  25.000 temp=  25.000 *****
- ***** operating point status is all       simulation time is     0.     
+ ***** operating point status is voltage   simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
  +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 500.0222m 0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 299.8461m 0:vinn    = 500.0000m 0:vinn1   = 500.0222m
- +0:vinp    = 500.0222m 0:vop     = 299.8461m 0:vss     =   0.     
- +1:1       = 602.8504m 1:2       = 601.7690m 1:b       = 797.6911m
- +1:von     = 397.7131m 1:z1      = 602.8504m
+ +0:inx     = 501.1364m 0:vb      = 700.0000m 0:vdd     =   1.0000 
+ +0:vg      = 619.4745m 0:vinn    = 500.0000m 0:vinn1   = 501.1364m
+ +0:vinp    = 501.1364m 0:vop     = 619.4745m 0:vss     =   0.     
+ +1:1       = 629.6188m 1:2       = 574.4786m 1:b       = 798.2511m
+ +1:von     = 370.2561m 1:z1      = 629.6188m
 
 
- maximum nodal capacitance=   1.049E-12         on node     1:2               
+ maximum nodal capacitance=   3.000E-06         on node     0:vg              
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      =   0.     
- +0:inx     =   2.9963f 0:vb      =   0.      0:vdd     = 343.4111f
- +0:vg      =   2.8696f 0:vinn    =  84.7991f 0:vinn1   =   0.     
- +0:vinp    =  84.7992f 0:vop     = 926.3999f 0:vss     = 146.7782f
- +1:1       = 148.8272f 1:2       =   1.0485p 1:b       = 553.2184f
- +1:von     = 447.2825f 1:z1      = 400.0000f
+ +0:b0      =  58.6120f 0:b1      =  37.9046f 0:i2      =   0.     
+ +0:inx     =   2.9979f 0:vb      =   0.      0:vdd     = 351.9052f
+ +0:vg      =   3.0000u 0:vinn    =  84.7957f 0:vinn1   =   0.     
+ +0:vinp    =  84.8029f 0:vop     = 927.6102f 0:vss     = 147.8526f
+ +1:1       = 145.4808f 1:2       =   1.0561p 1:b       = 553.2080f
+ +1:von     = 446.4876f 1:z1      = 400.0000f
 
  
-
- ****  voltage sources
-
- subckt                                                                    
- element  0:vw       0:vx       0:vy       0:vd       0:vs       0:vbias   
-  volts      0.         0.         0.         1.0000     0.       700.0000m
-  current    0.         0.       234.3842a   -1.6268u    1.5968u -700.0000n
-  power      0.         0.         0.         1.6268u    0.       490.0000n
-
- subckt                                   
- element  0:vb       0:vb1      0:vref    
-  volts    600.0000m  300.0000m  500.0000m
-  current    0.         0.         0.     
-  power      0.         0.         0.     
-
-     total voltage source power dissipation=    2.1168u       watts
-
-
-
- ***** current sources
-
- subckt             
- element  0:ibi     
-  volts    499.9778m
-  current   86.0773n
-  power    -43.0367n
-
-
-     total current source power dissipation= -43.0367n       watts
-
- **** resistors
-
- subckt              xopf      
- element  0:rl       1:rz1     
-  r value   10.0000x  350.0000k
-  v drop   299.8461m    0.     
-  current   29.9846n    0.     
-  power      8.9908n    0.     
-
-
-
- **** mosfets
-
-
- subckt              xopf       xopf       xopf       xopf       xopf      
- element  0:mnw      1:mb       1:m1       1:m2       1:m5       1:m6      
- model    0:nch.8    0:pch.3    0:pch.4    0:pch.4    0:nch.4    0:nch.4   
- region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id        86.0763n -554.8329n -277.4503n -277.3819n  277.4499n  277.3814n
-  ibs     -1.597e-23  8.073e-23  3.937e-23  3.936e-23 -4.596e-23 -4.595e-23
-  ibd       -8.9608a   51.9013a  151.8432a  151.8464a -111.0669a -108.1572a
-  vgs      299.8461m -400.0000m -297.6911m -297.6689m  300.0000m  300.0000m
-  vds      500.0222m -202.3089m -194.8407m -195.9221m  602.8504m  601.7690m
-  vbs        0.         0.         0.         0.         0.         0.     
-  vth      518.9688m -458.7427m -471.6918m -471.6910m  491.0343m  491.0350m
-  vdsat     40.9518m  -51.3038m  -41.5026m  -41.5021m   43.9133m   43.9133m
-  vod     -219.1227m   58.7427m  174.0007m  174.0221m -191.0343m -191.0350m
-  beta       6.8710m    1.4883m   11.7361m   11.7361m   15.0987m   15.0987m
-  gam eff  897.6890m  497.9476m  541.3676m  541.3676m  556.1233m  556.1233m
-  gm         2.3039u   12.4562u    7.4906u    7.4889u    7.5293u    7.5275u
-  gds       49.3184n   79.5092n   90.7594n   90.3939n   63.2736n   63.2900n
-  gmb      693.9766n    4.0970u    2.5204u    2.5198u    2.1704u    2.1699u
-  cdtot      2.9963f   27.5781f   82.0736f   82.0488f   14.6880f   14.6909f
-  cgtot      2.8696f   58.6118f   84.7991f   84.7992f   18.9523f   18.9523f
-  cstot      3.4267f   44.8448f   87.8164f   87.8161f   17.2107f   17.2107f
-  cbtot      5.6292f   80.8328f  175.0161f  174.9917f   31.6638f   31.6666f
-  cgs      917.7208a   18.8854f   20.1832f   20.1829f    4.8321f    4.8321f
-  cgd      914.0445a    6.5675f   19.6732f   19.6732f    4.7623f    4.7623f
-
-
-
- subckt   xopf       xopf       xopf       xopf      
- element  1:m3       1:m4       1:m7       1:m8      
- model    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
- region       Cutoff     Cutoff     Cutoff     Cutoff
-  id      -487.2223n -498.6370n  487.2227n  468.6533n
-  ibs      6.973e-23  7.137e-23 -8.628e-23 -8.319e-23
-  ibd       45.9632a   45.5388a  -12.7121a  -12.4080a
-  vgs     -397.1496m -398.2310m  397.7131m  397.7131m
-  vds     -602.2869m -700.1539m  397.7131m  299.8461m
-  vbs        0.         0.         0.         0.     
-  vth     -458.6505m -458.6280m  483.5635m  483.5958m
-  vdsat    -50.7460m  -50.9666m   57.9217m   57.9088m
-  vod       61.5009m   60.3970m  -85.8504m  -85.8827m
-  beta       1.3403m    1.3276m    1.5707m    1.5278m
-  gam eff  497.9476m  497.9476m  519.2085m  519.5326m
-  gm        10.9805u   11.2072u   10.6203u   10.2223u
-  gds       41.8354n   41.9564n   49.3068n   55.7827n
-  gmb        3.6133u    3.6880u    3.0778u    2.9629u
-  cdtot     22.4570f   21.8368f    4.5768f    4.5630f
-  cgtot     52.0656f   51.8034f   10.2576f    9.9911f
-  cstot     39.2048f   39.2428f    6.4711f    6.3031f
-  cbtot     70.1726f   69.1133f   13.7219f   13.4743f
-  cgs       16.1288f   16.2969f    2.3700f    2.3080f
-  cgd        5.8996f    5.8436f    1.3906f    1.3543f
-
-
-
- ***************************************************
-   ******   pole/zero analysis  
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- 
- 
-    input =  0:ibi          output = v(0)
- 
- ***** no poles found *****     coeffd =162.425g
- ***** no zeros found *****     coeffn =1.00000 
-  ***** constant factor = 1.00000k
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -705,10 +350,10 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      39  # elements   =      27
-  # resistors   =       4  # capacitors =       2  # inductors   =       0
+  # nodes       =      39  # elements   =      28
+  # resistors   =       5  # capacitors =       3  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      10
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       9
   # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
   # jfets       =       0  # mosfets    =      10  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
@@ -718,338 +363,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.03           1          96
-  ac analysis        0.10        1301        1301
-  transient          0.05      100001          60          30 rev=         0
-  readin             0.14
-  errchk             0.02
-  setup              0.02
+  op point           0.05           1         341
+  transient         91.13        3001     2173318      574478 rev=    139439
+  readin             0.17
+  errchk             0.03
+  setup              0.01
   output             0.00
 
 
-           total memory used          402  kbytes
-           total cpu time            0.44 seconds
-           total elapsed time           1 seconds
-           job started at     21:11:49 12/18/2015
-           job ended   at     21:11:50 12/18/2015
-
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- 
-
-  ******    alter processing listing tnom=  25.000 temp=  25.000 *****
- .param rr = 1g
-
-
-
-
- .end                     
- $ end of alter processing $
-
- ***********************************************************************
- ** runlvl is invoked, you can disable it by:
-      a) Add option runlvl=0 to your current simulation job.
-      b) Copy $installdir/hspice.ini to your HOME directory and
-         customize it by adding option runlvl=0, which disables
-         it for all of your simulation jobs.
-      c) Re-invoke $installdir/bin/config program and unselect the
-         option runlvl setting in box 'hspice.ini' which disables
-         it for whole group simulation jobs.
-
- ** runlvl is invoked, some options are ignored or automatically set:
-      Options below are automatically set(user setting will overwrite them):
-      if runlvl=[1|2|3|4|5|6],  .option bypass=2
-
-      Options below are ignored, they are replaced by automated algorithms:
-        lvltim    dvdt      ft    fast   trtol  absvar  relvar
-          relq  chgtol    dvtr    imin    itl3    rmax
-
- ** runlvl is invoked, actual option value used by HSPICE are:
-       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00u
- ***********************************************************************
-
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  circuit name directory
- circuit number to circuit name directory
-   number circuitname                     definition         multiplier
-        0 main circuit
-        1 xopf.                           op                 1.00 
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of v(inxc,0)
-   branch - output ignored
-
- **warning**  attempt to reference undefined node     0:o2              
-  in the definition of vdb(o2,0)
-   branch - output ignored
-
- **warning** could not find branch element     0:e2              
-      branch - output ignored
- **warning** could not find branch element     0:mp              
-      branch - output ignored
- **warning**  attempt to reference undefined node     0:inxc            
-  in the definition of vdb(inxc,0)
-   branch - output ignored
-
- 
-
- **warning** the following singular supplies were terminated to 1 meg resistor 
-   supply       node1            node2
-  vbias                   0:vb               defined in subckt 0                     0:0                defined in subckt 0               
-  vw                      0:vinn1            defined in subckt 0                     0:inx              defined in subckt 0               
-      
-  Opening plot unit= 79
- file=c:\users\timer\documents\github\hspice\researchtry\researchtry3.pa2      
-
-  *** initial damped pseudo transient completed. ***
-  *** final try started ***
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  operating point information tnom=  25.000 temp=  25.000 *****
- ***** operating point status is all       simulation time is     0.     
-    node    =voltage      node    =voltage      node    =voltage
-
- +0:b0      = 600.0000m 0:b1      = 300.0000m 0:i2      =   0.     
- +0:inx     = 499.9660m 0:vb      = 700.0000m 0:vdd     =   1.0000 
- +0:vg      = 299.8473m 0:vinn    = 500.0000m 0:vinn1   = 499.9660m
- +0:vinp    = 499.9660m 0:vop     = 299.8473m 0:vss     =   0.     
- +1:1       = 601.4985m 1:2       = 603.1556m 1:b       = 797.6637m
- +1:von     = 399.0988m 1:z1      = 601.4985m
-
-
- maximum nodal capacitance=   1.048E-12         on node     1:2               
-
-    nodal  capacitance table 
-
-    node    =    cap      node    =    cap      node    =    cap
-
- +0:b0      =  58.6118f 0:b1      =  37.9046f 0:i2      =   0.     
- +0:inx     =   2.9963f 0:vb      =   0.      0:vdd     = 343.4121f
- +0:vg      =   2.8696f 0:vinn    =  84.7993f 0:vinn1   =   0.     
- +0:vinp    =  84.7991f 0:vop     = 926.3999f 0:vss     = 146.8875f
- +1:1       = 149.0862f 1:2       =   1.0483p 1:b       = 553.2202f
- +1:von     = 447.3431f 1:z1      = 400.0000f
-
- 
-
- ****  voltage sources
-
- subckt                                                                    
- element  0:vw       0:vx       0:vy       0:vd       0:vs       0:vbias   
-  volts      0.         0.         0.         1.0000     0.       700.0000m
-  current    0.         0.        41.6478a   -1.6264u    1.6261u -700.0000n
-  power      0.         0.         0.         1.6264u    0.       490.0000n
-
- subckt                                   
- element  0:vb       0:vb1      0:vref    
-  volts    600.0000m  300.0000m  500.0000m
-  current    0.         0.         0.     
-  power      0.         0.         0.     
-
-     total voltage source power dissipation=    2.1164u       watts
-
-
-
- ***** current sources
-
- subckt             
- element  0:ibi     
-  volts    500.0340m
-  current   86.0773n
-  power    -43.0416n
-
-
-     total current source power dissipation= -43.0416n       watts
-
- **** resistors
-
- subckt              xopf      
- element  0:rl       1:rz1     
-  r value    1.0000g  350.0000k
-  v drop   299.8473m    0.     
-  current  299.8473p    0.     
-  power     89.9084p    0.     
-
-
-
- **** mosfets
-
-
- subckt              xopf       xopf       xopf       xopf       xopf      
- element  0:mnw      1:mb       1:m1       1:m2       1:m5       1:m6      
- model    0:nch.8    0:pch.3    0:pch.4    0:pch.4    0:nch.4    0:nch.4   
- region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id        86.0763n -554.8351n -277.3647n -277.4696n  277.3643n  277.4692n
-  ibs     -1.597e-23  8.073e-23  3.936e-23  3.938e-23 -4.594e-23 -4.596e-23
-  ibd       -8.9602a   51.9013a  151.8471a  151.8422a -107.4467a -111.9086a
-  vgs      299.8473m -400.0000m -297.6637m -297.6977m  300.0000m  300.0000m
-  vds      499.9660m -202.3363m -196.1652m -194.5081m  601.4985m  603.1556m
-  vbs        0.         0.         0.         0.         0.         0.     
-  vth      518.9690m -458.7427m -471.6908m -471.6921m  491.0351m  491.0341m
-  vdsat     40.9518m  -51.3038m  -41.5020m  -41.5027m   43.9133m   43.9133m
-  vod     -219.1216m   58.7427m  174.0271m  173.9944m -191.0351m -191.0341m
-  beta       6.8710m    1.4883m   11.7361m   11.7361m   15.0987m   15.0987m
-  gam eff  897.6890m  497.9476m  541.3676m  541.3676m  556.1233m  556.1233m
-  gm         2.3039u   12.4563u    7.4885u    7.4910u    7.5270u    7.5298u
-  gds       49.3205n   79.4959n   90.3121n   90.8727n   63.2941n   63.2690n
-  gmb      693.9768n    4.0970u    2.5197u    2.5205u    2.1698u    2.1706u
-  cdtot      2.9963f   27.5778f   82.0433f   82.0812f   14.6916f   14.6872f
-  cgtot      2.8696f   58.6118f   84.7993f   84.7991f   18.9523f   18.9523f
-  cstot      3.4267f   44.8448f   87.8160f   87.8166f   17.2107f   17.2107f
-  cbtot      5.6292f   80.8326f  174.9863f  175.0236f   31.6674f   31.6629f
-  cgs      917.7209a   18.8854f   20.1828f   20.1833f    4.8321f    4.8321f
-  cgd      914.0445a    6.5675f   19.6732f   19.6732f    4.7623f    4.7623f
-
-
-
- subckt   xopf       xopf       xopf       xopf      
- element  1:m3       1:m4       1:m7       1:m8      
- model    0:pch.3    0:pch.3    0:nch.7    0:nch.7   
- region       Cutoff     Cutoff     Cutoff     Cutoff
-  id      -502.2151n -483.3159n  502.2155n  483.0169n
-  ibs      7.187e-23  6.918e-23 -8.893e-23 -8.574e-23
-  ibd       45.9633a   45.5387a  -12.7122a  -12.4080a
-  vgs     -398.5015m -396.8444m  399.0988m  399.0988m
-  vds     -600.9012m -700.1527m  399.0988m  299.8473m
-  vbs        0.         0.         0.         0.     
-  vth     -458.6508m -458.6280m  483.5632m  483.5958m
-  vdsat    -51.0166m  -50.6900m   58.1708m   58.1577m
-  vod       60.1493m   61.7836m  -84.4643m  -84.4970m
-  beta       1.3402m    1.3277m    1.5707m    1.5278m
-  gam eff  497.9476m  497.9476m  519.2085m  519.5326m
-  gm        11.2884u   10.8927u   10.9198u   10.5095u
-  gds       43.0449n   40.7583n   50.6481n   57.4283n
-  gmb        3.7144u    3.5848u    3.1643u    3.0459u
-  cdtot     22.4632f   21.8368f    4.5755f    4.5631f
-  cgtot     52.3513f   51.5152f   10.2858f   10.0186f
-  cstot     39.7069f   38.7357f    6.5272f    6.3577f
-  cbtot     70.1893f   69.1027f   13.7206f   13.4743f
-  cgs       16.5286f   15.8933f    2.4109f    2.3479f
-  cgd        5.8996f    5.8436f    1.3906f    1.3543f
-
-
-
- ***************************************************
-   ******   pole/zero analysis  
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- **warning** underflow 1 time(s) in pole/zero analysis
- 
- 
-    input =  0:ibi          output = v(0)
- 
- ***** no poles found *****     coeffd =162.651g
- ***** no zeros found *****     coeffn =1.00000 
-  ***** constant factor = 1.00000k
-
-          ***** job concluded
-1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
- ******  
- *researchtry3.sp
-
-  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
-
-  ******  HSPICE Threads Information  ******
-  Command Line Threads Count:                      0
-  Available CPU Count:                             4
-  Actual Model Evaluation(Load) Threads Count:     1
-  Actual Solver Threads Count:                     1
-
-
-  ******  Circuit Statistics  ******
-  # nodes       =      39  # elements   =      27
-  # resistors   =       4  # capacitors =       2  # inductors   =       0
-  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      10
-  # curr_srcs   =       1  # diodes     =       0  # bjts        =       0
-  # jfets       =       0  # mosfets    =      10  # U elements  =       0
-  # T elements  =       0  # W elements =       0  # B elements  =       0
-  # S elements  =       0  # P elements =       0  # va device   =       0
-
-
-  ******  Runtime Statistics (seconds)  ******
-
-  analysis           time    # points   tot. iter  conv.iter
-  op point           0.06           1         109
-  ac analysis        0.11        1301        1301
-  transient          0.06      100001          60          30 rev=         0
-  readin             0.26
-  errchk             0.02
-  setup              0.02
-  output             0.00
-
-
-           total memory used          402  kbytes
-           total cpu time            0.59 seconds
-           total elapsed time           1 seconds
-           job started at     21:11:49 12/18/2015
-           job ended   at     21:11:50 12/18/2015
+           total memory used          381  kbytes
+           total cpu time           91.42 seconds
+           total elapsed time          91 seconds
+           job started at     16:51:00 12/20/2015
+           job ended   at     16:52:31 12/20/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

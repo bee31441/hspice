@@ -1,0 +1,17 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "16:47:10 12/20/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\research\captest\captest.sp "
+* "runtitle" "*captest"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ vdn =   1.0000        
++ vg =   0.7000        
++ vgn =   0.7000        
++ vsn =   0.            
+***   END: Saved Operating Point ***                     
