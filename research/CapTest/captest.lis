@@ -1,0 +1,201 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\research\captest\captest.sp
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .options abstol=1e-7 reltol=1e-7
+ + post=1 captab=1 accurate=1 ingold=1
+ ***netlist***
+
+ mn vdn vgn vsn vsn nch w = 10u l = 0.4u
+
+ vnd vdn gnd dc = 1v
+ vng vg gnd dc = 1v pulse(0.7 1 1ms 1ms 1ms 1s 2s)
+ vns vsn gnd dc = 0v
+
+ rl vg vgn 10k
+ cl vgn gnd 3u
+
+ .op
+ .tran 10us 5s
+ .probe tran i(mn)
+ .end
+
+ ***********************************************************************
+ ** runlvl is invoked, you can disable it by:
+      a) Add option runlvl=0 to your current simulation job.
+      b) Copy $installdir/hspice.ini to your HOME directory and
+         customize it by adding option runlvl=0, which disables
+         it for all of your simulation jobs.
+      c) Re-invoke $installdir/bin/config program and unselect the
+         option runlvl setting in box 'hspice.ini' which disables
+         it for whole group simulation jobs.
+
+ ** runlvl is invoked, some options are ignored or automatically set:
+      Options below are automatically set(user setting will overwrite them):
+      if runlvl=[1|2|3|4|5|6],  .option bypass=2
+
+      Options below are ignored, they are replaced by automated algorithms:
+        lvltim    dvdt      ft    fast   trtol  absvar  relvar
+          relq  chgtol    dvtr    imin    itl3    rmax
+
+ ** runlvl is invoked, actual option value used by HSPICE are:
+       runlvl= 5       bypass= 2      mbypass=   2.00   bytol= 100.00n
+ ***********************************************************************
+
+ 
+
+ 
+      
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *captest
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:vdn     =   1.0000  0:vg      =   1.0000  0:vgn     =   1.0000 
+ +0:vsn     =   0.     
+
+
+ maximum nodal capacitance=   3.000E-06         on node     0:vgn             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:vdn     = 1.192e-14 0:vg      =   0.      0:vgn     = 3.000e-06
+ +0:vsn     = 5.488e-14
+
+ 
+
+ ****  voltage sources
+
+ subckt                                   
+ element  0:vnd      0:vng      0:vns     
+  volts      1.0000     1.0000     0.     
+  current -3.960e-04    0.       3.960e-04
+  power    3.960e-04    0.         0.     
+
+     total voltage source power dissipation=  3.960e-04       watts
+
+
+
+ **** resistors
+
+ subckt             
+ element  0:rl      
+  r value  1.000e+04
+  v drop     0.     
+  current    0.     
+  power      0.     
+
+
+
+ **** mosfets
+
+
+ subckt             
+ element  0:mn      
+ model    0:nch.3   
+ region     Saturati
+  id       3.960e-04
+  ibs     -5.826e-16
+  ibd     -1.315e-14
+  vgs        1.0000 
+  vds        1.0000 
+  vbs        0.     
+  vth        0.5675 
+  vdsat      0.3342 
+  vod        0.4325 
+  beta     5.595e-03
+  gam eff    0.5650 
+  gm       1.454e-03
+  gds      3.118e-05
+  gmb      3.892e-04
+  cdtot    1.192e-14
+  cgtot    1.591e-14
+  cstot    2.827e-14
+  cbtot    2.661e-14
+  cgs      1.244e-14
+  cgd      2.077e-15
+
+
+
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *captest
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is voltage   simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:vdn     =   1.0000  0:vg      =   0.7000  0:vgn     =   0.7000 
+ +0:vsn     =   0.     
+
+
+ maximum nodal capacitance=   3.000E-06         on node     0:vgn             
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:vdn     = 1.192e-14 0:vg      =   0.      0:vgn     = 3.000e-06
+ +0:vsn     = 5.376e-14
+
+ 
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ *captest
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =       8  # elements   =       7
+  # resistors   =       1  # capacitors =       1  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       4
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =       1  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.01           1          10
+  transient          0.09      500001         416         208 rev=        17
+  readin             0.10
+  errchk             0.01
+  setup              0.01
+  output             0.00
+
+
+           total memory used          191  kbytes
+           total cpu time            0.25 seconds
+           total elapsed time           1 seconds
+           job started at     16:47:10 12/20/2015
+           job ended   at     16:47:10 12/20/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
