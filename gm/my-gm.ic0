@@ -1,0 +1,24 @@
+* "simulator" "HSPICE" 
+* "version" "B-2008.09 32-BIT"
+* "format" "HSP"
+* "rundate" "22:55:10 12/22/2015 "
+* "netlist" "c:\users\timer\documents\github\hspice\gm\my-gm.sp "
+* "runtitle" "*gm"
+* time =    0.            
+* temperature =   25.0000        
+*** BEGIN: Saved Operating Point ***                     
+.option 
++ gmindc= 1.000e-12       
+.nodeset
++ bd =   2.4032        
++ ggp =   0.5017        
++ idn =   0.5000        
++ inn =   1.0000        
++ inp =   1.0000        
++ ref =   0.5000        
++ sdn =   1.7010        
++ sdp =   1.7011        
++ vb =   2.6000        
++ vdd =   3.3000        
++ vss =   0.            
+***   END: Saved Operating Point ***                     
