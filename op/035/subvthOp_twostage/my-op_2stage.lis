@@ -1,0 +1,277 @@
+ ****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+  Copyright (C) 2008 Synopsys, Inc. All Rights Reserved.                        
+  Unpublished-rights reserved under US copyright laws.
+  This program is protected by law and is subject to the 
+  terms and conditions of the license agreement from Synopsys.
+  Use of this program is your acceptance to be bound by the 
+  license agreement. HSPICE is the trademark of Synopsys, Inc.
+  Input File: c:\users\timer\documents\github\hspice\op\035\subvthop_twostage\my
+ Init: read install configuration file: C:\synopsys\Hspice_B-2008.09\meta.cfg
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
+
+
+
+
+ .option post acout=0 accurate=1 dcon=1 converge=1 gmindc=1.0000e-12 captab=1
+ *.option dccap=1 accurate=1 post
+
+ ***param***
+ .param
+ +comon		= 0.5
+ +bias			= 0.6
+ +bias2		= 0.3
+ +supplyp	= 1.0
+ +supplyn	= 0
+ +diff			= 0
+ ***netlist***
+ ***1st stage***
+ mb	b	b0	vdd	vdd	pch	w = 10u  l = 1u	  m = 2
+ m1	1	vinn	b		b		pch	w = 30u l = 0.8u m = 2
+ m2	2	vinp	b		b		pch	w = 30u l = 0.8u m = 2
+ m5	1	b1		vss	vss	nch	w = 13u l = 0.8u m = 1
+ m6	2	b1		vss	vss	nch	w = 13u l = 0.8u m = 1
+ **low f gain = 34.5db
+ * for subthreshold diffpair. gain do little with id. it is more related to leff and vds of output mos(about output resistance)
+ * gds is proportional to 1/leff & vds
+ *kappa ~= 0.7
+
+ ***2nd stage***
+ m3	von	1		vdd	vdd	pch	w = 18u    l = 1u   m = 1
+ m4	vop	2		vdd	vdd	pch w = 3.88u 	 l = 0.4u m = 1
+ m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1
+ m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.4u m = 1
+
+ ***compensation***
+
+ c1	z1		von 400f
+ rz1	z1		1   350k
+ c2	2			vop 300f
+
+
+ ***source***
+ vd		vdd 	gnd dc supplyp
+ vs		vss 	gnd dc supplyn
+ vb 		b0		gnd dc bias
+ vb1		b1		gnd dc bias2
+
+
+ ***input***
+ vinp vinp gnd dc = 'comon+diff' ac = 1
+ vinn vinn gnd dc = 'comon-diff' *ac = 1 -180
+
+
+
+
+
+
+ ***test
+ *mt	vdt	vgt	vss	vss	nch	w = 2.7u   l = 0.5u m = 1
+ mt	vdt	vgt	vdd	vdd	pch w = 9.7u l = 0.5u m = 1
+
+ vtd	vdt	gnd dc = '1-499.7048m'
+ vtg	vgt	gnd dc = '1-397.6836m'
+
+ ***
+
+
+
+
+
+
+ .op
+
+ ***sweep***
+ .dc diff -0.5 0.5 0.01
+ ***probe&measuring***
+ .ac dec 1000 10 1g
+ *.tf v(1) vinp
+ *.pz v(vop) vinp
+ .probe dc i(m1) i(m2)	i(mt)
+ .probe ac cap(von)
+ +gain1st=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')	phase1st=par('vp(2,1)')
+ *+gainall=par('vdb(vop)-vdb(vinp,vinn)')		phaseall=par('vp(vop)')
+ .meas ac gain max (par('vdb(vop)-vdb(vinp,vinn)'))
+ *.meas ac zerodb when par('vdb(vop)-vdb(vinp,vinn)') = 1
+ *.meas ac phaseatdb	find par('vp(vop)') when par('vdb(vop)-vdb(vinp,vinn)') = 1
+ .end
+
+
+ **warning**  the accurate option increases  the cpu time but the results
+                are more accurate.
+ ***accurate option sets default value of the options: 
+ lvltim= 4         dvdt= 3       relvar= 200.00m absvar= 200.00m
+     ft= 200.00m relmos=  10.00m
+ (used for FFT control ) fft_accurate= 1
+ 
+
+ 
+      
+  *** initial damped pseudo transient completed. ***
+  *** final try started ***
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***myop_2stage
+
+  ******  operating point information tnom=  25.000 temp=  25.000 *****
+ ***** operating point status is all       simulation time is     0.     
+    node    =voltage      node    =voltage      node    =voltage
+
+ +0:1       =   4.1117m 0:2       =   4.1117m 0:b       = 824.6614m
+ +0:b0      = 600.0000m 0:b1      = 300.0000m 0:vdd     =   1.0000 
+ +0:vdt     = 500.2952m 0:vgt     = 602.3164m 0:vinn    = 500.0000m
+ +0:vinp    = 500.0000m 0:von     = 832.0486m 0:vop     = 629.8774m
+ +0:vss     =   0.      0:z1      =   4.1117m
+
+
+ maximum nodal capacitance=   6.248E-13         on node     0:b               
+
+    nodal  capacitance table 
+
+    node    =    cap      node    =    cap      node    =    cap
+
+ +0:1       = 166.2083f 0:2       = 399.7345f 0:b       = 624.7731f
+ +0:b0      =  26.0468f 0:b1      =  33.2861f 0:vdd     = 343.2184f
+ +0:vdt     =  13.8226f 0:vgt     =   7.9055f 0:vinn    =  66.2494f
+ +0:vinp    =  66.2494f 0:von     = 475.1220f 0:vop     = 308.0587f
+ +0:vss     = 163.7580f 0:z1      = 400.0000f
+
+ 
+
+ ****  voltage sources
+
+ subckt                                                                    
+ element  0:vd       0:vs       0:vb       0:vb1      0:vinp     0:vinn    
+  volts      1.0000     0.       600.0000m  300.0000m  500.0000m  500.0000m
+  current  -44.0143u   44.0137u    0.         0.         0.         0.     
+  power     44.0143u    0.         0.         0.         0.         0.     
+
+ subckt                        
+ element  0:vtd      0:vtg     
+  volts    500.2952m  602.3164m
+  current  593.1891p    0.     
+  power   -296.7696p    0.     
+
+     total voltage source power dissipation=   44.0140u       watts
+
+
+
+ **** resistors
+
+ subckt             
+ element  0:rz1     
+  r value  350.0000k
+  v drop     0.     
+  current    0.     
+  power      0.     
+
+
+
+ **** mosfets
+
+
+ subckt                                                                    
+ element  0:mb       0:m1       0:m2       0:m5       0:m6       0:m3      
+ model    0:pch.2    0:pch.12   0:pch.12   0:nch.3    0:nch.3    0:pch.2   
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Linear
+  id      -656.1260p -325.1289p -325.1289p  328.4039p  328.4039p  -27.2902u
+  ibs      1.302e-22  6.422e-23  6.422e-23 -4.870e-22 -4.870e-22    5.3705a
+  ibd        1.8498f    5.4518f    5.4518f   -2.4696f   -2.4696f    1.6435f
+  vgs     -400.0000m -324.6614m -324.6614m  300.0000m  300.0000m -995.8883m
+  vds     -175.3386m -820.5496m -820.5496m    4.1117m    4.1117m -167.9514m
+  vbs        0.         0.         0.         0.         0.         0.     
+  vth     -758.1953m -744.5510m -744.5510m  576.6535m  576.6535m -756.8501m
+  vdsat    -48.8149m  -48.5016m  -48.5016m   43.2428m   43.2428m -273.5258m
+  vod      358.1953m  419.8896m  419.8896m -276.6535m -276.6535m -239.0382m
+  beta       1.1713m    4.2851m    4.2851m    3.5801m    3.5801m    1.0273m
+  gam eff  395.2351m  390.2914m  390.2914m  481.3273m  481.3273m  395.2801m
+  gm        18.4520n    9.2455n    9.2455n    9.0348n    9.0348n  149.4316u
+  gds      235.5717p   95.1994p   95.1994p   75.4872n   75.4872n   92.3718u
+  gmb        4.6312n    2.5052n    2.5052n    2.9978n    2.9978n   33.2161u
+  cdtot     31.7768f   75.6984f   75.6984f   18.3556f   18.3556f   54.2286f
+  cgtot     26.0468f   66.2494f   66.2494f   16.6430f   16.6430f   72.1543f
+  cstot     34.1889f   99.2718f   99.2718f   18.3784f   18.3784f   90.9018f
+  cbtot     77.2993f  197.2263f  197.2263f   42.5916f   42.5916f   67.8059f
+  cgs        3.6783f   10.9983f   10.9983f    2.6963f    2.6963f   50.8573f
+  cgd        3.6783f   10.9983f   10.9983f    2.6963f    2.6963f   18.7750f
+
+
+
+ subckt                                              
+ element  0:m4       0:m7       0:m8       0:mt      
+ model    0:pch.3    0:nch.2    0:nch.6    0:pch.3   
+ region     Saturati   Saturati   Saturati     Cutoff
+  id       -16.7228u   27.2902u   16.7228u -592.1888p
+  ibs        3.3682a  -45.0672a  -36.4827a  1.176e-22
+  ibd      375.1099a   -5.6084f   -2.3535f  898.9100a
+  vgs     -995.8883m  832.0486m  832.0486m -397.6836m
+  vds     -370.1226m  832.0486m  629.8774m -499.7048m
+  vbs        0.         0.         0.         0.     
+  vth     -729.0257m  560.6157m  559.7432m -732.4239m
+  vdsat   -271.2552m  251.1281m  236.6685m  -46.4275m
+  vod     -266.8625m  271.4329m  272.3054m  334.7403m
+  beta     454.6598u  793.4711u  510.0144u    1.0350m
+  gam eff  451.1009m  467.5304m  509.4756m  432.2184m
+  gm       107.5514u  177.5937u  106.0278u   16.0178n
+  gds        7.3921u    1.1525u    2.4605u  357.9766p
+  gmb       22.8737u   51.0340u   27.9062u    4.1842n
+  cdtot      6.1908f    4.9573f    1.8679f   13.8226f
+  cgtot      5.6805f   13.9837f    1.9524f    7.9055f
+  cstot     11.8943f   20.1187f    3.7100f   16.6063f
+  cbtot     13.3243f   13.8734f    4.1159f   31.1974f
+  cgs        4.4293f   11.5579f    1.4394f    1.7842f
+  cgd      719.1900a  798.3810a  241.3710a    1.7842f
+
+
+
+ ******  
+ ***myop_2stage
+
+  ******  ac analysis tnom=  25.000 temp=  25.000 *****
+   gain=  2.9235E-01    at=  1.0000E+01
+               from=  1.0000E+01    to=  1.0000E+09
+
+          ***** job concluded
+1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
+ ******  
+ ***myop_2stage
+
+  ******  job statistics summary tnom=  25.000 temp=  25.000 *****
+
+  ******  HSPICE Threads Information  ******
+  Command Line Threads Count:                      0
+  Available CPU Count:                             4
+  Actual Model Evaluation(Load) Threads Count:     1
+  Actual Solver Threads Count:                     1
+
+
+  ******  Circuit Statistics  ******
+  # nodes       =      38  # elements   =      24
+  # resistors   =       1  # capacitors =       2  # inductors   =       0
+  # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      11
+  # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
+  # jfets       =       0  # mosfets    =      10  # U elements  =       0
+  # T elements  =       0  # W elements =       0  # B elements  =       0
+  # S elements  =       0  # P elements =       0  # va device   =       0
+
+
+  ******  Runtime Statistics (seconds)  ******
+
+  analysis           time    # points   tot. iter  conv.iter
+  op point           0.03           1          75
+  dc sweep           0.04         101         257
+  ac analysis        0.27        8001        8001
+  readin             0.10
+  errchk             0.02
+  setup              0.05
+  output             0.00
+
+
+           total memory used          485  kbytes
+           total cpu time            0.60 seconds
+           total elapsed time           1 seconds
+           job started at     16:57:09 12/22/2015
+           job ended   at     16:57:10 12/22/2015
+
+
+ Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
