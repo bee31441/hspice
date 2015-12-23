@@ -1,0 +1,362 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\gm\\my-gm.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A0","i(e1)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+updateAll();
+t
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","i(rl)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlDelCurve(1, node(D0,"A0","i(rl)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","i(e1)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+De1=(derivative(node(D0,"A0","i(e1)")));
+dbObject
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlAddPane();
+nil
+nil
+2
+pnlAddCurve(2, node(D0,"A0","De1"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+updateAll();
+dbObject
+t
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+updateAll();
+dbObject
+t
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+updateAll();
+dbObject
+t
+pnlUns
