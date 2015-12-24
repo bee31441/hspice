@@ -8,8 +8,8 @@
 + POST=1 CAPTAB ACCURATE=1 INGOLD=1
 ***netlist***
 
-.param wx = 13u
-+ lx = 1u
+.param wx = 0.5u
++ lx = 0.4u
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.040, 20u/1u, 1, 1.3, 0.7)
 *Mp vss vbp vdp vdp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.035u, 21u/1u, 1, 0.9, 0.7)
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(507n, 2.9/0.4u, 1, 1.2, 0.7)
@@ -34,9 +34,9 @@ Mn  vdn vgn vsn vsn nch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(910.4, 13
 Vpd vdp gnd dc = 2.7
 Vps vsp gnd dc = 3.1
 vpg vgp gnd dc = 2.5
-Vnd vdn gnd dc = 2.7
+Vnd vdn gnd dc = 1.65
 Vns vsn gnd dc = 0
-vng vgn gnd dc = 0.4
+vng vgn gnd dc = 1.65
 
 
 ***
