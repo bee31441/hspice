@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "23:02:56 12/23/2015 "
+* "rundate" "14:44:20 12/24/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\gm\my-gm.sp "
 * "runtitle" "*gm"
 * time =    0.            
@@ -10,19 +10,19 @@
 .option 
 + gmindc= 1.000e-12       
 .nodeset
-+ bd =   2.0495        
-+ bump =   1.8918        
-+ ggn =   0.3990        
-+ ggp =   0.3990        
-+ idn =   0.3990        
-+ idp =   0.3990        
-+ inn =   1.3000        
-+ inp =   1.3000        
-+ sdn =   1.8359        
-+ sdp =   1.8359        
++ bd =   2.0430        
++ bump =   1.9828        
++ ggn =   0.3943        
++ ggp =   0.3943        
++ idn =   0.3830        
++ idp =   0.3943        
++ inn =   1.0000        
++ inp =   1.0000        
++ ref =   0.3830        
++ sdn =   1.5079        
++ sdp =   1.5081        
 + vb =   2.7000        
-+ vb2 =   1.4000        
 + vdd =   3.3000        
 + vss =   0.            
-+ x =   1.9495        
++ x =   2.0430        
 ***   END: Saved Operating Point ***                     

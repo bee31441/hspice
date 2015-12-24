@@ -8,8 +8,8 @@
 + POST=1 CAPTAB ACCURATE=1 INGOLD=1
 ***netlist***
 
-.param wx = 1u
-+ lx = 0.4u
+.param wx = 13u
++ lx = 1u
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.040, 20u/1u, 1, 1.3, 0.7)
 *Mp vss vbp vdp vdp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.035u, 21u/1u, 1, 0.9, 0.7)
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(507n, 2.9/0.4u, 1, 1.2, 0.7)
@@ -21,13 +21,20 @@
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(145.3n, 5u/0.4u, 1, , 1.3, 0.5)
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(148.7n, 4.7u/0.4u, 1, , 1.4, 0.5)
 *Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(148.7n, 4.7u/0.4u, 1, , 1.3, 0.6)
-Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(148.7n, 4.7u/0.4u, 1, , 1.4, 0.5)
+*Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(148.7n, 4.7u/0.4u, 1, , 1.4, 0.5)
+*Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.074, 10u/0.4u, 1, , 0.2, 0.6)
+*Mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(1.028, 8u/0.4u, 1, , 0.4, 0.6)
+
 *Mn  vgn vgn vsn vsn nch w = wx l = lx m = 2  * (Id, w/l, m, vds, vgs)=(495.2n, 2.7u/0.4u, 2, 0.5, 0.5)
 *Mn  vgn vgn vsn vsn nch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(147.4n, 1.6u/0.4u, 1, 0.4, 0.4)
-Vpd vdp gnd dc = 0
-vpg vgp gnd dc = 1.3
-Vps vsp gnd dc = 1.9
-Vnd vdn gnd dc = 0.5
+*Mn  vgn vgn vsn vsn nch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(147.4n, 1.6u/0.4u, 1, 0.4, 0.4)
+
+Mn  vdn vgn vsn vsn nch w = wx l = lx m = 1  * (Id, w/l, m, vds, vgs)=(910.4, 13u/1u, 1, 2.7, 0.4)
+
+Vpd vdp gnd dc = 2.7
+Vps vsp gnd dc = 3.1
+vpg vgp gnd dc = 2.5
+Vnd vdn gnd dc = 2.7
 Vns vsn gnd dc = 0
 vng vgn gnd dc = 0.4
 
