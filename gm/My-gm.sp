@@ -7,36 +7,36 @@
 ***netlist***
 
 *******SUBCKT************
-.subckt gmx vdd vss vb2 in bd gg id sd
-Ms  sd  vb2  bd  bd  pch w = 4u    l = 0.4u m = 1
+.subckt gmx vdd vss in bd gg id sd
+Ms  sd  sd bd  bd  pch w = 20u    l = 0.4u m = 1
 Min id  in  sd  sd  pch w = 25u    l = 0.4u m = 1
-Mn  id  gg  vss vss nch w = 11u    l = 0.4u m = 2
+Mn  id  gg  vss vss nch w = 5u    l = 0.4u m = 2
 .ends
 
 *******Circuits**********
-Mb  bd  vb  vdd vdd pch w = 21u     l = 1u   m = 2
-X1  vdd vss vb2 inp bd ggp idp sdp gmx
-X2  vdd vss vb2 inn bd ggn idn sdn gmx
+Mb  bd  vb  vdd vdd pch w = 18u     l = 1u   m = 1
+X1  vdd vss inp bd ggp idp sdp gmx
+X2  vdd vss inn bd ggn idn sdn gmx
 V0  idp ggp dc = 0
-V1  idn ggn dc = 0
+V1  idp ggn dc = 0
 *******Current Cancellation
-Mbp  bump     inp     x   x  pch    w = 1u    l = 0.4u m = 1
-Mbn  vss   inn    bump   bump   pch    w = 1u    l = 0.4u m = 1
-Vx bd x dc = 0.1
+Mbp  bump  sdn    x      x      pch    w = 10u    l = 0.4u m = 1
+Mbn  vss   sdp    bump   bump   pch    w = 10u    l = 0.4u m = 1
+Vx bd x dc = 0
 
 *******Output Load**************
-*E1 idn gnd OPAMP ref idn
-*Vr ref gnd dc = 0.4
+E1 idn gnd OPAMP ref idn
+Vr ref gnd dc = 0.383
 *RL idn gnd 5k
 
 *******Input******************
 .param diff = 0
-Vinp inp  gnd dc = '1.3+diff'
-Vinn inn  gnd dc = '1.3-diff'
+Vinp inp  gnd dc = '1-diff'
+Vinn inn  gnd dc = '1+diff'
 
 ********Bias**************
 Vbias   vb  gnd dc = 2.7
-Vbias2  vb2 gnd dc = 1.4
+*Vbias2  vb2 gnd dc = 1.4
 Vd      vdd gnd dc = 3.3
 vs      vss gnd dc = 0
 
