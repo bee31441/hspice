@@ -7,14 +7,17 @@
 
 ***netlist***
 
-M1n sn vx   vdd vdd pch w = 5u l = 0.4u m = 3
-M3n vx vinp sn  sn  pch w = 12u  l = 0.4u m = 1
-M2n sp vx   vdd vdd pch w = 5u l = 0.4u m = 3
-M4n vx vinn sp  sp  pch w = 12u  l = 0.4u m = 1
+M1 sn vx   vdd vdd pch w = 5u l = 0.4u m = 3
+M3 vx vinp sn  sn  pch w = 12u  l = 0.4u m = 1
+M2 sp vx   vdd vdd pch w = 5u l = 0.4u m = 3
+M4 vx vinn sp  sp  pch w = 12u  l = 0.4u m = 1
 Mb  vx vb   vss vss nch w = 15u  l = 1u m = 3
 
-Min ion vinn sn sn pch  w = 2.8u l = 0.4u m = 1
-Mip iop vinp sp sp pch  w = 2.8u l = 0.4u m = 1
+Min ion vinn sn sn pch  w = 1.7u l = 0.4u m = 1
+Mip iop vinp sp sp pch  w = 1.7u l = 0.4u m = 1
+
+Mc1 ion ion vss vss nch w = 1.1u l = 0.4u m = 6
+Mc2 iop iop vss vss nch w = 1.1u l = 0.4u m = 6
 
 ***source***
 Vd vdd gnd dc = 3.3
@@ -25,12 +28,15 @@ Vbi vb   gnd dc = 0.5
 Vip vinp gnd dc = '2.2-diff'
 Vin vinn gnd dc = '2.2+diff'
 
-En ion gnd OPAMP vref ion
-Ep iop gnd OPAMP vref iop
-Vr vref gnd dc = 1.65
+*En ion gnd OPAMP vref ion
+*Ep iop gnd OPAMP vref iop
+*.param rr = 0.4
+*Vr vref gnd dc = rr
 
 ***
 .op
-.dc sweep diff -0.5 0.5 0.001
-.probe I(en), I(ep) Idiff = par('I(ep)-I(en)') lx3(m3n) lx3(m1n) lx2(m3n) lx2(m1n) lx2(mip)
+.dc sweep diff -0.5 0.5 0.001 *sweep rr 0.6 1.6 0.2
+.probe dc lx3(M3) lx3(M1) lx2(M3) lx2(M1) lx2(mip)
+*+ I(en), I(ep) Idiff = par('I(ep)-I(en)')
++ Vdiff = par('V(iop) - V(ion)')
 .end
