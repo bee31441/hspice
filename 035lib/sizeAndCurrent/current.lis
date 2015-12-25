@@ -16,7 +16,7 @@
  + post=1 captab accurate=1 ingold=1
  ***netlist***
 
- .param wx = 0.5u
+ .param wx = 1.1u
  + lx = 0.4u
  *mp  vdp vgp vsp vsp pch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(1.040, 20u/1u, 1, 1.3, 0.7)
  *mp vss vbp vdp vdp pch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(1.035u, 21u/1u, 1, 0.9, 0.7)
@@ -36,16 +36,17 @@
  *mn  vgn vgn vsn vsn nch w = wx l = lx m = 2  * (id, w/l, m, vds, vgs)=(495.2n, 2.7u/0.4u, 2, 0.5, 0.5)
  *mn  vgn vgn vsn vsn nch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(147.4n, 1.6u/0.4u, 1, 0.4, 0.4)
  *mn  vgn vgn vsn vsn nch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(147.4n, 1.6u/0.4u, 1, 0.4, 0.4)
+ mn  vgn vgn vsn vsn nch w = wx l = lx m = 6  * (id, w/l, m, vds, vgs)=(601.2, 13u/1u, 1, 0.6, 0.6)
 
- mn  vdn vgn vsn vsn nch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(910.4, 13u/1u, 1, 2.7, 0.4)
+ *mn  vdn vgn vsn vsn nch w = wx l = lx m = 1  * (id, w/l, m, vds, vgs)=(910.4, 13u/1u, 1, 2.7, 0.4)
+
 
  vpd vdp gnd dc = 2.7
  vps vsp gnd dc = 3.1
  vpg vgp gnd dc = 2.5
- vnd vdn gnd dc = 1.65
+ vnd vdn gnd dc = 0.4
  vns vsn gnd dc = 0
- vng vgn gnd dc = 1.65
-
+ vng vgn gnd dc = 0.4
 
  ***
  .op
@@ -79,6 +80,7 @@
 
  **warning** the following singular supplies were terminated to 1 meg resistor 
    supply       node1            node2
+  vnd                     0:vdn              defined in subckt 0                     0:0                defined in subckt 0               
   vpd                     0:vdp              defined in subckt 0                     0:0                defined in subckt 0               
   vpg                     0:vgp              defined in subckt 0                     0:0                defined in subckt 0               
   vps                     0:vsp              defined in subckt 0                     0:0                defined in subckt 0               
@@ -96,18 +98,18 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:vdn     =   1.6500  0:vdp     =   2.7000  0:vgn     =   1.6500 
+ +0:vdn     =   0.4000  0:vdp     =   2.7000  0:vgn     =   0.4000 
  +0:vgp     =   2.5000  0:vsn     =   0.      0:vsp     =   3.1000 
 
 
- maximum nodal capacitance=   4.402E-15         on node     0:vsn             
+ maximum nodal capacitance=   3.507E-14         on node     0:vsn             
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:vdn     = 9.939e-16 0:vdp     =   0.      0:vgn     = 1.043e-15
- +0:vgp     =   0.      0:vsn     = 4.402e-15 0:vsp     =   0.     
+ +0:vdn     =   0.      0:vdp     =   0.      0:vgn     = 1.682e-14
+ +0:vgp     =   0.      0:vsn     = 3.507e-14 0:vsp     =   0.     
 
  
 
@@ -115,11 +117,11 @@
 
  subckt                                                                    
  element  0:vpd      0:vps      0:vpg      0:vnd      0:vns      0:vng     
-  volts      2.7000     3.1000     2.5000     1.6500     0.         1.6500 
-  current -2.700e-06 -3.100e-06 -2.500e-06 -1.320e-04  1.320e-04    0.     
-  power    7.290e-06  9.610e-06  6.250e-06  2.178e-04    0.         0.     
+  volts      2.7000     3.1000     2.5000     0.4000     0.         0.4000 
+  current -2.700e-06 -3.100e-06 -2.500e-06 -4.000e-07  5.903e-07 -5.903e-07
+  power    7.290e-06  9.610e-06  6.250e-06  1.600e-07    0.       2.361e-07
 
-     total voltage source power dissipation=  2.410e-04       watts
+     total voltage source power dissipation=  2.355e-05       watts
 
 
 
@@ -129,28 +131,28 @@
 
  subckt             
  element  0:mn      
- model    0:nch.9   
- region     Saturati
-  id       1.320e-04
-  ibs     -3.323e-16
-  ibd     -2.248e-13
-  vgs        1.6500 
-  vds        1.6500 
+ model    0:nch.6   
+ region       Cutoff
+  id       5.903e-07
+  ibs     -1.276e-18
+  ibd     -1.455e-14
+  vgs        0.4000 
+  vds        0.4000 
   vbs        0.     
-  vth        0.4744 
-  vdsat      0.7146 
-  vod        1.1756 
-  beta     3.821e-04
-  gam eff    0.4916 
-  gm       1.541e-04
-  gds      6.183e-06
-  gmb      3.688e-05
-  cdtot    9.939e-16
-  cgtot    1.043e-15
-  cstot    2.052e-15
-  cbtot    2.350e-15
-  cgs      7.446e-16
-  cgd      1.170e-16
+  vth        0.4650 
+  vdsat    4.582e-02
+  vod     -6.499e-02
+  beta     3.911e-03
+  gam eff    0.5179 
+  gm       1.542e-05
+  gds      2.928e-07
+  gmb      4.094e-06
+  cdtot    1.086e-14
+  cgtot    5.959e-15
+  cstot    1.187e-14
+  cbtot    2.320e-14
+  cgs      1.370e-15
+  cgd      1.370e-15
 
 
 
@@ -170,8 +172,8 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      10  # elements   =      11
-  # resistors   =       3  # capacitors =       0  # inductors   =       0
+  # nodes       =      10  # elements   =      12
+  # resistors   =       4  # capacitors =       0  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
   # cccs        =       0  # ccvs       =       0  # volt_srcs   =       7
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
@@ -184,18 +186,18 @@
 
   analysis           time    # points   tot. iter  conv.iter
   op point           0.01           1           4
-  dc sweep           0.01          27          56
-  readin             0.11
-  errchk             0.01
-  setup              0.02
+  dc sweep           0.04          27          56
+  readin             0.12
+  errchk             0.02
+  setup              0.04
   output             0.00
 
 
            total memory used          197  kbytes
-           total cpu time            0.18 seconds
+           total cpu time            0.28 seconds
            total elapsed time           1 seconds
-           job started at     23:46:44 12/24/2015
-           job ended   at     23:46:44 12/24/2015
+           job started at     18:18:36 12/25/2015
+           job ended   at     18:18:36 12/25/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
