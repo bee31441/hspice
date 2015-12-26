@@ -38,5 +38,5 @@ Vin vinn gnd dc = '2.2+diff'
 .dc sweep diff -0.5 0.5 0.001 *sweep rr 0.6 1.6 0.2
 .probe dc lx3(M3) lx3(M1) lx2(M3) lx2(M1) lx2(mip)
 *+ I(en), I(ep) Idiff = par('I(ep)-I(en)')
-+ Vdiff = par('V(iop) - V(ion)')
++ Vdiff = par('V(iop) - V(ion)') I(mc1) I(mc2) Idiff = par('I(mc2)-I(mc1)')
 .end
