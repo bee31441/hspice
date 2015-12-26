@@ -48,7 +48,7 @@
  .dc sweep diff -0.5 0.5 0.001 *sweep rr 0.6 1.6 0.2
  .probe dc lx3(m3) lx3(m1) lx2(m3) lx2(m1) lx2(mip)
  *+ i(en), i(ep) idiff = par('i(ep)-i(en)')
- + vdiff = par('v(iop) - v(ion)')
+ + vdiff = par('v(iop) - v(ion)') i(mc1) i(mc2) idiff = par('i(mc2)-i(mc1)')
  .end
 
 
@@ -175,10 +175,10 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      29  # elements   =      14
+  # nodes       =      31  # elements   =      16
   # resistors   =       0  # capacitors =       0  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       0
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       5
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =       7
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
   # jfets       =       0  # mosfets    =       9  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
@@ -188,19 +188,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.01           1          29
-  dc sweep           0.20        1001        2021
-  readin             0.11
+  op point           0.03           1          29
+  dc sweep           0.21        1001        2021
+  readin             0.10
   errchk             0.01
-  setup              0.02
+  setup              0.01
   output             0.00
 
 
-           total memory used          227  kbytes
-           total cpu time            0.38 seconds
+           total memory used          231  kbytes
+           total cpu time            0.39 seconds
            total elapsed time           1 seconds
-           job started at     18:41:19 12/25/2015
-           job ended   at     18:41:20 12/25/2015
+           job started at     19:08:00 12/25/2015
+           job ended   at     19:08:00 12/25/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

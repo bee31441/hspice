@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "18:41:19 12/25/2015 "
+* "rundate" "19:08:00 12/25/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\gm\classabgm\classabgm_b.sp "
 * "runtitle" "*classabgm_b"
 * time =    0.            
