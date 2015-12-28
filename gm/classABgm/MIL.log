@@ -1,0 +1,132 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\gm\\classabgm\\classabgm_b.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A0","v(iop)"), node(D0,"A0","diff"));
+nil
+pnlAddCurve(1, node(D0,"A0","v(ion)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+updateAll();
+t
+pnlAddCurve(1, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlAddCurve(1, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlAddCurve(1, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlAddPane();
+nil
+nil
+2
+pnlAddCurve(2, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlDelCurve(2, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlAddCurve(2, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlDelCurve(2, node(D0,"A0","par(vdiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlAddCurve(2, node(D0,"A0","par(vdiff)"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+Dev=(derivative(node(D0,"A0","par(vdiff)")));
+dbObject
+pnlUnselectPane(2, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlAddPane();
+nil
+nil
+3
+pnlAddCurve(3, node(D0,"A0","Dev"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(3, 0);
+nil
+pnlSelectPane(3);
+nil
+pnlUnselectPane(3, 0);
+nil
+pnlSelectPane(2);
+nil
+pnlAddPane();
+nil
+nil
+4
+pnlUnselectPane(4, 0);
+nil
+pnlSelectPane(4);
+nil
+updateAll();
+dbObject
+t
+pnlAddCurve(4, node(D0,"A0","par(idiff)"), node(D0,"A0","par(vdiff)"));
+nil
+pnlUnselectPane(4, 0);
+nil
+pnlSelectPane(4);
+nil
+pnlUnselectPane(4, 0);
+nil
+pnlSelectPane(4);
+nil
+Dei=(derivative(node(D0,"A0","par(idiff)","ALL","diff")));
+dbObject
+pnlUnselectPane(4, 0);
+nil
+pnlSelectPane(4);
+nil
+pnlAddPane();
+5
+pnlAddPane();
+nil
+nil
+6
+pnlAddCurve(6, node(D0,"A0","Dei"), node(D0,"A0","diff"));
+nil
+pnlUnselectPane(6, 0);
+nil
+pnlSelectPane(6);
+nil
+quit();
+exit
+pnlDeletePane(6, 1);
+nil
+nil
+nil
+pnlDeletePane(5, 1);
+nil
+nil
+pnlDeletePane(4, 1);
+nil
+nil
+pnlDeletePane(3, 1);
+nil
+nil
+pnlDeletePane(2, 1);
+nil
+nil
+pnlDeletePane(1, 1);
+nil
+nil
