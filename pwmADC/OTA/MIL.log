@@ -1,0 +1,21 @@
+pnlAddPane();
+nil
+1
+designOpen("c:\\users\\timer\\documents\\github\\hspice\\pwmadc\\ota\\ota.sp");
+"D0"
+t
+pnlAddCurve(1, node(D0,"A2","i(vout)"), node(D0,"A2","vdiff"));
+nil
+De1=(derivative(node(D0,"A2","i(vout)")));
+dbObject
+pnlAddCurve(1, node(D0,"A2","De1"), node(D0,"A2","vdiff"));
+nil
+pnlUnselectPane(1, 0);
+nil
+pnlSelectPane(1);
+nil
+quit();
+exit
+pnlDeletePane(1, 1);
+nil
+nil
