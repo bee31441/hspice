@@ -363,21 +363,21 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.01           1          21
-  dc sweep           0.14         361         745
+  op point           0.10           1          21
+  dc sweep           0.21         361         745
   ac analysis        0.05          61          61
-  transient          0.09         301         692         252 rev=        42
-  readin             0.20
-  errchk             0.02
-  setup              0.02
+  transient          0.13         301         692         252 rev=        42
+  readin             0.19
+  errchk             0.12
+  setup              0.01
   output             0.00
 
 
            total memory used          398  kbytes
-           total cpu time            0.55 seconds
+           total cpu time            0.90 seconds
            total elapsed time           1 seconds
-           job started at     20:26:33 11/22/2015
-           job ended   at     20:26:33 11/22/2015
+           job started at     23:07:00 12/28/2015
+           job ended   at     23:07:01 12/28/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

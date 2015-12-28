@@ -20,7 +20,7 @@
  .subckt gmx vdd vss in bd gg id sd
  ms  sd  sd bd  bd  pch w = 15u    l = 0.4u m = 1
  min id  in  sd  sd  pch w = 25u    l = 0.4u m = 1
- mn  id  gg  vss vss nch w = 5u    l = 0.4u m = 2
+ mn  id  gg  vss vss nch w = 12.5u    l = 0.8u m = 2
  .ends
 
  *******circuits**********
@@ -33,12 +33,12 @@
  *ma1 sdn inp sdp sdp pch w = 1u l = 10u m = 1
  *ma2 sdp inn sdn sdn pch w = 1u l = 10u m = 1
  *******bump circuit*******
- *mbp  bump  sdn    x      x      pch    w = 10u    l = 0.4u m = 1
- *mbn  vss   sdp    bump   bump   pch    w = 10u    l = 0.4u m = 1
+ *mb1  bump  sdn    x      x      pch    w = 10u    l = 0.4u m = 1
+ *mb2  vss   sdp    bump   bump   pch    w = 10u    l = 0.4u m = 1
  *vx bd x dc = 0
  ********
- mb1  bd   ggp  bump bump nch w = 3u l = 0.4u m = 3
- mb2  bump ggn  vss  vss  nch w = 3u l = 0.4u m = 6
+ mb1  bd   ggp  bump bump nch w = 11u l = 2u m = 2
+ mb2  bump ggn  vss  vss  nch w = 10u l = 2u m = 2
 
  ******second stage*****
  mo1 io1 ggp vss vss nch w = 5u l = 0.4u m = 2
@@ -55,7 +55,7 @@
  *rl idn gnd 5k
 
  *******input******************
- .param diff = 0.1
+ .param diff = 0
  vinp inp  gnd dc = '1.1-diff'
  vinn inn  gnd dc = '1.1+diff'
 
@@ -68,9 +68,10 @@
  *******
  .op
  .dc sweep diff -0.5 0.5 0.001
- .probe dc i(e1) i(rl)
- + idiff = par('i(x1.mn)-i(x2.mn)') vdiff = par('v(ggp)-v(ggn)') i(mbp)
- + i(mo1) i(mo2) i(mo3) i(mo4)
+ .probe dc i(e1) i(rl) i(mb)
+ + idiff = par('i(x1.mn)-i(x2.mn)') vdiff = par('v(ggp)-v(ggn)') i(mb1)
+ + i(mo1) i(mo2) i(mo3) i(mo4) i(x1.mn) i(x2.mn)
+ *.print dc i(x1.mn) i(x2.mn) i(mb1)
  .end
 
 
@@ -94,8 +95,6 @@
 
  **warning** could not find branch element     0:rl              
       branch - output ignored
- **warning** could not find branch element     0:mbp             
-      branch - output ignored
  **warning** could not find branch element     0:mo3             
       branch - output ignored
  **warning** could not find branch element     0:mo4             
@@ -113,26 +112,26 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:bd      =   2.1054  0:bump    = 9.365e-02 0:ggn     =   0.3291 
- +0:ggp     =   0.4176  0:idn     =   0.3291  0:idp     =   0.4176 
- +0:inn     =   1.2000  0:inp     =   1.0000  0:io1     =   2.0747 
- +0:io1a    =   2.6873  0:io2     =   1.6500  0:io2a    =   2.6754 
- +0:ref     =   1.6500  0:sdn     =   1.6305  0:sdp     =   1.5339 
+ +0:bd      =   2.1294  0:bump    = 2.554e-02 0:ggn     =   0.3793 
+ +0:ggp     =   0.3793  0:idn     =   0.3793  0:idp     =   0.3793 
+ +0:inn     =   1.1000  0:inp     =   1.1000  0:io1     =   2.1587 
+ +0:io1a    =   2.7293  0:io2     =   1.6500  0:io2a    =   2.7150 
+ +0:ref     =   1.6500  0:sdn     =   1.5943  0:sdp     =   1.5943 
  +0:vb      =   2.7000  0:vdd     =   3.3000  0:vss     =   0.     
 
 
- maximum nodal capacitance=   2.618E-13         on node     0:vss             
+ maximum nodal capacitance=   4.380E-13         on node     0:vss             
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:bd      = 1.733e-13 0:bump    = 6.690e-14 0:ggn     = 3.429e-14
- +0:ggp     = 2.454e-14 0:idn     = 4.225e-14 0:idp     = 4.311e-14
- +0:inn     = 1.747e-14 0:inp     = 1.705e-14 0:io1     = 3.980e-14
- +0:io1a    = 7.833e-14 0:io2     = 2.687e-14 0:io2a    = 6.289e-14
- +0:ref     =   0.      0:sdn     = 1.423e-13 0:sdp     = 1.421e-13
- +0:vb      = 2.143e-14 0:vdd     = 1.893e-13 0:vss     = 2.618e-13
+ +0:bd      = 1.861e-13 0:bump    = 1.534e-13 0:ggn     = 9.287e-14
+ +0:ggp     = 9.674e-14 0:idn     = 6.133e-14 0:idp     = 6.133e-14
+ +0:inn     = 1.720e-14 0:inp     = 1.720e-14 0:io1     = 4.003e-14
+ +0:io1a    = 7.885e-14 0:io2     = 2.676e-14 0:io2a    = 6.300e-14
+ +0:ref     =   0.      0:sdn     = 1.420e-13 0:sdp     = 1.420e-13
+ +0:vb      = 2.143e-14 0:vdd     = 1.898e-13 0:vss     = 4.380e-13
 
  
 
@@ -140,17 +139,17 @@
 
  subckt                                                                    
  element  0:v0       0:v1       0:vr       0:vinp     0:vinn     0:vbias   
-  volts      0.         0.         1.6500     1.0000     1.2000     2.7000 
+  volts      0.         0.         1.6500     1.1000     1.1000     2.7000 
   current    0.         0.         0.         0.         0.         0.     
   power      0.         0.         0.         0.         0.         0.     
 
  subckt                        
  element  0:vd       0:vs      
   volts      3.3000     0.     
-  current -5.168e-07  3.372e-07
-  power    1.705e-06    0.     
+  current -2.675e-07  2.660e-07
+  power    8.826e-07    0.     
 
-     total voltage source power dissipation=  1.705e-06       watts
+     total voltage source power dissipation=  8.826e-07       watts
 
 
 
@@ -160,7 +159,7 @@
  subckt             
  element  0:e1      
   volts      1.6500 
-  current  1.796e-07
+  current  1.413e-09
 
 
 
@@ -171,28 +170,28 @@
 
  subckt                                                                    
  element  0:mb       0:mb1      0:mb2      0:mo1      0:mo2      0:mo3a    
- model    0:pch.2    0:nch.3    0:nch.3    0:nch.3    0:nch.3    0:pch.3   
+ model    0:pch.2    0:nch.1    0:nch.1    0:nch.3    0:nch.3    0:pch.3   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id      -1.240e-07  1.311e-08  1.313e-08  1.955e-07  1.764e-08 -1.956e-07
-  ibs      2.443e-20 -2.258e-20 -2.260e-20 -3.127e-19 -2.767e-20  3.929e-20
-  ibd      1.821e-15 -5.038e-12 -2.714e-14 -1.064e-10 -5.337e-13  9.518e-16
-  vgs       -0.6000     0.3240     0.3291     0.4176     0.3291    -0.6127 
-  vds       -1.1946     2.0117   9.365e-02    2.0747     1.6500    -0.6127 
+  id      -1.235e-07  4.158e-08  4.160e-08  7.155e-08  7.095e-08 -7.162e-08
+  ibs      2.433e-20 -6.223e-20 -6.261e-20 -1.145e-19 -1.113e-19  1.439e-20
+  ibd      1.767e-15 -4.795e-12 -1.648e-14 -6.094e-11 -2.093e-12  9.518e-16
+  vgs       -0.6000     0.3537     0.3793     0.3793     0.3793    -0.5707 
+  vds       -1.1706     2.1038   2.554e-02    2.1587     1.6500    -0.5707 
   vbs        0.         0.         0.         0.         0.         0.     
-  vth       -0.7499     0.5560     0.5707     0.5577     0.5614    -0.7195 
-  vdsat   -5.277e-02  4.250e-02  4.248e-02  4.354e-02  4.286e-02 -5.020e-02
-  vod        0.1499    -0.2320    -0.2416    -0.1400    -0.2323     0.1068 
-  beta     1.067e-03  4.893e-03  9.771e-03  5.636e-03  6.820e-03  1.239e-03
-  gam eff    0.3953     0.5474     0.5474     0.5574     0.5599     0.4553 
-  gm       2.685e-06  3.704e-07  3.721e-07  5.199e-06  4.943e-07  4.436e-06
-  gds      2.137e-08  4.977e-09  1.663e-08  7.070e-08  6.751e-09  1.364e-07
-  gmb      6.129e-07  1.089e-07  1.121e-07  1.477e-06  1.475e-07  9.852e-07
-  cdtot    2.112e-14  1.084e-14  2.755e-14  1.134e-14  1.384e-14  1.444e-14
-  cgtot    2.143e-14  7.839e-15  1.566e-14  8.351e-15  1.013e-14  7.005e-15
-  cstot    3.011e-14  1.414e-14  2.827e-14  1.489e-14  1.762e-14  1.792e-14
-  cbtot    5.944e-14  2.522e-14  5.628e-14  2.621e-14  3.157e-14  3.197e-14
-  cgs      3.303e-15  1.900e-15  3.800e-15  2.092e-15  2.504e-15  1.848e-15
-  cgd      3.303e-15  1.900e-15  3.800e-15  2.092e-15  2.504e-15  1.848e-15
+  vth       -0.7501     0.5491     0.5517     0.5570     0.5614    -0.7206 
+  vdsat   -5.275e-02  4.289e-02  4.335e-02  4.302e-02  4.306e-02 -4.712e-02
+  vod        0.1501    -0.1954    -0.1725    -0.1778    -0.1821     0.1499 
+  beta     1.067e-03  2.384e-03  2.161e-03  5.636e-03  6.820e-03  1.239e-03
+  gam eff    0.3953     0.4674     0.4670     0.5574     0.5599     0.4553 
+  gm       2.675e-06  1.105e-06  1.062e-06  1.958e-06  1.944e-06  1.700e-06
+  gds      2.135e-08  3.701e-09  9.923e-07  2.630e-08  2.680e-08  5.238e-08
+  gmb      6.105e-07  3.434e-07  3.291e-07  5.650e-07  5.668e-07  3.876e-07
+  cdtot    2.122e-14  2.372e-14  2.834e-14  1.128e-14  1.384e-14  1.461e-14
+  cgtot    2.143e-14  5.699e-14  5.151e-14  8.411e-15  1.003e-14  7.063e-15
+  cstot    3.011e-14  3.129e-14  2.856e-14  1.489e-14  1.762e-14  1.792e-14
+  cbtot    5.955e-14  9.373e-14  9.179e-14  2.621e-14  3.147e-14  3.220e-14
+  cgs      3.303e-15  4.567e-15  4.155e-15  2.092e-15  2.504e-15  1.848e-15
+  cgd      3.303e-15  4.567e-15  4.155e-15  2.092e-15  2.504e-15  1.848e-15
 
 
 
@@ -200,26 +199,26 @@
  element  0:mo4a     0:mo3b     0:mo4b     1:ms       1:min      1:mn      
  model    0:pch.3    0:pch.3    0:pch.3    0:pch.3    0:pch.12   0:nch.3   
  region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
-  id      -1.972e-07 -1.956e-07 -1.972e-07 -1.023e-07 -1.023e-07  1.023e-07
-  ibs      3.962e-20  3.929e-20  3.962e-20  2.020e-20  2.013e-20 -1.637e-19
-  ibd      9.518e-16  9.518e-16  9.972e-16  1.376e-15  2.408e-15 -1.411e-14
-  vgs       -0.6127    -0.6127    -0.6007    -0.5714    -0.5339     0.4176 
-  vds       -0.6246    -0.6127    -1.0254    -0.5714    -1.1163     0.4176 
+  id      -7.237e-08 -7.162e-08 -7.237e-08 -4.093e-08 -4.093e-08  4.093e-08
+  ibs      1.454e-20  1.439e-20  1.454e-20  8.079e-21  8.050e-21 -6.082e-20
+  ibd      9.518e-16  9.518e-16  9.895e-16  1.376e-15  2.517e-15 -3.219e-14
+  vgs       -0.5707    -0.5707    -0.5564    -0.5351    -0.4943     0.3793 
+  vds       -0.5850    -0.5707    -1.0650    -0.5351    -1.2150     0.3793 
   vbs        0.         0.         0.         0.         0.         0.     
-  vth       -0.7191    -0.7195    -0.7083    -0.7138    -0.6977     0.5701 
-  vdsat   -5.023e-02 -5.020e-02 -5.011e-02 -4.699e-02 -4.633e-02  4.331e-02
-  vod        0.1065     0.1068     0.1076     0.1424     0.1637    -0.1524 
-  beta     1.239e-03  1.239e-03  1.243e-03  1.915e-03  3.227e-03  5.627e-03
-  gam eff    0.4553     0.4553     0.4553     0.4650     0.4587     0.5574 
-  gm       4.472e-06  4.436e-06  4.478e-06  2.462e-06  2.512e-06  2.757e-06
-  gds      1.372e-07  1.364e-07  1.312e-07  7.517e-08  7.211e-08  4.557e-08
-  gmb      9.929e-07  9.852e-07  9.949e-07  5.693e-07  5.812e-07  8.038e-07
-  cdtot    1.439e-14  1.444e-14  1.303e-14  2.056e-14  2.958e-14  1.353e-14
-  cgtot    7.005e-15  7.005e-15  7.021e-15  1.028e-14  1.705e-14  8.351e-15
-  cstot    1.792e-14  1.792e-14  1.792e-14  2.523e-14  4.150e-14  1.489e-14
-  cbtot    3.192e-14  3.197e-14  3.058e-14  4.505e-14  6.980e-14  2.840e-14
-  cgs      1.848e-15  1.848e-15  1.848e-15  2.754e-15  4.584e-15  2.092e-15
-  cgd      1.848e-15  1.848e-15  1.848e-15  2.754e-15  4.584e-15  2.092e-15
+  vth       -0.7202    -0.7206    -0.7072    -0.7148    -0.6950     0.5755 
+  vdsat   -4.713e-02 -4.712e-02 -4.708e-02 -4.591e-02 -4.569e-02  4.343e-02
+  vod        0.1495     0.1499     0.1508     0.1797     0.2007    -0.1963 
+  beta     1.239e-03  1.239e-03  1.244e-03  1.915e-03  3.230e-03  6.881e-03
+  gam eff    0.4553     0.4553     0.4553     0.4650     0.4587     0.4813 
+  gm       1.717e-06  1.700e-06  1.719e-06  1.015e-06  1.032e-06  1.098e-06
+  gds      5.277e-08  5.238e-08  5.009e-08  3.111e-08  2.941e-08  8.375e-09
+  gmb      3.914e-07  3.876e-07  3.923e-07  2.416e-07  2.460e-07  3.478e-07
+  cdtot    1.455e-14  1.461e-14  1.292e-14  2.078e-14  2.899e-14  3.234e-14
+  cgtot    7.063e-15  7.063e-15  7.084e-15  1.036e-14  1.720e-14  3.133e-14
+  cstot    1.792e-14  1.792e-14  1.792e-14  2.523e-14  4.150e-14  3.539e-14
+  cbtot    3.214e-14  3.220e-14  3.053e-14  4.535e-14  6.936e-14  7.832e-14
+  cgs      1.848e-15  1.848e-15  1.848e-15  2.754e-15  4.584e-15  5.186e-15
+  cgd      1.848e-15  1.848e-15  1.848e-15  2.754e-15  4.584e-15  5.186e-15
 
 
 
@@ -227,26 +226,26 @@
  element  2:ms       2:min      2:mn      
  model    0:pch.3    0:pch.12   0:nch.3   
  region       Cutoff     Cutoff     Cutoff
-  id      -8.502e-09 -8.501e-09  8.502e-09
-  ibs      1.679e-21  1.672e-21 -1.360e-20
-  ibd      1.376e-15  2.431e-15 -1.411e-14
-  vgs       -0.4749    -0.4305     0.3291 
-  vds       -0.4749    -1.3014     0.3291 
+  id      -4.093e-08 -4.093e-08  4.093e-08
+  ibs      8.079e-21  8.050e-21 -6.082e-20
+  ibd      1.376e-15  2.517e-15 -3.219e-14
+  vgs       -0.5351    -0.4943     0.3793 
+  vds       -0.5351    -1.2150     0.3793 
   vbs        0.         0.         0.     
-  vth       -0.7164    -0.6927     0.5707 
-  vdsat   -4.532e-02 -4.534e-02  4.277e-02
-  vod        0.2415     0.2622    -0.2416 
-  beta     1.914e-03  3.233e-03  5.627e-03
-  gam eff    0.4650     0.4587     0.5574 
-  gm       2.190e-07  2.209e-07  2.394e-07
-  gds      6.766e-09  6.261e-09  4.056e-09
-  gmb      5.477e-08  5.543e-08  7.269e-08
-  cdtot    2.116e-14  2.850e-14  1.375e-14
-  cgtot    1.050e-14  1.747e-14  8.494e-15
-  cstot    2.523e-14  4.150e-14  1.489e-14
-  cbtot    4.587e-14  6.913e-14  2.877e-14
-  cgs      2.754e-15  4.584e-15  2.092e-15
-  cgd      2.754e-15  4.584e-15  2.092e-15
+  vth       -0.7148    -0.6950     0.5755 
+  vdsat   -4.591e-02 -4.569e-02  4.343e-02
+  vod        0.1797     0.2007    -0.1963 
+  beta     1.915e-03  3.230e-03  6.881e-03
+  gam eff    0.4650     0.4587     0.4813 
+  gm       1.015e-06  1.032e-06  1.098e-06
+  gds      3.111e-08  2.941e-08  8.375e-09
+  gmb      2.416e-07  2.460e-07  3.478e-07
+  cdtot    2.078e-14  2.899e-14  3.234e-14
+  cgtot    1.036e-14  1.720e-14  3.133e-14
+  cstot    2.523e-14  4.150e-14  3.539e-14
+  cbtot    4.535e-14  6.936e-14  7.832e-14
+  cgs      2.754e-15  4.584e-15  5.186e-15
+  cgd      2.754e-15  4.584e-15  5.186e-15
 
 
 
@@ -266,10 +265,10 @@
 
 
   ******  Circuit Statistics  ******
-  # nodes       =      53  # elements   =      28
+  # nodes       =      55  # elements   =      30
   # resistors   =       0  # capacitors =       0  # inductors   =       0
   # mutual_inds =       0  # vccs       =       0  # vcvs        =       1
-  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      12
+  # cccs        =       0  # ccvs       =       0  # volt_srcs   =      14
   # curr_srcs   =       0  # diodes     =       0  # bjts        =       0
   # jfets       =       0  # mosfets    =      15  # U elements  =       0
   # T elements  =       0  # W elements =       0  # B elements  =       0
@@ -279,19 +278,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.03           1          33
-  dc sweep           0.32        1001        2043
-  readin             0.10
+  op point           0.01           1          17
+  dc sweep           0.32        1001        2028
+  readin             0.11
   errchk             0.01
-  setup              0.02
+  setup              0.01
   output             0.00
 
 
-           total memory used          380  kbytes
-           total cpu time            0.51 seconds
+           total memory used          382  kbytes
+           total cpu time            0.49 seconds
            total elapsed time           1 seconds
-           job started at     21:29:04 12/28/2015
-           job ended   at     21:29:05 12/28/2015
+           job started at     23:03:18 12/28/2015
+           job ended   at     23:03:18 12/28/2015
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
