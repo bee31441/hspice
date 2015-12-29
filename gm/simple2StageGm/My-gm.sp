@@ -10,11 +10,11 @@
 .subckt gmx vdd vss in bd gg id sd
 Ms  sd  sd bd  bd  pch w = 15u    l = 0.4u m = 1
 Min id  id  sd  in  pch w = 25u    l = 0.4u m = 1
-Mn  id  gg  vss vss nch w = 6u    l = 0.4u m = 2
+Mn  id  gg  vss vss nch w = 5u    l = 0.4u m = 2
 .ends
 
 *******Circuits**********
-Mb  bd  vb  vdd vdd pch w = 18u l = 1u   m = 1
+Mb  bd  vb  vdd vdd pch w = 25u l = 1u   m = 2
 X1  vdd vss inp bd ggp idp sdp gmx
 X2  vdd vss inn bd ggn idn sdn gmx
 V0  idp ggp dc = 0
@@ -27,16 +27,16 @@ V1  idn ggn dc = 0
 *Mb2  vss   sdp    bump   bump   pch    w = 10u    l = 0.4u m = 1
 *Vx bd x dc = 0
 ********
-Mb1  bd   ggp  bump bump nch w = 4u l = 0.4u m = 3   *slightly adjust bump centerization
-Mb2  bump ggn  vss  vss  nch w = 6u l = 0.4u m = 3
+Mb1  bd   ggp  bump vss nch w = 3.1u l = 0.4u m = 4   *slightly adjust bump centerization
+Mb2  bump ggn  vss  vss  nch w = 6u l = 0.4u m = 4
 
 ******Second Stage*****
-Mo1 io1 ggp vss vss nch w = 5u l = 0.4u m = 2
-Mo2 io2 ggn vss vss nch w = 6u l = 0.4u m = 2
-Mo3a io1a io1a vdd vdd pch w = 5u l = 0.4u m = 2
-Mo4a io2a io1a vdd vdd pch w = 5u l = 0.4u m = 2
-Mo3b io1 io1 io1a io1a pch w = 5u l = 0.4u m = 2
-Mo4b io2 io1 io2a io2a pch w = 5u l = 0.4u m = 2
+Mo1 io1 ggp vss vss nch w = 8u l = 0.4u m = 2
+Mo2 io2 ggn vss vss nch w = 8u l = 0.4u m = 2
+Mo3a io1a io1a vdd vdd pch w = 8u l = 0.4u m = 2
+Mo4a io2a io1a vdd vdd pch w = 8u l = 0.4u m = 2
+Mo3b io1 io1 io1a io1a pch w = 8u l = 0.4u m = 2
+Mo4b io2 io1 io2a io2a pch w = 8u l = 0.4u m = 2
 E1  io2 gnd OPAMP ref io2
 Vr ref gnd dc = 1.65
 *******Output Load**************
@@ -45,7 +45,7 @@ Vr ref gnd dc = 1.65
 *RL idn gnd 5k
 
 *******Input******************
-.param diff = 0 cm = 1.2
+.param diff = 0 cm = 1.4
 Vinp inp  gnd dc = 'cm-diff'
 Vinn inn  gnd dc = 'cm+diff'
 

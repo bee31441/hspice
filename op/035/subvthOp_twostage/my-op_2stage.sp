@@ -8,35 +8,36 @@
 
 ***param***
 .param
-+comon		= 0.5
-+bias			= 0.6
-+bias2		= 3.3
++comon		= 2
++bias			= 2.7
++bias2		= 0.45
 +supplyp	= 3.3
 +supplyn	= 0
 +diff			= 0
 ***netlist***
 ***1st stage***
-Mb	b	b0	vdd	vdd	pch	W = 10u  L = 1u	  m = 2
-M1	1	Vinn	b		b		pch	W = 30u L = 0.8u m = 2
-M2	2	Vinp	b		b		pch	W = 30u L = 0.8u m = 2
-M5	1	b1		vss	vss	nch	W = 13u L = 0.8u m = 1
-M6	2	b1		vss	vss	nch	W = 13u L = 0.8u m = 1
+Mb	b	b0	vdd	vdd	pch	W = 31u  L = 1u	  m = 2
+M1	1	Vinn	b		b		pch	W = 10u L = 0.4u m = 1
+M2	2	Vinp	b		b		pch	W = 10u L = 0.4u m = 1
+M3	1	b1		vss	vss	nch	W = 2.8u L = 0.4u m = 2
+M4	2	b1		vss	vss	nch	W = 2.8u L = 0.4u m = 2
+
 **low f gain = 34.5db
 * for subthreshold diffpair. gain do little with Id. it is more related to Leff and Vds of output mos(about output resistance)
 * gds is proportional to 1/leff & vds
 *kappa ~= 0.7
 
 ***2nd stage***
-m3	von	1		vdd	vdd	pch	w = 18u    l = 1u   m = 1
-m4	vop	2		vdd	vdd	pch w = 3.88u 	 l = 0.4u m = 1
-m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1
-m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.4u m = 1
+*m3	von	1		vdd	vdd	pch	w = 18u    l = 1u   m = 1
+*m4	vop	2		vdd	vdd	pch w = 3.88u 	 l = 0.4u m = 1
+*m7	von	von	vss	vss	nch	w = 3.8u   l = 1u   m = 1
+*m8	vop	von	vss	vss	nch	w = 1.1u   l = 0.4u m = 1
 
 ***compensation***
-
-C1	z1		von 400f
-Rz1	z1		1   350k
-C2	2			vop 300f
+*
+*C1	z1		von 400f
+*Rz1	z1		1   350k
+*C2	2			vop 300f
 
 
 ***source***
@@ -47,8 +48,8 @@ vb1		b1		gnd dc bias2
 
 
 ***input***
-vinp vinp gnd dc = 'comon+diff' ac = 1
-vinn vinn gnd dc = 'comon-diff' *ac = 1 -180
+vinp vinp gnd dc = 'comon+diff' *ac = 1
+vinn vinn gnd dc = 'comon-diff' ac = 1
 
 
 
@@ -84,4 +85,6 @@ vtg	vgt	gnd dc = '1-397.6836m'
 .meas ac gain MAX (par('Vdb(vop)-Vdb(vinp,vinn)'))
 *.meas ac zerodb WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
 *.meas ac phaseATdb	FIND par('vp(vop)') WHEN par('Vdb(vop)-Vdb(vinp,vinn)') = 1
+
+.noise v(1) vinn 10
 .end
