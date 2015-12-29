@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "23:03:18 12/28/2015 "
+* "rundate" "15:11:29 12/29/2015 "
 * "netlist" "c:\users\timer\documents\github\hspice\gm\simple2stagegm\my-gm.sp "
 * "runtitle" "*mygm"
 * time =    0.            
@@ -10,21 +10,23 @@
 .option 
 + gmindc= 1.000e-12       
 .nodeset
-+ bd =   2.1294        
-+ bump = 2.554e-02       
-+ ggn =   0.3793        
-+ ggp =   0.3793        
-+ idn =   0.3793        
-+ idp =   0.3793        
-+ inn =   1.1000        
-+ inp =   1.1000        
-+ io1 =   2.1587        
-+ io1a =   2.7293        
++ a =   1.0000        
++ b =   0.            
++ bd =   1.4997        
++ bump = 2.435e-02       
++ ggn =   0.3845        
++ ggp =   0.3845        
++ idn =   0.3845        
++ idp =   0.3845        
++ inn =   1.2000        
++ inp =   1.2000        
++ io1 =   2.1474        
++ io1a =   2.7237        
 + io2 =   1.6500        
-+ io2a =   2.7150        
++ io2a =   2.7097        
 + ref =   1.6500        
-+ sdn =   1.5943        
-+ sdp =   1.5943        
++ sdn =   0.9576        
++ sdp =   0.9576        
 + vb =   2.7000        
 + vdd =   3.3000        
 + vss =   0.            
