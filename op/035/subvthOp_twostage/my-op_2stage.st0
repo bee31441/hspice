@@ -3,7 +3,7 @@
  lic:
  lic: FLEXlm: v8.5b
  lic: USER:   timer                HOSTNAME: timer-PC
- lic: HOSTID: "00ffb0fbd808 902b349f3511" PID:      36708
+ lic: HOSTID: "00ffb0fbd808 902b349f3511" PID:      48732
  lic: Using FLEXlm license file:
  lic: C:\synopsys\Hspice_A-2008.03\Hspice_2007-09.lic
  lic: Checkout 1 hspice
@@ -36,23 +36,24 @@
        option conver   =     1.00
        option gmindc   =    1.000E-12
        option captab   =     1.00
- init: end read circuit files,  cpu clock=  1.81E-01 memory=    145 kb
- init: begin check errors,  cpu clock=  1.81E-01
- init: end check errors,  cpu clock=  2.76E-01 memory=    311 kb
- init: begin setup matrix, pivot=    10 cpu clock=  2.76E-01
-       establish matrix -- done,  cpu clock=  2.84E-01 memory=    319 kb
-       re-order matrix -- done,  cpu clock=  2.90E-01 memory=    321 kb
- init: end setup matrix,  cpu clock=  2.96E-01 memory=    339 kb
+       option unwrap   =     1.00
+ init: end read circuit files,  cpu clock=  1.87E-01 memory=    146 kb
+ init: begin check errors,  cpu clock=  1.87E-01
+ init: end check errors,  cpu clock=  2.01E-01 memory=    448 kb
+ init: begin setup matrix, pivot=    10 cpu clock=  2.01E-01
+       establish matrix -- done,  cpu clock=  2.07E-01 memory=    465 kb
+       re-order matrix -- done,  cpu clock=  2.10E-01 memory=    470 kb
+ init: end setup matrix,  cpu clock=  2.14E-01 memory=    496 kb
  output: c:\users\timer\documents\github\hspice\op\035\subvthop_twostage\my-op_2
- sweep: dc dc0    begin, #sweeps= 101 cpu clock=  3.04E-01
- sweep: dc dc0    end,  cpu clock=  3.34E-01 memory=    339 kb
- dcop: begin dcop,  cpu clock=  3.81E-01
+ sweep: dc dc0    begin, #sweeps= 101 cpu clock=  2.35E-01
+ sweep: dc dc0    end,  cpu clock=  3.05E-01 memory=    496 kb
+ dcop: begin dcop,  cpu clock=  3.09E-01
  dcop: begin pseudo transient
  dcop: ...succeeded
  dcop: end pseudo transient
- dcop: end dcop,  cpu clock=  4.66E-01 memory=    339 kb  tot_iter=      85
+ dcop: end dcop,  cpu clock=  3.45E-01 memory=    496 kb  tot_iter=     173
  output: c:\users\timer\documents\github\hspice\op\035\subvthop_twostage\my-op_2
- sweep: ac ac0    begin, #sweeps=8001 cpu clock=  4.75E-01
+ sweep: ac ac0    begin, #sweeps=8001 cpu clock=  3.55E-01
  ac: frequency=    1.00E+01
  ac: frequency=    6.31E+01
  ac: frequency=    3.98E+02
@@ -64,7 +65,7 @@
  ac: frequency=    2.51E+07
  ac: frequency=    1.58E+08
  ac: frequency=    1.00E+09
- sweep: ac ac0    end,  cpu clock=  1.07E+00 memory=    929 kb
+ sweep: ac ac0    end,  cpu clock=  7.94E-01 memory=   1741 kb
 >info:         ***** hspice job concluded
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini
  lic: Release hspice token(s)

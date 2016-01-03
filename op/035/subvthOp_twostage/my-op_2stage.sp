@@ -32,10 +32,18 @@ m3n	    von	1   vss vss nch w = 5u  l = 0.4u    m = 1
 m4n	    vop	2   vss vss nch w = 5u  l = 0.4u    m = 1
 
 ***compensation***
-*Ct	gnd		von 20p
-C1	2		vop 10f
+*Ct	gnd		2   100f
+*Con	gnd	von 500f
+Con1 1 von 100f
+*Cop2 2 vop 100f
+*C1   1 gnd 50f  *flatten end
+*C2   2 gnd 10f
+*Cb   b gnd 10f         useless
+*Cvoa gnd voa 600f      useless
+*Cvo2 gnd vo2 1p
+*Cvoavo2 voa vo2 500f
 *Rz1	z1		1   350k
-*C2	2			vop 300f
+*C2a	gnd voa 100f
 
 
 ***source***
@@ -101,9 +109,9 @@ mc3 cn cn vss vss nch w = 5.1u l = 0.4u m = 3
 *real            imag            real            imag
 *-991.234k       0.              -157.760k       0.
 *-3.70828x       0.              -590.191k       0.
-*-10.4857x       5.09194x        -1.66885x       810.407k
+*-10.4857x       5.09194x        -1.66885x       810.407k     must have one in 2
 *-10.4857x       -5.09194x       -1.66885x       -810.407k
-*-33.8793x       2.52538x        -5.39205x       401.927k
+*-33.8793x       2.52538x        -5.39205x       401.927k       one relate with von
 *-33.8793x       -2.52538x       -5.39205x       -401.927k
 *-57.5252x       0.              -9.15541x       0.
 *-93.0328x       0.              -14.8066x       0.
