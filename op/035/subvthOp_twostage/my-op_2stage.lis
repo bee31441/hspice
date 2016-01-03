@@ -63,8 +63,8 @@
 
 
  ***input***
- *vinp vinp gnd dc = 'comon-diff' ac = 1
- vinn vinn gnd dc = 'comon+diff' ac = 1 *180
+ vinp vinp gnd dc = 'comon-diff' ac = 1
+ *vinn vinn gnd dc = 'comon+diff' *ac = 1 180
 
  ***current mirror***
  iin cp vss dc = 500n
@@ -73,10 +73,6 @@
  mc2 cn cn c0  c0  pch w = 1u l = 0.4u m = 1
  mc3 cn cn vss vss nch w = 5.1u l = 0.4u m = 3
 
-
- ***feedback test***
- if gnd vinp dc = 10n 
- rf vinp vop 1x
  ***test
  *mt	vdt	vgt	vss	vss	nch	w = 2.7u   l = 0.5u m = 1
  *mt	vdt	vgt	vdd	vdd	pch w = 9.7u l = 0.5u m = 1
@@ -84,8 +80,9 @@
  *vtd	vdt	gnd dc = '1-499.7048m'
  *vtg	vgt	gnd dc = '1-397.6836m'
 
- ***
-
+ ***feedback test***
+ rf vop vinn 1x
+ if vdd vinn  dc = 10n
 
 
 
@@ -94,12 +91,12 @@
  .op
 
  ***sweep***
- .dc diff -0.5 0.5 0.01
+ *.dc diff -0.5 0.5 0.01
+ .dc if dec 100 1n 100n
  ***probe&measuring***
- .ac dec 1000 10 1g
+ *.ac dec 1000 10 1g
  *.tf v(1) vinp
  *.pz v(vop) vinp
- .pz v(vop) vinn
  .probe dc i(m1) i(m2)	i(mt)
  .probe ac cap(von)
  +gain1st=par('vdb(2, 1)-vdb(vinp,vinn)')	par('i(m1)-i(m2)')	phase1st=par('vp(2,1)')
@@ -140,38 +137,38 @@
  ***** operating point status is all       simulation time is     0.     
     node    =voltage      node    =voltage      node    =voltage
 
- +0:1       =  99.9030u 0:2       =   2.3350  0:b       =   2.3353 
+ +0:1       = 392.4538m 0:2       = 402.4515m 0:b       =   2.5710 
  +0:b0      =   2.7000  0:b1      = 450.0000m 0:c0      =   1.2252 
  +0:cn      = 449.9268m 0:cp      =   2.7007  0:vdd     =   3.3000 
- +0:vinn    =   2.0000  0:vinp    =  10.0040m 0:vo2     =   2.7070 
- +0:voa     =   3.1048  0:von     =   2.9096  0:vop     =   4.0439u
+ +0:vinn    =   2.0005  0:vinp    =   2.0000  0:vo2     =   2.7634 
+ +0:voa     =   2.7705  0:von     =   2.2409  0:vop     =   1.9905 
  +0:vss     =   0.     
 
 
- maximum nodal capacitance=   7.450E-13         on node     0:vdd             
+ maximum nodal capacitance=   7.433E-13         on node     0:vdd             
 
     nodal  capacitance table 
 
     node    =    cap      node    =    cap      node    =    cap
 
- +0:1       = 127.2810f 0:2       =  49.7300f 0:b       = 184.4446f
+ +0:1       = 125.9785f 0:2       =  25.9635f 0:b       = 167.8817f
  +0:b0      =   0.      0:b1      =   0.      0:c0      =  17.9291f
- +0:cn      =  50.1498f 0:cp      = 155.1721f 0:vdd     = 744.9700f
- +0:vinn    =   7.3085f 0:vinp    =  18.6994f 0:vo2     = 130.9515f
- +0:voa     = 178.0924f 0:von     = 177.7454f 0:vop     =  35.5142f
- +0:vss     = 190.0687f
+ +0:cn      =  50.1498f 0:cp      = 155.1721f 0:vdd     = 743.3376f
+ +0:vinn    =   6.9074f 0:vinp    =   6.9068f 0:vo2     = 133.7544f
+ +0:voa     = 166.3787f 0:von     = 167.1161f 0:vop     =  34.6028f
+ +0:vss     = 180.9789f
 
  
 
  ****  voltage sources
 
  subckt                                                         
- element  0:vd       0:vs       0:vb       0:vb1      0:vinn    
+ element  0:vd       0:vs       0:vb       0:vb1      0:vinp    
   volts      3.3000     0.         2.7000   450.0000m    2.0000 
-  current   -1.2973u    1.3073u   -2.7000u -450.0000n    0.     
-  power      4.2812u    0.         7.2900u  202.5000n    0.     
+  current   -1.3942u    1.3942u   -2.7000u -450.0000n    0.     
+  power      4.6009u    0.         7.2900u  202.5000n    0.     
 
-     total voltage source power dissipation=   11.7737u       watts
+     total voltage source power dissipation=   12.0934u       watts
 
 
 
@@ -179,20 +176,20 @@
 
  subckt                        
  element  0:iin      0:if      
-  volts      2.7007   -10.0040m
+  volts      2.7007     1.2995 
   current  500.0000n   10.0000n
-  power     -1.3503u  100.0404p
+  power     -1.3503u  -12.9953n
 
 
-     total current source power dissipation=  -1.3502u       watts
+     total current source power dissipation=  -1.3633u       watts
 
  **** resistors
 
  subckt             
  element  0:rf      
   r value    1.0000x
-  v drop    10.0000m
-  current   10.0000n
+  v drop   -10.0000m
+  current  -10.0000n
   power    100.0000p
 
 
@@ -203,54 +200,54 @@
  subckt                                                                    
  element  0:mb       0:m1       0:m2       0:m3       0:m4       0:m1pa    
  model    0:pch.11   0:pch.3    0:pch.3    0:nch.3    0:nch.3    0:pch.3   
- region       Cutoff     Cutoff     Linear     Cutoff     Cutoff     Cutoff
-  id      -422.5667n -605.6933p -421.9602n  610.3772p  421.1332n   -6.0290p
-  ibs      8.303e-20  1.206e-22  8.366e-20 -9.980e-22 -6.886e-19  1.271e-24
-  ibd        5.6408f   13.9088f   11.5004a  -47.2730a -817.7219p    2.0308f
-  vgs     -599.3222m -335.2924m   -2.3253   449.9268m  449.9268m -195.2050m
-  vds     -964.7076m   -2.3352  -323.4304u   99.9030u    2.3350  -195.2050m
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id      -403.4383n -201.2683n -202.1599n  201.2733n  202.1647n  -52.8745n
+  ibs      7.927e-20  3.991e-20  4.009e-20 -3.291e-19 -3.305e-19  1.047e-20
+  ibd        5.6318f    2.2110p    2.1237p  -12.1810f  -12.1810f    2.0318f
+  vgs     -599.3222m -570.5261m -570.9974m  449.9268m  449.9268m -529.5294m
+  vds     -729.0026m   -2.1785    -2.1685   392.4538m  402.4515m -529.5294m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -747.3630m -668.1000m -730.8547m  572.6737m  555.0873m -725.1453m
-  vdsat    -52.7042m  -45.1659m   -1.2753    43.9309m   44.6530m  -45.1566m
-  vod      148.0407m  332.8076m   -1.5944  -122.7469m -105.1605m  529.9403m
-  beta       3.6763m    1.2855m  950.3060u    4.6776m    4.6871m    2.7856m
+  vth     -749.0796m -672.3105m -672.5793m  569.7186m  569.6433m -716.1660m
+  vdsat    -52.5698m  -49.9359m  -49.9564m   44.0322m   44.0349m  -45.8244m
+  vod      149.7574m  101.7844m  101.5819m -119.7918m -119.7165m  186.6366m
+  beta       3.6745m    1.2829m    1.2828m    4.6792m    4.6792m    2.7929m
   gam eff  391.6940m  462.5849m  462.5849m  554.4915m  554.4915m  463.2525m
-  gm         9.2562u   16.0141n  162.4793n   15.7199n   10.8221u  161.3176p
-  gds       81.0701n  444.6680p    1.3235m    6.1023u  148.6896n    5.7054p
-  gmb        2.1214u    4.2844n   68.3065n    4.5790n    3.0140u   50.0861p
-  cdtot     75.5516f    9.9764f   29.8152f   12.7035f    9.5239f   34.5376f
-  cgtot     72.8482f    7.3085f   18.6994f    7.0242f    7.0242f   16.7694f
-  cstot    102.5259f   17.0945f   30.5547f   12.7039f   12.7039f   37.4431f
-  cbtot    205.4685f   27.0228f   34.2210f   25.3844f   22.2048f   72.5729f
-  cgs       11.3643f    1.8391f    9.2763f    1.7618f    1.7618f    4.0443f
-  cgd       11.3643f    1.8391f    9.2752f    1.7618f    1.7618f    4.0443f
+  gm         8.8635u    4.6378u    4.6575u    5.2879u    5.3107u    1.3156u
+  gds       81.4959n  129.6083n  130.1775n   89.1796n   89.1632n   40.3906n
+  gmb        2.0315u    1.0380u    1.0423u    1.5174u    1.5237u  313.4577n
+  cdtot     80.0152f   10.1869f   10.2008f   11.5965f   11.5753f   30.8892f
+  cgtot     72.8482f    6.9074f    6.9068f    7.0242f    7.0242f   15.2971f
+  cstot    102.5259f   17.0945f   17.0945f   12.7039f   12.7039f   37.4431f
+  cbtot    209.9321f   26.8322f   26.8455f   24.2774f   24.2562f   67.4522f
+  cgs       11.3643f    1.8391f    1.8391f    1.7618f    1.7618f    4.0443f
+  cgd       11.3643f    1.8391f    1.8391f    1.7618f    1.7618f    4.0443f
 
 
 
  subckt                                                                    
  element  0:m1pb     0:m2pa     0:m2pb     0:m3n      0:m4n      0:mc0     
  model    0:pch.3    0:pch.3    0:pch.3    0:nch.3    0:nch.3    0:pch.3   
- region       Cutoff     Cutoff     Cutoff     Cutoff     Linear     Cutoff
-  id        -6.0286p   -8.4573p -992.7623a  970.9877f   10.0108n -499.9916n
-  ibs      1.271e-24  1.910e-24  1.072e-24 -6.208e-24 -1.601e-20  1.004e-19
-  ibd        2.0308f    2.0318f    2.0319f  -21.3687f   -1.0943a    3.3314f
-  vgs     -195.2030m -195.2050m  202.5544m   99.9030u    2.3350  -599.3222m
-  vds     -195.2030m -592.9625m   -2.7070     2.9096     4.0439u -599.3222m
+ region       Cutoff     Cutoff     Cutoff     Cutoff     Cutoff     Cutoff
+  id       -52.8745n  -53.1619n  -53.1610n   52.8051n   63.1386n -499.9916n
+  ibs      1.047e-20  1.053e-20  1.053e-20 -8.447e-20 -1.010e-19  1.004e-19
+  ibd        2.0318f    2.0318f    2.0318f  -67.3064p  -21.2507p    3.3314f
+  vgs     -529.5294m -529.5294m -522.4291m  392.4538m  402.4515m -599.3222m
+  vds     -529.5294m -536.6298m -772.8990m    2.2409     1.9905  -599.3222m
   vbs        0.         0.         0.         0.         0.         0.     
-  vth     -725.1454m -714.4623m -657.6821m  551.4262m  573.1722m -719.8247m
-  vdsat    -45.1566m  -45.1557m  -45.1511m   42.7137m  973.2147m  -48.9331m
-  vod      529.9424m  519.2573m  860.2366m -551.3263m    1.7618   120.5025m
-  beta       2.7856m    2.7946m    2.8421m    2.8201m    2.3613m    4.3353m
+  vth     -716.1660m -715.9753m -709.6296m  556.4238m  558.2958m -719.8247m
+  vdsat    -45.8244m  -45.8276m  -45.8147m   43.1531m   43.2600m  -48.9331m
+  vod      186.6366m  186.4459m  187.2005m -163.9699m -155.8442m  120.5025m
+  beta       2.7929m    2.7930m    2.7984m    2.8183m    2.8177m    4.3353m
   gam eff  463.2525m  463.2525m  463.2525m  557.3611m  557.3611m  455.2807m
-  gm       161.3084p  226.2608p   26.5886f   27.9346p    2.7527n   11.5078u
-  gds        5.7051p    6.8063p  734.9876a  396.3983f    2.5491m  354.1031n
-  gmb       50.0833p   69.7344p   10.1651f    9.3961p    1.1412n    2.5757u
-  cdtot     34.5376f   30.3277f   20.8784f    5.4018f   14.6359f   50.7212f
-  cgtot     16.7694f   16.7694f   21.0365f    4.6011f   10.3909f   24.5798f
-  cstot     37.4431f   37.4431f   37.4431f    7.4453f   15.1197f   62.7138f
-  cbtot     72.5729f   68.3630f   63.1808f   13.2645f   15.3126f  112.1386f
-  cgs        4.0443f    4.0443f    4.0443f    1.0459f    5.1310f    6.4691f
-  cgd        4.0443f    4.0443f    4.0443f    1.0459f    5.1310f    6.4691f
+  gm         1.3156u    1.3226u    1.3233u    1.4313u    1.7015u   11.5078u
+  gds       40.3906n   40.5450n   39.1140n   19.2807n   23.1155n  354.1031n
+  gmb      313.4577n  315.0695n  315.4373n  410.0695n  487.2888n    2.5757u
+  cdtot     30.8892f   30.8247f   28.9001f    5.6090f    5.7027f   50.7212f
+  cgtot     15.2971f   15.2971f   15.3207f    4.1951f    4.1873f   24.5798f
+  cstot     37.4431f   37.4431f   37.4431f    7.4453f    7.4453f   62.7138f
+  cbtot     67.4522f   67.3876f   65.4867f   13.0657f   13.1516f  112.1386f
+  cgs        4.0443f    4.0443f    4.0443f    1.0459f    1.0459f    6.4691f
+  cgd        4.0443f    4.0443f    4.0443f    1.0459f    1.0459f    6.4691f
 
 
 
@@ -281,51 +278,6 @@
 
 
 
- ***************************************************
-   ******   pole/zero analysis  
- 
- 
-    input =  0:vinn          output = v(vop)
- 
-       poles (rad/sec)                 poles ( hertz)
- real            imag            real            imag            
- -70.5942        0.              -11.2354        0.              
- -835.157        0.              -132.919        0.              
- -3.36838k       0.              -536.095        0.              
- -1.90780x       0.              -303.635k       0.              
- -65.1799x       0.              -10.3737x       0.              
- -72.2358x       0.              -11.4967x       0.              
- -106.584x       0.              -16.9634x       0.              
- -208.774x       0.              -33.2274x       0.              
- -593.486x       0.              -94.4563x       0.              
- -31.5521g       0.              -5.02167g       0.              
- -86.5927g       0.              -13.7817g       0.              
- 
-       zeros (rad/sec)                 zeros ( hertz)
- real            imag            real            imag            
- -70.5843        0.              -11.2338        0.              
- -835.598        0.              -132.989        0.              
- -3.36822k       0.              -536.069        0.              
- 113.462k        0.              18.0581k        0.              
- -2.96207x       0.              -471.429k       0.              
- -78.4767x       0.              -12.4900x       0.              
- -98.6617x       48.6735x        -15.7025x       7.74662x        
- -98.6617x       -48.6735x       -15.7025x       -7.74662x       
- -205.615x       0.              -32.7247x       0.              
- -593.571x       0.              -94.4698x       0.              
- -39.6747g       0.              -6.31442g       0.              
- 
-  ***** constant factor = 14.0911m
- ******  
- ***myop_2stage
-
-  ******  ac analysis tnom=  25.000 temp=  25.000 *****
-   gain= -5.7181E+01    at=  1.0000E+09
-               from=  1.0000E+01    to=  1.0000E+09
-   gain1st= -2.3545E+01    at=  1.2589E+01
-               from=  1.0000E+01    to=  1.0000E+09
-   zerodb= failed
-   phaseatdb= failed
 
           ***** job concluded
 1****** HSPICE -- B-2008.09 32-BIT (Aug 26 2008) winnt ******                   
@@ -355,20 +307,19 @@
   ******  Runtime Statistics (seconds)  ******
 
   analysis           time    # points   tot. iter  conv.iter
-  op point           0.04           1         173
-  dc sweep           0.07         101         283
-  ac analysis        0.44        8001        8001
-  readin             0.15
-  errchk             0.01
+  op point           0.04           1         274
+  dc sweep           0.04         201         471
+  readin             0.13
+  errchk             0.02
   setup              0.01
   output             0.00
 
 
-           total memory used          496  kbytes
-           total cpu time            0.78 seconds
+           total memory used          369  kbytes
+           total cpu time            0.26 seconds
            total elapsed time           1 seconds
-           job started at     16:16:25 01/03/2016
-           job ended   at     16:16:26 01/03/2016
+           job started at     16:36:08 01/03/2016
+           job ended   at     16:36:08 01/03/2016
 
 
  Init: hspice initialization file: C:\synopsys\Hspice_B-2008.09\hspice.ini

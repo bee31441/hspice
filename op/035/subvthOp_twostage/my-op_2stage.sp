@@ -55,7 +55,7 @@ vb1		b1		gnd dc bias2
 
 ***input***
 vinp vinp gnd dc = 'comon-diff' ac = 1
-vinn vinn gnd dc = 'comon+diff' ac = 1 180
+*vinn vinn gnd dc = 'comon+diff' *ac = 1 180
 
 ***current mirror***
 Iin cp vss dc = 500n
@@ -71,8 +71,9 @@ mc3 cn cn vss vss nch w = 5.1u l = 0.4u m = 3
 *vtd	vdt	gnd dc = '1-499.7048m'
 *vtg	vgt	gnd dc = '1-397.6836m'
 
-***
-
+***feedback test***
+Rf vop vinn 1x
+If vdd vinn  dc = 10n
 
 
 
@@ -81,11 +82,12 @@ mc3 cn cn vss vss nch w = 5.1u l = 0.4u m = 3
 .op
 
 ***sweep***
-.dc diff -0.5 0.5 0.01
+*.dc diff -0.5 0.5 0.01
+.dc If dec 100 1n 100n
 ***probe&measuring***
-.ac dec 1000 10 1g
+*.ac dec 1000 10 1g
 *.tf v(1) vinp
-.pz v(vop) vinp
+*.pz v(vop) vinp
 .probe dc I(m1) I(m2)	I(mt)
 .probe ac cap(von)
 +gain1st=par('Vdb(2, 1)-Vdb(vinp,vinn)')	par('I(m1)-I(m2)')	phase1st=par('vp(2,1)')
