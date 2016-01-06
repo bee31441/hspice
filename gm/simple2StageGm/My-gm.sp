@@ -85,7 +85,7 @@ vb b gnd dc = 0
 
 *******
 .op
-.dc va -2 2 0.01
+*.dc va -2 2 0.01
 .dc diff -1 1 0.01 *sweep cm 1 2 0.2
 .probe dc I(e1) I(rl) I(mb)
 + Idiff = par('I(X1.mn)-I(X2.mn)') vdiff = par('v(ggp)-v(ggn)') I(mb1)
