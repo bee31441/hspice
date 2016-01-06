@@ -1,7 +1,7 @@
 * "simulator" "HSPICE" 
 * "version" "B-2008.09 32-BIT"
 * "format" "HSP"
-* "rundate" "19:56:58 12/29/2015 "
+* "rundate" "15:07:32 01/06/2016 "
 * "netlist" "c:\users\timer\documents\github\hspice\gm\simple2stagegm\my-gm.sp "
 * "runtitle" "*mygm"
 * time =    0.            
