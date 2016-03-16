@@ -30,6 +30,7 @@ $RECYCLE.BIN/
 
 # Thumbnails
 ._*
+*.l
 
 # Files that might appear on external disk
 .Spotlight-V100
@@ -42,3 +43,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 research/OTA/simple_wi_ota.ic0
+*.lis
